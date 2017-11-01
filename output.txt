@@ -1,4 +1,0 @@
-
- LEXER 
-	RegEx	Token	AttVal
-

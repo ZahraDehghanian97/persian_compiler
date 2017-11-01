@@ -49,7 +49,7 @@ comments ("/*"(.)*"/*")| ("//"[(.)*^{new_line}]){new_line}
     counter ++ ;
   }  
   {null_char} {
-    printf("null_char") ;
+    printf("null_char s here ") ;
     counter ++ ;
   } 
   {comments} {
