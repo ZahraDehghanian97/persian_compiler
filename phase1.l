@@ -23,7 +23,7 @@ harf  ('\u0627' | '\u0628' | '\u067e' | '\u062a' | '\u062b' |
 harfe_sabet  ((\)?"'" (\)?{harf} (\)?"'" )^("'\n'") ^ ("'\0'") 
 new_line  "\n"
 null_char "\0"
-jaye_khali ((\t) | " ")
+jaye_khali ((\t) |" ")
 noghte_virgul (";" | '\u061b' )
 comma ("," | '\u060c')
 comments ("/*"(.)*"/*")| ("//"[(.)*^{new_line}]){new_line}
