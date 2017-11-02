@@ -56,7 +56,7 @@ null_char = {back_slash}0
 harfe_sabet = {back_slash}?"'"{back_slash}?(.){back_slash}?"'"{back_slash}?
 noghte_virgul = ";"|[\u061b]
 comma = ","|[\u060c]
-comments = {slash}{slash}(.)*{new_line} | {slash}"*"(.)*"*"{slash}
+comments = {slash}{slash}({PERSIAN_LETTER}|[A-z]|{DIGIT})*{new_line} | {slash}"*"(.)*"*"{slash}
 
 ADD_KW = [+]
 SUB_KW = [-]
