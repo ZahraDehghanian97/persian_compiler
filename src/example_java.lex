@@ -51,7 +51,7 @@ shenase = {PERSIAN_LETTER}{harf_ragham}*
 adad = {DIGIT}+
 back_slash = \
 slash = (\u002f)
-new_line = {back_slash}n
+new_line = {back_slash}n | {back_slash}t
 null_char = {back_slash}0
 harfe_sabet = {back_slash}?"'"{back_slash}?(.){back_slash}?"'"{back_slash}?
 noghte_virgul = ";"|[\u061b]
@@ -144,7 +144,7 @@ BOOLEAN_CONSTANT = (\u063a\u0644\u0637) | (\u062f\u0631\u0633\u062a)
 {null_char} {
 	System.out.println(yytext() + "\t" + "null_char\t" + '-');
 }
-
-
+"\s"|"\n"|"\r"|"\t" {
+}
 . {
 }
