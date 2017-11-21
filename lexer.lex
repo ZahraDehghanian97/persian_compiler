@@ -122,10 +122,8 @@ BOOLEAN_CONSTANT = (\u063a\u0644\u0637) | (\u062f\u0631\u0633\u062a)
 	//System.out.println(yytext() + "\t" + "jens_kw\t" + '-');
 	return YYParser.CHAR_KW;
 }
-
-
-{switch_kw) {
-	//System.out.println(yytext() + "\t" + "switch_kw\t" + '-');
+{switch_kw} {
+	//System.out.println(yytext() + "\t" + "jens_kw\t" + '-');
 	return YYParser.SWITCH_KW;
 }
 {end_kw} {
