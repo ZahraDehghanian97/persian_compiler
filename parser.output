@@ -99,7 +99,7 @@ Grammar
 
    62 ebarat: taghirpazir EQUAL_KW ebarat
    63       | taghirpazir PLUS_EQUAL_KW ebarat
-   64       | taghirpazir MINU_EQUAL_KW ebarat
+   64       | taghirpazir MINUS_EQUAL_KW ebarat
    65       | taghirpazir MULTIPLY_EQUAL_KW ebarat
    66       | taghirpazir DEVIDE_EQUAL_KW ebarat
    67       | taghirpazir PLUS_PLUS_KW
@@ -220,7 +220,7 @@ MORE_EQUAL_KW (308) 81
 PLUS_EQUAL_KW (309) 63
 PLUS_PLUS_KW (310) 67
 MINUS_MINUS_KW (311) 68
-MINU_EQUAL_KW (312) 64
+MINUS_EQUAL_KW (312) 64
 MULTIPLY_EQUAL_KW (313) 65
 DEVIDE_EQUAL_KW (314) 66
 LOWER_THAN_ELSE_KW (315)
@@ -1154,7 +1154,7 @@ state 72
 
    62 ebarat: taghirpazir . EQUAL_KW ebarat
    63       | taghirpazir . PLUS_EQUAL_KW ebarat
-   64       | taghirpazir . MINU_EQUAL_KW ebarat
+   64       | taghirpazir . MINUS_EQUAL_KW ebarat
    65       | taghirpazir . MULTIPLY_EQUAL_KW ebarat
    66       | taghirpazir . DEVIDE_EQUAL_KW ebarat
    67       | taghirpazir . PLUS_PLUS_KW
@@ -1169,7 +1169,7 @@ state 72
     PLUS_EQUAL_KW      shift, and go to state 126
     PLUS_PLUS_KW       shift, and go to state 127
     MINUS_MINUS_KW     shift, and go to state 128
-    MINU_EQUAL_KW      shift, and go to state 129
+    MINUS_EQUAL_KW     shift, and go to state 129
     MULTIPLY_EQUAL_KW  shift, and go to state 130
     DEVIDE_EQUAL_KW    shift, and go to state 131
 
@@ -2106,7 +2106,7 @@ state 128
 
 state 129
 
-   64 ebarat: taghirpazir MINU_EQUAL_KW . ebarat
+   64 ebarat: taghirpazir MINUS_EQUAL_KW . ebarat
 
     FLOAT_KW            shift, and go to state 41
     ADAD                shift, and go to state 48
@@ -2659,7 +2659,7 @@ state 167
 
 state 168
 
-   64 ebarat: taghirpazir MINU_EQUAL_KW ebarat .
+   64 ebarat: taghirpazir MINUS_EQUAL_KW ebarat .
 
     $default  reduce using rule 64 (ebarat)
 
