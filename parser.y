@@ -4,12 +4,13 @@ import java.io.*;
 %}
 
 %token COMMENT FLOAT_KW INT_KW BOOLEAN_KW CHAR_KW AKULAD_BAZ_KW AKULAD_BASTE_KW 
-MAIN_KW SUB_KW ADD_KW BOOLEAN_CONSTANT JENS_KW SWITCH_KW END_KW DEFAULT_KW BREAK_KW 
+ADD_KW BOOLEAN_CONSTANT SWITCH_KW END_KW DEFAULT_KW BREAK_KW 
 RETURN_KW COMMA PROGRAM_KW STRUCT_KW CONSTANT_KW IF_KW THEN_KW ELSE_KW AND_KW OR_KW 
 NOT_KW WHILE_KW NOGHTE_VIRGUL ADAD SHENASE HARFE_SABET 
 KEY_KW MORE_THAN_KW NOGHTE_KW MULTIPLY_KW BRACKET_BASTE_KW BRACKET_BAZ_KW PARANTHESIS_BASTE_KW PARANTHESIS_BAZ_KW
 TRUE_KW QUESTION_KW EQUAL_EQUAL_KW EQUAL_KW DEVIDE_KW OR_ELSE_KW FALSE_KW AND_THEN_KW MINUS_KW DONOGHTE_KW LESS_EQUAL_KW
-MOD_KW LESS_THAN_KW MORE_EQUAL_KW
+MOD_KW LESS_THAN_KW MORE_EQUAL_KW 
+PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINU_EQUAL_KW MULTIPLY_EQUAL_KW DEVIDE_EQUAL_KW
 
 %code {
 	static PrintStream writer;
@@ -51,10 +52,15 @@ MOD_KW LESS_THAN_KW MORE_EQUAL_KW
     }
 }
 
-%left OR_KW
-%left AND_KW
-%left ADD_KW SUB_KW
-%right NOT_KW usub
+%left OR_KW OR_ELSE_KW
+%left AND_KW AND_THEN_KW
+%left EQUAL_KW LESS_EQUAL_KW LESS_THAN_KW MORE_EQUAL_KW MORE_THAN_KW EQUAL_EQUAL_KW
+%left ADD_KW MINUS_KW
+%left MULTIPLY_KW DEVIDE_KW MOD_KW
+%right NOT_KW
+
+%nonassoc LOWER_THAN_ELSE_KW
+%nonassoc ELSE_KW
 
 %%
 barnameh:
@@ -83,13 +89,21 @@ tarif:
 
 tarifeSakhtar:
 	STRUCT_KW SHENASE AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
-		System.out.println("Rule 4 ");
+		System.out.println("Rule 4.1 ");
+	}
+	|
+	STRUCT_KW SHENASE AKULAD_BAZ_KW AKULAD_BASTE_KW  {
+		System.out.println("Rule 4.2 ");
 	}
 	
 tarifhayeMahalli:
 	tarifhayeMahalli tarifeMoteghayyerMahdud  {
 		System.out.println("Rule 5 ");
-		}
+	}
+	|
+	tarifeMoteghayyerMahdud  {
+		System.out.println("Rule 5 ");
+	}
 	
 tarifeMoteghayyerMahdud:
 	jenseMahdud tarifhayeMoteghayyerha NOGHTE_VIRGUL {
@@ -97,8 +111,12 @@ tarifeMoteghayyerMahdud:
 	}
 
 jenseMahdud:
-	CONSTANT_KW JENS_KW {
-		System.out.println("Rule 7");
+	CONSTANT_KW jens {
+		System.out.println("Rule 7.1");
+	}
+	|
+	jens {
+		System.out.println("Rule 7.2");
 	}
 	
 jens:
@@ -139,7 +157,13 @@ tarifeTabe:
 		System.out.println("Rule 13.1");
 	}
 	|
-	SHENASE PARANTHESIS_BAZ_KW vorudi jomle {System.out.println("Rule 13.2");}
+	jens SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
+		System.out.println("Rule 13.2");
+	}
+	|
+	SHENASE PARANTHESIS_BAZ_KW vorudi PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.3");}
+	|
+	SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.4");}
 
 vorudi :
 	vorudiha {System.out.println("Rule 14");}
@@ -150,9 +174,7 @@ vorudiha :
 	jensVorudiha {System.out.println("Rule 15.2");}
 	
 jensVorudiha :
-	shenaseyeVorudiha COMMA shenaseyeVorudi {System.out.println("Rule 16.1");}
-	|
-	shenaseyeVorudi {System.out.println("Rule 16.2");}
+	jens shenaseyeVorudiha  {System.out.println("Rule 16");}
 	
 shenaseyeVorudiha :
 	shenaseyeVorudiha COMMA shenaseyeVorudi {System.out.println("Rule 17.1");}
@@ -178,11 +200,26 @@ jomle :
 
 jomleyeMorakkab :
 	AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW {
-		System.out.println("Rule 20");
+		System.out.println("Rule 20.1");
+	}
+	|
+	AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW {
+		System.out.println("Rule 20.2");
+	}
+	|
+	AKULAD_BAZ_KW jomleha AKULAD_BASTE_KW {
+		System.out.println("Rule 20.3");
+	}
+	|
+	AKULAD_BAZ_KW AKULAD_BASTE_KW {
+		System.out.println("Rule 20.4");
 	}
 	
 jomleha :
 	jomleha jomle {System.out.println("Rule 21.1");}
+	|
+	jomle {System.out.println("Rule 21.2");}
+
 	
 jomleyeEbarat :
 	ebarat NOGHTE_VIRGUL {
@@ -192,12 +229,15 @@ jomleyeEbarat :
 	NOGHTE_VIRGUL {System.out.println("Rule 22.2");}
 
 jomleyeEntekhab :
-	IF_KW ebarateSade THEN_KW jomle {System.out.println("Rule 23.1");}
+	IF_KW ebarateSade THEN_KW jomle %prec LOWER_THAN_ELSE_KW {System.out.println("Rule 23.1");}
 	|
 	IF_KW ebarateSade THEN_KW jomle ELSE_KW jomle {System.out.println("Rule 23.2");}
 	|
 	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat onsorePishfarz END_KW {System.out.println("Rule 23.3");}
+	|
+	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW {System.out.println("Rule 23.4");}
 
+		
 onsoreHalat :
 	SWITCH_KW ADAD DONOGHTE_KW jomle NOGHTE_VIRGUL { System.out.println("Rule 24.1"); }
 	|
@@ -220,17 +260,17 @@ jomleyeShekast:
 ebarat:
 	taghirpazir EQUAL_KW ebarat {System.out.println("Rule 29.1");}
 	|
-	taghirpazir ADD_KW EQUAL_KW ebarat {System.out.println("Rule 29.2");}
+	taghirpazir PLUS_EQUAL_KW ebarat {System.out.println("Rule 29.2");}
 	|
-	taghirpazir MINUS_KW EQUAL_KW ebarat {System.out.println("Rule 29.3");}
+	taghirpazir MINU_EQUAL_KW ebarat {System.out.println("Rule 29.3");}
 	|
-	taghirpazir MULTIPLY_KW EQUAL_KW ebarat {System.out.println("Rule 29.4");}
+	taghirpazir MULTIPLY_EQUAL_KW ebarat {System.out.println("Rule 29.4");}
 	|
-	taghirpazir DEVIDE_KW EQUAL_KW ebarat {System.out.println("Rule 29.5");}
+	taghirpazir DEVIDE_EQUAL_KW ebarat {System.out.println("Rule 29.5");}
 	|
-	taghirpazir ADD_KW ADD_KW  {System.out.println("Rule 29.6");}
+	taghirpazir PLUS_PLUS_KW {System.out.println("Rule 29.6");}
 	|
-	taghirpazir MINUS_KW MINUS_KW  {System.out.println("Rule 29.7");}
+	taghirpazir MINUS_MINUS_KW  {System.out.println("Rule 29.7");}
 	|
 	ebarateSade {System.out.println(" Rule 29.8");}
 
@@ -245,7 +285,7 @@ ebarateSade :
 	|
 	ebarateSade NOT_KW ebarateSade {System.out.println("Rule 30.5");}
 	|
-	ebarateSade {System.out.println("Rule 30.6");}
+	ebarateRabetei {System.out.println("Rule 30.6");}
 
 ebarateRabetei :
 	ebarateRiaziManteghi {System.out.println("Rule 31.1");}
@@ -266,18 +306,16 @@ amalgareRabetei :
 ebarateRiaziManteghi :
 	ebarateYegani {System.out.println("Rule 33.1");}
 	|
-	ebarateRiaziManteghi amalgareRiazi ebarateRiaziManteghi {System.out.println("Rule 33.2");}
+	ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi {System.out.println("Rule 33.2");}
+	|
+	ebarateRiaziManteghi MINUS_KW ebarateRiaziManteghi {System.out.println("Rule 33.2");}
+	|
+	ebarateRiaziManteghi MULTIPLY_KW ebarateRiaziManteghi {System.out.println("Rule 33.2");}
+	|
+	ebarateRiaziManteghi DEVIDE_KW ebarateRiaziManteghi {System.out.println("Rule 33.2");}
+	|
+	ebarateRiaziManteghi MOD_KW ebarateRiaziManteghi {System.out.println("Rule 33.2");}
 
-amalgareRiazi :
-	ADD_KW {System.out.println("Rule 34.1");}
-	|
-	MINUS_KW {System.out.println("Rule 34.2");}
-	|
-	MULTIPLY_KW  {System.out.println("Rule 34.3");}
-	|
-	DEVIDE_KW  {System.out.println("Rule 34.4");}
-	|
-	MOD_KW  {System.out.println("Rule 34.5");}
 
 ebarateYegani :
 	amalgareYegani ebarateYegani {System.out.println("Rule 35.1");}
@@ -287,9 +325,9 @@ ebarateYegani :
 amalgareYegani :
 	MINUS_KW {System.out.println("Rule 36.1");}
 	|
-	MULTIPLY_KW  {System.out.println("Rule 36.2");}
+	MULTIPLY_KW {System.out.println("Rule 36.2");}
 	|
-	QUESTION_KW  {System.out.println("Rule 36.3");}
+	QUESTION_KW {System.out.println("Rule 36.3");}
 
 amel :
 	taghirpazir  {System.out.println("Rule 37.1");}
@@ -308,10 +346,13 @@ taghirnapazir :
 	|
 	sedaZadan  {System.out.println("Rule 39.2");}
 	|
-	CONSTANT_KW {System.out.println("Rule 39.3");}
+	meghdareSabet {System.out.println("Rule 39.3");}
 
 sedaZadan :
-	SHENASE PARANTHESIS_BAZ_KW bordareVorudi PARANTHESIS_BASTE_KW {System.out.println("Rule 40");} 
+	SHENASE PARANTHESIS_BAZ_KW bordareVorudi PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");} 
+	|
+	SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW {System.out.println("Rule 40.2");} 
+
 
 bordareVorudi: 
 	bordareVorudiha {System.out.println("Rule 41");}
