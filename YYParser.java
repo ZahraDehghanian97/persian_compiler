@@ -36,7 +36,6 @@
 /* Line 32 of lalr1.java  */
 /* Line 1 of "parser.y"  */
 
-package myCompiler;
 import java.io.*;
 
 
@@ -700,7 +699,7 @@ class YYParser
     
 /* Line 353 of lalr1.java  */
 /* Line 172 of "parser.y"  */
-    {System.out.println("Rule 15.1"};
+    {System.out.println("Rule 15.1");}
   break;
     
 
@@ -1579,7 +1578,7 @@ class YYParser
         if (yychar == yyempty_)
           {
 	    yycdebug ("Reading a token: ");
-	    yychar = yylex ();
+	    yychar = yylex();
             
             yylval = yylexer.getLVal ();
           }
@@ -2244,7 +2243,7 @@ class YYParser
         final Yylex lexer;
 
         writer = new PrintStream(new File("output.txt"));
-        lexer = new Yylex(new InputStreamReader(new FileInputStream("java_code.txt")));
+        lexer = new Yylex(new InputStreamReader(new FileInputStream("code.txt")));
 
         yyparser = new YYParser(new Lexer() {
 

@@ -665,7 +665,7 @@ class Yylex {
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public Yytoken yylex() throws java.io.IOException {
+  public int yylex() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -743,18 +743,18 @@ class Yylex {
       // store back cached position
       zzMarkedPos = zzMarkedPosL;
 
-      if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
-        zzAtEOF = true;
-        return null;
-      }
-      else {
+//      if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
+//        zzAtEOF = true;
+//        return null;
+//      }
+      //else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
             { //System.out.println(yytext() + "\t" + "nothing\t" + '-');
             }
           case 60: break;
           case 2: 
-            { //System.out.println(yytext() + "\t" + "shenase\t" + '-');
+            { System.out.println(yytext() + "\t" + "shenase\t" + '-');
 	return YYParser.SHENASE;
             }
           case 61: break;
@@ -802,7 +802,7 @@ class Yylex {
           case 70: break;
           case 12: 
             { return YYParser.MORE_THAN_KW ;
-	S//ystem.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
+	//ystem.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
             }
           case 71: break;
           case 13: 
@@ -832,7 +832,7 @@ class Yylex {
           case 76: break;
           case 18: 
             { return YYParser.MINUS_KW ;
-	System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');
+	//System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');
             }
           case 77: break;
           case 19: 
@@ -1005,7 +1005,7 @@ class Yylex {
             }
           case 111: break;
           case 53: 
-            { //System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
+            { System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
 	return YYParser.PROGRAM_KW;
             }
           case 112: break;
@@ -1031,7 +1031,7 @@ class Yylex {
           case 116: break;
           case 58: 
             { return YYParser.OR_ELSE_KW ;
-	System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
+	//System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
             }
           case 117: break;
           case 59: 
@@ -1047,4 +1047,4 @@ class Yylex {
   }
 
 
-}
+//}
