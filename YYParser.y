@@ -1,5 +1,4 @@
 %{
-package myCompiler;
 import java.io.*;
 %}
 
@@ -20,7 +19,7 @@ PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW DEVID
         final Yylex lexer;
 
         writer = new PrintStream(new File("output.txt"));
-        lexer = new Yylex(new InputStreamReader(new FileInputStream("java_code.txt")));
+        lexer = new Yylex(new InputStreamReader(new FileInputStream("code.txt")));
 
         yyparser = new YYParser(new Lexer() {
 
@@ -63,6 +62,11 @@ PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW DEVID
 %nonassoc ELSE_KW
 
 %%
+
+s:
+ barnameh {
+	System.out.println("Rule 0 ");
+ }
 barnameh:
 	PROGRAM_KW SHENASE tarifha {
 		System.out.println("Rule 1.1 ");
@@ -153,7 +157,7 @@ tarifeShenaseMoteghayer:
 	}
 	
 tarifeTabe:
-	jens SHENASE PARANTHESIS_BAZ_KW vorudi PARANTHESIS_BASTE_KW jomle {
+	jens SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {
 		System.out.println("Rule 13.1");
 	}
 	|
@@ -161,15 +165,12 @@ tarifeTabe:
 		System.out.println("Rule 13.2");
 	}
 	|
-	SHENASE PARANTHESIS_BAZ_KW vorudi PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.3");}
+	SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.3");}
 	|
 	SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.4");}
-
-vorudi :
-	vorudiha {System.out.println("Rule 14");}
 	
 vorudiha :
-	vorudiha NOGHTE_VIRGUL jensVorudiha {System.out.println("Rule 15.1"}
+	vorudiha NOGHTE_VIRGUL jensVorudiha {System.out.println("Rule 15.1");}
 	|
 	jensVorudiha {System.out.println("Rule 15.2");}
 	
@@ -287,7 +288,7 @@ ebarateSade :
 	|
 	ebarateRabetei {System.out.println("Rule 30.6");}
 
-ebarateRabetei :
+ebarateRabetei:
 	ebarateRiaziManteghi {System.out.println("Rule 31.1");}
 	|
 	ebarateRiaziManteghi amalgareRabetei ebarateRiaziManteghi {System.out.println("Rule 31.2");}
@@ -349,13 +350,9 @@ taghirnapazir :
 	meghdareSabet {System.out.println("Rule 39.3");}
 
 sedaZadan :
-	SHENASE PARANTHESIS_BAZ_KW bordareVorudi PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");} 
+	SHENASE PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");} 
 	|
 	SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW {System.out.println("Rule 40.2");} 
-
-
-bordareVorudi: 
-	bordareVorudiha {System.out.println("Rule 41");}
 
 bordareVorudiha: 
 	bordareVorudiha COMMA ebarat {System.out.println("Rule 42.1");}

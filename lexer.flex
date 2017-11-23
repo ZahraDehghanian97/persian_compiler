@@ -36,8 +36,8 @@ end_kw = (\u062a\u0645\u0627\u0645)
 default_kw = (\u067e\u06cc\u0634\u0641\u0631\u0636)
 break_kw = (\u0628\u0634\u06a9\u0646)
 return_kw = (\u0628\u0631\u06af\u0631\u062f\u0627\u0646)
-AKULAD_BAZ_KW = "{"
-AKULAD_BASTE_KW = "}"
+AKULAD_BAZ_KW = [{]
+AKULAD_BASTE_KW = [}]
 
 IF_KW = (\u0627\u06AF\u0631)
 THEN_KW = (\u0622\u0646\u06af\u0627\u0647)
@@ -101,257 +101,318 @@ MULTIPLY_EQUAL_KW = "*="
 DEVIDE_EQUAL_KW = "/="
 
 ADD_KW = [+]
-MINUS_KW = [-]
 
 
 %%
 {comments} {
-	//System.out.println(yytext() + "\t" + "comments\t" + '-');
+	if(p){System.out.println(yytext() + "\t" + "comments\t" + '-');}
 	return YYParser.COMMENT;
 }
 
 {KEY_KW} {
-	//System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');
+	if(p){System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');}
 	return YYParser.KEY_KW ;
 }
 {NOGHTE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');}
 	return YYParser.NOGHTE_KW ;
 	//System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');
 }
-{MULTIPLY_KW} {
-	return YYParser.MULTIPLY_KW ;
-	//System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');
-}
+
 {BRACKET_BASTE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');}
+
 	return YYParser.BRACKET_BASTE_KW ;
 	//System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');
 }
 {BRACKET_BAZ_KW} {
+	if(p){System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');}
+
 	return YYParser.BRACKET_BAZ_KW ;
 	//System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');
 }
 {PARANTHESIS_BASTE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');}
+
 	return YYParser.PARANTHESIS_BASTE_KW ;
 	//System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');
 }
 {PARANTHESIS_BAZ_KW} {
+	if(p){System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');}
 	return YYParser.PARANTHESIS_BAZ_KW ;
 	//System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');
 }
 {TRUE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');}
 	return YYParser.TRUE_KW ;
 	//System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');
 }
 
 {LESS_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');}
 	return YYParser.LESS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');
 }
 {DONOGHTE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');}
 	return YYParser.DONOGHTE_KW ;
 	//System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');
 }
 {AND_THEN_KW} {
+	if(p){System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');}
 	return YYParser.AND_THEN_KW ;
 	//System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');
 }
 {FALSE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');}
 	return YYParser.FALSE_KW ;
 	//System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');
 }
 {OR_ELSE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');}
 	return YYParser.OR_ELSE_KW ;
-	System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
+	//System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
 }
-{DEVIDE_KW} {
-	return YYParser.DEVIDE_KW ;
-	//System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');
-}
-{EQUAL_KW} {
-	return YYParser.EQUAL_KW ;
-	//System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');
-}
+
 {EQUAL_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');}
 	return YYParser.EQUAL_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');
 }
+{EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');}
+	return YYParser.EQUAL_KW ;
+	//System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');
+}
 {QUESTION_KW} {
+	if(p){System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');}
 	return YYParser.QUESTION_KW ;
 	//System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');
 }
 {MOD_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');}
 	return YYParser.MOD_KW ;
 	//System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');
 }
 {LESS_THAN_KW} {
+	if(p){System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');}
 	return YYParser.LESS_THAN_KW ;
 	//System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');
 }
 
 {MORE_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');}
 	return YYParser.MORE_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');
 }
 
 {MORE_THAN_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');}
 	return YYParser.MORE_THAN_KW ;
-	S//ystem.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
+	//ystem.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
 }
 
 {PLUS_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');}
 	return YYParser.PLUS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');
 }
 {PLUS_PLUS_KW} {
+	if(p){System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');}
 	return YYParser.PLUS_PLUS_KW ;
 	//System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');
 }
 
 {ADD_KW} {
+	if(p){System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');
 	return YYParser.ADD_KW;
 }
 
 {MINUS_MINUS_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');}
 	return YYParser.MINUS_MINUS_KW ;
 	//System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');
 }
 {MINUS_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MINUS_EQUAL_KW\t" + '-');}
 	return YYParser.MINUS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MINU_EQUAL_KW\t" + '-');
 }
 {MINUS_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');}
 	return YYParser.MINUS_KW ;
-	System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');
 }
 {MULTIPLY_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');}
 	return YYParser.MULTIPLY_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');
 }
+{MULTIPLY_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');}
+	return YYParser.MULTIPLY_KW ;
+	//System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');
+}
+
 {DEVIDE_EQUAL_KW} {
+	if(p){System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');}
 	return YYParser.DEVIDE_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');
 }
 
+{DEVIDE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');}
+	return YYParser.DEVIDE_KW ;
+	//System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');
+}
+
 {AKULAD_BAZ_KW} {
+	if(p){System.out.println(yytext() + "\t" + "AKULAD_BAZ_KW\t" + '-');}
 	return YYParser.AKULAD_BAZ_KW;
 }
 {AKULAD_BASTE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "AKULAD_BASTE_KW\t" + '-');}
 	return YYParser.AKULAD_BASTE_KW;
 }
 
 {INT_KW} {
 	//System.out.println(yytext() + "\t" + "INT_KW\t" + '-');
+	if(p){System.out.println(yytext() + "\t" + "INT_KW\t" + '-');}
 	return YYParser.INT_KW;
 }
 {FLOAT_KW} {
+	if(p){System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
 	return YYParser.FLOAT_KW;
 }
 {BOOLEAN_KW} {
+	if(p){System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
 	return YYParser.BOOLEAN_KW;
 }
 {CHAR_KW} {
+	if(p){System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');
 	return YYParser.CHAR_KW;
 }
 {SWITCH_KW} {
+	if(p){System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');
 	return YYParser.SWITCH_KW;
 }
 {end_kw} {
+	if(p){System.out.println(yytext() + "\t" + "END_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "end_kw\t" + '-');
 	return YYParser.END_KW;
 }
 {default_kw} {
+	if(p){System.out.println(yytext() + "\t" + "DEFAULT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "default_kw\t" + '-');
 	return YYParser.DEFAULT_KW;
 }
 {break_kw} {
+	if(p){System.out.println(yytext() + "\t" + "BREAK_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "break_kw\t" + '-');
 	return YYParser.BREAK_KW;
 }
 {return_kw} {
+	if(p){System.out.println(yytext() + "\t" + "RETURN_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "return_kw\t" + '-');
 	return YYParser.RETURN_KW;
 }
 
 {comma} {
+	if(p){System.out.println(yytext() + "\t" + "COMMA\t" + '-');}
 	//System.out.println(yytext() + "\t" + "comma\t" + '-');
 	return YYParser.COMMA;
 }
 
 {PROGRAM_KW} {
+	if(p){System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
 	return YYParser.PROGRAM_KW;
 }
 {struct_kw} {
+	if(p){System.out.println(yytext() + "\t" + "STRUCT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "type_kw\t" + '-');
 	return YYParser.STRUCT_KW;
 }
 {constant_kw} {
+	if(p){System.out.println(yytext() + "\t" + "CONSTANT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "constant_kw\t" + '-');
 	return YYParser.CONSTANT_KW;
 }
 
 {IF_KW} {
+	if(p){System.out.println(yytext() + "\t" + "IF_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "IF_KW\t" + '-');
 	return YYParser.IF_KW;
 }
 {THEN_KW} {
+	if(p){System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');
 	return YYParser.THEN_KW;
 }
 {ELSE_KW} {
+	if(p){System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');
 	return YYParser.ELSE_KW;
 }
 {AND_KW} {
+	if(p){System.out.println(yytext() + "\t" + "AND_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "AND_KW\t" + '-');
 	return YYParser.AND_KW;
 }
 {OR_KW} {
+	if(p){System.out.println(yytext() + "\t" + "OR_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "OR_KW\t" + '-');
 	return YYParser.OR_KW;
 }
 {NOT_KW} {
+	if(p){System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');
 	return YYParser.NOT_KW;
 }
 {while_kw} {
+	if(p){System.out.println(yytext() + "\t" + "WHILE_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "while_kw\t" + '-');
 	return YYParser.WHILE_KW;
 }
 
 {noghte_virgul} {
+	if(p){System.out.println(yytext() + "\t" + "NOGHTE_VIRGUL\t" + '-');}
 	//System.out.println(yytext() + "\t" + "noghte_virgul\t" + '-');
 	return YYParser.NOGHTE_VIRGUL;
 }
 
 {adad} {
+	if(p){System.out.println(yytext() + "\t" + "ADAD\t" + '-');}
 	//System.out.println(yytext() + "\t" + "adad\t" + '-');
 	return YYParser.ADAD;
 }
 
 {shenase} {
-	 
+	 if(p){System.out.println(yytext() + "\t" + "SHENASE\t" + '-');}
 	//System.out.println(yytext() + "\t" + "shenase\t" + '-');
 	return YYParser.SHENASE;
 }
 
 {harfe_sabet} {
+	if(p){System.out.println(yytext() + "\t" + "HARFE_SABET\t" + '-');}
 	//System.out.println(yytext() + "\t" + "harfe_sabet\t" + '-');
 	return YYParser.HARFE_SABET;
 }
 
 {null_char} {
+	//if(p){System.out.println(yytext() + "\t" + "\t" + '-');}
 	System.out.println(yytext() + "\t" + "null_char\t" + '-');
 }
 {new_line} {
 	//System.out.println(yytext() + "\t" + "new line\t" + '-');
+	//if(p){System.out.println(yytext() + "\t" + "NEW_LINE\t" + '-');}
 }
 . {
+	//if(p){System.out.println(yytext() + "\t" + "NOTHING\t" + '-');}
 	//System.out.println(yytext() + "\t" + "nothing\t" + '-');
 
 }

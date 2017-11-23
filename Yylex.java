@@ -665,7 +665,7 @@ class Yylex {
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public int yylex() throws java.io.IOException {
+  public Yytoken yylex() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -743,299 +743,358 @@ class Yylex {
       // store back cached position
       zzMarkedPos = zzMarkedPosL;
 
-//      if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
-//        zzAtEOF = true;
-//        return null;
-//      }
-      //else {
+      if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
+        zzAtEOF = true;
+        return null;
+      }
+      else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { //System.out.println(yytext() + "\t" + "nothing\t" + '-');
+            { //if(p){System.out.println(yytext() + "\t" + "NOTHING\t" + '-');}
+	//System.out.println(yytext() + "\t" + "nothing\t" + '-');
             }
           case 60: break;
           case 2: 
-            { System.out.println(yytext() + "\t" + "shenase\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "SHENASE\t" + '-');}
+	//System.out.println(yytext() + "\t" + "shenase\t" + '-');
 	return YYParser.SHENASE;
             }
           case 61: break;
           case 3: 
-            { return YYParser.AKULAD_BAZ_KW;
+            { if(p){System.out.println(yytext() + "\t" + "AKULAD_BAZ_KW\t" + '-');}
+	return YYParser.AKULAD_BAZ_KW;
             }
           case 62: break;
           case 4: 
-            { return YYParser.AKULAD_BASTE_KW;
+            { if(p){System.out.println(yytext() + "\t" + "AKULAD_BASTE_KW\t" + '-');}
+	return YYParser.AKULAD_BASTE_KW;
             }
           case 63: break;
           case 5: 
-            { //System.out.println(yytext() + "\t" + "AND_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "AND_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "AND_KW\t" + '-');
 	return YYParser.AND_KW;
             }
           case 64: break;
           case 6: 
-            { //System.out.println(yytext() + "\t" + "adad\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "ADAD\t" + '-');}
+	//System.out.println(yytext() + "\t" + "adad\t" + '-');
 	return YYParser.ADAD;
             }
           case 65: break;
           case 7: 
-            { return YYParser.DEVIDE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');}
+	return YYParser.DEVIDE_KW ;
 	//System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');
             }
           case 66: break;
           case 8: 
             { //System.out.println(yytext() + "\t" + "new line\t" + '-');
+	//if(p){System.out.println(yytext() + "\t" + "NEW_LINE\t" + '-');}
             }
           case 67: break;
           case 9: 
-            { //System.out.println(yytext() + "\t" + "noghte_virgul\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "NOGHTE_VIRGUL\t" + '-');}
+	//System.out.println(yytext() + "\t" + "noghte_virgul\t" + '-');
 	return YYParser.NOGHTE_VIRGUL;
             }
           case 68: break;
           case 10: 
-            { //System.out.println(yytext() + "\t" + "comma\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "COMMA\t" + '-');}
+	//System.out.println(yytext() + "\t" + "comma\t" + '-');
 	return YYParser.COMMA;
             }
           case 69: break;
           case 11: 
-            { return YYParser.MULTIPLY_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');}
+	return YYParser.MULTIPLY_KW ;
 	//System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');
             }
           case 70: break;
           case 12: 
-            { return YYParser.MORE_THAN_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');}
+	return YYParser.MORE_THAN_KW ;
 	//ystem.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
             }
           case 71: break;
           case 13: 
-            { return YYParser.NOGHTE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');}
+	return YYParser.NOGHTE_KW ;
 	//System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');
             }
           case 72: break;
           case 14: 
-            { return YYParser.BRACKET_BASTE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');}
+
+	return YYParser.BRACKET_BASTE_KW ;
 	//System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');
             }
           case 73: break;
           case 15: 
-            { return YYParser.BRACKET_BAZ_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');}
+
+	return YYParser.BRACKET_BAZ_KW ;
 	//System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');
             }
           case 74: break;
           case 16: 
-            { return YYParser.PARANTHESIS_BASTE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');}
+
+	return YYParser.PARANTHESIS_BASTE_KW ;
 	//System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');
             }
           case 75: break;
           case 17: 
-            { return YYParser.PARANTHESIS_BAZ_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');}
+	return YYParser.PARANTHESIS_BAZ_KW ;
 	//System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');
             }
           case 76: break;
           case 18: 
-            { return YYParser.MINUS_KW ;
-	//System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');}
+	return YYParser.MINUS_KW ;
             }
           case 77: break;
           case 19: 
-            { return YYParser.QUESTION_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');}
+	return YYParser.QUESTION_KW ;
 	//System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');
             }
           case 78: break;
           case 20: 
-            { return YYParser.EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');}
+	return YYParser.EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');
             }
           case 79: break;
           case 21: 
-            { return YYParser.DONOGHTE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');}
+	return YYParser.DONOGHTE_KW ;
 	//System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');
             }
           case 80: break;
           case 22: 
-            { return YYParser.LESS_THAN_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');}
+	return YYParser.LESS_THAN_KW ;
 	//System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');
             }
           case 81: break;
           case 23: 
-            { return YYParser.MOD_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');}
+	return YYParser.MOD_KW ;
 	//System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');
             }
           case 82: break;
           case 24: 
-            { //System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');
 	return YYParser.ADD_KW;
             }
           case 83: break;
           case 25: 
-            { //System.out.println(yytext() + "\t" + "OR_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "OR_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "OR_KW\t" + '-');
 	return YYParser.OR_KW;
             }
           case 84: break;
           case 26: 
-            { System.out.println(yytext() + "\t" + "null_char\t" + '-');
+            { //if(p){System.out.println(yytext() + "\t" + "\t" + '-');}
+	System.out.println(yytext() + "\t" + "null_char\t" + '-');
             }
           case 85: break;
           case 27: 
-            { return YYParser.DEVIDE_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');}
+	return YYParser.DEVIDE_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');
             }
           case 86: break;
           case 28: 
-            { return YYParser.MULTIPLY_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');}
+	return YYParser.MULTIPLY_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');
             }
           case 87: break;
           case 29: 
-            { return YYParser.MORE_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');}
+	return YYParser.MORE_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');
             }
           case 88: break;
           case 30: 
-            { return YYParser.MINUS_MINUS_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');}
+	return YYParser.MINUS_MINUS_KW ;
 	//System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');
             }
           case 89: break;
           case 31: 
-            { return YYParser.MINUS_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "MINUS_EQUAL_KW\t" + '-');}
+	return YYParser.MINUS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MINU_EQUAL_KW\t" + '-');
             }
           case 90: break;
           case 32: 
-            { return YYParser.EQUAL_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');}
+	return YYParser.EQUAL_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');
             }
           case 91: break;
           case 33: 
-            { return YYParser.LESS_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');}
+	return YYParser.LESS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');
             }
           case 92: break;
           case 34: 
-            { return YYParser.PLUS_EQUAL_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');}
+	return YYParser.PLUS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');
             }
           case 93: break;
           case 35: 
-            { return YYParser.PLUS_PLUS_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');}
+	return YYParser.PLUS_PLUS_KW ;
 	//System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');
             }
           case 94: break;
           case 36: 
-            { //System.out.println(yytext() + "\t" + "IF_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "IF_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "IF_KW\t" + '-');
 	return YYParser.IF_KW;
             }
           case 95: break;
           case 37: 
-            { //System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');
 	return YYParser.CHAR_KW;
             }
           case 96: break;
           case 38: 
-            { //System.out.println(yytext() + "\t" + "while_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "WHILE_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "while_kw\t" + '-');
 	return YYParser.WHILE_KW;
             }
           case 97: break;
           case 39: 
-            { //System.out.println(yytext() + "\t" + "comments\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "comments\t" + '-');}
 	return YYParser.COMMENT;
             }
           case 98: break;
           case 40: 
-            { //System.out.println(yytext() + "\t" + "harfe_sabet\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "HARFE_SABET\t" + '-');}
+	//System.out.println(yytext() + "\t" + "harfe_sabet\t" + '-');
 	return YYParser.HARFE_SABET;
             }
           case 99: break;
           case 41: 
-            { return YYParser.FALSE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');}
+	return YYParser.FALSE_KW ;
 	//System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');
             }
           case 100: break;
           case 42: 
-            { //System.out.println(yytext() + "\t" + "break_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "BREAK_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "break_kw\t" + '-');
 	return YYParser.BREAK_KW;
             }
           case 101: break;
           case 43: 
-            { //System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');
 	return YYParser.NOT_KW;
             }
           case 102: break;
           case 44: 
-            { //System.out.println(yytext() + "\t" + "end_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "END_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "end_kw\t" + '-');
 	return YYParser.END_KW;
             }
           case 103: break;
           case 45: 
-            { //System.out.println(yytext() + "\t" + "constant_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "CONSTANT_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "constant_kw\t" + '-');
 	return YYParser.CONSTANT_KW;
             }
           case 104: break;
           case 46: 
             { //System.out.println(yytext() + "\t" + "INT_KW\t" + '-');
+	if(p){System.out.println(yytext() + "\t" + "INT_KW\t" + '-');}
 	return YYParser.INT_KW;
             }
           case 105: break;
           case 47: 
-            { //System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');
 	return YYParser.SWITCH_KW;
             }
           case 106: break;
           case 48: 
-            { //System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');}
 	return YYParser.KEY_KW ;
             }
           case 107: break;
           case 49: 
-            { return YYParser.TRUE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');}
+	return YYParser.TRUE_KW ;
 	//System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');
             }
           case 108: break;
           case 50: 
-            { //System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
 	return YYParser.BOOLEAN_KW;
             }
           case 109: break;
           case 51: 
-            { //System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');
 	return YYParser.THEN_KW;
             }
           case 110: break;
           case 52: 
-            { //System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');
 	return YYParser.ELSE_KW;
             }
           case 111: break;
           case 53: 
-            { System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
 	return YYParser.PROGRAM_KW;
             }
           case 112: break;
           case 54: 
-            { //System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
 	return YYParser.FLOAT_KW;
             }
           case 113: break;
           case 55: 
-            { //System.out.println(yytext() + "\t" + "type_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "STRUCT_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "type_kw\t" + '-');
 	return YYParser.STRUCT_KW;
             }
           case 114: break;
           case 56: 
-            { //System.out.println(yytext() + "\t" + "default_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "DEFAULT_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "default_kw\t" + '-');
 	return YYParser.DEFAULT_KW;
             }
           case 115: break;
           case 57: 
-            { //System.out.println(yytext() + "\t" + "return_kw\t" + '-');
+            { if(p){System.out.println(yytext() + "\t" + "RETURN_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "return_kw\t" + '-');
 	return YYParser.RETURN_KW;
             }
           case 116: break;
           case 58: 
-            { return YYParser.OR_ELSE_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');}
+	return YYParser.OR_ELSE_KW ;
 	//System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
             }
           case 117: break;
           case 59: 
-            { return YYParser.AND_THEN_KW ;
+            { if(p){System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');}
+	return YYParser.AND_THEN_KW ;
 	//System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');
             }
           case 118: break;
@@ -1047,4 +1106,4 @@ class Yylex {
   }
 
 
-//}
+}
