@@ -284,7 +284,7 @@ ebarateSade :
 	|
 	ebarateSade AND_THEN_KW ebarateSade {System.out.println("Rule 30.4");}
 	|
-	ebarateSade NOT_KW ebarateSade {System.out.println("Rule 30.5");}
+	NOT_KW ebarateSade {System.out.println("Rule 30.5");}
 	|
 	ebarateRabetei {System.out.println("Rule 30.6");}
 
