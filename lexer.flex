@@ -27,10 +27,8 @@ class MainClass {
 PROGRAM_KW = (\u0628\u0631\u0646\u0627\u0645\u0647)
 struct_kw = (\u0633\u0627\u062e\u062a\u0627\u0631)
 constant_kw = (\u062b\u0627\u0628\u062a)
-INT_KW = (\u0635\u062d\u06cc\u062d)
-FLOAT_KW =(\u0627\u0639\u0634\u0627\u0631\u06cc)
-CHAR_KW =(\u062d\u0631\u0641)
-BOOLEAN_KW = (\u0645\u0646\u0637\u0642\u06cc)
+INT_KW = (\u0635\u062d\u062d)
+
 SWITCH_KW = ( \u062d\u0627\u0644\u062a)
 end_kw = (\u062a\u0645\u0627\u0645)
 default_kw = (\u067e\u06cc\u0634\u0641\u0631\u0636)
@@ -66,7 +64,6 @@ noghte_virgul = ";"|[\u061b]
 comma = ","|[\u060c]
 comments = {slash}{slash}({PERSIAN_LETTER}|[A-z]|{DIGIT})*		{new_line} | {slash}"*"(.)*"*"{slash}
 FLOAT_KW = (\u0627\u0639\u0634\u0627\u0631\u06cc)
-INT_KW = (\u0635\u062d\u06cc\u062d)
 BOOLEAN_KW =(\u0645\u0646\u0637\u0642\u06cc)
 CHAR_KW = (\u062d\u0631\u0641)
 
@@ -394,6 +391,7 @@ ADD_KW = [+]
 {shenase} {
 	 if(p){System.out.println(yytext() + "\t" + "SHENASE\t" + '-');}
 	//System.out.println(yytext() + "\t" + "shenase\t" + '-');
+	YYParser.lexIdentifier = "zahra";
 	return YYParser.SHENASE;
 }
 
