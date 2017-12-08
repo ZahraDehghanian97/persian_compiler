@@ -42,7 +42,7 @@ THEN_KW = (\u0622\u0646\u06af\u0627\u0647)
 ELSE_KW = (\u0648\u06af\u0631\u0646\u0647)
 
 AND_KW = (\u0648)
-OR_KW = (\u06cc\u0627)
+OR_KW = (\u06cc\u0627) | (\u0627\u0648\u0631)
 NOT_KW = (\u062e\u0644\u0627\u0641) 
 while_kw = (\u0648\u0642\u062a\u06cc)|(\u0648\u0642\u062a)
 
@@ -55,6 +55,8 @@ harf_ragham = {DIGIT} | {PERSIAN_LETTER}
 
 shenase = {PERSIAN_LETTER}{harf_ragham}*
 adad = {DIGIT}+
+dot = "."
+ADAD_ASHARI = {DIGIT}+{dot}{DIGIT}+
 back_slash = \
 slash = (\u002f)
 new_line = "\s"|"\n"|"\r"|"\t"
@@ -141,6 +143,7 @@ ADD_KW = [+]
 }
 {TRUE_KW} {
 	if(p){System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');}
+	YYParser.lexBoolean = Boolean.parseBoolean("true");
 	return YYParser.TRUE_KW ;
 	//System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');
 }
@@ -162,6 +165,7 @@ ADD_KW = [+]
 }
 {FALSE_KW} {
 	if(p){System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');}
+	YYParser.lexBoolean = Boolean.parseBoolean("false");
 	return YYParser.FALSE_KW ;
 	//System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');
 }
@@ -382,22 +386,31 @@ ADD_KW = [+]
 	return YYParser.NOGHTE_VIRGUL;
 }
 
+{ADAD_ASHARI} {
+	if(p){System.out.println(yytext() + "\t" + "ADAD\t" + '-');}
+	//System.out.println(yytext() + "\t" + "adad\t" + '-');
+	YYParser.lexReal = Double.parseDouble(yytext());
+	return YYParser.ADAD_ASHARI;
+}
+
 {adad} {
 	if(p){System.out.println(yytext() + "\t" + "ADAD\t" + '-');}
 	//System.out.println(yytext() + "\t" + "adad\t" + '-');
+	YYParser.lexInt = Integer.parseInt(yytext());
 	return YYParser.ADAD;
 }
 
 {shenase} {
 	 if(p){System.out.println(yytext() + "\t" + "SHENASE\t" + '-');}
 	//System.out.println(yytext() + "\t" + "shenase\t" + '-');
-	YYParser.lexIdentifier = "zahra";
+	YYParser.lexIdentifier = yytext();
 	return YYParser.SHENASE;
 }
 
 {harfe_sabet} {
 	if(p){System.out.println(yytext() + "\t" + "HARFE_SABET\t" + '-');}
 	//System.out.println(yytext() + "\t" + "harfe_sabet\t" + '-');
+	YYParser.lexChar = yytext().charAt(1);
 	return YYParser.HARFE_SABET;
 }
 
