@@ -799,7 +799,7 @@ class YYParser
 		((EVal)yyval).array = ((EVal)(yystack.valueAt (3-(1)))).array;
 		((EVal)yyval).initializers = ((EVal)(yystack.valueAt (3-(3)))).initializers;
 		
-		emit(":=", ((EVal)(yystack.valueAt (3-(3)))).name, null, ((EVal)(yystack.valueAt (3-(1)))).name);
+		emit(":=", ((EVal)(yystack.valueAt (3-(3)))).place, null, ((EVal)(yystack.valueAt (3-(1)))).place);
 	};
   break;
     
@@ -1230,8 +1230,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1272,8 +1272,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1314,8 +1314,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1356,8 +1356,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1453,8 +1453,8 @@ class YYParser
 		emit("+", ((EVal)yyval).place, ((EVal)(yystack.valueAt (4-(4)))).place, ((EVal)yyval).place);
 		((EVal)yyval).trueList = EVal.makeList(nextQuad());
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2));
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1));
 	};
   break;
     
@@ -1482,8 +1482,8 @@ class YYParser
 		emit("*", ((EVal)yyval).place, ((EVal)(yystack.valueAt (4-(4)))).place, ((EVal)yyval).place);
 		((EVal)yyval).trueList = EVal.makeList(nextQuad());
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
 	};
   break;
     
@@ -1668,8 +1668,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	};
   break;
     
@@ -1715,8 +1715,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1807,8 +1807,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1854,8 +1854,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -1907,8 +1907,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -2267,12 +2267,10 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 		
-		if(lexBoolean)
-			emit(":=", "1", null, ((EVal)yyval).place);
-		else
-			emit(":=", "0", null, ((EVal)yyval).place);
-		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit(":=", "1", null, ((EVal)yyval).place);
+		
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -2281,7 +2279,7 @@ class YYParser
   if (yyn == 112)
     
 /* Line 353 of lalr1.java  */
-/* Line 1363 of ".\\YYParser.y"  */
+/* Line 1361 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 34.2: " +
 			"saved_boolean: FALSE_KW");
@@ -2292,12 +2290,10 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 		
-		if(lexBoolean)
-			emit(":=", "1", null, ((EVal)yyval).place);
-		else
-			emit(":=", "0", null, ((EVal)yyval).place);
-		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit(":=", "0", null, ((EVal)yyval).place);
+		
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	};
   break;
     
@@ -2306,7 +2302,7 @@ class YYParser
   if (yyn == 113)
     
 /* Line 353 of lalr1.java  */
-/* Line 1382 of ".\\YYParser.y"  */
+/* Line 1378 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 35: " +
 			"M: ");
@@ -2319,7 +2315,7 @@ class YYParser
 
 
 /* Line 353 of lalr1.java  */
-/* Line 2323 of "YYParser.java"  */
+/* Line 2319 of "YYParser.java"  */
 	default: break;
       }
 
@@ -3032,7 +3028,7 @@ class YYParser
      937,   962,  1002,  1041,  1080,  1120,  1168,  1170,  1178,  1180,
     1182,  1185,  1194,  1202,  1211,  1213,  1216,  1223,  1225,  1235,
     1237,  1240,  1242,  1245,  1256,  1267,  1278,  1290,  1298,  1315,
-    1331,  1346,  1363,  1382
+    1331,  1346,  1361,  1378
   };
 
   // Report on the debug stream that the rule yyrule is going to be reduced.
@@ -3293,13 +3289,13 @@ class YYParser
 
 
 /* Line 875 of lalr1.java  */
-/* Line 3297 of "YYParser.java"  */
+/* Line 3293 of "YYParser.java"  */
 
 }
 
 
 /* Line 879 of lalr1.java  */
-/* Line 1398 of ".\\YYParser.y"  */
+/* Line 1394 of ".\\YYParser.y"  */
 
 class EVal {
 
