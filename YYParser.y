@@ -13,7 +13,7 @@ MOD_KW LESS_THAN_KW MORE_EQUAL_KW
 PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW 
 ADAD_ASHARI
 
-%type <EVal> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif
+%type <EVal> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer
 meghdareSabet taghirpazir
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
@@ -28,11 +28,11 @@ meghdareSabet taghirpazir
 	public static final String TYPE_STRING_CHAR = "char";
 	public static final String TYPE_STRING_BOOLEAN = "int";
 
-	private static final String tempStr = "__SHLangTempVar";
-	public static final String startStr = "__SHLangStartVar";
-	public static final String sizeStr = "__SHLangSizeVar";
-	public static final String indexStr = "__SHLangIndexVar";
-	public static final String condStr = "__SHLangConditionVar";
+	private static final String tempStr = "tempVar";
+	public static final String startStr = "StartVar";
+	public static final String sizeStr = "SizeVar";
+	public static final String indexStr = "IndexVar";
+	public static final String condStr = "ConditionVar";
 	
 	public static String lexIdentifier;
 	public static int lexInt;
@@ -266,36 +266,167 @@ jenseMahdud:
 	}
 	
 jens:
-	INT_KW {System.out.println("Rule 8.1");}
-	| FLOAT_KW {System.out.println("Rule 8.2");}
-	|CHAR_KW {System.out.println("Rule 8.3");}
-	|BOOLEAN_KW{System.out.println("Rule 8.4");}
+	INT_KW {
+	System.out.println("Rule 8.1");
+	
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
+	}
+	| FLOAT_KW {
+	System.out.println("Rule 8.2");
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_REAL;
+	}
+	|CHAR_KW {
+		System.out.println("Rule 8.3");
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_CHAR;
+	}
+	|BOOLEAN_KW{
+		System.out.println("Rule 8.4");
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+	}
 	
 tarifeMoteghayyer:
 	jens tarifhayeMoteghayyerha NOGHTE_VIRGUL {
 		System.out.println("Rule 9");
+		
+		System.out.println("Rule 3: " +
+			"declarations: type_specifiers declarator_list");
+		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
+			for(int i = 0; i < $2.initializersList.size(); i++) {
+				if(symbolTable.lookUp(sizeStr + $2.declareds.get(i).place) == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, false);
+					if($2.initializersList.get(i) != null && $2.initializersList.get(i).size() == 1) {
+						//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+							emit(":=", $2.initializersList.get(i).get(0).place, null, $2.declareds.get(i).place);
+							switch ($1.type) {
+								case EVal.TYPE_CODE_INTEGER:
+									emit("iprint", null, null, $2.declareds.get(i).place);
+									break;
+								case EVal.TYPE_CODE_REAL:
+									emit("rprint", null, null, $2.declareds.get(i).place);
+									break;
+								case EVal.TYPE_CODE_CHAR:
+									emit("cprint", null, null, $2.declareds.get(i).place);
+									break;
+							}
+						//} else {
+							// backpatch($2.initializersList.get(i).get(0).falseList, nextQuad());
+							// backpatch($2.initializersList.get(i).get(0).trueList, nextQuad() + 2);
+						//	emit(":=", "0", null, $2.declareds.get(i).place);
+						//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+						//	emit(":=", "1", null, $2.declareds.get(i).place);
+						//	emit("bprint", null, null, $2.declareds.get(i).place);
+						//}
+					} else if($2.initializersList.get(i) != null) {
+						System.err.println("Error! Initializer number mismatch. (Expected: 1" + ", Number: " + $2.initializersList.get(i).size() + ")");
+						return YYABORT;
+					}
+				} else {
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, true);
+					emit("malloc", getTypeString($1.type), sizeStr + $2.declareds.get(i).place, $2.declareds.get(i).place);
+					if($2.initializersList.get(i) != null) {
+						for(int j = 0; j < $2.initializersList.get(i).size(); j++) {
+							EVal.arrayIndexOutOfBoundList.add(nextQuad() + 1);
+							emit(">=", String.valueOf(j), sizeStr + $2.declareds.get(i).place, condStr + $2.declareds.get(i).place);
+							emit("check", condStr + $2.declareds.get(i).place, null, String.valueOf(nextQuad() + 2)); // Result will be backpatched.
+							//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+								emit("[]=", $2.initializersList.get(i).get(j).place, String.valueOf(j), $2.declareds.get(i).place);
+								emit("+", startStr + $2.declareds.get(i).place, String.valueOf(j), condStr + $2.declareds.get(i).place);
+								switch ($1.type) {
+									case EVal.TYPE_CODE_INTEGER:
+										emit("aiprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+										break;
+									case EVal.TYPE_CODE_REAL:
+										emit("arprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+										break;
+									case EVal.TYPE_CODE_CHAR:
+										emit("acprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+										break;
+								}
+							//} else {
+								// backpatch($2.initializersList.get(i).get(j).falseList, nextQuad());
+								// backpatch($2.initializersList.get(i).get(j).trueList, nextQuad() + 2);
+							//	emit("[]=", "0", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+							//	emit("[]=", "1", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("abprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+							//}
+						}
+					}
+				}
+			}
+		} else {
+			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
+			return YYABORT;
+}
 	}
 	
 tarifhayeMoteghayyerha:
 	tarifeMeghdareAvalie{
 		System.out.println("Rule 10.1 ");
+		System.out.println("Rule 7.1: " +
+			"declarator_end: dec SEMICOLON_KW");
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = EVal.TYPE_CODE_UNKNOWN;
+		((EVal)$$).initializers = $1.initializers;
 	} |
 	tarifhayeMoteghayyerha COMMA tarifeMeghdareAvalie {
 		System.out.println("Rule 10.2 ");
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = EVal.TYPE_CODE_UNKNOWN;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).initializers = null;
 	}
 	
 tarifeMeghdareAvalie:
-	tarifeShenaseMoteghayer {System.out.println("Rule 11.1 ");}
+	tarifeShenaseMoteghayer {
+	System.out.println("Rule 11.1 ");
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).array = false;
+	}
 	| tarifeShenaseMoteghayer EQUAL_KW ebarateSade{
 		System.out.println("Rule 11.2 ");
+		if($1.array != $3.array) {
+			System.err.println("Error! Array mismatch: " + $1.place + " and " + $3.place + " are not the same.");
+			return YYABORT;
+		}
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).initializers = $3.initializers;
 	}
 
 tarifeShenaseMoteghayer:
-	SHENASE {
-		System.out.println("Rule 12.1: " );
+	saved_identifier {
+		System.out.println("Rule 8.1: " +
+			"dec: saved_identifier");
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).array = false;
 	}
-	| SHENASE BRACKET_BAZ_KW ADAD BRACKET_BASTE_KW {
-		System.out.println("Rule 12.2: ");
+	| saved_identifier BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW {
+		
+		System.out.println("Rule 8.3: " +
+			"dec: saved_identifier LB_KW saved_integer RB_KW");
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).array = true;
+
+		symbolTable.addToSymbolTable(startStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
+		emit(":=", "0", null , startStr + ((EVal)$$).place);
+
+		symbolTable.addToSymbolTable(sizeStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
+		emit(":=", $3.place, null , sizeStr + ((EVal)$$).place);
+
+		symbolTable.addToSymbolTable(indexStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
+		symbolTable.addToSymbolTable(condStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
 	}
 	
 tarifeTabe:
@@ -663,7 +794,7 @@ ebarateRabetei:
 
 		emit("<", $1.place, $3.place, ((EVal)$$).place);
 		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
-		emit("goto", null, null, "-" // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi LESS_EQUAL_KW ebarateRiaziManteghi {
@@ -690,7 +821,7 @@ ebarateRabetei:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
 		emit(">", $1.place, $3.place, ((EVal)$$).place);
-		emit("check", ((EVal)$$).place, null, "-")); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
 		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
@@ -719,17 +850,33 @@ ebarateRabetei:
 
 		emit("==", $1.place, $3.place, ((EVal)$$).place);
 		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
-		emit("goto", null, null, "-")); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 
 ebarateRiaziManteghi :
 	ebarateYegani {
-	System.out.println("Rule 33.1 ebarateYegani to ebarateRiaziManteghi");
-	$$ = new EVal();	
-		((EVal)$$).place = $1.place;
-		((EVal)$$).type = $1.type;
-		((EVal)$$).trueList = $1.trueList;
-		((EVal)$$).falseList = $1.falseList;
+	
+		System.out.println("Rule 26.4: " +
+			"expressions: saved_identifier");
+		int index = symbolTable.lookUp($1.place);
+		if (index == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+			System.err.println("Error! \"" + lexIdentifier + "\" is not declared.");
+			return YYABORT;
+		}
+		if (symbolTable.arrays.get(index)) {
+			System.err.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
+			return YYABORT;
+		}
+		$$ = new EVal();
+		((EVal)$$).place = symbolTable.names.get(index);
+		((EVal)$$).type = symbolTable.types.get(index);
+
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi {
@@ -768,8 +915,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MINUS_KW ebarateRiaziManteghi {
@@ -1320,6 +1467,7 @@ class SymbolTable {
 
 	public boolean addToSymbolTable(String name, int type, boolean array) {
 		if (lookUp(name) == -1) {
+			System.out.println(name+" added");
 			names.add(name);
 			types.add(type);
 			arrays.add(array);

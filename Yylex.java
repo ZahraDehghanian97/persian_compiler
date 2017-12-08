@@ -84,10 +84,11 @@ class Yylex {
     "\1\0\1\32\3\0\1\33\2\0\1\34\1\35\1\2"+
     "\1\36\1\37\1\40\1\41\1\42\1\43\3\2\1\44"+
     "\1\31\6\2\1\45\1\46\10\2\1\47\1\50\2\51"+
-    "\2\0\2\52\1\53\2\2\1\54\3\2\1\55\1\56"+
-    "\1\57\1\60\2\2\1\61\1\62\3\2\1\47\1\51"+
-    "\2\52\3\2\1\63\3\2\1\64\1\2\1\65\1\66"+
-    "\1\2\1\67\1\70\1\71\2\2\1\72\1\73\1\74";
+    "\2\0\2\52\1\53\2\2\1\54\1\2\1\55\1\2"+
+    "\1\56\1\57\1\60\1\61\2\2\1\62\1\63\3\2"+
+    "\1\47\1\51\2\52\3\2\1\55\3\2\1\64\1\2"+
+    "\1\65\1\66\1\2\1\67\1\70\1\71\2\2\1\72"+
+    "\1\73\1\74";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[154];
@@ -1037,45 +1038,45 @@ class Yylex {
             }
           case 104: break;
           case 45: 
+            { if(p){System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
+	return YYParser.BOOLEAN_KW;
+            }
+          case 105: break;
+          case 46: 
             { if(p){System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');
 	return YYParser.NOT_KW;
             }
-          case 105: break;
-          case 46: 
+          case 106: break;
+          case 47: 
             { if(p){System.out.println(yytext() + "\t" + "END_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "end_kw\t" + '-');
 	return YYParser.END_KW;
             }
-          case 106: break;
-          case 47: 
+          case 107: break;
+          case 48: 
             { if(p){System.out.println(yytext() + "\t" + "CONSTANT_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "constant_kw\t" + '-');
 	return YYParser.CONSTANT_KW;
             }
-          case 107: break;
-          case 48: 
+          case 108: break;
+          case 49: 
             { if(p){System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');
 	return YYParser.SWITCH_KW;
             }
-          case 108: break;
-          case 49: 
+          case 109: break;
+          case 50: 
             { if(p){System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');}
 	return YYParser.KEY_KW ;
             }
-          case 109: break;
-          case 50: 
+          case 110: break;
+          case 51: 
             { if(p){System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');}
 	YYParser.lexBoolean = Boolean.parseBoolean("true");
 	return YYParser.TRUE_KW ;
 	//System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');
-            }
-          case 110: break;
-          case 51: 
-            { if(p){System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');}
-	//System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
-	return YYParser.BOOLEAN_KW;
             }
           case 111: break;
           case 52: 
