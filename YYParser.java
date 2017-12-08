@@ -34,13 +34,14 @@
 /* First part of user declarations.  */
 
 /* Line 32 of lalr1.java  */
-/* Line 1 of "parser.y"  */
+/* Line 1 of ".\\YYParser.y"  */
 
 import java.io.*;
+import java.util.ArrayList;
 
 
 /**
- * A Bison parser, automatically generated from <tt>parser.y</tt>.
+ * A Bison parser, automatically generated from <tt>.\\YYParser.y</tt>.
  *
  * @author LALR (1) parser skeleton written by Paolo Bonzini.
  */
@@ -79,73 +80,73 @@ class YYParser
   /** Token number, to be returned by the scanner.  */
   public static final int ADD_KW = 265;
   /** Token number, to be returned by the scanner.  */
-  public static final int BOOLEAN_CONSTANT = 266;
+  public static final int SWITCH_KW = 266;
   /** Token number, to be returned by the scanner.  */
-  public static final int SWITCH_KW = 267;
+  public static final int END_KW = 267;
   /** Token number, to be returned by the scanner.  */
-  public static final int END_KW = 268;
+  public static final int DEFAULT_KW = 268;
   /** Token number, to be returned by the scanner.  */
-  public static final int DEFAULT_KW = 269;
+  public static final int BREAK_KW = 269;
   /** Token number, to be returned by the scanner.  */
-  public static final int BREAK_KW = 270;
+  public static final int RETURN_KW = 270;
   /** Token number, to be returned by the scanner.  */
-  public static final int RETURN_KW = 271;
+  public static final int COMMA = 271;
   /** Token number, to be returned by the scanner.  */
-  public static final int COMMA = 272;
+  public static final int PROGRAM_KW = 272;
   /** Token number, to be returned by the scanner.  */
-  public static final int PROGRAM_KW = 273;
+  public static final int STRUCT_KW = 273;
   /** Token number, to be returned by the scanner.  */
-  public static final int STRUCT_KW = 274;
+  public static final int CONSTANT_KW = 274;
   /** Token number, to be returned by the scanner.  */
-  public static final int CONSTANT_KW = 275;
+  public static final int IF_KW = 275;
   /** Token number, to be returned by the scanner.  */
-  public static final int IF_KW = 276;
+  public static final int THEN_KW = 276;
   /** Token number, to be returned by the scanner.  */
-  public static final int THEN_KW = 277;
+  public static final int ELSE_KW = 277;
   /** Token number, to be returned by the scanner.  */
-  public static final int ELSE_KW = 278;
+  public static final int AND_KW = 278;
   /** Token number, to be returned by the scanner.  */
-  public static final int AND_KW = 279;
+  public static final int OR_KW = 279;
   /** Token number, to be returned by the scanner.  */
-  public static final int OR_KW = 280;
+  public static final int NOT_KW = 280;
   /** Token number, to be returned by the scanner.  */
-  public static final int NOT_KW = 281;
+  public static final int WHILE_KW = 281;
   /** Token number, to be returned by the scanner.  */
-  public static final int WHILE_KW = 282;
+  public static final int NOGHTE_VIRGUL = 282;
   /** Token number, to be returned by the scanner.  */
-  public static final int NOGHTE_VIRGUL = 283;
+  public static final int ADAD = 283;
   /** Token number, to be returned by the scanner.  */
-  public static final int ADAD = 284;
+  public static final int SHENASE = 284;
   /** Token number, to be returned by the scanner.  */
-  public static final int SHENASE = 285;
+  public static final int HARFE_SABET = 285;
   /** Token number, to be returned by the scanner.  */
-  public static final int HARFE_SABET = 286;
+  public static final int KEY_KW = 286;
   /** Token number, to be returned by the scanner.  */
-  public static final int KEY_KW = 287;
+  public static final int MORE_THAN_KW = 287;
   /** Token number, to be returned by the scanner.  */
-  public static final int MORE_THAN_KW = 288;
+  public static final int NOGHTE_KW = 288;
   /** Token number, to be returned by the scanner.  */
-  public static final int NOGHTE_KW = 289;
+  public static final int MULTIPLY_KW = 289;
   /** Token number, to be returned by the scanner.  */
-  public static final int MULTIPLY_KW = 290;
+  public static final int BRACKET_BASTE_KW = 290;
   /** Token number, to be returned by the scanner.  */
-  public static final int BRACKET_BASTE_KW = 291;
+  public static final int BRACKET_BAZ_KW = 291;
   /** Token number, to be returned by the scanner.  */
-  public static final int BRACKET_BAZ_KW = 292;
+  public static final int PARANTHESIS_BASTE_KW = 292;
   /** Token number, to be returned by the scanner.  */
-  public static final int PARANTHESIS_BASTE_KW = 293;
+  public static final int PARANTHESIS_BAZ_KW = 293;
   /** Token number, to be returned by the scanner.  */
-  public static final int PARANTHESIS_BAZ_KW = 294;
+  public static final int TRUE_KW = 294;
   /** Token number, to be returned by the scanner.  */
-  public static final int TRUE_KW = 295;
+  public static final int QUESTION_KW = 295;
   /** Token number, to be returned by the scanner.  */
-  public static final int QUESTION_KW = 296;
+  public static final int EQUAL_EQUAL_KW = 296;
   /** Token number, to be returned by the scanner.  */
-  public static final int EQUAL_EQUAL_KW = 297;
+  public static final int EQUAL_KW = 297;
   /** Token number, to be returned by the scanner.  */
-  public static final int EQUAL_KW = 298;
+  public static final int DEVIDE_KW = 298;
   /** Token number, to be returned by the scanner.  */
-  public static final int DEVIDE_KW = 299;
+  public static final int DEVIDE_EQUAL_KW = 299;
   /** Token number, to be returned by the scanner.  */
   public static final int OR_ELSE_KW = 300;
   /** Token number, to be returned by the scanner.  */
@@ -175,7 +176,7 @@ class YYParser
   /** Token number, to be returned by the scanner.  */
   public static final int MULTIPLY_EQUAL_KW = 313;
   /** Token number, to be returned by the scanner.  */
-  public static final int DEVIDE_EQUAL_KW = 314;
+  public static final int ADAD_ASHARI = 314;
   /** Token number, to be returned by the scanner.  */
   public static final int LOWER_THAN_ELSE_KW = 315;
 
@@ -395,9 +396,10 @@ class YYParser
   if (yyn == 2)
     
 /* Line 353 of lalr1.java  */
-/* Line 67 of "parser.y"  */
+/* Line 212 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 1.1 ");
+		exportIntermediateCode();
 	};
   break;
     
@@ -406,7 +408,7 @@ class YYParser
   if (yyn == 3)
     
 /* Line 353 of lalr1.java  */
-/* Line 72 of "parser.y"  */
+/* Line 218 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 2.1: ");
 	};
@@ -417,7 +419,7 @@ class YYParser
   if (yyn == 4)
     
 /* Line 353 of lalr1.java  */
-/* Line 75 of "parser.y"  */
+/* Line 221 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 2.2");
 	};
@@ -428,7 +430,7 @@ class YYParser
   if (yyn == 5)
     
 /* Line 353 of lalr1.java  */
-/* Line 80 of "parser.y"  */
+/* Line 226 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 3.1: ");
 	};
@@ -439,7 +441,7 @@ class YYParser
   if (yyn == 6)
     
 /* Line 353 of lalr1.java  */
-/* Line 83 of "parser.y"  */
+/* Line 229 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 3.2: " );
 	};
@@ -450,7 +452,7 @@ class YYParser
   if (yyn == 7)
     
 /* Line 353 of lalr1.java  */
-/* Line 86 of "parser.y"  */
+/* Line 232 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 3.3: " );
 	};
@@ -461,7 +463,7 @@ class YYParser
   if (yyn == 8)
     
 /* Line 353 of lalr1.java  */
-/* Line 91 of "parser.y"  */
+/* Line 237 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 4.1 ");
 	};
@@ -472,7 +474,7 @@ class YYParser
   if (yyn == 9)
     
 /* Line 353 of lalr1.java  */
-/* Line 95 of "parser.y"  */
+/* Line 241 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 4.2 ");
 	};
@@ -483,7 +485,7 @@ class YYParser
   if (yyn == 10)
     
 /* Line 353 of lalr1.java  */
-/* Line 100 of "parser.y"  */
+/* Line 246 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 5 ");
 	};
@@ -494,7 +496,7 @@ class YYParser
   if (yyn == 11)
     
 /* Line 353 of lalr1.java  */
-/* Line 104 of "parser.y"  */
+/* Line 250 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 5 ");
 	};
@@ -505,7 +507,7 @@ class YYParser
   if (yyn == 12)
     
 /* Line 353 of lalr1.java  */
-/* Line 109 of "parser.y"  */
+/* Line 255 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 6");
 	};
@@ -516,7 +518,7 @@ class YYParser
   if (yyn == 13)
     
 /* Line 353 of lalr1.java  */
-/* Line 114 of "parser.y"  */
+/* Line 260 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 7.1");
 	};
@@ -527,7 +529,7 @@ class YYParser
   if (yyn == 14)
     
 /* Line 353 of lalr1.java  */
-/* Line 118 of "parser.y"  */
+/* Line 264 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 7.2");
 	};
@@ -538,7 +540,7 @@ class YYParser
   if (yyn == 15)
     
 /* Line 353 of lalr1.java  */
-/* Line 123 of "parser.y"  */
+/* Line 269 of ".\\YYParser.y"  */
     {System.out.println("Rule 8.1");};
   break;
     
@@ -547,7 +549,7 @@ class YYParser
   if (yyn == 16)
     
 /* Line 353 of lalr1.java  */
-/* Line 124 of "parser.y"  */
+/* Line 270 of ".\\YYParser.y"  */
     {System.out.println("Rule 8.2");};
   break;
     
@@ -556,7 +558,7 @@ class YYParser
   if (yyn == 17)
     
 /* Line 353 of lalr1.java  */
-/* Line 125 of "parser.y"  */
+/* Line 271 of ".\\YYParser.y"  */
     {System.out.println("Rule 8.3");};
   break;
     
@@ -565,7 +567,7 @@ class YYParser
   if (yyn == 18)
     
 /* Line 353 of lalr1.java  */
-/* Line 126 of "parser.y"  */
+/* Line 272 of ".\\YYParser.y"  */
     {System.out.println("Rule 8.4");};
   break;
     
@@ -574,7 +576,7 @@ class YYParser
   if (yyn == 19)
     
 /* Line 353 of lalr1.java  */
-/* Line 129 of "parser.y"  */
+/* Line 275 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 9");
 	};
@@ -585,7 +587,7 @@ class YYParser
   if (yyn == 20)
     
 /* Line 353 of lalr1.java  */
-/* Line 134 of "parser.y"  */
+/* Line 280 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 10.1 ");
 	};
@@ -596,7 +598,7 @@ class YYParser
   if (yyn == 21)
     
 /* Line 353 of lalr1.java  */
-/* Line 137 of "parser.y"  */
+/* Line 283 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 10.2 ");
 	};
@@ -607,7 +609,7 @@ class YYParser
   if (yyn == 22)
     
 /* Line 353 of lalr1.java  */
-/* Line 142 of "parser.y"  */
+/* Line 288 of ".\\YYParser.y"  */
     {System.out.println("Rule 11.1 ");};
   break;
     
@@ -616,7 +618,7 @@ class YYParser
   if (yyn == 23)
     
 /* Line 353 of lalr1.java  */
-/* Line 143 of "parser.y"  */
+/* Line 289 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 11.2 ");
 	};
@@ -627,7 +629,7 @@ class YYParser
   if (yyn == 24)
     
 /* Line 353 of lalr1.java  */
-/* Line 148 of "parser.y"  */
+/* Line 294 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 12.1: " );
 	};
@@ -638,7 +640,7 @@ class YYParser
   if (yyn == 25)
     
 /* Line 353 of lalr1.java  */
-/* Line 151 of "parser.y"  */
+/* Line 297 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 12.2: ");
 	};
@@ -649,7 +651,7 @@ class YYParser
   if (yyn == 26)
     
 /* Line 353 of lalr1.java  */
-/* Line 156 of "parser.y"  */
+/* Line 302 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 13.1");
 	};
@@ -660,7 +662,7 @@ class YYParser
   if (yyn == 27)
     
 /* Line 353 of lalr1.java  */
-/* Line 160 of "parser.y"  */
+/* Line 306 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 13.2");
 	};
@@ -671,7 +673,7 @@ class YYParser
   if (yyn == 28)
     
 /* Line 353 of lalr1.java  */
-/* Line 164 of "parser.y"  */
+/* Line 310 of ".\\YYParser.y"  */
     {System.out.println("Rule 13.3");};
   break;
     
@@ -680,7 +682,7 @@ class YYParser
   if (yyn == 29)
     
 /* Line 353 of lalr1.java  */
-/* Line 166 of "parser.y"  */
+/* Line 312 of ".\\YYParser.y"  */
     {System.out.println("Rule 13.4");};
   break;
     
@@ -689,8 +691,8 @@ class YYParser
   if (yyn == 30)
     
 /* Line 353 of lalr1.java  */
-/* Line 169 of "parser.y"  */
-    {System.out.println("Rule 14");};
+/* Line 315 of ".\\YYParser.y"  */
+    {System.out.println("Rule 15.1");};
   break;
     
 
@@ -698,8 +700,8 @@ class YYParser
   if (yyn == 31)
     
 /* Line 353 of lalr1.java  */
-/* Line 172 of "parser.y"  */
-    {System.out.println("Rule 15.1");}
+/* Line 317 of ".\\YYParser.y"  */
+    {System.out.println("Rule 15.2");};
   break;
     
 
@@ -707,8 +709,8 @@ class YYParser
   if (yyn == 32)
     
 /* Line 353 of lalr1.java  */
-/* Line 174 of "parser.y"  */
-    {System.out.println("Rule 15.2");};
+/* Line 320 of ".\\YYParser.y"  */
+    {System.out.println("Rule 16");};
   break;
     
 
@@ -716,8 +718,8 @@ class YYParser
   if (yyn == 33)
     
 /* Line 353 of lalr1.java  */
-/* Line 177 of "parser.y"  */
-    {System.out.println("Rule 16");};
+/* Line 323 of ".\\YYParser.y"  */
+    {System.out.println("Rule 17.1");};
   break;
     
 
@@ -725,8 +727,8 @@ class YYParser
   if (yyn == 34)
     
 /* Line 353 of lalr1.java  */
-/* Line 180 of "parser.y"  */
-    {System.out.println("Rule 17.1");};
+/* Line 325 of ".\\YYParser.y"  */
+    {System.out.println("Rule 17.2");};
   break;
     
 
@@ -734,8 +736,8 @@ class YYParser
   if (yyn == 35)
     
 /* Line 353 of lalr1.java  */
-/* Line 182 of "parser.y"  */
-    {System.out.println("Rule 17.2");};
+/* Line 328 of ".\\YYParser.y"  */
+    {System.out.println("Rule 18.1");};
   break;
     
 
@@ -743,8 +745,8 @@ class YYParser
   if (yyn == 36)
     
 /* Line 353 of lalr1.java  */
-/* Line 185 of "parser.y"  */
-    {System.out.println("Rule 18.1");};
+/* Line 329 of ".\\YYParser.y"  */
+    {System.out.println("Rule 18.2");};
   break;
     
 
@@ -752,8 +754,8 @@ class YYParser
   if (yyn == 37)
     
 /* Line 353 of lalr1.java  */
-/* Line 186 of "parser.y"  */
-    {System.out.println("Rule 18.2");};
+/* Line 332 of ".\\YYParser.y"  */
+    {System.out.println("Rule 19.1");};
   break;
     
 
@@ -761,8 +763,8 @@ class YYParser
   if (yyn == 38)
     
 /* Line 353 of lalr1.java  */
-/* Line 189 of "parser.y"  */
-    {System.out.println("Rule 19.1");};
+/* Line 334 of ".\\YYParser.y"  */
+    {System.out.println("Rule 19.2");};
   break;
     
 
@@ -770,8 +772,8 @@ class YYParser
   if (yyn == 39)
     
 /* Line 353 of lalr1.java  */
-/* Line 191 of "parser.y"  */
-    {System.out.println("Rule 19.2");};
+/* Line 336 of ".\\YYParser.y"  */
+    {System.out.println("Rule 19.3");};
   break;
     
 
@@ -779,8 +781,8 @@ class YYParser
   if (yyn == 40)
     
 /* Line 353 of lalr1.java  */
-/* Line 193 of "parser.y"  */
-    {System.out.println("Rule 19.3");};
+/* Line 338 of ".\\YYParser.y"  */
+    {System.out.println("Rule 19.4");};
   break;
     
 
@@ -788,8 +790,8 @@ class YYParser
   if (yyn == 41)
     
 /* Line 353 of lalr1.java  */
-/* Line 195 of "parser.y"  */
-    {System.out.println("Rule 19.4");};
+/* Line 340 of ".\\YYParser.y"  */
+    {System.out.println("Rule 19.5");};
   break;
     
 
@@ -797,8 +799,8 @@ class YYParser
   if (yyn == 42)
     
 /* Line 353 of lalr1.java  */
-/* Line 197 of "parser.y"  */
-    {System.out.println("Rule 19.5");};
+/* Line 342 of ".\\YYParser.y"  */
+    {System.out.println("Rule 19.6");};
   break;
     
 
@@ -806,8 +808,10 @@ class YYParser
   if (yyn == 43)
     
 /* Line 353 of lalr1.java  */
-/* Line 199 of "parser.y"  */
-    {System.out.println("Rule 19.6");};
+/* Line 345 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 20.1");
+	};
   break;
     
 
@@ -815,9 +819,9 @@ class YYParser
   if (yyn == 44)
     
 /* Line 353 of lalr1.java  */
-/* Line 202 of "parser.y"  */
+/* Line 349 of ".\\YYParser.y"  */
     {
-		System.out.println("Rule 20.1");
+		System.out.println("Rule 20.2");
 	};
   break;
     
@@ -826,9 +830,9 @@ class YYParser
   if (yyn == 45)
     
 /* Line 353 of lalr1.java  */
-/* Line 206 of "parser.y"  */
+/* Line 353 of ".\\YYParser.y"  */
     {
-		System.out.println("Rule 20.2");
+		System.out.println("Rule 20.3");
 	};
   break;
     
@@ -837,9 +841,9 @@ class YYParser
   if (yyn == 46)
     
 /* Line 353 of lalr1.java  */
-/* Line 210 of "parser.y"  */
+/* Line 357 of ".\\YYParser.y"  */
     {
-		System.out.println("Rule 20.3");
+		System.out.println("Rule 20.4");
 	};
   break;
     
@@ -848,10 +852,8 @@ class YYParser
   if (yyn == 47)
     
 /* Line 353 of lalr1.java  */
-/* Line 214 of "parser.y"  */
-    {
-		System.out.println("Rule 20.4");
-	};
+/* Line 362 of ".\\YYParser.y"  */
+    {System.out.println("Rule 21.1");};
   break;
     
 
@@ -859,8 +861,8 @@ class YYParser
   if (yyn == 48)
     
 /* Line 353 of lalr1.java  */
-/* Line 219 of "parser.y"  */
-    {System.out.println("Rule 21.1");};
+/* Line 364 of ".\\YYParser.y"  */
+    {System.out.println("Rule 21.2");};
   break;
     
 
@@ -868,8 +870,10 @@ class YYParser
   if (yyn == 49)
     
 /* Line 353 of lalr1.java  */
-/* Line 221 of "parser.y"  */
-    {System.out.println("Rule 21.2");};
+/* Line 368 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 22.1");
+	};
   break;
     
 
@@ -877,10 +881,8 @@ class YYParser
   if (yyn == 50)
     
 /* Line 353 of lalr1.java  */
-/* Line 225 of "parser.y"  */
-    {
-		System.out.println("Rule 22.1");
-	};
+/* Line 372 of ".\\YYParser.y"  */
+    {System.out.println("Rule 22.2");};
   break;
     
 
@@ -888,8 +890,8 @@ class YYParser
   if (yyn == 51)
     
 /* Line 353 of lalr1.java  */
-/* Line 229 of "parser.y"  */
-    {System.out.println("Rule 22.2");};
+/* Line 375 of ".\\YYParser.y"  */
+    {System.out.println("Rule 23.1");};
   break;
     
 
@@ -897,8 +899,8 @@ class YYParser
   if (yyn == 52)
     
 /* Line 353 of lalr1.java  */
-/* Line 232 of "parser.y"  */
-    {System.out.println("Rule 23.1");};
+/* Line 377 of ".\\YYParser.y"  */
+    {System.out.println("Rule 23.2");};
   break;
     
 
@@ -906,8 +908,8 @@ class YYParser
   if (yyn == 53)
     
 /* Line 353 of lalr1.java  */
-/* Line 234 of "parser.y"  */
-    {System.out.println("Rule 23.2");};
+/* Line 379 of ".\\YYParser.y"  */
+    {System.out.println("Rule 23.3");};
   break;
     
 
@@ -915,8 +917,8 @@ class YYParser
   if (yyn == 54)
     
 /* Line 353 of lalr1.java  */
-/* Line 236 of "parser.y"  */
-    {System.out.println("Rule 23.3");};
+/* Line 381 of ".\\YYParser.y"  */
+    {System.out.println("Rule 23.4");};
   break;
     
 
@@ -924,8 +926,8 @@ class YYParser
   if (yyn == 55)
     
 /* Line 353 of lalr1.java  */
-/* Line 238 of "parser.y"  */
-    {System.out.println("Rule 23.4");};
+/* Line 385 of ".\\YYParser.y"  */
+    { System.out.println("Rule 24.1"); };
   break;
     
 
@@ -933,8 +935,8 @@ class YYParser
   if (yyn == 56)
     
 /* Line 353 of lalr1.java  */
-/* Line 242 of "parser.y"  */
-    { System.out.println("Rule 24.1"); };
+/* Line 387 of ".\\YYParser.y"  */
+    {System.out.println("Rule 24.2");};
   break;
     
 
@@ -942,8 +944,8 @@ class YYParser
   if (yyn == 57)
     
 /* Line 353 of lalr1.java  */
-/* Line 244 of "parser.y"  */
-    {System.out.println("Rule 24.2");};
+/* Line 390 of ".\\YYParser.y"  */
+    {System.out.println("Rule 25");};
   break;
     
 
@@ -951,8 +953,8 @@ class YYParser
   if (yyn == 58)
     
 /* Line 353 of lalr1.java  */
-/* Line 247 of "parser.y"  */
-    {System.out.println("Rule 25");};
+/* Line 393 of ".\\YYParser.y"  */
+    {System.out.println("Rule 26");};
   break;
     
 
@@ -960,8 +962,8 @@ class YYParser
   if (yyn == 59)
     
 /* Line 353 of lalr1.java  */
-/* Line 250 of "parser.y"  */
-    {System.out.println("Rule 26");};
+/* Line 396 of ".\\YYParser.y"  */
+    {System.out.println("Rule 27.1");};
   break;
     
 
@@ -969,8 +971,8 @@ class YYParser
   if (yyn == 60)
     
 /* Line 353 of lalr1.java  */
-/* Line 253 of "parser.y"  */
-    {System.out.println("Rule 27.1");};
+/* Line 398 of ".\\YYParser.y"  */
+    {System.out.println("Rule 27.2");};
   break;
     
 
@@ -978,8 +980,8 @@ class YYParser
   if (yyn == 61)
     
 /* Line 353 of lalr1.java  */
-/* Line 255 of "parser.y"  */
-    {System.out.println("Rule 27.2");};
+/* Line 401 of ".\\YYParser.y"  */
+    {System.out.println("Rule 28");};
   break;
     
 
@@ -987,8 +989,11 @@ class YYParser
   if (yyn == 62)
     
 /* Line 353 of lalr1.java  */
-/* Line 258 of "parser.y"  */
-    {System.out.println("Rule 28");};
+/* Line 404 of ".\\YYParser.y"  */
+    {
+	System.out.println("Rule 29.1");
+	emit(":=", ((EVal)(yystack.valueAt (3-(3)))).place, null, ((EVal)(yystack.valueAt (3-(1)))).place);
+	};
   break;
     
 
@@ -996,8 +1001,41 @@ class YYParser
   if (yyn == 63)
     
 /* Line 353 of lalr1.java  */
-/* Line 261 of "parser.y"  */
-    {System.out.println("Rule 29.1");};
+/* Line 409 of ".\\YYParser.y"  */
+    {
+	
+		System.out.println("Rule 29.1: " +
+			"arithmatic_expressions: expressions ADD_KW expressions");
+		if(((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)yyval).type == EVal.TYPE_CODE_REAL && ((EVal)yyval).type == EVal.TYPE_CODE_REAL)) {
+			emit("+", ((EVal)yyval).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)yyval).place, TYPE_STRING_REAL, tmp);
+			emit("+", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)yyval).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("+", ((EVal)yyval).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"+\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1005,8 +1043,41 @@ class YYParser
   if (yyn == 64)
     
 /* Line 353 of lalr1.java  */
-/* Line 263 of "parser.y"  */
-    {System.out.println("Rule 29.2");};
+/* Line 444 of ".\\YYParser.y"  */
+    {
+	
+		System.out.println("Rule 29.1: " +
+			"arithmatic_expressions: expressions ADD_KW expressions");
+		if(((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)yyval).type == EVal.TYPE_CODE_REAL && ((EVal)yyval).type == EVal.TYPE_CODE_REAL)) {
+			emit("-", ((EVal)yyval).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)yyval).place, TYPE_STRING_REAL, tmp);
+			emit("-", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)yyval).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("-", ((EVal)yyval).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"+\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1014,8 +1085,41 @@ class YYParser
   if (yyn == 65)
     
 /* Line 353 of lalr1.java  */
-/* Line 265 of "parser.y"  */
-    {System.out.println("Rule 29.3");};
+/* Line 479 of ".\\YYParser.y"  */
+    {
+	
+		System.out.println("Rule 29.1: " +
+			"arithmatic_expressions: expressions ADD_KW expressions");
+		if(((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)yyval).type == EVal.TYPE_CODE_REAL && ((EVal)yyval).type == EVal.TYPE_CODE_REAL)) {
+			emit("*", ((EVal)yyval).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)yyval).place, TYPE_STRING_REAL, tmp);
+			emit("*", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)yyval).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("*", ((EVal)yyval).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"+\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1023,8 +1127,41 @@ class YYParser
   if (yyn == 66)
     
 /* Line 353 of lalr1.java  */
-/* Line 267 of "parser.y"  */
-    {System.out.println("Rule 29.4");};
+/* Line 514 of ".\\YYParser.y"  */
+    {
+	
+		System.out.println("Rule 29.1: " +
+			"arithmatic_expressions: expressions ADD_KW expressions");
+		if(((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)yyval).type == EVal.TYPE_CODE_REAL && ((EVal)yyval).type == EVal.TYPE_CODE_REAL)) {
+			emit("/", ((EVal)yyval).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)yyval).type == EVal.TYPE_CODE_INTEGER || ((EVal)yyval).type == EVal.TYPE_CODE_CHAR || ((EVal)yyval).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)yyval).place, TYPE_STRING_REAL, tmp);
+			emit("/", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)yyval).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("/", ((EVal)yyval).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"+\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1032,8 +1169,8 @@ class YYParser
   if (yyn == 67)
     
 /* Line 353 of lalr1.java  */
-/* Line 269 of "parser.y"  */
-    {System.out.println("Rule 29.5");};
+/* Line 549 of ".\\YYParser.y"  */
+    {System.out.println("Rule 29.6");};
   break;
     
 
@@ -1041,8 +1178,8 @@ class YYParser
   if (yyn == 68)
     
 /* Line 353 of lalr1.java  */
-/* Line 271 of "parser.y"  */
-    {System.out.println("Rule 29.6");};
+/* Line 551 of ".\\YYParser.y"  */
+    {System.out.println("Rule 29.7");};
   break;
     
 
@@ -1050,8 +1187,13 @@ class YYParser
   if (yyn == 69)
     
 /* Line 353 of lalr1.java  */
-/* Line 273 of "parser.y"  */
-    {System.out.println("Rule 29.7");};
+/* Line 553 of ".\\YYParser.y"  */
+    {System.out.println(" Rule 29.8 ebarateSade to ebarat");
+	yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;};
   break;
     
 
@@ -1059,8 +1201,17 @@ class YYParser
   if (yyn == 70)
     
 /* Line 353 of lalr1.java  */
-/* Line 275 of "parser.y"  */
-    {System.out.println(" Rule 29.8");};
+/* Line 561 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30.1: " +
+			"bool_expressions: expressions OR_KW M expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		backpatch(((EVal)(yystack.valueAt (4-(1)))).falseList, ((EVal)(yystack.valueAt (4-(3)))).quad);
+		((EVal)yyval).trueList = EVal.merge(((EVal)(yystack.valueAt (4-(1)))).trueList, ((EVal)(yystack.valueAt (4-(4)))).trueList);
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (4-(4)))).falseList;
+	};
   break;
     
 
@@ -1068,8 +1219,17 @@ class YYParser
   if (yyn == 71)
     
 /* Line 353 of lalr1.java  */
-/* Line 278 of "parser.y"  */
-    {System.out.println("Rule 30.1");};
+/* Line 572 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30.2: " +
+			"bool_expressions: expressions AND_KW M expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		backpatch(((EVal)(yystack.valueAt (4-(1)))).trueList, ((EVal)(yystack.valueAt (4-(3)))).quad);
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (4-(4)))).trueList;
+		((EVal)yyval).falseList = EVal.merge(((EVal)(yystack.valueAt (4-(1)))).falseList, ((EVal)(yystack.valueAt (4-(4)))).falseList);
+	};
   break;
     
 
@@ -1077,8 +1237,28 @@ class YYParser
   if (yyn == 72)
     
 /* Line 353 of lalr1.java  */
-/* Line 280 of "parser.y"  */
-    {System.out.println("Rule 30.2");};
+/* Line 583 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30.3: " +
+			"bool_expressions: expressions OR_ELSE_KW M expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		
+		backpatch(((EVal)(yystack.valueAt (4-(1)))).trueList, nextQuad());
+		emit(":=", "1", null, ((EVal)yyval).place);
+		emit("goto", null, null, String.valueOf(((EVal)(yystack.valueAt (4-(3)))).quad));
+		backpatch(((EVal)(yystack.valueAt (4-(1)))).falseList, nextQuad());
+		emit(":=", "0", null, ((EVal)yyval).place);
+		emit("goto", null, null, String.valueOf(((EVal)(yystack.valueAt (4-(3)))).quad));
+		backpatch(((EVal)(yystack.valueAt (4-(4)))).trueList, nextQuad());
+		backpatch(((EVal)(yystack.valueAt (4-(4)))).falseList, nextQuad());
+		emit("+", ((EVal)yyval).place, ((EVal)(yystack.valueAt (4-(4)))).place, ((EVal)yyval).place);
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2));
+		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+	};
   break;
     
 
@@ -1086,8 +1266,28 @@ class YYParser
   if (yyn == 73)
     
 /* Line 353 of lalr1.java  */
-/* Line 282 of "parser.y"  */
-    {System.out.println("Rule 30.3");};
+/* Line 605 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30.4: " +
+			"bool_expressions: expressions AND_THEN_KW M expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		
+		backpatch(((EVal)(yystack.valueAt (4-(1)))).trueList, nextQuad());
+		emit(":=", "1", null, ((EVal)yyval).place);
+		emit("goto", null, null, String.valueOf(((EVal)(yystack.valueAt (4-(3)))).quad));
+		backpatch(((EVal)(yystack.valueAt (4-(1)))).falseList, nextQuad());
+		emit(":=", "0", null, ((EVal)yyval).place);
+		emit("goto", null, null, String.valueOf(((EVal)(yystack.valueAt (4-(3)))).quad));
+		backpatch(((EVal)(yystack.valueAt (4-(4)))).trueList, nextQuad());
+		backpatch(((EVal)(yystack.valueAt (4-(4)))).falseList, nextQuad());
+		emit("*", ((EVal)yyval).place, ((EVal)(yystack.valueAt (4-(4)))).place, ((EVal)yyval).place);
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
+		emit("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
+	};
   break;
     
 
@@ -1095,8 +1295,16 @@ class YYParser
   if (yyn == 74)
     
 /* Line 353 of lalr1.java  */
-/* Line 284 of "parser.y"  */
-    {System.out.println("Rule 30.4");};
+/* Line 627 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30.5: " +
+			"bool_expressions: NOT_KW expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (2-(2)))).falseList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (2-(2)))).trueList;
+	};
   break;
     
 
@@ -1104,8 +1312,15 @@ class YYParser
   if (yyn == 75)
     
 /* Line 353 of lalr1.java  */
-/* Line 286 of "parser.y"  */
-    {System.out.println("Rule 30.5");};
+/* Line 637 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30.6 ebarateRabetei to ebarateSade");
+		yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+	};
   break;
     
 
@@ -1113,8 +1328,15 @@ class YYParser
   if (yyn == 76)
     
 /* Line 353 of lalr1.java  */
-/* Line 288 of "parser.y"  */
-    {System.out.println("Rule 30.6");};
+/* Line 647 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31.1 ebarateRiaziManteghi to ebarateRabetei");
+		yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+	};
   break;
     
 
@@ -1122,8 +1344,20 @@ class YYParser
   if (yyn == 77)
     
 /* Line 353 of lalr1.java  */
-/* Line 291 of "parser.y"  */
-    {System.out.println("Rule 31.1");};
+/* Line 656 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31.2: " +
+			"bool_expressions: expressions LT_KW expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+
+		emit("<", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		emit("check", ((EVal)yyval).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-" // result will be backpatched.
+	};
   break;
     
 
@@ -1131,8 +1365,20 @@ class YYParser
   if (yyn == 78)
     
 /* Line 353 of lalr1.java  */
-/* Line 293 of "parser.y"  */
-    {System.out.println("Rule 31.2");};
+/* Line 670 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31.3: " +
+			"bool_expressions: expressions LE_KW expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+
+		emit("<=", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		emit("check", ((EVal)yyval).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
+	};
   break;
     
 
@@ -1140,8 +1386,20 @@ class YYParser
   if (yyn == 79)
     
 /* Line 353 of lalr1.java  */
-/* Line 296 of "parser.y"  */
-    {System.out.println("Rule 32.1");};
+/* Line 684 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31.4: " +
+			"bool_expressions: expressions GT_KW expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+
+		emit(">", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		emit("check", ((EVal)yyval).place, null, "-")); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
+	};
   break;
     
 
@@ -1149,8 +1407,20 @@ class YYParser
   if (yyn == 80)
     
 /* Line 353 of lalr1.java  */
-/* Line 298 of "parser.y"  */
-    {System.out.println("Rule 32.2");};
+/* Line 698 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31.5: " +
+			"bool_expressions: expressions GE_KW expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+
+		emit(">=", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		emit("check", ((EVal)yyval).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
+	};
   break;
     
 
@@ -1158,8 +1428,20 @@ class YYParser
   if (yyn == 81)
     
 /* Line 353 of lalr1.java  */
-/* Line 300 of "parser.y"  */
-    {System.out.println("Rule 32.3");};
+/* Line 712 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31.6: " +
+			"bool_expressions: expressions EQ_KW expressions");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+
+		emit("==", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		emit("check", ((EVal)yyval).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-")); // result will be backpatched.
+	};
   break;
     
 
@@ -1167,8 +1449,15 @@ class YYParser
   if (yyn == 82)
     
 /* Line 353 of lalr1.java  */
-/* Line 302 of "parser.y"  */
-    {System.out.println("Rule 32.4");};
+/* Line 727 of ".\\YYParser.y"  */
+    {
+	System.out.println("Rule 33.1 ebarateYegani to ebarateRiaziManteghi");
+	yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+	};
   break;
     
 
@@ -1176,8 +1465,46 @@ class YYParser
   if (yyn == 83)
     
 /* Line 353 of lalr1.java  */
-/* Line 304 of "parser.y"  */
-    {System.out.println("Rule 32.5");};
+/* Line 736 of ".\\YYParser.y"  */
+    {
+	
+		System.out.println("Rule 29.1: " +
+			"arithmatic_expressions: expressions ADD_KW expressions");
+		if(((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL && ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(((EVal)(yystack.valueAt (3-(1)))).type, false);
+			((EVal)yyval).type = ((EVal)(yystack.valueAt (3-(1)))).type;
+			emit("+", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(1)))).place, TYPE_STRING_REAL, tmp);
+			emit("+", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("+", ((EVal)(yystack.valueAt (3-(1)))).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"+\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1185,8 +1512,45 @@ class YYParser
   if (yyn == 84)
     
 /* Line 353 of lalr1.java  */
-/* Line 307 of "parser.y"  */
-    {System.out.println("Rule 33.1");};
+/* Line 776 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 29.2: " +
+			"arithmatic_expressions: expressions SUB_KW expressions");
+		if(((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL && ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(((EVal)(yystack.valueAt (3-(1)))).type, false);
+			((EVal)yyval).type = ((EVal)(yystack.valueAt (3-(1)))).type;
+			emit("-", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(1)))).place, TYPE_STRING_REAL, tmp);
+			emit("-", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("-", ((EVal)(yystack.valueAt (3-(1)))).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"-\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1194,8 +1558,45 @@ class YYParser
   if (yyn == 85)
     
 /* Line 353 of lalr1.java  */
-/* Line 309 of "parser.y"  */
-    {System.out.println("Rule 33.2");};
+/* Line 815 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 29.3: " +
+			"arithmatic_expressions: expressions MUL_KW expressions");
+		if(((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL && ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(((EVal)(yystack.valueAt (3-(1)))).type, false);
+			((EVal)yyval).type = ((EVal)(yystack.valueAt (3-(1)))).type;
+			emit("*", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(1)))).place, TYPE_STRING_REAL, tmp);
+			emit("*", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("*", ((EVal)(yystack.valueAt (3-(1)))).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"*\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1203,8 +1604,46 @@ class YYParser
   if (yyn == 86)
     
 /* Line 353 of lalr1.java  */
-/* Line 311 of "parser.y"  */
-    {System.out.println("Rule 33.2");};
+/* Line 854 of ".\\YYParser.y"  */
+    {
+	
+		System.out.println("Rule 29.4: " +
+			"arithmatic_expressions: expressions DIV_KW expressions");
+		if(((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+				&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL && ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(((EVal)(yystack.valueAt (3-(1)))).type, false);
+			((EVal)yyval).type = ((EVal)(yystack.valueAt (3-(1)))).type;
+			emit("/", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(1)))).place, TYPE_STRING_REAL, tmp);
+			emit("/", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if(((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR || ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_REAL, tmp);
+			emit("/", ((EVal)(yystack.valueAt (3-(1)))).place, tmp, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"/\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1212,8 +1651,52 @@ class YYParser
   if (yyn == 87)
     
 /* Line 353 of lalr1.java  */
-/* Line 313 of "parser.y"  */
-    {System.out.println("Rule 33.2");};
+/* Line 894 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 29.5: " +
+			"arithmatic_expressions: expressions MOD_KW expressions");
+		if((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER
+				|| ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR
+				|| ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER
+				|| ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR
+				|| ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_INTEGER;
+			emit("%", ((EVal)(yystack.valueAt (3-(1)))).place, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else if((((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_INTEGER
+				|| ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_CHAR
+				|| ((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_BOOLEAN)
+			&& ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_REAL) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_INTEGER;
+			String tmp = newTemp(EVal.TYPE_CODE_INTEGER, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(3)))).place, TYPE_STRING_INTEGER, tmp);
+			emit("%", ((EVal)(yystack.valueAt (3-(1)))).place, tmp, ((EVal)yyval).place);
+		} else if(((EVal)(yystack.valueAt (3-(1)))).type == EVal.TYPE_CODE_REAL
+			&& (((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_INTEGER
+				|| ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_CHAR
+				|| ((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN)) {
+			yyval = new EVal();
+			((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)yyval).type = EVal.TYPE_CODE_INTEGER;
+			String tmp = newTemp(EVal.TYPE_CODE_INTEGER, false);
+			emit("cast", ((EVal)(yystack.valueAt (3-(1)))).place, TYPE_STRING_INTEGER, tmp);
+			emit("%", tmp, ((EVal)(yystack.valueAt (3-(3)))).place, ((EVal)yyval).place);
+		} else {
+			System.err.println("Error! Invalid type for \"%\" operation.");
+			return YYABORT;
+		}
+
+		((EVal)yyval).trueList = EVal.makeList(nextQuad());
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
   break;
     
 
@@ -1221,8 +1704,8 @@ class YYParser
   if (yyn == 88)
     
 /* Line 353 of lalr1.java  */
-/* Line 315 of "parser.y"  */
-    {System.out.println("Rule 33.2");};
+/* Line 942 of ".\\YYParser.y"  */
+    {System.out.println("Rule 35.1");};
   break;
     
 
@@ -1230,8 +1713,13 @@ class YYParser
   if (yyn == 89)
     
 /* Line 353 of lalr1.java  */
-/* Line 317 of "parser.y"  */
-    {System.out.println("Rule 33.2");};
+/* Line 944 of ".\\YYParser.y"  */
+    {System.out.println("Rule 35.2 amel to ebarateYegani");
+	yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;};
   break;
     
 
@@ -1239,8 +1727,8 @@ class YYParser
   if (yyn == 90)
     
 /* Line 353 of lalr1.java  */
-/* Line 321 of "parser.y"  */
-    {System.out.println("Rule 35.1");};
+/* Line 952 of ".\\YYParser.y"  */
+    {System.out.println("Rule 36.1");};
   break;
     
 
@@ -1248,8 +1736,8 @@ class YYParser
   if (yyn == 91)
     
 /* Line 353 of lalr1.java  */
-/* Line 323 of "parser.y"  */
-    {System.out.println("Rule 35.2");};
+/* Line 954 of ".\\YYParser.y"  */
+    {System.out.println("Rule 36.2");};
   break;
     
 
@@ -1257,8 +1745,8 @@ class YYParser
   if (yyn == 92)
     
 /* Line 353 of lalr1.java  */
-/* Line 326 of "parser.y"  */
-    {System.out.println("Rule 36.1");};
+/* Line 956 of ".\\YYParser.y"  */
+    {System.out.println("Rule 36.3");};
   break;
     
 
@@ -1266,8 +1754,14 @@ class YYParser
   if (yyn == 93)
     
 /* Line 353 of lalr1.java  */
-/* Line 328 of "parser.y"  */
-    {System.out.println("Rule 36.2");};
+/* Line 959 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 37.1 taghirpazir to amel");
+		yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;};
   break;
     
 
@@ -1275,8 +1769,13 @@ class YYParser
   if (yyn == 94)
     
 /* Line 353 of lalr1.java  */
-/* Line 330 of "parser.y"  */
-    {System.out.println("Rule 36.3");};
+/* Line 968 of ".\\YYParser.y"  */
+    {System.out.println("Rule 37.2 taghirnapazir to amel");
+					yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;};
   break;
     
 
@@ -1284,8 +1783,14 @@ class YYParser
   if (yyn == 95)
     
 /* Line 353 of lalr1.java  */
-/* Line 333 of "parser.y"  */
-    {System.out.println("Rule 37.1");};
+/* Line 976 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 38.1 saved_identifier to taghirpazir");
+		yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;};
   break;
     
 
@@ -1293,8 +1798,8 @@ class YYParser
   if (yyn == 96)
     
 /* Line 353 of lalr1.java  */
-/* Line 335 of "parser.y"  */
-    {System.out.println("Rule 37.2");};
+/* Line 985 of ".\\YYParser.y"  */
+    {System.out.println("Rule 38.2");};
   break;
     
 
@@ -1302,8 +1807,8 @@ class YYParser
   if (yyn == 97)
     
 /* Line 353 of lalr1.java  */
-/* Line 338 of "parser.y"  */
-    {System.out.println("Rule 38.1");};
+/* Line 987 of ".\\YYParser.y"  */
+    {System.out.println("Rule 38.3");};
   break;
     
 
@@ -1311,8 +1816,13 @@ class YYParser
   if (yyn == 98)
     
 /* Line 353 of lalr1.java  */
-/* Line 340 of "parser.y"  */
-    {System.out.println("Rule 38.2");};
+/* Line 990 of ".\\YYParser.y"  */
+    {System.out.println("Rule 39.1");
+		yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (3-(2)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (3-(2)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (3-(2)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (3-(2)))).falseList;};
   break;
     
 
@@ -1320,8 +1830,8 @@ class YYParser
   if (yyn == 99)
     
 /* Line 353 of lalr1.java  */
-/* Line 342 of "parser.y"  */
-    {System.out.println("Rule 38.3");};
+/* Line 997 of ".\\YYParser.y"  */
+    {System.out.println("Rule 39.2");};
   break;
     
 
@@ -1329,8 +1839,15 @@ class YYParser
   if (yyn == 100)
     
 /* Line 353 of lalr1.java  */
-/* Line 345 of "parser.y"  */
-    {System.out.println("Rule 39.1");};
+/* Line 999 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 39.3: meghdareSabet to taghirnapazir");
+		yyval = new EVal();	
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+	};
   break;
     
 
@@ -1338,8 +1855,8 @@ class YYParser
   if (yyn == 101)
     
 /* Line 353 of lalr1.java  */
-/* Line 347 of "parser.y"  */
-    {System.out.println("Rule 39.2");};
+/* Line 1009 of ".\\YYParser.y"  */
+    {System.out.println("Rule 40.1");};
   break;
     
 
@@ -1347,8 +1864,8 @@ class YYParser
   if (yyn == 102)
     
 /* Line 353 of lalr1.java  */
-/* Line 349 of "parser.y"  */
-    {System.out.println("Rule 39.3");};
+/* Line 1011 of ".\\YYParser.y"  */
+    {System.out.println("Rule 40.2");};
   break;
     
 
@@ -1356,8 +1873,8 @@ class YYParser
   if (yyn == 103)
     
 /* Line 353 of lalr1.java  */
-/* Line 352 of "parser.y"  */
-    {System.out.println("Rule 40.1");};
+/* Line 1014 of ".\\YYParser.y"  */
+    {System.out.println("Rule 42.1");};
   break;
     
 
@@ -1365,8 +1882,8 @@ class YYParser
   if (yyn == 104)
     
 /* Line 353 of lalr1.java  */
-/* Line 354 of "parser.y"  */
-    {System.out.println("Rule 40.2");};
+/* Line 1016 of ".\\YYParser.y"  */
+    {System.out.println("Rule 42.2");};
   break;
     
 
@@ -1374,8 +1891,17 @@ class YYParser
   if (yyn == 105)
     
 /* Line 353 of lalr1.java  */
-/* Line 358 of "parser.y"  */
-    {System.out.println("Rule 41");};
+/* Line 1019 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 43.1: " +
+			"constant_expressions: saved_integer");
+		yyval = new EVal();
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+		((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;
+	};
   break;
     
 
@@ -1383,8 +1909,17 @@ class YYParser
   if (yyn == 106)
     
 /* Line 353 of lalr1.java  */
-/* Line 361 of "parser.y"  */
-    {System.out.println("Rule 42.1");};
+/* Line 1030 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 43.2: " +
+			"constant_expressions: saved_real");
+		yyval = new EVal();
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+		((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;
+	};
   break;
     
 
@@ -1392,8 +1927,17 @@ class YYParser
   if (yyn == 107)
     
 /* Line 353 of lalr1.java  */
-/* Line 363 of "parser.y"  */
-    {System.out.println("Rule 42.2");};
+/* Line 1041 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 43.3: " +
+			"constant_expressions: saved_char");
+		yyval = new EVal();
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+		((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;
+	};
   break;
     
 
@@ -1401,8 +1945,17 @@ class YYParser
   if (yyn == 108)
     
 /* Line 353 of lalr1.java  */
-/* Line 366 of "parser.y"  */
-    {System.out.println("Rule 43.1");};
+/* Line 1052 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 43.4: " +
+			"constant_expressions: saved_boolean");
+		yyval = new EVal();
+		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
+		((EVal)yyval).type = ((EVal)(yystack.valueAt (1-(1)))).type;
+		((EVal)yyval).trueList = ((EVal)(yystack.valueAt (1-(1)))).trueList;
+		((EVal)yyval).falseList = ((EVal)(yystack.valueAt (1-(1)))).falseList;
+		((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;
+	};
   break;
     
 
@@ -1410,8 +1963,13 @@ class YYParser
   if (yyn == 109)
     
 /* Line 353 of lalr1.java  */
-/* Line 368 of "parser.y"  */
-    {System.out.println("Rule 43.1");};
+/* Line 1064 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 30: " +
+			"saved_identifier: IDENTIFIER");
+		yyval = new EVal();
+		((EVal)yyval).place = lexIdentifier;
+};
   break;
     
 
@@ -1419,8 +1977,22 @@ class YYParser
   if (yyn == 110)
     
 /* Line 353 of lalr1.java  */
-/* Line 370 of "parser.y"  */
-    {System.out.println("Rule 43.2");};
+/* Line 1072 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 31: " +
+			"saved_integer: INTEGER_CONSTANT");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_INTEGER;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit(":=", String.valueOf(lexInt), null, ((EVal)yyval).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+
+};
   break;
     
 
@@ -1428,8 +2000,21 @@ class YYParser
   if (yyn == 111)
     
 /* Line 353 of lalr1.java  */
-/* Line 372 of "parser.y"  */
-    {System.out.println("Rule 43.3");};
+/* Line 1089 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 32: " +
+			"saved_real: REAL_CONSTANT");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_REAL, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_REAL;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit(":=", String.valueOf(lexReal), null, ((EVal)yyval).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+};
   break;
     
 
@@ -1437,15 +2022,91 @@ class YYParser
   if (yyn == 112)
     
 /* Line 353 of lalr1.java  */
-/* Line 374 of "parser.y"  */
-    {System.out.println("Rule 43.4");};
+/* Line 1105 of ".\\YYParser.y"  */
+    {
+		System.out.println("saved_char: HARFE_SABET");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_CHAR, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_CHAR;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
+		emit(":=", "'" + String.valueOf(lexChar) + "'", null, ((EVal)yyval).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+};
+  break;
+    
+
+  case 113:
+  if (yyn == 113)
+    
+/* Line 353 of lalr1.java  */
+/* Line 1120 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 34.1: " +
+			"saved_boolean: TRUE_KW");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+		
+		if(lexBoolean)
+			emit(":=", "1", null, ((EVal)yyval).place);
+		else
+			emit(":=", "0", null, ((EVal)yyval).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
+  break;
+    
+
+  case 114:
+  if (yyn == 114)
+    
+/* Line 353 of lalr1.java  */
+/* Line 1137 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 34.2: " +
+			"saved_boolean: FALSE_KW");
+		yyval = new EVal();
+		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)yyval).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+		
+		if(lexBoolean)
+			emit(":=", "1", null, ((EVal)yyval).place);
+		else
+			emit(":=", "0", null, ((EVal)yyval).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	};
+  break;
+    
+
+  case 115:
+  if (yyn == 115)
+    
+/* Line 353 of lalr1.java  */
+/* Line 1156 of ".\\YYParser.y"  */
+    {
+		System.out.println("Rule 35: " +
+			"M: ");
+		yyval = new EVal();
+		((EVal)yyval).quad = nextQuad();
+	};
   break;
     
 
 
 
 /* Line 353 of lalr1.java  */
-/* Line 1450 of "parser.java"  */
+/* Line 2110 of "YYParser.java"  */
 	default: break;
       }
 
@@ -1578,7 +2239,7 @@ class YYParser
         if (yychar == yyempty_)
           {
 	    yycdebug ("Reading a token: ");
-	    yychar = yylex();
+	    yychar = yylex ();
             
             yylval = yylexer.getLVal ();
           }
@@ -1798,30 +2459,31 @@ class YYParser
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-  private static final short yypact_ninf_ = -44;
+  private static final short yypact_ninf_ = -42;
   private static final short yypact_[] =
   {
-       -16,   -13,    20,    60,   -44,   -44,   -44,   -44,   -44,    17,
-      -5,    60,   -44,   -44,    26,   -44,   -44,    29,     2,   -44,
-      63,     7,   -44,    30,    21,   287,    33,    22,    57,   -44,
-      55,     8,    62,   -44,   321,   -44,    71,   148,   -44,    62,
-     -44,   -44,   155,    65,   101,   321,    68,   -44,   -44,    69,
-     -44,    72,   -44,   321,   -44,   -44,   -44,   -44,   -44,   -44,
-     -44,   -44,   -44,   -44,   -44,    82,   361,   -44,   324,   -44,
-     321,   -44,   336,   -44,   -44,   -44,    75,    97,   -44,   287,
-      71,    79,   287,    80,    84,   -44,   361,   -18,   -44,   -44,
-     -44,    15,    98,   -44,   200,   -44,   229,   -44,   -44,    99,
-      27,   321,   301,   321,    95,   -44,   321,   321,   321,   321,
-     321,   321,   -44,   321,   -44,   321,   321,   -44,   321,   -44,
-     -44,   321,   -44,   104,   321,   321,   321,   -44,   -44,   321,
-     321,   321,   102,    33,   -44,   -44,   -44,   -44,   287,   -44,
-     -44,   258,   -44,   -44,   -44,   287,   153,   -44,   -44,   105,
-     120,   358,   -44,   113,    -3,   113,    -3,   113,     4,   -44,
-     -44,     4,   -44,    -6,   -44,   108,   -44,   -44,   -44,   -44,
-     -44,   -44,   -44,   -44,   -44,   122,   287,   -44,   321,   134,
-     -44,   287,   -44,   -44,   119,    56,   -44,   109,   121,   -44,
-     116,   160,   287,   117,   287,   -44,   146,   287,   152,   -44,
-     161,   -44,   -44
+         2,    -9,    24,    66,   -42,   -42,   -42,   -42,   -42,     0,
+      16,    66,   -42,   -42,    30,   -42,   -42,    60,    -1,   -42,
+      77,    80,   -42,    32,   139,   292,    53,   -15,   -42,    84,
+      72,    54,   -42,   360,   -42,   155,   203,   -42,    54,   -42,
+     165,    90,   314,   360,   360,    86,   -42,   -42,   -42,   -42,
+      93,   -42,   360,   -42,   -42,   -42,   -42,   -42,   -42,   -42,
+     -42,   -42,   -42,   -42,   -42,    91,    11,   -42,    -2,   -42,
+     375,   -42,    97,   -42,   -42,   -42,   104,   -42,   -42,   -42,
+     -42,   114,   147,   -42,   155,   292,   129,   292,   -12,   141,
+     -42,    11,    33,   -42,   -42,   -42,    98,   -42,   211,   -42,
+     238,   -42,   -42,   148,    87,   -42,   360,   360,   145,   -42,
+     -42,   -42,   -42,   -42,   375,   375,   375,   375,   375,   375,
+     375,   375,   375,   375,   -42,   154,   360,   360,   360,   360,
+     -42,   -42,   360,   360,   338,   151,    53,   -42,   -42,   -42,
+     -42,   292,   -42,   -42,   265,   -42,   -42,   -42,   292,   -14,
+      20,   -42,   360,   360,   360,   360,   106,     4,   -42,     4,
+     -42,   106,     4,   -42,     4,     4,   -42,   152,   -42,   -42,
+     -42,   -42,   -42,   -42,   -42,    26,   -42,   -42,   -42,   -42,
+     166,   292,   178,   -42,    14,    14,   -42,   -42,   360,   -42,
+     292,   -42,   169,   109,   -42,   -42,   149,   172,   -42,   153,
+     189,   292,   157,   292,   -42,   187,   292,   194,   -42,   196,
+     -42,   -42
   };
 
   /* YYDEFACT[S] -- default rule to reduce with in state S when YYTABLE
@@ -1831,143 +2493,150 @@ class YYParser
   {
          0,     0,     0,     0,     1,    16,    15,    18,    17,     0,
        0,     2,     4,     5,     0,     6,     7,     0,     0,     3,
-      24,     0,    20,    22,     0,     0,     0,     0,    30,    32,
-       0,     0,     0,    19,     0,     9,     0,     0,    11,     0,
-      14,   109,     0,     0,     0,     0,     0,    51,   108,    97,
-     110,     0,    93,     0,   111,    94,   112,    92,    29,    38,
-      39,    40,    41,    42,    43,     0,    70,    76,    77,    84,
-       0,    91,    95,    96,   101,   102,    36,    33,    35,     0,
-       0,     0,     0,     0,    24,    21,    23,    95,    13,     8,
-      10,     0,   109,    47,     0,    49,     0,    62,    60,     0,
-       0,     0,     0,     0,     0,    50,     0,     0,     0,     0,
-       0,     0,    81,     0,    83,     0,     0,    80,     0,    79,
-      82,     0,    90,     0,     0,     0,     0,    68,    69,     0,
-       0,     0,     0,     0,    28,    31,    25,    27,     0,    12,
-      45,     0,    46,    48,    61,     0,     0,   104,   107,     0,
-     105,     0,   100,    72,    71,    75,    73,    74,    85,    87,
-      88,    86,    89,    78,    99,     0,    63,    64,    65,    66,
-      67,    37,    34,    26,    44,    52,     0,   103,     0,     0,
-      98,     0,    59,   106,     0,     0,    53,     0,     0,    55,
-       0,     0,     0,     0,     0,    54,     0,     0,     0,    56,
-       0,    58,    57
+      24,     0,    20,    22,     0,     0,     0,     0,    31,     0,
+       0,     0,    19,     0,     9,     0,     0,    11,     0,    14,
+       0,     0,     0,     0,     0,     0,    50,   110,   109,   112,
+       0,    91,     0,   113,    92,   114,    90,   111,    29,    37,
+      38,    39,    40,    41,    42,     0,    69,    75,    76,    82,
+       0,    89,    93,    94,    99,   100,    95,   105,   106,   107,
+     108,    35,    32,    34,     0,     0,     0,     0,     0,    24,
+      21,    23,    93,    13,     8,    10,     0,    46,     0,    48,
+       0,    61,    59,     0,     0,    74,     0,     0,     0,    49,
+     115,   115,   115,   115,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    88,     0,     0,     0,     0,     0,
+      67,    68,     0,     0,     0,     0,     0,    30,    28,    25,
+      27,     0,    12,    44,     0,    45,    47,    60,     0,     0,
+       0,    98,     0,     0,     0,     0,    83,    79,    85,    81,
+      86,    84,    78,    87,    77,    80,    97,     0,    62,    66,
+      63,    64,    65,   102,   104,     0,    36,    33,    26,    43,
+      51,     0,     0,    71,    70,    72,    73,    96,     0,   101,
+       0,    58,     0,     0,   103,    52,     0,     0,    54,     0,
+       0,     0,     0,     0,    53,     0,     0,     0,    55,     0,
+      57,    56
   };
 
   /* YYPGOTO[NTERM-NUM].  */
   private static final short yypgoto_[] =
   {
-       -44,   -44,   -44,   170,   -44,   150,   -32,   -44,     0,   -44,
-     149,   165,   -44,   -44,   162,   -44,   130,   -44,    66,   -25,
-     -44,   118,   -44,   -44,   -44,   -44,   -44,   -44,   -44,   -43,
-      16,   -44,   -44,   286,   132,   -44,   -44,   -12,   -44,   -44,
-     -44,   -44,   -44
+       -42,   -42,   -42,   216,   -42,   188,   -34,   -42,    10,   -42,
+     191,   201,   -42,   -42,   204,   159,   -42,    99,   -25,   -42,
+     135,   -42,   -42,   -42,   -42,   -42,   -42,   -42,   -41,   -26,
+     -42,   310,   174,   -42,   -42,   -17,   -42,   -42,   -42,   -42,
+     123,   -42,   -42,   -42,   -42,    55
   };
 
   /* YYDEFGOTO[NTERM-NUM].  */
   private static final short
   yydefgoto_[] =
   {
-        -1,     2,    11,    12,    13,    37,    38,    39,    40,    15,
-      21,    22,    23,    16,    27,    28,    29,    77,    78,    95,
-      59,    96,    60,    61,   185,   191,    62,    63,    64,    65,
-      66,    67,   121,    68,    69,    70,    71,    72,    73,    74,
-     149,   150,    75
+        -1,     2,    11,    12,    13,    36,    37,    38,    39,    15,
+      21,    22,    23,    16,    27,    28,    82,    83,    99,    59,
+     100,    60,    61,   193,   200,    62,    63,    64,    65,    66,
+      67,    68,    69,    70,    71,    72,    73,    74,   175,    75,
+      76,    77,    78,    79,    80,   152
   };
 
   /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
      positive, shift that token.  If negative, reduce the rule which
      number is the opposite.  If zero, do what YYDEFACT says.  */
-  private static final short yytable_ninf_ = -17;
+  private static final short yytable_ninf_ = -1;
   private static final short
   yytable_[] =
   {
-        58,    99,     1,    14,   111,    90,     5,     6,     7,     8,
-     104,    14,     5,     6,     7,     8,   123,     3,    26,   124,
-       4,   106,    87,   108,    32,     5,     6,     7,     8,   113,
-      35,    26,    32,    87,    18,    33,    88,    24,   115,   113,
-      25,    36,   116,   139,   110,   118,    82,    17,   115,   145,
-      86,   106,   107,   108,   134,   118,    20,   137,    87,   148,
-      79,   100,    90,    76,     5,     6,     7,     8,   188,   189,
-     190,   143,   109,    34,   110,     5,     6,     7,     8,     9,
-      26,   165,   166,   167,    81,    80,   168,   169,   170,    87,
-      10,    87,    84,    97,    87,    87,    87,    87,    87,    87,
-      30,    87,    31,    87,    87,    41,    87,   101,   102,    87,
-     105,   103,   132,   173,   133,   136,   143,   146,   138,   151,
-     175,    30,   153,   154,   155,   156,   157,   144,   -16,    98,
-      48,    49,    50,   152,   164,   183,    52,   178,   171,   108,
-      53,    54,    55,   177,   180,   181,   184,    56,   187,    57,
-     193,   182,     5,     6,     7,     8,   186,    89,   192,    92,
-       6,     7,     8,    42,    93,   194,   197,   196,    36,   198,
-      43,    44,   200,   195,   199,    36,    45,   106,   107,   108,
-     201,    19,    46,    47,    48,    49,    50,    51,    91,   202,
-      52,   176,    94,    83,    53,    54,    55,    85,   109,   172,
-     110,    56,   122,    57,    92,     6,     7,     8,    42,   140,
-     135,     0,   141,     0,     0,    43,    44,     0,     0,     0,
-      36,    45,     0,     0,     0,     0,     0,    46,    47,    48,
-      49,    50,    51,    41,     0,    52,     0,    42,   142,    53,
-      54,    55,     0,     0,    43,    44,    56,     0,    57,     0,
-      45,     0,     0,     0,     0,     0,    46,    47,    48,    49,
-      50,    51,    41,     0,    52,     0,    42,   174,    53,    54,
-      55,     0,     0,    43,    44,    56,     0,    57,     0,    45,
-       0,     0,     0,     0,     0,    46,    47,    48,    49,    50,
-      51,    41,     0,    52,     0,    42,     0,    53,    54,    55,
-       0,     0,    43,    44,    56,    41,    57,     0,    45,     0,
-       0,     0,     0,     0,    46,    47,    48,    49,    50,    51,
-       0,     0,    52,     0,     0,    41,    53,    54,    55,     0,
-      48,    49,    50,    56,   111,    57,    52,     0,     0,   147,
-      53,    54,    55,     0,     0,     0,     0,    56,     0,    57,
-      48,    49,    50,     0,     0,     0,    52,   112,     0,   113,
-      53,    54,    55,     0,     0,     0,   114,    56,   115,    57,
-     123,     0,   116,   124,   117,   118,   119,   120,     0,   125,
-       0,     0,   106,   107,   108,   106,   107,   108,     0,     0,
-     126,   127,   128,   129,   130,   131,   179,   158,     0,   159,
-       0,   160,   161,   109,   162,   110,   109,   163,   110
+        58,   103,    95,     5,     6,     7,     8,    91,   114,   110,
+     111,   108,    84,    14,   114,    84,    92,   104,   105,     1,
+       3,    14,    85,   181,     4,   141,    92,    92,    26,    17,
+     115,   112,   116,   113,   110,   111,    25,   110,   116,   117,
+      26,   118,   188,   110,   111,    93,   119,   118,   120,   121,
+     122,   123,   119,    92,    18,   121,   112,   182,   113,    20,
+     138,   113,   140,   189,    95,   112,   125,   113,    24,   126,
+       5,     6,     7,     8,    33,   146,     5,     6,     7,     8,
+     149,   150,    81,    89,     9,   167,   168,   169,   170,    92,
+      92,   171,   172,   174,    26,    10,    31,    92,    92,    92,
+      92,    92,    92,    92,    92,    92,    92,    32,   148,    87,
+     110,   111,    86,    29,    31,    30,   178,   101,   109,   146,
+     197,   198,   199,   180,   106,   142,   183,   184,   185,   186,
+     125,   107,   112,   126,   113,    92,    92,    92,    92,   127,
+     116,   128,   134,     5,     6,     7,     8,   194,    34,   118,
+     135,   129,   130,   131,   132,   133,   191,   121,    35,     5,
+       6,     7,     8,   136,   139,   195,   153,   154,   155,     5,
+       6,     7,     8,    40,    97,   147,   205,    29,   207,    41,
+      42,   209,   151,    48,    35,    43,   176,   187,   190,   192,
+      44,    45,    46,    47,    48,    49,    50,   196,   201,    51,
+     202,   204,   203,    52,    53,    54,   206,     5,     6,     7,
+       8,    55,    94,    56,   208,     5,     6,     7,     8,    40,
+     143,   210,    35,   211,    57,    41,    42,    19,    98,    96,
+      35,    43,    90,   144,    88,   177,    44,    45,    46,    47,
+      48,    49,    50,   137,   124,    51,    40,   145,   166,    52,
+      53,    54,    41,    42,     0,     0,     0,    55,    43,    56,
+       0,     0,     0,    44,    45,    46,    47,    48,    49,    50,
+      57,     0,    51,    40,   179,     0,    52,    53,    54,    41,
+      42,     0,     0,     0,    55,    43,    56,     0,     0,     0,
+      44,    45,    46,    47,    48,    49,    50,    57,     0,    51,
+      40,     0,     0,    52,    53,    54,    41,    42,     0,     0,
+       0,    55,    43,    56,     0,     0,     0,    44,    45,    46,
+      47,    48,    49,    50,    57,     0,    51,     0,     0,     0,
+      52,    53,    54,     0,     0,     0,     0,     0,    55,    44,
+      56,   102,    47,    48,    49,     0,     0,     0,    51,     0,
+       0,    57,    52,    53,    54,     0,     0,     0,     0,     0,
+      55,     0,    56,    44,     0,     0,    47,    48,    49,     0,
+       0,     0,    51,    57,     0,   173,    52,    53,    54,     0,
+       0,     0,     0,     0,    55,    44,    56,     0,    47,    48,
+      49,     0,     0,     0,    51,     0,     0,    57,    52,    53,
+      54,     0,     0,    47,    48,    49,    55,     0,    56,    51,
+       0,     0,     0,    52,    53,    54,     0,     0,     0,    57,
+       0,    55,     0,    56,   156,   157,   158,   159,   160,   161,
+     162,   163,   164,   165,    57
   };
 
   /* YYCHECK.  */
   private static final short
   yycheck_[] =
   {
-        25,    44,    18,     3,    10,    37,     4,     5,     6,     7,
-      53,    11,     4,     5,     6,     7,    34,    30,    18,    37,
-       0,    24,    34,    26,    17,     4,     5,     6,     7,    35,
-       9,    31,    17,    45,    39,    28,    36,     8,    44,    35,
-      38,    20,    48,    28,    47,    51,    38,    30,    44,    22,
-      34,    24,    25,    26,    79,    51,    30,    82,    70,   102,
-      38,    45,    94,    30,     4,     5,     6,     7,    12,    13,
-      14,    96,    45,    43,    47,     4,     5,     6,     7,    19,
-      80,   124,   125,   126,    29,    28,   129,   130,   131,   101,
-      30,   103,    30,    28,   106,   107,   108,   109,   110,   111,
-      37,   113,    39,   115,   116,     4,   118,    39,    39,   121,
-      28,    39,    37,   138,    17,    36,   141,   101,    38,   103,
-     145,    37,   106,   107,   108,   109,   110,    28,    30,    28,
-      29,    30,    31,    38,    30,   178,    35,    17,    36,    26,
-      39,    40,    41,    38,    36,    23,    12,    46,    29,    48,
-      29,   176,     4,     5,     6,     7,   181,     9,    49,     4,
-       5,     6,     7,     8,     9,    49,    49,   192,    20,   194,
-      15,    16,   197,    13,    28,    20,    21,    24,    25,    26,
-      28,    11,    27,    28,    29,    30,    31,    32,    39,    28,
-      35,    38,    42,    31,    39,    40,    41,    32,    45,   133,
-      47,    46,    70,    48,     4,     5,     6,     7,     8,     9,
-      80,    -1,    94,    -1,    -1,    15,    16,    -1,    -1,    -1,
-      20,    21,    -1,    -1,    -1,    -1,    -1,    27,    28,    29,
-      30,    31,    32,     4,    -1,    35,    -1,     8,     9,    39,
-      40,    41,    -1,    -1,    15,    16,    46,    -1,    48,    -1,
-      21,    -1,    -1,    -1,    -1,    -1,    27,    28,    29,    30,
-      31,    32,     4,    -1,    35,    -1,     8,     9,    39,    40,
-      41,    -1,    -1,    15,    16,    46,    -1,    48,    -1,    21,
-      -1,    -1,    -1,    -1,    -1,    27,    28,    29,    30,    31,
-      32,     4,    -1,    35,    -1,     8,    -1,    39,    40,    41,
-      -1,    -1,    15,    16,    46,     4,    48,    -1,    21,    -1,
-      -1,    -1,    -1,    -1,    27,    28,    29,    30,    31,    32,
-      -1,    -1,    35,    -1,    -1,     4,    39,    40,    41,    -1,
-      29,    30,    31,    46,    10,    48,    35,    -1,    -1,    38,
-      39,    40,    41,    -1,    -1,    -1,    -1,    46,    -1,    48,
-      29,    30,    31,    -1,    -1,    -1,    35,    33,    -1,    35,
-      39,    40,    41,    -1,    -1,    -1,    42,    46,    44,    48,
-      34,    -1,    48,    37,    50,    51,    52,    53,    -1,    43,
-      -1,    -1,    24,    25,    26,    24,    25,    26,    -1,    -1,
-      54,    55,    56,    57,    58,    59,    38,   111,    -1,   113,
-      -1,   115,   116,    45,   118,    47,    45,   121,    47
+        25,    42,    36,     4,     5,     6,     7,    33,    10,    23,
+      24,    52,    27,     3,    10,    27,    33,    43,    44,    17,
+      29,    11,    37,    37,     0,    37,    43,    44,    18,    29,
+      32,    45,    34,    47,    23,    24,    37,    23,    34,    41,
+      30,    43,    16,    23,    24,    35,    48,    43,    50,    51,
+      52,    53,    48,    70,    38,    51,    45,    37,    47,    29,
+      85,    47,    87,    37,    98,    45,    33,    47,     8,    36,
+       4,     5,     6,     7,    42,   100,     4,     5,     6,     7,
+     106,   107,    29,    29,    18,   126,   127,   128,   129,   106,
+     107,   132,   133,   134,    84,    29,    16,   114,   115,   116,
+     117,   118,   119,   120,   121,   122,   123,    27,    21,    37,
+      23,    24,    28,    36,    16,    38,   141,    27,    27,   144,
+      11,    12,    13,   148,    38,    27,   152,   153,   154,   155,
+      33,    38,    45,    36,    47,   152,   153,   154,   155,    42,
+      34,    44,    38,     4,     5,     6,     7,   188,     9,    43,
+      36,    54,    55,    56,    57,    58,   181,    51,    19,     4,
+       5,     6,     7,    16,    35,   190,   111,   112,   113,     4,
+       5,     6,     7,     8,     9,    27,   201,    36,   203,    14,
+      15,   206,    37,    29,    19,    20,    35,    35,    22,    11,
+      25,    26,    27,    28,    29,    30,    31,    28,    49,    34,
+      28,    12,    49,    38,    39,    40,    49,     4,     5,     6,
+       7,    46,     9,    48,    27,     4,     5,     6,     7,     8,
+       9,    27,    19,    27,    59,    14,    15,    11,    40,    38,
+      19,    20,    31,    98,    30,   136,    25,    26,    27,    28,
+      29,    30,    31,    84,    70,    34,     8,     9,   125,    38,
+      39,    40,    14,    15,    -1,    -1,    -1,    46,    20,    48,
+      -1,    -1,    -1,    25,    26,    27,    28,    29,    30,    31,
+      59,    -1,    34,     8,     9,    -1,    38,    39,    40,    14,
+      15,    -1,    -1,    -1,    46,    20,    48,    -1,    -1,    -1,
+      25,    26,    27,    28,    29,    30,    31,    59,    -1,    34,
+       8,    -1,    -1,    38,    39,    40,    14,    15,    -1,    -1,
+      -1,    46,    20,    48,    -1,    -1,    -1,    25,    26,    27,
+      28,    29,    30,    31,    59,    -1,    34,    -1,    -1,    -1,
+      38,    39,    40,    -1,    -1,    -1,    -1,    -1,    46,    25,
+      48,    27,    28,    29,    30,    -1,    -1,    -1,    34,    -1,
+      -1,    59,    38,    39,    40,    -1,    -1,    -1,    -1,    -1,
+      46,    -1,    48,    25,    -1,    -1,    28,    29,    30,    -1,
+      -1,    -1,    34,    59,    -1,    37,    38,    39,    40,    -1,
+      -1,    -1,    -1,    -1,    46,    25,    48,    -1,    28,    29,
+      30,    -1,    -1,    -1,    34,    -1,    -1,    59,    38,    39,
+      40,    -1,    -1,    28,    29,    30,    46,    -1,    48,    34,
+      -1,    -1,    -1,    38,    39,    40,    -1,    -1,    -1,    59,
+      -1,    46,    -1,    48,   114,   115,   116,   117,   118,   119,
+     120,   121,   122,   123,    59
   };
 
   /* STOS_[STATE-NUM] -- The (internal number of the) accessing
@@ -1975,27 +2644,28 @@ class YYParser
   private static final byte
   yystos_[] =
   {
-         0,    18,    62,    30,     0,     4,     5,     6,     7,    19,
-      30,    63,    64,    65,    69,    70,    74,    30,    39,    64,
-      30,    71,    72,    73,     8,    38,    69,    75,    76,    77,
-      37,    39,    17,    28,    43,     9,    20,    66,    67,    68,
-      69,     4,     8,    15,    16,    21,    27,    28,    29,    30,
-      31,    32,    35,    39,    40,    41,    46,    48,    80,    81,
-      83,    84,    87,    88,    89,    90,    91,    92,    94,    95,
-      96,    97,    98,    99,   100,   103,    30,    78,    79,    38,
-      28,    29,    38,    75,    30,    72,    91,    98,    69,     9,
-      67,    71,     4,     9,    66,    80,    82,    28,    28,    90,
-      91,    39,    39,    39,    90,    28,    24,    25,    26,    45,
-      47,    10,    33,    35,    42,    44,    48,    50,    51,    52,
-      53,    93,    95,    34,    37,    43,    54,    55,    56,    57,
-      58,    59,    37,    17,    80,    77,    36,    80,    38,    28,
-       9,    82,     9,    80,    28,    22,    91,    38,    90,   101,
-     102,    91,    38,    91,    91,    91,    91,    91,    94,    94,
-      94,    94,    94,    94,    30,    90,    90,    90,    90,    90,
-      90,    36,    79,    80,     9,    80,    38,    38,    17,    38,
-      36,    23,    80,    90,    12,    85,    80,    29,    12,    13,
-      14,    86,    49,    29,    49,    13,    80,    49,    80,    28,
-      80,    28,    28
+         0,    17,    62,    29,     0,     4,     5,     6,     7,    18,
+      29,    63,    64,    65,    69,    70,    74,    29,    38,    64,
+      29,    71,    72,    73,     8,    37,    69,    75,    76,    36,
+      38,    16,    27,    42,     9,    19,    66,    67,    68,    69,
+       8,    14,    15,    20,    25,    26,    27,    28,    29,    30,
+      31,    34,    38,    39,    40,    46,    48,    59,    79,    80,
+      82,    83,    86,    87,    88,    89,    90,    91,    92,    93,
+      94,    95,    96,    97,    98,   100,   101,   102,   103,   104,
+     105,    29,    77,    78,    27,    37,    28,    37,    75,    29,
+      72,    90,    96,    69,     9,    67,    71,     9,    66,    79,
+      81,    27,    27,    89,    90,    90,    38,    38,    89,    27,
+      23,    24,    45,    47,    10,    32,    34,    41,    43,    48,
+      50,    51,    52,    53,    93,    33,    36,    42,    44,    54,
+      55,    56,    57,    58,    38,    36,    16,    76,    79,    35,
+      79,    37,    27,     9,    81,     9,    79,    27,    21,    90,
+      90,    37,   106,   106,   106,   106,    92,    92,    92,    92,
+      92,    92,    92,    92,    92,    92,   101,    89,    89,    89,
+      89,    89,    89,    37,    89,    99,    35,    78,    79,     9,
+      79,    37,    37,    90,    90,    90,    90,    35,    16,    37,
+      22,    79,    11,    84,    89,    79,    28,    11,    12,    13,
+      85,    49,    28,    49,    12,    79,    49,    79,    27,    79,
+      27,    27
   };
 
   /* TOKEN_NUMBER_[YYLEX-NUM] -- Internal symbol number corresponding
@@ -2019,15 +2689,15 @@ class YYParser
          0,    61,    62,    63,    63,    64,    64,    64,    65,    65,
       66,    66,    67,    68,    68,    69,    69,    69,    69,    70,
       71,    71,    72,    72,    73,    73,    74,    74,    74,    74,
-      75,    76,    76,    77,    78,    78,    79,    79,    80,    80,
-      80,    80,    80,    80,    81,    81,    81,    81,    82,    82,
-      83,    83,    84,    84,    84,    84,    85,    85,    86,    87,
-      88,    88,    89,    90,    90,    90,    90,    90,    90,    90,
-      90,    91,    91,    91,    91,    91,    91,    92,    92,    93,
-      93,    93,    93,    93,    94,    94,    94,    94,    94,    94,
-      95,    95,    96,    96,    96,    97,    97,    98,    98,    98,
-      99,    99,    99,   100,   100,   101,   102,   102,   103,   103,
-     103,   103,   103
+      75,    75,    76,    77,    77,    78,    78,    79,    79,    79,
+      79,    79,    79,    80,    80,    80,    80,    81,    81,    82,
+      82,    83,    83,    83,    83,    84,    84,    85,    86,    87,
+      87,    88,    89,    89,    89,    89,    89,    89,    89,    89,
+      90,    90,    90,    90,    90,    90,    91,    91,    91,    91,
+      91,    91,    92,    92,    92,    92,    92,    92,    93,    93,
+      94,    94,    94,    95,    95,    96,    96,    96,    97,    97,
+      97,    98,    98,    99,    99,   100,   100,   100,   100,   101,
+     102,   103,   104,   105,   105,   106
   };
 
   /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -2037,15 +2707,15 @@ class YYParser
          0,     2,     3,     2,     1,     1,     1,     1,     5,     4,
        2,     1,     3,     2,     1,     1,     1,     1,     1,     3,
        1,     3,     1,     3,     1,     4,     6,     5,     5,     4,
-       1,     3,     1,     2,     3,     1,     1,     3,     1,     1,
-       1,     1,     1,     1,     4,     3,     3,     2,     2,     1,
-       2,     1,     4,     6,     7,     6,     5,     6,     4,     5,
-       2,     3,     2,     3,     3,     3,     3,     3,     2,     2,
-       1,     3,     3,     3,     3,     3,     1,     1,     3,     1,
-       1,     1,     1,     1,     1,     3,     3,     3,     3,     3,
-       2,     1,     1,     1,     1,     1,     1,     1,     4,     3,
-       3,     1,     1,     4,     3,     1,     3,     1,     1,     1,
-       1,     1,     1
+       3,     1,     2,     3,     1,     1,     3,     1,     1,     1,
+       1,     1,     1,     4,     3,     3,     2,     2,     1,     2,
+       1,     4,     6,     7,     6,     5,     6,     4,     5,     2,
+       3,     2,     3,     3,     3,     3,     3,     2,     2,     1,
+       4,     4,     4,     4,     2,     1,     1,     3,     3,     3,
+       3,     3,     1,     3,     3,     3,     3,     3,     2,     1,
+       1,     1,     1,     1,     1,     1,     4,     3,     3,     1,
+       1,     4,     3,     3,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     0
   };
 
   /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
@@ -2054,70 +2724,73 @@ class YYParser
   {
     "$end", "error", "$undefined", "COMMENT", "FLOAT_KW", "INT_KW",
   "BOOLEAN_KW", "CHAR_KW", "AKULAD_BAZ_KW", "AKULAD_BASTE_KW", "ADD_KW",
-  "BOOLEAN_CONSTANT", "SWITCH_KW", "END_KW", "DEFAULT_KW", "BREAK_KW",
-  "RETURN_KW", "COMMA", "PROGRAM_KW", "STRUCT_KW", "CONSTANT_KW", "IF_KW",
-  "THEN_KW", "ELSE_KW", "AND_KW", "OR_KW", "NOT_KW", "WHILE_KW",
-  "NOGHTE_VIRGUL", "ADAD", "SHENASE", "HARFE_SABET", "KEY_KW",
-  "MORE_THAN_KW", "NOGHTE_KW", "MULTIPLY_KW", "BRACKET_BASTE_KW",
-  "BRACKET_BAZ_KW", "PARANTHESIS_BASTE_KW", "PARANTHESIS_BAZ_KW",
-  "TRUE_KW", "QUESTION_KW", "EQUAL_EQUAL_KW", "EQUAL_KW", "DEVIDE_KW",
+  "SWITCH_KW", "END_KW", "DEFAULT_KW", "BREAK_KW", "RETURN_KW", "COMMA",
+  "PROGRAM_KW", "STRUCT_KW", "CONSTANT_KW", "IF_KW", "THEN_KW", "ELSE_KW",
+  "AND_KW", "OR_KW", "NOT_KW", "WHILE_KW", "NOGHTE_VIRGUL", "ADAD",
+  "SHENASE", "HARFE_SABET", "KEY_KW", "MORE_THAN_KW", "NOGHTE_KW",
+  "MULTIPLY_KW", "BRACKET_BASTE_KW", "BRACKET_BAZ_KW",
+  "PARANTHESIS_BASTE_KW", "PARANTHESIS_BAZ_KW", "TRUE_KW", "QUESTION_KW",
+  "EQUAL_EQUAL_KW", "EQUAL_KW", "DEVIDE_KW", "DEVIDE_EQUAL_KW",
   "OR_ELSE_KW", "FALSE_KW", "AND_THEN_KW", "MINUS_KW", "DONOGHTE_KW",
   "LESS_EQUAL_KW", "MOD_KW", "LESS_THAN_KW", "MORE_EQUAL_KW",
   "PLUS_EQUAL_KW", "PLUS_PLUS_KW", "MINUS_MINUS_KW", "MINUS_EQUAL_KW",
-  "MULTIPLY_EQUAL_KW", "DEVIDE_EQUAL_KW", "LOWER_THAN_ELSE_KW", "$accept",
+  "MULTIPLY_EQUAL_KW", "ADAD_ASHARI", "LOWER_THAN_ELSE_KW", "$accept",
   "barnameh", "tarifha", "tarif", "tarifeSakhtar", "tarifhayeMahalli",
   "tarifeMoteghayyerMahdud", "jenseMahdud", "jens", "tarifeMoteghayyer",
   "tarifhayeMoteghayyerha", "tarifeMeghdareAvalie",
-  "tarifeShenaseMoteghayer", "tarifeTabe", "vorudi", "vorudiha",
-  "jensVorudiha", "shenaseyeVorudiha", "shenaseyeVorudi", "jomle",
-  "jomleyeMorakkab", "jomleha", "jomleyeEbarat", "jomleyeEntekhab",
-  "onsoreHalat", "onsorePishfarz", "jomleyeTekrar", "jomleyeBazgasht",
-  "jomleyeShekast", "ebarat", "ebarateSade", "ebarateRabetei",
-  "amalgareRabetei", "ebarateRiaziManteghi", "ebarateYegani",
-  "amalgareYegani", "amel", "taghirpazir", "taghirnapazir", "sedaZadan",
-  "bordareVorudi", "bordareVorudiha", "meghdareSabet", null
+  "tarifeShenaseMoteghayer", "tarifeTabe", "vorudiha", "jensVorudiha",
+  "shenaseyeVorudiha", "shenaseyeVorudi", "jomle", "jomleyeMorakkab",
+  "jomleha", "jomleyeEbarat", "jomleyeEntekhab", "onsoreHalat",
+  "onsorePishfarz", "jomleyeTekrar", "jomleyeBazgasht", "jomleyeShekast",
+  "ebarat", "ebarateSade", "ebarateRabetei", "ebarateRiaziManteghi",
+  "ebarateYegani", "amalgareYegani", "amel", "taghirpazir",
+  "taghirnapazir", "sedaZadan", "bordareVorudiha", "meghdareSabet",
+  "saved_identifier", "saved_integer", "saved_real", "saved_char",
+  "saved_boolean", "M", null
   };
 
   /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
   private static final byte yyrhs_[] =
   {
-        62,     0,    -1,    18,    30,    63,    -1,    63,    64,    -1,
-      64,    -1,    65,    -1,    70,    -1,    74,    -1,    19,    30,
-       8,    66,     9,    -1,    19,    30,     8,     9,    -1,    66,
-      67,    -1,    67,    -1,    68,    71,    28,    -1,    20,    69,
+        62,     0,    -1,    17,    29,    63,    -1,    63,    64,    -1,
+      64,    -1,    65,    -1,    70,    -1,    74,    -1,    18,    29,
+       8,    66,     9,    -1,    18,    29,     8,     9,    -1,    66,
+      67,    -1,    67,    -1,    68,    71,    27,    -1,    19,    69,
       -1,    69,    -1,     5,    -1,     4,    -1,     7,    -1,     6,
-      -1,    69,    71,    28,    -1,    72,    -1,    71,    17,    72,
-      -1,    73,    -1,    73,    43,    91,    -1,    30,    -1,    30,
-      37,    29,    36,    -1,    69,    30,    39,    75,    38,    80,
-      -1,    69,    30,    39,    38,    80,    -1,    30,    39,    75,
-      38,    80,    -1,    30,    39,    38,    80,    -1,    76,    -1,
-      76,    28,    77,    -1,    77,    -1,    69,    78,    -1,    78,
-      17,    79,    -1,    79,    -1,    30,    -1,    30,    37,    36,
-      -1,    81,    -1,    83,    -1,    84,    -1,    87,    -1,    88,
-      -1,    89,    -1,     8,    66,    82,     9,    -1,     8,    66,
-       9,    -1,     8,    82,     9,    -1,     8,     9,    -1,    82,
-      80,    -1,    80,    -1,    90,    28,    -1,    28,    -1,    21,
-      91,    22,    80,    -1,    21,    91,    22,    80,    23,    80,
-      -1,    32,    39,    91,    38,    85,    86,    13,    -1,    32,
-      39,    91,    38,    85,    13,    -1,    12,    29,    49,    80,
-      28,    -1,    85,    12,    29,    49,    80,    28,    -1,    14,
-      49,    80,    28,    -1,    27,    39,    91,    38,    80,    -1,
-      16,    28,    -1,    16,    90,    28,    -1,    15,    28,    -1,
-      98,    43,    90,    -1,    98,    54,    90,    -1,    98,    57,
-      90,    -1,    98,    58,    90,    -1,    98,    59,    90,    -1,
-      98,    55,    -1,    98,    56,    -1,    91,    -1,    91,    25,
-      91,    -1,    91,    24,    91,    -1,    91,    45,    91,    -1,
-      91,    47,    91,    -1,    91,    26,    91,    -1,    92,    -1,
-      94,    -1,    94,    93,    94,    -1,    52,    -1,    50,    -1,
-      33,    -1,    53,    -1,    42,    -1,    95,    -1,    94,    10,
-      94,    -1,    94,    48,    94,    -1,    94,    35,    94,    -1,
-      94,    44,    94,    -1,    94,    51,    94,    -1,    96,    95,
-      -1,    97,    -1,    48,    -1,    35,    -1,    41,    -1,    98,
-      -1,    99,    -1,    30,    -1,    98,    37,    90,    36,    -1,
-      98,    34,    30,    -1,    39,    90,    38,    -1,   100,    -1,
-     103,    -1,    30,    39,   101,    38,    -1,    30,    39,    38,
-      -1,   102,    -1,   102,    17,    90,    -1,    90,    -1,    29,
-      -1,     4,    -1,    31,    -1,    40,    -1,    46,    -1
+      -1,    69,    71,    27,    -1,    72,    -1,    71,    16,    72,
+      -1,    73,    -1,    73,    42,    90,    -1,    29,    -1,    29,
+      36,    28,    35,    -1,    69,    29,    38,    75,    37,    79,
+      -1,    69,    29,    38,    37,    79,    -1,    29,    38,    75,
+      37,    79,    -1,    29,    38,    37,    79,    -1,    75,    27,
+      76,    -1,    76,    -1,    69,    77,    -1,    77,    16,    78,
+      -1,    78,    -1,    29,    -1,    29,    36,    35,    -1,    80,
+      -1,    82,    -1,    83,    -1,    86,    -1,    87,    -1,    88,
+      -1,     8,    66,    81,     9,    -1,     8,    66,     9,    -1,
+       8,    81,     9,    -1,     8,     9,    -1,    81,    79,    -1,
+      79,    -1,    89,    27,    -1,    27,    -1,    20,    90,    21,
+      79,    -1,    20,    90,    21,    79,    22,    79,    -1,    31,
+      38,    90,    37,    84,    85,    12,    -1,    31,    38,    90,
+      37,    84,    12,    -1,    11,    28,    49,    79,    27,    -1,
+      84,    11,    28,    49,    79,    27,    -1,    13,    49,    79,
+      27,    -1,    26,    38,    90,    37,    79,    -1,    15,    27,
+      -1,    15,    89,    27,    -1,    14,    27,    -1,    96,    42,
+      89,    -1,    96,    54,    89,    -1,    96,    57,    89,    -1,
+      96,    58,    89,    -1,    96,    44,    89,    -1,    96,    55,
+      -1,    96,    56,    -1,    90,    -1,    90,    24,   106,    90,
+      -1,    90,    23,   106,    90,    -1,    90,    45,   106,    90,
+      -1,    90,    47,   106,    90,    -1,    25,    90,    -1,    91,
+      -1,    92,    -1,    92,    52,    92,    -1,    92,    50,    92,
+      -1,    92,    32,    92,    -1,    92,    53,    92,    -1,    92,
+      41,    92,    -1,    93,    -1,    92,    10,    92,    -1,    92,
+      48,    92,    -1,    92,    34,    92,    -1,    92,    43,    92,
+      -1,    92,    51,    92,    -1,    94,    93,    -1,    95,    -1,
+      48,    -1,    34,    -1,    40,    -1,    96,    -1,    97,    -1,
+     101,    -1,    96,    36,    89,    35,    -1,    96,    33,   101,
+      -1,    38,    89,    37,    -1,    98,    -1,   100,    -1,   101,
+      38,    99,    37,    -1,   101,    38,    37,    -1,    99,    16,
+      89,    -1,    89,    -1,   102,    -1,   103,    -1,   104,    -1,
+     105,    -1,    29,    -1,    28,    -1,    59,    -1,    30,    -1,
+      39,    -1,    46,    -1,    -1
   };
 
   /* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
@@ -2127,32 +2800,32 @@ class YYParser
          0,     0,     3,     7,    10,    12,    14,    16,    18,    24,
       29,    32,    34,    38,    41,    43,    45,    47,    49,    51,
       55,    57,    61,    63,    67,    69,    74,    81,    87,    93,
-      98,   100,   104,   106,   109,   113,   115,   117,   121,   123,
-     125,   127,   129,   131,   133,   138,   142,   146,   149,   152,
-     154,   157,   159,   164,   171,   179,   186,   192,   199,   204,
-     210,   213,   217,   220,   224,   228,   232,   236,   240,   243,
-     246,   248,   252,   256,   260,   264,   268,   270,   272,   276,
-     278,   280,   282,   284,   286,   288,   292,   296,   300,   304,
-     308,   311,   313,   315,   317,   319,   321,   323,   325,   330,
-     334,   338,   340,   342,   347,   351,   353,   357,   359,   361,
-     363,   365,   367
+      98,   102,   104,   107,   111,   113,   115,   119,   121,   123,
+     125,   127,   129,   131,   136,   140,   144,   147,   150,   152,
+     155,   157,   162,   169,   177,   184,   190,   197,   202,   208,
+     211,   215,   218,   222,   226,   230,   234,   238,   241,   244,
+     246,   251,   256,   261,   266,   269,   271,   273,   277,   281,
+     285,   289,   293,   295,   299,   303,   307,   311,   315,   318,
+     320,   322,   324,   326,   328,   330,   332,   337,   341,   345,
+     347,   349,   354,   358,   362,   364,   366,   368,   370,   372,
+     374,   376,   378,   380,   382,   384
   };
 
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
   private static final short yyrline_[] =
   {
-         0,    67,    67,    72,    75,    80,    83,    86,    91,    95,
-     100,   104,   109,   114,   118,   123,   124,   125,   126,   129,
-     134,   137,   142,   143,   148,   151,   156,   160,   164,   166,
-     169,   172,   174,   177,   180,   182,   185,   186,   189,   191,
-     193,   195,   197,   199,   202,   206,   210,   214,   219,   221,
-     225,   229,   232,   234,   236,   238,   242,   244,   247,   250,
-     253,   255,   258,   261,   263,   265,   267,   269,   271,   273,
-     275,   278,   280,   282,   284,   286,   288,   291,   293,   296,
-     298,   300,   302,   304,   307,   309,   311,   313,   315,   317,
-     321,   323,   326,   328,   330,   333,   335,   338,   340,   342,
-     345,   347,   349,   352,   354,   358,   361,   363,   366,   368,
-     370,   372,   374
+         0,   212,   212,   218,   221,   226,   229,   232,   237,   241,
+     246,   250,   255,   260,   264,   269,   270,   271,   272,   275,
+     280,   283,   288,   289,   294,   297,   302,   306,   310,   312,
+     315,   317,   320,   323,   325,   328,   329,   332,   334,   336,
+     338,   340,   342,   345,   349,   353,   357,   362,   364,   368,
+     372,   375,   377,   379,   381,   385,   387,   390,   393,   396,
+     398,   401,   404,   409,   444,   479,   514,   549,   551,   553,
+     561,   572,   583,   605,   627,   637,   647,   656,   670,   684,
+     698,   712,   727,   736,   776,   815,   854,   894,   942,   944,
+     952,   954,   956,   959,   968,   976,   985,   987,   990,   997,
+     999,  1009,  1011,  1014,  1016,  1019,  1030,  1041,  1052,  1064,
+    1072,  1089,  1105,  1120,  1137,  1156
   };
 
   // Report on the debug stream that the rule yyrule is going to be reduced.
@@ -2219,8 +2892,8 @@ class YYParser
       return yyundef_token_;
   }
 
-  private static final int yylast_ = 408;
-  private static final int yynnts_ = 43;
+  private static final int yylast_ = 434;
+  private static final int yynnts_ = 46;
   private static final int yyempty_ = -2;
   private static final int yyfinal_ = 4;
   private static final int yyterror_ = 1;
@@ -2234,16 +2907,60 @@ class YYParser
 /* Unqualified %code blocks.  */
 
 /* Line 875 of lalr1.java  */
-/* Line 15 of "parser.y"  */
+/* Line 24 of ".\\YYParser.y"  */
 
-	static PrintStream writer;
 
-    public static void main(String args[]) throws IOException, FileNotFoundException {
+	public static final String TYPE_STRING_INTEGER = "int";
+	public static final String TYPE_STRING_REAL = "double";
+	public static final String TYPE_STRING_CHAR = "char";
+	public static final String TYPE_STRING_BOOLEAN = "int";
+
+	private static final String tempStr = "__SHLangTempVar";
+	public static final String startStr = "__SHLangStartVar";
+	public static final String sizeStr = "__SHLangSizeVar";
+	public static final String indexStr = "__SHLangIndexVar";
+	public static final String condStr = "__SHLangConditionVar";
+	
+	public static String lexIdentifier;
+	public static int lexInt;
+	public static double lexReal;
+	public static boolean lexBoolean;
+	public static char lexChar;
+
+	private ArrayList<Quadruple> quadruples = new ArrayList<>();
+	private SymbolTable symbolTable = new SymbolTable();
+	public static PrintStream writer;
+
+	private int tempCounter = 0;
+
+	public String fileAddress;
+
+	public static void main(String args[]) throws IOException {
         YYParser yyparser;
         final Yylex lexer;
 
-        writer = new PrintStream(new File("output.txt"));
-        lexer = new Yylex(new InputStreamReader(new FileInputStream("code.txt")));
+        String inputCode = "code.txt";
+        String outputCode = "out.c";
+        String output = "output.txt";
+
+        if (args.length == 1) {
+            inputCode = args[0];
+            outputCode = args[0] + ".c";
+            output = args[0] + ".txt";
+        }
+        if (args.length == 2) {
+            inputCode = args[0];
+            outputCode = args[1];
+            output = args[0] + ".txt";
+        }
+        if (args.length == 3) {
+            inputCode = args[0];
+            outputCode = args[1];
+            output = args[2];
+        }
+
+        writer = new PrintStream(new File(output));
+        lexer = new Yylex(new InputStreamReader(new FileInputStream(inputCode)));
 
         yyparser = new YYParser(new Lexer() {
 
@@ -2251,17 +2968,16 @@ class YYParser
             public int yylex() {
                 int yyl_return = -1;
                 try {
-
                     yyl_return = lexer.yylex();
                 } catch (IOException e) {
-                    System.err.println("IO error :" + e);
+                    System.err.println("IO error: " + e);
                 }
                 return yyl_return;
             }
 
             @Override
             public void yyerror(String error) {
-                System.err.println("Error : " + error);
+                System.err.println("Error! " + error);
             }
 
             @Override
@@ -2269,16 +2985,300 @@ class YYParser
                 return null;
             }
         });
+        yyparser.fileAddress = outputCode;
         yyparser.parse();
 
         return;
-    }
+	}
+
+	private void emit(String operation, String arg0, String arg1, String result) {
+		quadruples.add(new Quadruple(operation, arg0, arg1, result));
+	}
+
+	private void backpatch(ArrayList<Integer> list, int quadNumber) {
+		for (int i = 0; i < list.size(); i++)
+			quadruples.get(list.get(i)).result = String.valueOf(quadNumber);
+	}
+
+	private void backpatch(int quadNumber, int destination) {
+		quadruples.get(quadNumber).result = String.valueOf(destination);
+	}
+
+	private String newTemp(int type, boolean array) {
+		String name = tempStr + tempCounter++;
+		symbolTable.addToSymbolTable(name, type, array);
+		return name;
+	}
+
+	private int nextQuad() {
+		return quadruples.size();
+	}
+
+	private String getTypeString(int typeCode){
+		switch(typeCode){
+			case EVal.TYPE_CODE_INTEGER:
+				return TYPE_STRING_INTEGER;
+			case EVal.TYPE_CODE_REAL:
+				return TYPE_STRING_REAL;
+			case EVal.TYPE_CODE_CHAR:
+				return TYPE_STRING_CHAR;
+			case EVal.TYPE_CODE_BOOLEAN:
+				return TYPE_STRING_BOOLEAN;
+			case EVal.TYPE_CODE_UNKNOWN:
+			case EVal.TYPE_CODE_RANGE:
+			default:
+				return null;
+		}
+	}
+
+	private void exportIntermediateCode() {
+		DataOutputStream dos = null;
+		try {
+			dos = new DataOutputStream(new FileOutputStream(fileAddress));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\t// ////////////////// Symbol Table \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\n\n");
+			dos.writeBytes(symbolTable.toString());
+			dos.writeBytes("\n\t// ////////////////// Quadruples \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\n\n");
+			// Backpatch of error controllers.
+			backpatch(EVal.arrayIndexOutOfBoundList, (quadruples.size() + 1)); // Array index out of bound error.
+			backpatch(EVal.invalidArraySizeList, (quadruples.size() + 2)); // Invalid array size error.
+			for (int i = 0; i < quadruples.size() && i < 100; i++) {
+				dos.writeBytes(Quadruple.LINE_STR + i + ":" + "\t\t" + quadruples.get(i) + "\n");
+			}
+			for (int i = 100; i < quadruples.size(); i++) {
+				dos.writeBytes(Quadruple.LINE_STR + i + ":" + "\t\t" + quadruples.get(i) + "\n");
+			}
+			// Normal Finish
+			if(quadruples.size() < 100)
+				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
+					"\t\t\t\tgetchar();\n\t\t\t\treturn 0;\n");
+			else
+				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
+					"\t\t\t\tgetchar();\n\t\t\t\treturn 0;\n");
+
+			// Array index out of bound error.
+			if(quadruples.size() < 100)
+				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 1) + ":" + "\t\tprintf(\"Array Error: Index out of bound!\\n\");\n" +
+					"\t\t\t\tgetchar();\n\t\t\treturn -1;\n");
+			else
+				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 1) + ":" + "\t\tprintf(\"Array Error: Index out of bound!\\n\");\n" +
+					"\t\t\t\tgetchar();\n\t\t\treturn -1;\n");
+
+			// Invalid array size error.
+			if(quadruples.size() < 100)
+				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 2) + ":" + "\t\tprintf(\"Array Error: Invalid array size!\\n\");\n" +
+					"\t\t\t\tgetchar();\n\t\t\treturn -2;\n");
+			else
+				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 2) + ":" + "\t\tprintf(\"Array Error: Invalid array size!\\n\");\n" +
+					"\t\t\t\tgetchar();\n\t\t\treturn -2;\n");
+
+			dos.writeBytes("}\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 
 
 /* Line 875 of lalr1.java  */
-/* Line 2282 of "parser.java"  */
+/* Line 3090 of "YYParser.java"  */
 
 }
 
+
+/* Line 879 of lalr1.java  */
+/* Line 1172 of ".\\YYParser.y"  */
+
+class EVal {
+
+	public static final int TYPE_CODE_UNKNOWN = -1;
+	public static final int TYPE_CODE_INTEGER = 0;
+	public static final int TYPE_CODE_REAL = 1;
+	public static final int TYPE_CODE_CHAR = 2;
+	public static final int TYPE_CODE_BOOLEAN = 3;
+	public static final int TYPE_CODE_RANGE = 4;
+	
+
+	public String place;
+	public int type;
+	public boolean array;
+
+	public int quad;
+
+	public static ArrayList<Integer> arrayIndexOutOfBoundList = new ArrayList<>();
+	public static ArrayList<Integer> invalidArraySizeList = new ArrayList<>();
+	public ArrayList<Integer> initList;
+	public ArrayList<Integer> nextList;
+	public ArrayList<Integer> trueList;
+	public ArrayList<Integer> falseList;
+
+	public ArrayList<ArrayList<EVal>> initializersList;
+	public ArrayList<EVal> declareds;
+
+	public ArrayList<EVal> initializers;
+
+	public EVal() {
+	}
+
+	public static ArrayList<Integer> makeList(int number) {
+		ArrayList<Integer> result = new ArrayList<>();
+		result.add(number);
+		return result;
+	}
+
+	public static ArrayList<Integer> merge(ArrayList<Integer> al1, ArrayList<Integer> al2) {
+		ArrayList<Integer> result = new ArrayList<>();
+		result.addAll(al1);
+		result.addAll(al2);
+		return result;
+	}
+
+	public static ArrayList<ArrayList<EVal>> makeInitializersList(ArrayList<EVal> initializers) {
+		ArrayList<ArrayList<EVal>> result = new ArrayList<>();
+		result.add(initializers);
+		return result;
+	}
+
+	public static ArrayList<EVal> makeInitializersOrDeclareds(EVal initializerOrdDeclared) {
+		ArrayList<EVal> result = new ArrayList<>();
+		result.add(initializerOrdDeclared);
+		return result;
+	}
+}
+
+class Quadruple {
+
+	public static final String LINE_STR = "Line";
+
+	public String operation;
+	public String arg0;
+	public String arg1;
+	public String result;
+
+	public Quadruple(String operation, String arg0, String arg1, String result) {
+		this.operation = operation;
+		this.arg0 = arg0;
+		this.arg1 = arg1;
+		this.result = result;
+	}
+
+	@Override
+	public String toString() {
+		switch(operation.toLowerCase()){
+			case "goto":
+				return operation + " " + LINE_STR + result + ";";
+			case "check":
+				return "if (" + arg0 + ") goto " + LINE_STR + result + ";";
+			case "==":
+			case "<":
+			case "<=":
+			case ">":
+			case ">=":
+			case "+":
+			case "-":
+			case "*":
+			case "/":
+			case "%":
+				return result + " = " + arg0 + " " + operation + " " + arg1 + ";";
+			case "=":
+				return result + " = " + arg0 + " " + "==" + " " + arg1 + ";";
+			case "<>":
+				return result + " != " + arg0 + " " + "==" + " " + arg1 + ";";
+			case "usub":
+				return result + " = -" + arg0 + ";";
+			case ":=":
+				return result + " = " + arg0 + ";";
+			case "cast":
+				return result + " = (" + arg1 + ") " + arg0 + ";";
+			case "init":
+				return arg1 + " " + result + ";";
+			case "iprint":
+				return "printf(\"%s = %d\\n\", \"" + result + "\", " + result + ");";
+			case "rprint":
+				return "printf(\"%s = %f\\n\", \"" + result + "\", " + result + ");";
+			case "cprint":
+				return "printf(\"%s = '%c'\\n\", \"" + result + "\", " + result + ");";
+			case "bprint":
+				return "printf(\"%s = %s\\n\", \"" + result + "\", " + result + " ? \"true\" : \"false\");";
+			case "aiprint":
+				return "printf(\"%s[%d] = %d\\n\", \"" + result + "\", " + arg0 + ", " + result + "[" + arg1 + "]);";
+			case "arprint":
+				return "printf(\"%s[%d] = %f\\n\", \"" + result + "\", " + arg0 + ", " + result + "[" + arg1 + "]);";
+			case "acprint":
+				return "printf(\"%s[%d] = '%c'\\n\", \"" + result + "\", " + arg0 + ", " + result + "[" + arg1 + "]);";
+			case "abprint":
+				return "printf(\"%s[%d] = %s\\n\", \"" + result + "\", " + arg0 + ", " + result + "[" + arg1 + "] ? \"true\" : \"false\");";
+			case "[]=":
+				return "*(" + result + " + " + arg1 + ") = " + arg0 + ";";
+			case "=[]":
+				return result + " = *(" + arg0 + " + " + arg1 + ");";
+			case "malloc":
+				return result + " = " + "malloc(sizeof(" + arg0 + ") * " + arg1+ ");";
+			default:
+				return null;
+		}
+	}
+}
+
+class SymbolTable {
+
+	public static final int NOT_IN_SYMBOL_TABLE = -1;
+
+	public ArrayList<String> names;
+	public ArrayList<Integer> types;
+	public ArrayList<Boolean> arrays;
+
+	public SymbolTable() {
+		names = new ArrayList<>();
+		types = new ArrayList<>();
+		arrays = new ArrayList<>();
+	}
+
+	public int lookUp(String name) {
+		return names.indexOf(name);
+	}
+
+	public boolean addToSymbolTable(String name, int type, boolean array) {
+		if (lookUp(name) == -1) {
+			names.add(name);
+			types.add(type);
+			arrays.add(array);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+    public String toString() {
+        if(names.size() == 0)
+            return null;
+        String res = "";
+        for(int i = 0; i < names.size(); i++) {
+            switch (types.get(i)) {
+                case EVal.TYPE_CODE_INTEGER:
+                    res += "\t" + YYParser.TYPE_STRING_INTEGER;
+                    break;
+                case EVal.TYPE_CODE_REAL:
+                    res += "\t" + YYParser.TYPE_STRING_REAL;
+                    break;
+                case EVal.TYPE_CODE_CHAR:
+                    res += "\t" + YYParser.TYPE_STRING_CHAR;
+                    break;
+                case EVal.TYPE_CODE_BOOLEAN:
+                    res += "\t" + YYParser.TYPE_STRING_BOOLEAN;
+                    break;
+                case EVal.TYPE_CODE_RANGE:
+                    continue;
+            }
+            res += (arrays.get(i) ? " *" : " ") + names.get(i) + ";\n";
+        }
+        return res;
+	}
+
+}
 
