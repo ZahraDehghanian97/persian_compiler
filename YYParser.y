@@ -13,7 +13,7 @@ MOD_KW LESS_THAN_KW MORE_EQUAL_KW
 PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW 
 ADAD_ASHARI
 
-%type <EVal> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer
+%type <EVal> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud
 meghdareSabet taghirpazir
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
@@ -250,19 +250,86 @@ tarifhayeMahalli:
 	tarifeMoteghayyerMahdud  {
 		System.out.println("Rule 5 ");
 	}
-	
+		
 tarifeMoteghayyerMahdud:
-	jenseMahdud tarifhayeMoteghayyerha NOGHTE_VIRGUL {
-		System.out.println("Rule 6");
-	}
-
-jenseMahdud:
-	CONSTANT_KW jens {
-		System.out.println("Rule 7.1");
-	}
-	|
-	jens {
-		System.out.println("Rule 7.2");
+	jens tarifhayeMoteghayyerha NOGHTE_VIRGUL {
+		System.out.println("Rule 6 eha");
+		System.out.println("Rule 9");
+		
+		System.out.println("Rule 3: " +
+			"declarations: type_specifiers declarator_list");
+		System.out.println($1.type+" "+$2.type);
+		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
+			for(int i = 0; i < $2.initializersList.size(); i++) {
+				if(symbolTable.lookUp(sizeStr + $2.declareds.get(i).place) == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, false);
+					if($2.initializersList.get(i) != null && $2.initializersList.get(i).size() == 1) {
+						//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+							emit(":=", $2.initializersList.get(i).get(0).place, null, $2.declareds.get(i).place);
+							switch ($1.type) {
+								case EVal.TYPE_CODE_INTEGER:
+									emit("iprint", null, null, $2.declareds.get(i).place);
+									break;
+								case EVal.TYPE_CODE_REAL:
+									emit("rprint", null, null, $2.declareds.get(i).place);
+									break;
+								case EVal.TYPE_CODE_CHAR:
+									emit("cprint", null, null, $2.declareds.get(i).place);
+									break;
+								case EVal.TYPE_CODE_BOOLEAN:
+									emit("bprint", null, null, $2.declareds.get(i).place);
+									break;
+							}
+						//} else {
+							// backpatch($2.initializersList.get(i).get(0).falseList, nextQuad());
+							// backpatch($2.initializersList.get(i).get(0).trueList, nextQuad() + 2);
+						//	emit(":=", "0", null, $2.declareds.get(i).place);
+						//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+						//	emit(":=", "1", null, $2.declareds.get(i).place);
+						//	emit("bprint", null, null, $2.declareds.get(i).place);
+						//}
+					} else if($2.initializersList.get(i) != null) {
+						System.err.println("Error! Initializer number mismatch. (Expected: 1" + ", Number: " + $2.initializersList.get(i).size() + ")");
+						return YYABORT;
+					}
+				} else {
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, true);
+					emit("malloc", getTypeString($1.type), sizeStr + $2.declareds.get(i).place, $2.declareds.get(i).place);
+					if($2.initializersList.get(i) != null) {
+						for(int j = 0; j < $2.initializersList.get(i).size(); j++) {
+							EVal.arrayIndexOutOfBoundList.add(nextQuad() + 1);
+							emit(">=", String.valueOf(j), sizeStr + $2.declareds.get(i).place, condStr + $2.declareds.get(i).place);
+							emit("check", condStr + $2.declareds.get(i).place, null, String.valueOf(nextQuad() + 2)); // Result will be backpatched.
+							//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+								emit("[]=", $2.initializersList.get(i).get(j).place, String.valueOf(j), $2.declareds.get(i).place);
+								emit("+", startStr + $2.declareds.get(i).place, String.valueOf(j), condStr + $2.declareds.get(i).place);
+								switch ($1.type) {
+									case EVal.TYPE_CODE_INTEGER:
+										emit("aiprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+										break;
+									case EVal.TYPE_CODE_REAL:
+										emit("arprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+										break;
+									case EVal.TYPE_CODE_CHAR:
+										emit("acprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+										break;
+								}
+							//} else {
+								// backpatch($2.initializersList.get(i).get(j).falseList, nextQuad());
+								// backpatch($2.initializersList.get(i).get(j).trueList, nextQuad() + 2);
+							//	emit("[]=", "0", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+							//	emit("[]=", "1", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("abprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
+							//}
+						}
+					}
+				}
+			}
+		} else {
+			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
+			return YYABORT;
+		}
 	}
 	
 jens:
@@ -294,6 +361,7 @@ tarifeMoteghayyer:
 		
 		System.out.println("Rule 3: " +
 			"declarations: type_specifiers declarator_list");
+		System.out.println($1.type+" "+$2.type);
 		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
 			for(int i = 0; i < $2.initializersList.size(); i++) {
 				if(symbolTable.lookUp(sizeStr + $2.declareds.get(i).place) == SymbolTable.NOT_IN_SYMBOL_TABLE) {
@@ -361,26 +429,35 @@ tarifeMoteghayyer:
 		} else {
 			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
 			return YYABORT;
-}
+		}
 	}
 	
 tarifhayeMoteghayyerha:
 	tarifeMeghdareAvalie{
 		System.out.println("Rule 10.1 ");
-		System.out.println("Rule 7.1: " +
-			"declarator_end: dec SEMICOLON_KW");
+		
+		System.out.println("Rule 5.2: " +
+			"delarator_list: declarator_end");
 		$$ = new EVal();
-		((EVal)$$).place = $1.place;
-		((EVal)$$).type = EVal.TYPE_CODE_UNKNOWN;
-		((EVal)$$).initializers = $1.initializers;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).declareds = EVal.makeInitializersOrDeclareds($1);
+		((EVal)$$).initializersList = EVal.makeInitializersList($1.initializers);
 	} |
 	tarifhayeMoteghayyerha COMMA tarifeMeghdareAvalie {
-		System.out.println("Rule 10.2 ");
-		$$ = new EVal();
-		((EVal)$$).place = $1.place;
-		((EVal)$$).type = EVal.TYPE_CODE_UNKNOWN;
-		((EVal)$$).array = $1.array;
-		((EVal)$$).initializers = null;
+		System.out.println("Rule 5.1: " +
+			"declarator_list: declarator_list declarator");
+		if($1.type == EVal.TYPE_CODE_UNKNOWN
+			|| $1.type == $3.type) {
+			$$ = new EVal();
+			((EVal)$$).type = $3.type;
+			((EVal)$$).declareds = $1.declareds;
+			((EVal)$$).declareds.add($3);
+			((EVal)$$).initializersList = $1.initializersList;
+			((EVal)$$).initializersList.add($3.initializers);
+		} else {
+			System.err.println("Error! Declarator type mismatch.");
+			return YYABORT;
+		}
 	}
 	
 tarifeMeghdareAvalie:
@@ -401,6 +478,8 @@ tarifeMeghdareAvalie:
 		((EVal)$$).type = $3.type;
 		((EVal)$$).array = $1.array;
 		((EVal)$$).initializers = $3.initializers;
+		
+		emit(":=", $3.place, null, $1.place);
 	}
 
 tarifeShenaseMoteghayer:
