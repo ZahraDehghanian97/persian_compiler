@@ -647,8 +647,8 @@ ebarat:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir MINUS_EQUAL_KW ebarat {
@@ -682,8 +682,8 @@ ebarat:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir MULTIPLY_EQUAL_KW ebarat {
@@ -717,8 +717,8 @@ ebarat:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir DEVIDE_EQUAL_KW ebarat {
@@ -752,8 +752,8 @@ ebarat:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir PLUS_PLUS_KW {System.out.println("Rule 29.6");}
@@ -808,8 +808,8 @@ ebarateSade :
 		emit("+", ((EVal)$$).place, $4.place, ((EVal)$$).place);
 		((EVal)$$).trueList = EVal.makeList(nextQuad());
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1));
 	}
 	|
 	ebarateSade AND_THEN_KW M ebarateSade {
@@ -830,8 +830,8 @@ ebarateSade :
 		emit("*", ((EVal)$$).place, $4.place, ((EVal)$$).place);
 		((EVal)$$).trueList = EVal.makeList(nextQuad());
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
 	}
 	|
 	NOT_KW ebarateSade {
@@ -955,8 +955,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi {
@@ -995,8 +995,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MINUS_KW ebarateRiaziManteghi {
@@ -1073,8 +1073,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi DEVIDE_KW ebarateRiaziManteghi {
@@ -1113,8 +1113,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MOD_KW ebarateRiaziManteghi {
@@ -1159,8 +1159,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 
 

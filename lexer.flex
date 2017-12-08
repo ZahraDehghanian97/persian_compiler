@@ -65,7 +65,7 @@ harfe_sabet = {back_slash}?"'"{back_slash}?(.){back_slash}?"'"{back_slash}?
 noghte_virgul = ";"|[\u061b]
 comma = ","|[\u060c]
 comments = {slash}{slash}({PERSIAN_LETTER}|[A-z]|{DIGIT})*		{new_line} | {slash}"*"(.)*"*"{slash}
-FLOAT_KW = (\u0627\u0639\u0634\u0627\u0631\u06cc)
+FLOAT_KW = (\u0627\u0639\u0634\u0627\u0631\u06cc) | (\u0627\u0639\u0634\u0627\u0631)
 BOOLEAN_KW =(\u0645\u0646\u0637\u0642\u06cc) | (\u0645\u0646\u0637\u0642)
 CHAR_KW = (\u062d\u0631\u0641)
 
