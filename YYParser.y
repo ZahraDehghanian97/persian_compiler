@@ -407,7 +407,6 @@ ebarat:
 	}
 	|
 	taghirpazir PLUS_EQUAL_KW ebarat {
-	
 		System.out.println("Rule 29.1: " +
 			"arithmatic_expressions: expressions ADD_KW expressions");
 		if(((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
