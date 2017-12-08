@@ -1369,9 +1369,11 @@ saved_boolean:
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 		
 		emit(":=", "0", null, ((EVal)$$).place);
+
 		
 		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
 		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+
 	}
 	
 M:
