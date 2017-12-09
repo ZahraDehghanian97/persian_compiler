@@ -481,7 +481,7 @@ tarifeMeghdareAvalie:
 		backpatch($3.falseList, nextQuad() + 2);
 		
 		emit(":=", "1", null, $1.place);
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+		emit("goto", null, null, String.valueOf(nextQuad() + 2));
 		emit(":=", "0", null, $1.place);
 		$$ = new EVal();
 		((EVal)$$).place = $1.place;
@@ -995,8 +995,8 @@ ebarateRiaziManteghi :
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
-		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 		}
 	}
 	|
@@ -1333,6 +1333,10 @@ saved_identifier:
 			"saved_identifier: IDENTIFIER");
 		$$ = new EVal();
 		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+
 }
 	
 saved_integer:

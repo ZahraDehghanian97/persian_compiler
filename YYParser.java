@@ -801,7 +801,7 @@ class YYParser
 		backpatch(((EVal)(yystack.valueAt (3-(3)))).falseList, nextQuad() + 2);
 		
 		emit(":=", "1", null, ((EVal)(yystack.valueAt (3-(1)))).place);
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+		emit("goto", null, null, String.valueOf(nextQuad() + 2));
 		emit(":=", "0", null, ((EVal)(yystack.valueAt (3-(1)))).place);
 		yyval = new EVal();
 		((EVal)yyval).place = ((EVal)(yystack.valueAt (3-(1)))).place;
@@ -1708,8 +1708,8 @@ class YYParser
 		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
 
-		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
-		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		emit("check", ((EVal)yyval).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 		}
 	};
   break;
@@ -2223,6 +2223,10 @@ class YYParser
 			"saved_identifier: IDENTIFIER");
 		yyval = new EVal();
 		((EVal)yyval).place = lexIdentifier;
+		((EVal)yyval).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)yyval).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)yyval).nextList = EVal.merge(((EVal)yyval).trueList, ((EVal)yyval).falseList);
+
 };
   break;
     
@@ -2231,7 +2235,7 @@ class YYParser
   if (yyn == 108)
     
 /* Line 353 of lalr1.java  */
-/* Line 1339 of ".\\YYParser.y"  */
+/* Line 1343 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 31: " +
 			"saved_integer: INTEGER_CONSTANT");
@@ -2254,7 +2258,7 @@ class YYParser
   if (yyn == 109)
     
 /* Line 353 of lalr1.java  */
-/* Line 1356 of ".\\YYParser.y"  */
+/* Line 1360 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 32: " +
 			"saved_real: REAL_CONSTANT");
@@ -2276,7 +2280,7 @@ class YYParser
   if (yyn == 110)
     
 /* Line 353 of lalr1.java  */
-/* Line 1372 of ".\\YYParser.y"  */
+/* Line 1376 of ".\\YYParser.y"  */
     {
 		System.out.println("saved_char: HARFE_SABET");
 		yyval = new EVal();
@@ -2297,7 +2301,7 @@ class YYParser
   if (yyn == 111)
     
 /* Line 353 of lalr1.java  */
-/* Line 1387 of ".\\YYParser.y"  */
+/* Line 1391 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 34.1: " +
 			"saved_boolean: TRUE_KW");
@@ -2320,7 +2324,7 @@ class YYParser
   if (yyn == 112)
     
 /* Line 353 of lalr1.java  */
-/* Line 1402 of ".\\YYParser.y"  */
+/* Line 1406 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 34.2: " +
 			"saved_boolean: FALSE_KW");
@@ -2345,7 +2349,7 @@ class YYParser
   if (yyn == 113)
     
 /* Line 353 of lalr1.java  */
-/* Line 1421 of ".\\YYParser.y"  */
+/* Line 1425 of ".\\YYParser.y"  */
     {
 		System.out.println("Rule 35: " +
 			"M: ");
@@ -2358,7 +2362,7 @@ class YYParser
 
 
 /* Line 353 of lalr1.java  */
-/* Line 2362 of "YYParser.java"  */
+/* Line 2366 of "YYParser.java"  */
 	default: break;
       }
 
@@ -3070,8 +3074,8 @@ class YYParser
      822,   844,   866,   876,   886,   895,   909,   923,   937,   951,
      966,  1003,  1043,  1082,  1121,  1161,  1209,  1211,  1219,  1221,
     1223,  1226,  1235,  1243,  1252,  1254,  1257,  1264,  1266,  1276,
-    1278,  1281,  1283,  1286,  1297,  1308,  1319,  1331,  1339,  1356,
-    1372,  1387,  1402,  1421
+    1278,  1281,  1283,  1286,  1297,  1308,  1319,  1331,  1343,  1360,
+    1376,  1391,  1406,  1425
   };
 
   // Report on the debug stream that the rule yyrule is going to be reduced.
@@ -3332,13 +3336,13 @@ class YYParser
 
 
 /* Line 875 of lalr1.java  */
-/* Line 3336 of "YYParser.java"  */
+/* Line 3340 of "YYParser.java"  */
 
 }
 
 
 /* Line 879 of lalr1.java  */
-/* Line 1437 of ".\\YYParser.y"  */
+/* Line 1441 of ".\\YYParser.y"  */
 
 class EVal {
 
