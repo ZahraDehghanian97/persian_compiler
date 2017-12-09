@@ -86,9 +86,9 @@ class Yylex {
     "\1\31\6\2\1\45\1\46\10\2\1\47\1\50\2\51"+
     "\2\0\2\52\1\53\2\2\1\54\1\2\1\55\1\2"+
     "\1\56\1\57\1\60\1\61\2\2\1\62\1\63\3\2"+
-    "\1\47\1\51\2\52\3\2\1\55\3\2\1\64\1\2"+
-    "\1\65\1\66\1\2\1\67\1\70\1\71\2\2\1\72"+
-    "\1\73\1\74";
+    "\1\47\1\51\2\52\2\2\1\64\1\55\3\2\1\65"+
+    "\1\2\1\66\1\67\1\2\1\64\1\70\1\71\2\2"+
+    "\1\72\1\73\1\74";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[154];
@@ -1080,27 +1080,27 @@ class Yylex {
             }
           case 111: break;
           case 52: 
+            { if(p){System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');}
+	//System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
+	return YYParser.FLOAT_KW;
+            }
+          case 112: break;
+          case 53: 
             { if(p){System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');
 	return YYParser.THEN_KW;
             }
-          case 112: break;
-          case 53: 
+          case 113: break;
+          case 54: 
             { if(p){System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');
 	return YYParser.ELSE_KW;
             }
-          case 113: break;
-          case 54: 
+          case 114: break;
+          case 55: 
             { if(p){System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');}
 	//System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
 	return YYParser.PROGRAM_KW;
-            }
-          case 114: break;
-          case 55: 
-            { if(p){System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');}
-	//System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
-	return YYParser.FLOAT_KW;
             }
           case 115: break;
           case 56: 
