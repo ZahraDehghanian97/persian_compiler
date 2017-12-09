@@ -153,9 +153,9 @@ meghdareSabet taghirpazir
 		}
 
 		try {
-			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\t// ////////////////// Symbol Table \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\n\n");
+			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\n");
 			dos.writeBytes(symbolTable.toString());
-			dos.writeBytes("\n\t// ////////////////// Quadruples \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\n\n");
+			dos.writeBytes("\n\t\n");
 			// Backpatch of error controllers.
 			backpatch(EVal.arrayIndexOutOfBoundList, (quadruples.size() + 1)); // Array index out of bound error.
 			backpatch(EVal.invalidArraySizeList, (quadruples.size() + 2)); // Invalid array size error.
@@ -634,10 +634,22 @@ ebarat:
 	taghirpazir EQUAL_KW ebarat {
 	System.out.println("Rule 29.1");
 	if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		backpatch($3.trueList, nextQuad() );
+		backpatch($3.falseList, nextQuad() + 2);
+		
 		emit(":=", "1", null, $1.place);
+		emit("goto", null, null, String.valueOf(nextQuad() + 2));
 		emit(":=", "0", null, $1.place);
-		backpatch($3.trueList, nextQuad() + 1);
-		backpatch($3.trueList, nextQuad() + 2);
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).trueList = $3.trueList;
+		((EVal)$$).falseList = $3.falseList;
+		((EVal)$$).initializers = $3.initializers;
+		
+		}
 	}
 	else{
 	emit(":=", $3.place, null, $1.place);
