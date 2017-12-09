@@ -327,8 +327,8 @@ tarifeMoteghayyerMahdud:
 				}
 			}
 		} else {
-			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
-			return YYABORT;
+			/*System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
+			return YYABORT;*/
 		}
 	}
 	
@@ -389,8 +389,8 @@ tarifeMoteghayyer:
 						//	emit("bprint", null, null, $2.declareds.get(i).place);
 						//}
 					} else if($2.initializersList.get(i) != null) {
-						System.err.println("Error! Initializer number mismatch. (Expected: 1" + ", Number: " + $2.initializersList.get(i).size() + ")");
-						return YYABORT;
+						//System.err.println("Error! Initializer number mismatch. (Expected: //1" + ", Number: " + $2.initializersList.get(i).size() + ")");
+						//return YYABORT;
 					}
 				} else {
 					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, true);
@@ -427,8 +427,8 @@ tarifeMoteghayyer:
 				}
 			}
 		} else {
-			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
-			return YYABORT;
+			//System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + //$2.type + ")");
+			//return YYABORT;
 		}
 	}
 	
@@ -437,9 +437,11 @@ tarifhayeMoteghayyerha:
 		System.out.println("Rule 10.1 ");
 		
 		System.out.println("Rule 5.2: " +
-			"delarator_list: declarator_end");
+			"delarator_list: declarator_end 00");
 		$$ = new EVal();
 		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
 		((EVal)$$).declareds = EVal.makeInitializersOrDeclareds($1);
 		((EVal)$$).initializersList = EVal.makeInitializersList($1.initializers);
 	} |
@@ -455,8 +457,8 @@ tarifhayeMoteghayyerha:
 			((EVal)$$).initializersList = $1.initializersList;
 			((EVal)$$).initializersList.add($3.initializers);
 		} else {
-			System.err.println("Error! Declarator type mismatch.");
-			return YYABORT;
+			//System.err.println("Error! Declarator type mismatch.");
+			//return YYABORT;
 		}
 	}
 	
@@ -469,17 +471,35 @@ tarifeMeghdareAvalie:
 	}
 	| tarifeShenaseMoteghayer EQUAL_KW ebarateSade{
 		System.out.println("Rule 11.2 ");
-		if($1.array != $3.array) {
+		/*if($1.array != $3.array) {
 			System.err.println("Error! Array mismatch: " + $1.place + " and " + $3.place + " are not the same.");
 			return YYABORT;
+		}*/
+		
+		if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		backpatch($3.trueList, nextQuad() );
+		backpatch($3.falseList, nextQuad() + 2);
+		
+		emit(":=", "1", null, $1.place);
+		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+		emit(":=", "0", null, $1.place);
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).trueList = $3.trueList;
+		((EVal)$$).falseList = $3.falseList;
+		((EVal)$$).initializers = $3.initializers;
+		
 		}
+		else{
 		$$ = new EVal();
 		((EVal)$$).place = $1.place;
 		((EVal)$$).type = $3.type;
 		((EVal)$$).array = $1.array;
 		((EVal)$$).initializers = $3.initializers;
-		
 		emit(":=", $3.place, null, $1.place);
+		}
 	}
 
 tarifeShenaseMoteghayer:
@@ -613,7 +633,16 @@ jomleyeShekast:
 ebarat:
 	taghirpazir EQUAL_KW ebarat {
 	System.out.println("Rule 29.1");
+	if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		emit(":=", "1", null, $1.place);
+		emit(":=", "0", null, $1.place);
+		backpatch($3.trueList, nextQuad() + 1);
+		backpatch($3.trueList, nextQuad() + 2);
+	}
+	else{
 	emit(":=", $3.place, null, $1.place);
+	}
+	
 	}
 	|
 	taghirpazir PLUS_EQUAL_KW ebarat {
@@ -935,7 +964,17 @@ ebarateRabetei:
 
 ebarateRiaziManteghi :
 	ebarateYegani {
-	
+		if($1.type == EVal.TYPE_CODE_BOOLEAN){
+			System.out.println("Rule 27.4: " +
+			"constant_expressions: saved_boolean");
+			$$ = new EVal();
+			((EVal)$$).place = $1.place;
+			((EVal)$$).type = $1.type;
+			((EVal)$$).trueList = $1.trueList;
+			((EVal)$$).falseList = $1.falseList;
+			((EVal)$$).nextList = $1.nextList;
+		}
+		else{
 		System.out.println("Rule 26.4: " +
 			"expressions: saved_identifier");
 		int index = symbolTable.lookUp($1.place);
@@ -951,12 +990,14 @@ ebarateRiaziManteghi :
 		((EVal)$$).place = symbolTable.names.get(index);
 		((EVal)$$).type = symbolTable.types.get(index);
 
+		
 		((EVal)$$).trueList = EVal.makeList(nextQuad());
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
 		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
 		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		}
 	}
 	|
 	ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi {
@@ -1355,8 +1396,8 @@ saved_boolean:
 		
 		emit(":=", "1", null, ((EVal)$$).place);
 		
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit("check", ((EVal)$$).place, null, "-"); // result may be backpatched.
+		emit("goto", null, null, "-"); // result may be backpatched.
 	}|
 	FALSE_KW {
 		System.out.println("Rule 34.2: " +
@@ -1371,8 +1412,8 @@ saved_boolean:
 		emit(":=", "0", null, ((EVal)$$).place);
 
 		
-		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit("check", ((EVal)$$).place, null, "-"); // result may be backpatched.
+		emit("goto", null, null, "-"); // result may be backpatched.
 
 	}
 	
