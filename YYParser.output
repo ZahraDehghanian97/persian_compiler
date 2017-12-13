@@ -5,7 +5,6 @@ Terminals unused in grammar
 
 
 State 148 conflicts: 18 shift/reduce
-State 185 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -82,7 +81,7 @@ Grammar
    48 jomleyeEntekhab: IF_KW ebarateSade THEN_KW jomle M
    49                | IF_KW ebarateSade THEN_KW M jomle N ELSE_KW M jomle
    50                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
-   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW
+   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat END_KW
 
    52 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
    53            | onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
@@ -333,7 +332,7 @@ M (105)
     on left: 112, on right: 44 46 47 48 49 52 53 54 55 56 58 67 68
     69 70
 N (106)
-    on left: 113, on right: 49 50 52 53 54
+    on left: 113, on right: 49 50 51 52 53 54
 
 
 state 0
@@ -991,7 +990,7 @@ state 48
 state 49
 
    50 jomleyeEntekhab: KEY_KW . PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
-   51                | KEY_KW . PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW
+   51                | KEY_KW . PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat END_KW
 
     PARANTHESIS_BAZ_KW  shift, and go to state 105
 
@@ -1669,7 +1668,7 @@ state 104
 state 105
 
    50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW . ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
-   51                | KEY_KW PARANTHESIS_BAZ_KW . ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW
+   51                | KEY_KW PARANTHESIS_BAZ_KW . ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat END_KW
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2622,7 +2621,7 @@ state 149
 state 150
 
    50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade . PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
-   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade . PARANTHESIS_BASTE_KW onsoreHalat END_KW
+   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade . PARANTHESIS_BASTE_KW N onsoreHalat END_KW
    67 ebarateSade: ebarateSade . OR_KW M ebarateSade
    68            | ebarateSade . AND_KW M ebarateSade
    69            | ebarateSade . OR_ELSE_KW M ebarateSade
@@ -3121,14 +3120,11 @@ state 184
 state 185
 
    50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW . N onsoreHalat onsorePishfarz END_KW
-   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW . onsoreHalat END_KW
+   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW . N onsoreHalat END_KW
 
-    SWITCH_KW  shift, and go to state 196
+    $default  reduce using rule 113 (N)
 
-    SWITCH_KW  [reduce using rule 113 (N)]
-
-    onsoreHalat  go to state 197
-    N            go to state 198
+    N  go to state 196
 
 
 state 186
@@ -3204,7 +3200,7 @@ state 191
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarat                go to state 199
+    ebarat                go to state 197
     ebarateSade           go to state 65
     ebarateRabetei        go to state 66
     ebarateRiaziManteghi  go to state 67
@@ -3242,7 +3238,7 @@ state 194
 
     $default  reduce using rule 113 (N)
 
-    N  go to state 200
+    N  go to state 198
 
 
 state 195
@@ -3251,51 +3247,34 @@ state 195
 
     $default  reduce using rule 112 (M)
 
-    M  go to state 201
+    M  go to state 199
 
 
 state 196
 
-   52 onsoreHalat: SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N . onsoreHalat onsorePishfarz END_KW
+   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N . onsoreHalat END_KW
 
-    $default  reduce using rule 112 (M)
+    SWITCH_KW  shift, and go to state 200
 
-    M  go to state 202
+    onsoreHalat  go to state 201
 
 
 state 197
-
-   51 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat . END_KW
-   53 onsoreHalat: onsoreHalat . SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
-
-    SWITCH_KW  shift, and go to state 203
-    END_KW     shift, and go to state 204
-
-
-state 198
-
-   50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N . onsoreHalat onsorePishfarz END_KW
-
-    SWITCH_KW  shift, and go to state 196
-
-    onsoreHalat  go to state 205
-
-
-state 199
 
   100 bordareVorudiha: bordareVorudiha COMMA ebarat .
 
     $default  reduce using rule 100 (bordareVorudiha)
 
 
-state 200
+state 198
 
    49 jomleyeEntekhab: IF_KW ebarateSade THEN_KW M jomle N . ELSE_KW M jomle
 
-    ELSE_KW  shift, and go to state 206
+    ELSE_KW  shift, and go to state 202
 
 
-state 201
+state 199
 
    55 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M . jomle
 
@@ -3318,7 +3297,7 @@ state 201
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 207
+    jomle                 go to state 203
     jomleyeMorakkab       go to state 58
     jomleyeEbarat         go to state 59
     jomleyeEntekhab       go to state 60
@@ -3343,91 +3322,84 @@ state 201
     saved_boolean         go to state 79
 
 
+state 200
+
+   52 onsoreHalat: SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+
+    $default  reduce using rule 112 (M)
+
+    M  go to state 204
+
+
+state 201
+
+   50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat . onsorePishfarz END_KW
+   51                | KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat . END_KW
+   53 onsoreHalat: onsoreHalat . SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+
+    SWITCH_KW   shift, and go to state 205
+    END_KW      shift, and go to state 206
+    DEFAULT_KW  shift, and go to state 207
+
+    onsorePishfarz  go to state 208
+
+
 state 202
 
-   52 onsoreHalat: SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
-
-    ADAD  shift, and go to state 46
-
-    saved_integer  go to state 208
-
-
-state 203
-
-   53 onsoreHalat: onsoreHalat SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   49 jomleyeEntekhab: IF_KW ebarateSade THEN_KW M jomle N ELSE_KW . M jomle
 
     $default  reduce using rule 112 (M)
 
     M  go to state 209
 
 
-state 204
-
-   51 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW .
-
-    $default  reduce using rule 51 (jomleyeEntekhab)
-
-
-state 205
-
-   50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat . onsorePishfarz END_KW
-   53 onsoreHalat: onsoreHalat . SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
-
-    SWITCH_KW   shift, and go to state 203
-    DEFAULT_KW  shift, and go to state 210
-
-    onsorePishfarz  go to state 211
-
-
-state 206
-
-   49 jomleyeEntekhab: IF_KW ebarateSade THEN_KW M jomle N ELSE_KW . M jomle
-
-    $default  reduce using rule 112 (M)
-
-    M  go to state 212
-
-
-state 207
+state 203
 
    55 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle .
 
     $default  reduce using rule 55 (jomleyeTekrar)
 
 
-state 208
+state 204
 
-   52 onsoreHalat: SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle NOGHTE_VIRGUL
-
-    $default  reduce using rule 113 (N)
-
-    N  go to state 213
-
-
-state 209
-
-   53 onsoreHalat: onsoreHalat SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   52 onsoreHalat: SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
 
     ADAD  shift, and go to state 46
 
-    saved_integer  go to state 214
+    saved_integer  go to state 210
 
 
-state 210
+state 205
+
+   53 onsoreHalat: onsoreHalat SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+
+    $default  reduce using rule 112 (M)
+
+    M  go to state 211
+
+
+state 206
+
+   51 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat END_KW .
+
+    $default  reduce using rule 51 (jomleyeEntekhab)
+
+
+state 207
 
    54 onsorePishfarz: DEFAULT_KW . DONOGHTE_KW M jomle N NOGHTE_VIRGUL
 
-    DONOGHTE_KW  shift, and go to state 215
+    DONOGHTE_KW  shift, and go to state 212
 
 
-state 211
+state 208
 
    50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz . END_KW
 
-    END_KW  shift, and go to state 216
+    END_KW  shift, and go to state 213
 
 
-state 212
+state 209
 
    49 jomleyeEntekhab: IF_KW ebarateSade THEN_KW M jomle N ELSE_KW M . jomle
 
@@ -3450,7 +3422,7 @@ state 212
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 217
+    jomle                 go to state 214
     jomleyeMorakkab       go to state 58
     jomleyeEbarat         go to state 59
     jomleyeEntekhab       go to state 60
@@ -3475,14 +3447,55 @@ state 212
     saved_boolean         go to state 79
 
 
+state 210
+
+   52 onsoreHalat: SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+
+    $default  reduce using rule 113 (N)
+
+    N  go to state 215
+
+
+state 211
+
+   53 onsoreHalat: onsoreHalat SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+
+    ADAD  shift, and go to state 46
+
+    saved_integer  go to state 216
+
+
+state 212
+
+   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW . M jomle N NOGHTE_VIRGUL
+
+    $default  reduce using rule 112 (M)
+
+    M  go to state 217
+
+
 state 213
+
+   50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW .
+
+    $default  reduce using rule 50 (jomleyeEntekhab)
+
+
+state 214
+
+   49 jomleyeEntekhab: IF_KW ebarateSade THEN_KW M jomle N ELSE_KW M jomle .
+
+    $default  reduce using rule 49 (jomleyeEntekhab)
+
+
+state 215
 
    52 onsoreHalat: SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle NOGHTE_VIRGUL
 
     DONOGHTE_KW  shift, and go to state 218
 
 
-state 214
+state 216
 
    53 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle NOGHTE_VIRGUL
 
@@ -3491,46 +3504,7 @@ state 214
     N  go to state 219
 
 
-state 215
-
-   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW . M jomle N NOGHTE_VIRGUL
-
-    $default  reduce using rule 112 (M)
-
-    M  go to state 220
-
-
-state 216
-
-   50 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW .
-
-    $default  reduce using rule 50 (jomleyeEntekhab)
-
-
 state 217
-
-   49 jomleyeEntekhab: IF_KW ebarateSade THEN_KW M jomle N ELSE_KW M jomle .
-
-    $default  reduce using rule 49 (jomleyeEntekhab)
-
-
-state 218
-
-   52 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle NOGHTE_VIRGUL
-
-    $default  reduce using rule 112 (M)
-
-    M  go to state 221
-
-
-state 219
-
-   53 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle NOGHTE_VIRGUL
-
-    DONOGHTE_KW  shift, and go to state 222
-
-
-state 220
 
    54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M . jomle N NOGHTE_VIRGUL
 
@@ -3553,7 +3527,7 @@ state 220
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 223
+    jomle                 go to state 220
     jomleyeMorakkab       go to state 58
     jomleyeEbarat         go to state 59
     jomleyeEntekhab       go to state 60
@@ -3576,6 +3550,31 @@ state 220
     saved_real            go to state 77
     saved_char            go to state 78
     saved_boolean         go to state 79
+
+
+state 218
+
+   52 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle NOGHTE_VIRGUL
+
+    $default  reduce using rule 112 (M)
+
+    M  go to state 221
+
+
+state 219
+
+   53 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle NOGHTE_VIRGUL
+
+    DONOGHTE_KW  shift, and go to state 222
+
+
+state 220
+
+   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle . N NOGHTE_VIRGUL
+
+    $default  reduce using rule 113 (N)
+
+    N  go to state 223
 
 
 state 221
@@ -3637,11 +3636,9 @@ state 222
 
 state 223
 
-   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle . N NOGHTE_VIRGUL
+   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N . NOGHTE_VIRGUL
 
-    $default  reduce using rule 113 (N)
-
-    N  go to state 226
+    NOGHTE_VIRGUL  shift, and go to state 226
 
 
 state 224
@@ -3701,9 +3698,9 @@ state 225
 
 state 226
 
-   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N . NOGHTE_VIRGUL
+   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL .
 
-    NOGHTE_VIRGUL  shift, and go to state 229
+    $default  reduce using rule 54 (onsorePishfarz)
 
 
 state 227
@@ -3717,17 +3714,10 @@ state 228
 
    53 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle . NOGHTE_VIRGUL
 
-    NOGHTE_VIRGUL  shift, and go to state 230
+    NOGHTE_VIRGUL  shift, and go to state 229
 
 
 state 229
-
-   54 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL .
-
-    $default  reduce using rule 54 (onsorePishfarz)
-
-
-state 230
 
    53 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL .
 
