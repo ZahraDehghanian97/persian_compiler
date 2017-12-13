@@ -601,6 +601,8 @@ otherjomle :
 jomleyeMorakkab :
 	AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW {
 		System.out.println("Rule 20.1");
+		$$ = new EVal();
+		//((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
 	}
 	|
 	AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW {
