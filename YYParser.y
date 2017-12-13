@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.ArrayList;
 %}
 
-%token <mojood> COMMENT FLOAT_KW INT_KW BOOLEAN_KW CHAR_KW AKULAD_BAZ_KW AKULAD_BASTE_KW 
+%token <EVal> COMMENT FLOAT_KW INT_KW BOOLEAN_KW CHAR_KW AKULAD_BAZ_KW AKULAD_BASTE_KW 
 ADD_KW SWITCH_KW END_KW DEFAULT_KW BREAK_KW 
 RETURN_KW COMMA PROGRAM_KW STRUCT_KW CONSTANT_KW IF_KW THEN_KW ELSE_KW AND_KW OR_KW 
 NOT_KW WHILE_KW NOGHTE_VIRGUL ADAD SHENASE HARFE_SABET 
@@ -13,13 +13,13 @@ MOD_KW LESS_THAN_KW MORE_EQUAL_KW
 PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW 
 ADAD_ASHARI
 
-%type <mojood> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud
+%type <EVal> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab
 meghdareSabet taghirpazir
-%type <mojood> saved_identifier
-%type <mojood> saved_integer
-%type <mojood> saved_real
-%type <mojood> saved_char
-%type <mojood> M N
+%type <EVal> saved_identifier
+%type <EVal> saved_integer
+%type <EVal> saved_real
+%type <EVal> saved_char
+%type <EVal> M N
 
 %code {
 
@@ -41,7 +41,7 @@ meghdareSabet taghirpazir
 	public static char lexChar;
 
 	private ArrayList<Quadruple> quadruples = new ArrayList<>();
-	private jadvaleasli jadvaleasli = new jadvaleasli();
+	private SymbolTable symbolTable = new SymbolTable();
 	public static PrintStream writer;
 
 	private int tempCounter = 0;
@@ -104,7 +104,7 @@ meghdareSabet taghirpazir
         return;
 	}
 
-	private void besaz(String operation, String arg0, String arg1, String result) {
+	private void emit(String operation, String arg0, String arg1, String result) {
 		quadruples.add(new Quadruple(operation, arg0, arg1, result));
 	}
 
@@ -117,9 +117,9 @@ meghdareSabet taghirpazir
 		quadruples.get(quadNumber).result = String.valueOf(destination);
 	}
 
-	private String moteqayerejadid(int type, boolean array) {
+	private String newTemp(int type, boolean array) {
 		String name = tempStr + tempCounter++;
-		jadvaleasli.addTojadvaleasli(name, type, array);
+		symbolTable.addToSymbolTable(name, type, array);
 		return name;
 	}
 
@@ -129,16 +129,16 @@ meghdareSabet taghirpazir
 
 	private String getTypeString(int typeCode){
 		switch(typeCode){
-			case mojood.TYPE_CODE_INTEGER:
+			case EVal.TYPE_CODE_INTEGER:
 				return TYPE_STRING_INTEGER;
-			case mojood.TYPE_CODE_REAL:
+			case EVal.TYPE_CODE_REAL:
 				return TYPE_STRING_REAL;
-			case mojood.TYPE_CODE_CHAR:
+			case EVal.TYPE_CODE_CHAR:
 				return TYPE_STRING_CHAR;
-			case mojood.TYPE_CODE_BOOLEAN:
+			case EVal.TYPE_CODE_BOOLEAN:
 				return TYPE_STRING_BOOLEAN;
-			case mojood.TYPE_CODE_UNKNOWN:
-			case mojood.TYPE_CODE_RANGE:
+			case EVal.TYPE_CODE_UNKNOWN:
+			case EVal.TYPE_CODE_RANGE:
 			default:
 				return null;
 		}
@@ -153,12 +153,12 @@ meghdareSabet taghirpazir
 		}
 
 		try {
-			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\t// ////////////////// Symbol Table \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\n\n");
-			dos.writeBytes(jadvaleasli.toString());
-			dos.writeBytes("\n\t// ////////////////// Quadruples \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\\\n\n");
+			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\n");
+			dos.writeBytes(symbolTable.toString());
+			dos.writeBytes("\n\t\n");
 			// Backpatch of error controllers.
-			backpatch(mojood.arrayIndexOutOfBoundList, (quadruples.size() + 1)); // Array index out of bound error.
-			backpatch(mojood.invalidArraySizeList, (quadruples.size() + 2)); // Invalid array size error.
+			backpatch(EVal.arrayIndexOutOfBoundList, (quadruples.size() + 1)); // Array index out of bound error.
+			backpatch(EVal.invalidArraySizeList, (quadruples.size() + 2)); // Invalid array size error.
 			for (int i = 0; i < quadruples.size() && i < 100; i++) {
 				dos.writeBytes(Quadruple.LINE_STR + i + ":" + "\t\t" + quadruples.get(i) + "\n");
 			}
@@ -259,76 +259,76 @@ tarifeMoteghayyerMahdud:
 		System.out.println("Rule 3: " +
 			"declarations: type_specifiers declarator_list");
 		System.out.println($1.type+" "+$2.type);
-		if($2.type == mojood.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
+		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
 			for(int i = 0; i < $2.initializersList.size(); i++) {
-				if(jadvaleasli.lookUp(sizeStr + $2.shenasayiShodes.get(i).place) == jadvaleasli.NOT_IN_SYMBOL_TABLE) {
-					jadvaleasli.addTojadvaleasli($2.shenasayiShodes.get(i).place, $1.type, false);
+				if(symbolTable.lookUp(sizeStr + $2.declareds.get(i).place) == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, false);
 					if($2.initializersList.get(i) != null && $2.initializersList.get(i).size() == 1) {
-						//if($1.type != mojood.TYPE_CODE_BOOLEAN) {
-							besaz(":=", $2.initializersList.get(i).get(0).place, null, $2.shenasayiShodes.get(i).place);
+						//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+							emit(":=", $2.initializersList.get(i).get(0).place, null, $2.declareds.get(i).place);
 							switch ($1.type) {
-								case mojood.TYPE_CODE_INTEGER:
-									besaz("iprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_INTEGER:
+									emit("iprint", null, null, $2.declareds.get(i).place);
 									break;
-								case mojood.TYPE_CODE_REAL:
-									besaz("rprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_REAL:
+									emit("rprint", null, null, $2.declareds.get(i).place);
 									break;
-								case mojood.TYPE_CODE_CHAR:
-									besaz("cprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_CHAR:
+									emit("cprint", null, null, $2.declareds.get(i).place);
 									break;
-								case mojood.TYPE_CODE_BOOLEAN:
-									besaz("bprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_BOOLEAN:
+									emit("bprint", null, null, $2.declareds.get(i).place);
 									break;
 							}
 						//} else {
 							// backpatch($2.initializersList.get(i).get(0).falseList, nextQuad());
 							// backpatch($2.initializersList.get(i).get(0).trueList, nextQuad() + 2);
-						//	besaz(":=", "0", null, $2.shenasayiShodes.get(i).place);
-						//	besaz("goto", null, null, String.valueOf(nextQuad() + 2));
-						//	besaz(":=", "1", null, $2.shenasayiShodes.get(i).place);
-						//	besaz("bprint", null, null, $2.shenasayiShodes.get(i).place);
+						//	emit(":=", "0", null, $2.declareds.get(i).place);
+						//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+						//	emit(":=", "1", null, $2.declareds.get(i).place);
+						//	emit("bprint", null, null, $2.declareds.get(i).place);
 						//}
 					} else if($2.initializersList.get(i) != null) {
 						System.err.println("Error! Initializer number mismatch. (Expected: 1" + ", Number: " + $2.initializersList.get(i).size() + ")");
 						return YYABORT;
 					}
 				} else {
-					jadvaleasli.addTojadvaleasli($2.shenasayiShodes.get(i).place, $1.type, true);
-					besaz("malloc", getTypeString($1.type), sizeStr + $2.shenasayiShodes.get(i).place, $2.shenasayiShodes.get(i).place);
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, true);
+					emit("malloc", getTypeString($1.type), sizeStr + $2.declareds.get(i).place, $2.declareds.get(i).place);
 					if($2.initializersList.get(i) != null) {
 						for(int j = 0; j < $2.initializersList.get(i).size(); j++) {
-							mojood.arrayIndexOutOfBoundList.add(nextQuad() + 1);
-							besaz(">=", String.valueOf(j), sizeStr + $2.shenasayiShodes.get(i).place, condStr + $2.shenasayiShodes.get(i).place);
-							besaz("check", condStr + $2.shenasayiShodes.get(i).place, null, String.valueOf(nextQuad() + 2)); // Result will be backpatched.
-							//if($1.type != mojood.TYPE_CODE_BOOLEAN) {
-								besaz("[]=", $2.initializersList.get(i).get(j).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
-								besaz("+", startStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), condStr + $2.shenasayiShodes.get(i).place);
+							EVal.arrayIndexOutOfBoundList.add(nextQuad() + 1);
+							emit(">=", String.valueOf(j), sizeStr + $2.declareds.get(i).place, condStr + $2.declareds.get(i).place);
+							emit("check", condStr + $2.declareds.get(i).place, null, String.valueOf(nextQuad() + 2)); // Result will be backpatched.
+							//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+								emit("[]=", $2.initializersList.get(i).get(j).place, String.valueOf(j), $2.declareds.get(i).place);
+								emit("+", startStr + $2.declareds.get(i).place, String.valueOf(j), condStr + $2.declareds.get(i).place);
 								switch ($1.type) {
-									case mojood.TYPE_CODE_INTEGER:
-										besaz("aiprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+									case EVal.TYPE_CODE_INTEGER:
+										emit("aiprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 										break;
-									case mojood.TYPE_CODE_REAL:
-										besaz("arprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+									case EVal.TYPE_CODE_REAL:
+										emit("arprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 										break;
-									case mojood.TYPE_CODE_CHAR:
-										besaz("acprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+									case EVal.TYPE_CODE_CHAR:
+										emit("acprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 										break;
 								}
 							//} else {
 								// backpatch($2.initializersList.get(i).get(j).falseList, nextQuad());
 								// backpatch($2.initializersList.get(i).get(j).trueList, nextQuad() + 2);
-							//	besaz("[]=", "0", String.valueOf(j), $2.shenasayiShodes.get(i).place);
-							//	besaz("goto", null, null, String.valueOf(nextQuad() + 2));
-							//	besaz("[]=", "1", String.valueOf(j), $2.shenasayiShodes.get(i).place);
-							//	besaz("abprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+							//	emit("[]=", "0", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+							//	emit("[]=", "1", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("abprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 							//}
 						}
 					}
 				}
 			}
 		} else {
-			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
-			return YYABORT;
+			/*System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
+			return YYABORT;*/
 		}
 	}
 	
@@ -336,23 +336,23 @@ jens:
 	INT_KW {
 	System.out.println("Rule 8.1");
 	
-		$$ = new mojood();
-		((mojood)$$).type = mojood.TYPE_CODE_INTEGER;
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
 	}
 	| FLOAT_KW {
 	System.out.println("Rule 8.2");
-		$$ = new mojood();
-		((mojood)$$).type = mojood.TYPE_CODE_REAL;
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_REAL;
 	}
 	|CHAR_KW {
 		System.out.println("Rule 8.3");
-		$$ = new mojood();
-		((mojood)$$).type = mojood.TYPE_CODE_CHAR;
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_CHAR;
 	}
 	|BOOLEAN_KW{
 		System.out.println("Rule 8.4");
-		$$ = new mojood();
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
+		$$ = new EVal();
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
 	}
 	
 tarifeMoteghayyer:
@@ -362,73 +362,73 @@ tarifeMoteghayyer:
 		System.out.println("Rule 3: " +
 			"declarations: type_specifiers declarator_list");
 		System.out.println($1.type+" "+$2.type);
-		if($2.type == mojood.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
+		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
 			for(int i = 0; i < $2.initializersList.size(); i++) {
-				if(jadvaleasli.lookUp(sizeStr + $2.shenasayiShodes.get(i).place) == jadvaleasli.NOT_IN_SYMBOL_TABLE) {
-					jadvaleasli.addTojadvaleasli($2.shenasayiShodes.get(i).place, $1.type, false);
+				if(symbolTable.lookUp(sizeStr + $2.declareds.get(i).place) == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, false);
 					if($2.initializersList.get(i) != null && $2.initializersList.get(i).size() == 1) {
-						//if($1.type != mojood.TYPE_CODE_BOOLEAN) {
-							besaz(":=", $2.initializersList.get(i).get(0).place, null, $2.shenasayiShodes.get(i).place);
+						//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+							emit(":=", $2.initializersList.get(i).get(0).place, null, $2.declareds.get(i).place);
 							switch ($1.type) {
-								case mojood.TYPE_CODE_INTEGER:
-									besaz("iprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_INTEGER:
+									emit("iprint", null, null, $2.declareds.get(i).place);
 									break;
-								case mojood.TYPE_CODE_REAL:
-									besaz("rprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_REAL:
+									emit("rprint", null, null, $2.declareds.get(i).place);
 									break;
-								case mojood.TYPE_CODE_CHAR:
-									besaz("cprint", null, null, $2.shenasayiShodes.get(i).place);
+								case EVal.TYPE_CODE_CHAR:
+									emit("cprint", null, null, $2.declareds.get(i).place);
 									break;
 							}
 						//} else {
 							// backpatch($2.initializersList.get(i).get(0).falseList, nextQuad());
 							// backpatch($2.initializersList.get(i).get(0).trueList, nextQuad() + 2);
-						//	besaz(":=", "0", null, $2.shenasayiShodes.get(i).place);
-						//	besaz("goto", null, null, String.valueOf(nextQuad() + 2));
-						//	besaz(":=", "1", null, $2.shenasayiShodes.get(i).place);
-						//	besaz("bprint", null, null, $2.shenasayiShodes.get(i).place);
+						//	emit(":=", "0", null, $2.declareds.get(i).place);
+						//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+						//	emit(":=", "1", null, $2.declareds.get(i).place);
+						//	emit("bprint", null, null, $2.declareds.get(i).place);
 						//}
 					} else if($2.initializersList.get(i) != null) {
-						System.err.println("Error! Initializer number mismatch. (Expected: 1" + ", Number: " + $2.initializersList.get(i).size() + ")");
-						return YYABORT;
+						//System.err.println("Error! Initializer number mismatch. (Expected: //1" + ", Number: " + $2.initializersList.get(i).size() + ")");
+						//return YYABORT;
 					}
 				} else {
-					jadvaleasli.addTojadvaleasli($2.shenasayiShodes.get(i).place, $1.type, true);
-					besaz("malloc", getTypeString($1.type), sizeStr + $2.shenasayiShodes.get(i).place, $2.shenasayiShodes.get(i).place);
+					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, true);
+					emit("malloc", getTypeString($1.type), sizeStr + $2.declareds.get(i).place, $2.declareds.get(i).place);
 					if($2.initializersList.get(i) != null) {
 						for(int j = 0; j < $2.initializersList.get(i).size(); j++) {
-							mojood.arrayIndexOutOfBoundList.add(nextQuad() + 1);
-							besaz(">=", String.valueOf(j), sizeStr + $2.shenasayiShodes.get(i).place, condStr + $2.shenasayiShodes.get(i).place);
-							besaz("check", condStr + $2.shenasayiShodes.get(i).place, null, String.valueOf(nextQuad() + 2)); // Result will be backpatched.
-							//if($1.type != mojood.TYPE_CODE_BOOLEAN) {
-								besaz("[]=", $2.initializersList.get(i).get(j).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
-								besaz("+", startStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), condStr + $2.shenasayiShodes.get(i).place);
+							EVal.arrayIndexOutOfBoundList.add(nextQuad() + 1);
+							emit(">=", String.valueOf(j), sizeStr + $2.declareds.get(i).place, condStr + $2.declareds.get(i).place);
+							emit("check", condStr + $2.declareds.get(i).place, null, String.valueOf(nextQuad() + 2)); // Result will be backpatched.
+							//if($1.type != EVal.TYPE_CODE_BOOLEAN) {
+								emit("[]=", $2.initializersList.get(i).get(j).place, String.valueOf(j), $2.declareds.get(i).place);
+								emit("+", startStr + $2.declareds.get(i).place, String.valueOf(j), condStr + $2.declareds.get(i).place);
 								switch ($1.type) {
-									case mojood.TYPE_CODE_INTEGER:
-										besaz("aiprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+									case EVal.TYPE_CODE_INTEGER:
+										emit("aiprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 										break;
-									case mojood.TYPE_CODE_REAL:
-										besaz("arprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+									case EVal.TYPE_CODE_REAL:
+										emit("arprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 										break;
-									case mojood.TYPE_CODE_CHAR:
-										besaz("acprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+									case EVal.TYPE_CODE_CHAR:
+										emit("acprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 										break;
 								}
 							//} else {
 								// backpatch($2.initializersList.get(i).get(j).falseList, nextQuad());
 								// backpatch($2.initializersList.get(i).get(j).trueList, nextQuad() + 2);
-							//	besaz("[]=", "0", String.valueOf(j), $2.shenasayiShodes.get(i).place);
-							//	besaz("goto", null, null, String.valueOf(nextQuad() + 2));
-							//	besaz("[]=", "1", String.valueOf(j), $2.shenasayiShodes.get(i).place);
-							//	besaz("abprint", condStr + $2.shenasayiShodes.get(i).place, String.valueOf(j), $2.shenasayiShodes.get(i).place);
+							//	emit("[]=", "0", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("goto", null, null, String.valueOf(nextQuad() + 2));
+							//	emit("[]=", "1", String.valueOf(j), $2.declareds.get(i).place);
+							//	emit("abprint", condStr + $2.declareds.get(i).place, String.valueOf(j), $2.declareds.get(i).place);
 							//}
 						}
 					}
 				}
 			}
 		} else {
-			System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + $2.type + ")");
-			return YYABORT;
+			//System.err.println("Error! Type specifier type mismatch. (" + $1.type + ", " + //$2.type + ")");
+			//return YYABORT;
 		}
 	}
 	
@@ -437,75 +437,95 @@ tarifhayeMoteghayyerha:
 		System.out.println("Rule 10.1 ");
 		
 		System.out.println("Rule 5.2: " +
-			"delarator_list: declarator_end");
-		$$ = new mojood();
-		((mojood)$$).type = $1.type;
-		((mojood)$$).shenasayiShodes = mojood.makeInitializersOrshenasayiShodes($1);
-		((mojood)$$).initializersList = mojood.makeInitializersList($1.initializers);
+			"delarator_list: declarator_end 00");
+		$$ = new EVal();
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
+		((EVal)$$).declareds = EVal.makeInitializersOrDeclareds($1);
+		((EVal)$$).initializersList = EVal.makeInitializersList($1.initializers);
 	} |
 	tarifhayeMoteghayyerha COMMA tarifeMeghdareAvalie {
 		System.out.println("Rule 5.1: " +
 			"declarator_list: declarator_list declarator");
-		if($1.type == mojood.TYPE_CODE_UNKNOWN
+		if($1.type == EVal.TYPE_CODE_UNKNOWN
 			|| $1.type == $3.type) {
-			$$ = new mojood();
-			((mojood)$$).type = $3.type;
-			((mojood)$$).shenasayiShodes = $1.shenasayiShodes;
-			((mojood)$$).shenasayiShodes.add($3);
-			((mojood)$$).initializersList = $1.initializersList;
-			((mojood)$$).initializersList.add($3.initializers);
+			$$ = new EVal();
+			((EVal)$$).type = $3.type;
+			((EVal)$$).declareds = $1.declareds;
+			((EVal)$$).declareds.add($3);
+			((EVal)$$).initializersList = $1.initializersList;
+			((EVal)$$).initializersList.add($3.initializers);
 		} else {
-			System.err.println("Error! Declarator type mismatch.");
-			return YYABORT;
+			//System.err.println("Error! Declarator type mismatch.");
+			//return YYABORT;
 		}
 	}
 	
 tarifeMeghdareAvalie:
 	tarifeShenaseMoteghayer {
 	System.out.println("Rule 11.1 ");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).array = false;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).array = false;
 	}
 	| tarifeShenaseMoteghayer EQUAL_KW ebarateSade{
 		System.out.println("Rule 11.2 ");
-		if($1.array != $3.array) {
+		/*if($1.array != $3.array) {
 			System.err.println("Error! Array mismatch: " + $1.place + " and " + $3.place + " are not the same.");
 			return YYABORT;
-		}
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $3.type;
-		((mojood)$$).array = $1.array;
-		((mojood)$$).initializers = $3.initializers;
+		}*/
 		
-		besaz(":=", $3.place, null, $1.place);
+		if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		backpatch($3.trueList, nextQuad() );
+		backpatch($3.falseList, nextQuad() + 2);
+		
+		emit(":=", "1", null, $1.place);
+		emit("goto", null, null, String.valueOf(nextQuad() + 2));
+		emit(":=", "0", null, $1.place);
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).trueList = $3.trueList;
+		((EVal)$$).falseList = $3.falseList;
+		((EVal)$$).initializers = $3.initializers;
+		
+		}
+		else{
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).initializers = $3.initializers;
+		emit(":=", $3.place, null, $1.place);
+		}
 	}
 
 tarifeShenaseMoteghayer:
 	saved_identifier {
 		System.out.println("Rule 8.1: " +
 			"dec: saved_identifier");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).array = false;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).array = false;
 	}
 	| saved_identifier BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW {
 		
 		System.out.println("Rule 8.3: " +
 			"dec: saved_identifier LB_KW saved_integer RB_KW");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).array = true;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).array = true;
 
-		jadvaleasli.addTojadvaleasli(startStr + ((mojood)$$).place, mojood.TYPE_CODE_INTEGER, false);
-		besaz(":=", "0", null , startStr + ((mojood)$$).place);
+		symbolTable.addToSymbolTable(startStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
+		emit(":=", "0", null , startStr + ((EVal)$$).place);
 
-		jadvaleasli.addTojadvaleasli(sizeStr + ((mojood)$$).place, mojood.TYPE_CODE_INTEGER, false);
-		besaz(":=", $3.place, null , sizeStr + ((mojood)$$).place);
+		symbolTable.addToSymbolTable(sizeStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
+		emit(":=", $3.place, null , sizeStr + ((EVal)$$).place);
 
-		jadvaleasli.addTojadvaleasli(indexStr + ((mojood)$$).place, mojood.TYPE_CODE_INTEGER, false);
-		jadvaleasli.addTojadvaleasli(condStr + ((mojood)$$).place, mojood.TYPE_CODE_INTEGER, false);
+		symbolTable.addToSymbolTable(indexStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
+		symbolTable.addToSymbolTable(condStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
 	}
 	
 tarifeTabe:
@@ -539,17 +559,29 @@ shenaseyeVorudi :
 	SHENASE BRACKET_BAZ_KW BRACKET_BASTE_KW {System.out.println("Rule 18.2");}
 	
 jomle :
-	jomleyeMorakkab {System.out.println("Rule 19.1");}
+	jomleyeMorakkab {System.out.println("Rule 19.1");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeEbarat {System.out.println("Rule 19.2");}
+	jomleyeEbarat {System.out.println("Rule 19.2");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeEntekhab {System.out.println("Rule 19.3");}
+	jomleyeEntekhab {System.out.println("Rule 19.3");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeTekrar{System.out.println("Rule 19.4");}
+	jomleyeTekrar{System.out.println("Rule 19.4");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeBazgasht{System.out.println("Rule 19.5");}
+	jomleyeBazgasht{System.out.println("Rule 19.5");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeShekast {System.out.println("Rule 19.6");}
+	jomleyeShekast {System.out.println("Rule 19.6");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 
 jomleyeMorakkab :
 	AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW {
@@ -569,190 +601,293 @@ jomleyeMorakkab :
 	}
 	
 jomleha :
-	jomleha jomle {System.out.println("Rule 21.1");}
+	jomleha M jomle {
+	System.out.println("Rule 21.1 jomleha : jomleha M jomle");
+	$$ = new EVal();
+		((EVal)$$).nextList = $3.nextList;
+		backpatch($1.nextList, $2.quad);
+	}
 	|
-	jomle {System.out.println("Rule 21.2");}
+	jomle {
+	System.out.println("Rule 21.2 jomleha : jomle");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;
+	}
 
 	
 jomleyeEbarat :
-	ebarat NOGHTE_VIRGUL {
-		System.out.println("Rule 22.1");
+	ebarat NOGHTE_VIRGUL M{
+		System.out.println("Rule 22.1 jomleyeEbarat : ebarat NOGHTE_VIRGUL M");
+		$$ = new EVal();
+		((EVal)$$).nextList = $1.nextList;
 	}
 	|
-	NOGHTE_VIRGUL {System.out.println("Rule 22.2");}
+	NOGHTE_VIRGUL M {
+	System.out.println("Rule 22.2 jomleyeEbarat : NOGHTE_VIRGUL M");
+	$$ = new EVal();
+		((EVal)$$).nextList = EVal.makeList($2.quad);}
 
 jomleyeEntekhab :
-	IF_KW ebarateSade THEN_KW jomle %prec LOWER_THAN_ELSE_KW {System.out.println("Rule 23.1");}
+	IF_KW ebarateSade THEN_KW jomle M %prec LOWER_THAN_ELSE_KW {
+		System.out.println("Rule 23.1 jomleyeEntekhab : IF_KW ebarateSade THEN_KW jomle M %prec LOWER_THAN_ELSE_KW ");
+		$$ = new EVal();
+		backpatch($2.trueList, $4.quad);
+		((EVal)$$).nextList = EVal.merge($2.falseList, $5.nextList);}
 	|
-	IF_KW ebarateSade THEN_KW jomle ELSE_KW jomle {System.out.println("Rule 23.2");}
+	IF_KW ebarateSade THEN_KW M jomle N ELSE_KW M jomle {
+		System.out.println("Rule 23.2 jomleyeEntekhab : IF_KW ebarateSade THEN_KW M jomle N ELSE_KW M jomle ");
+		$$ = new EVal();
+		backpatch($2.trueList, $4.quad);
+		backpatch($2.falseList, $8.quad);
+		((EVal)$$).nextList = EVal.merge($5.nextList, $6.nextList);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
+
+	}
 	|
-	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat onsorePishfarz END_KW {System.out.println("Rule 23.3");}
+	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW {System.out.println("Rule 23.3 jomleyeEntekhab : KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE onsoreHalat onsorePishfarz END_KW ");
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
+		((EVal)$$).nextList = EVal.merge($6.nextList, $7.nextList);
+
+		int last = $6.falseList.size() - 1;
+		backpatch($5.nextList, $6.initList.get(0));
+		backpatch($6.falseList.get(last), nextQuad());
+		for(int i = 0; i < $6.declareds.size() - 1; i++) {
+			backpatch($6.falseList.get(i), $6.initList.get(i + 1));
+
+			emit("=", $3.place, $6.declareds.get(i).place, ((EVal)$$).place);
+			emit("check", ((EVal)$$).place, null, String.valueOf($6.trueList.get(i))); // result will not be backpatched.
+		}
+		emit("=", $3.place, $6.declareds.get(last).place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, String.valueOf($6.trueList.get(last))); // result will not be backpatched.
+
+		emit("goto", null, null, String.valueOf($7.quad)); // result will not be backpatched.
+
+
+	}
 	|
 	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW {System.out.println("Rule 23.4");}
 
 		
 onsoreHalat :
-	SWITCH_KW ADAD DONOGHTE_KW jomle NOGHTE_VIRGUL { System.out.println("Rule 24.1"); }
+	SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL { System.out.println("Rule 24.1 onsoreHalat : SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL");
+	$$ = new EVal();
+		((EVal)$$).initList = EVal.makeList($2.quad); // Starting point of saving saved_integer is stored in initList;
+		((EVal)$$).declareds = EVal.makeInitializersOrDeclareds($3); // saved_integer value is stored in declareds.
+		((EVal)$$).falseList = $4.nextList; // If there is another init point this will be backpatched to next init point, else to test point.
+		((EVal)$$).trueList = EVal.makeList($6.quad); // Starting point of block is stored in trueList;
+		((EVal)$$).nextList = $7.nextList;
+
+	 }
 	|
-	onsoreHalat SWITCH_KW ADAD DONOGHTE_KW jomle NOGHTE_VIRGUL {System.out.println("Rule 24.2");}
+	onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL {System.out.println("Rule 24.2 onsoreHalat : onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL");
+	$$ = new EVal();
+		((EVal)$$).initList = $1.initList;
+		((EVal)$$).initList.add($3.quad);
+		((EVal)$$).declareds = $1.declareds;
+		((EVal)$$).declareds.add($4);
+		((EVal)$$).falseList = EVal.merge($1.falseList, $5.nextList);
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).trueList.add($7.quad);
+		((EVal)$$).nextList = EVal.merge($1.nextList, $8.nextList);
+}
 
 onsorePishfarz:
-	DEFAULT_KW DONOGHTE_KW jomle NOGHTE_VIRGUL {System.out.println("Rule 25");}
+	DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL {System.out.println("Rule 25 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL");
+	$$ = new EVal();
+		((EVal)$$).quad = $3.quad;
+		((EVal)$$).nextList = $5.nextList;
+		}
 
 jomleyeTekrar:
-	WHILE_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 26");}
+	WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle {System.out.println("Rule 26 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle ");
+	$$ = new EVal();
+		((EVal)$$).nextList = $4.falseList;
+
+		backpatch($7.nextList, $3.quad);
+		backpatch($4.trueList, $6.quad);
+	}
+
 
 jomleyeBazgasht:
-	RETURN_KW NOGHTE_VIRGUL {System.out.println("Rule 27.1");}
+	RETURN_KW M NOGHTE_VIRGUL {System.out.println("Rule 27.1");
+	$$ = new EVal();
+	((EVal)$$).nextList = $2.nextList;}
 	|
-	RETURN_KW ebarat NOGHTE_VIRGUL {System.out.println("Rule 27.2");}
+	RETURN_KW ebarat NOGHTE_VIRGUL {System.out.println("Rule 27.2");
+	$$ = new EVal();
+	((EVal)$$).nextList = $2.nextList;}
 
 jomleyeShekast:
-	BREAK_KW NOGHTE_VIRGUL {System.out.println("Rule 28");}
+	BREAK_KW M NOGHTE_VIRGUL {System.out.println("Rule 28");
+	$$ = new EVal();
+	((EVal)$$).nextList = $2.nextList;}
 
 ebarat:
 	taghirpazir EQUAL_KW ebarat {
 	System.out.println("Rule 29.1");
-	besaz(":=", $3.place, null, $1.place);
+	if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		backpatch($3.trueList, nextQuad() );
+		backpatch($3.falseList, nextQuad() + 2);
+		
+		emit(":=", "1", null, $1.place);
+		emit("goto", null, null, String.valueOf(nextQuad() + 2));
+		emit(":=", "0", null, $1.place);
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).array = $1.array;
+		((EVal)$$).trueList = $3.trueList;
+		((EVal)$$).falseList = $3.falseList;
+		((EVal)$$).initializers = $3.initializers;
+		
+		}
+	}
+	else{
+	emit(":=", $3.place, null, $1.place);
+	}
+	
 	}
 	|
 	taghirpazir PLUS_EQUAL_KW ebarat {
+	
 		System.out.println("Rule 29.1: " +
 			"arithmatic_expressions: expressions ADD_KW expressions");
-		if(((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| (((mojood)$$).type == mojood.TYPE_CODE_REAL && ((mojood)$$).type == mojood.TYPE_CODE_REAL)) {
-			besaz("+", ((mojood)$$).place, $3.place, ((mojood)$$).place);
-		} else if((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", ((mojood)$$).place, TYPE_STRING_REAL, tmp);
-			besaz("+", tmp, $3.place, ((mojood)$$).place);
-		} else if(((mojood)$$).type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("+", ((mojood)$$).place, tmp, ((mojood)$$).place);
+		if(((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)$$).type == EVal.TYPE_CODE_REAL && ((EVal)$$).type == EVal.TYPE_CODE_REAL)) {
+			emit("+", ((EVal)$$).place, $3.place, ((EVal)$$).place);
+		} else if((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)$$).place, TYPE_STRING_REAL, tmp);
+			emit("+", tmp, $3.place, ((EVal)$$).place);
+		} else if(((EVal)$$).type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("+", ((EVal)$$).place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"+\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir MINUS_EQUAL_KW ebarat {
 	
 		System.out.println("Rule 29.1: " +
 			"arithmatic_expressions: expressions ADD_KW expressions");
-		if(((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| (((mojood)$$).type == mojood.TYPE_CODE_REAL && ((mojood)$$).type == mojood.TYPE_CODE_REAL)) {
-			besaz("-", ((mojood)$$).place, $3.place, ((mojood)$$).place);
-		} else if((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", ((mojood)$$).place, TYPE_STRING_REAL, tmp);
-			besaz("-", tmp, $3.place, ((mojood)$$).place);
-		} else if(((mojood)$$).type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("-", ((mojood)$$).place, tmp, ((mojood)$$).place);
+		if(((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)$$).type == EVal.TYPE_CODE_REAL && ((EVal)$$).type == EVal.TYPE_CODE_REAL)) {
+			emit("-", ((EVal)$$).place, $3.place, ((EVal)$$).place);
+		} else if((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)$$).place, TYPE_STRING_REAL, tmp);
+			emit("-", tmp, $3.place, ((EVal)$$).place);
+		} else if(((EVal)$$).type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("-", ((EVal)$$).place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"+\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir MULTIPLY_EQUAL_KW ebarat {
 	
 		System.out.println("Rule 29.1: " +
 			"arithmatic_expressions: expressions ADD_KW expressions");
-		if(((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| (((mojood)$$).type == mojood.TYPE_CODE_REAL && ((mojood)$$).type == mojood.TYPE_CODE_REAL)) {
-			besaz("*", ((mojood)$$).place, $3.place, ((mojood)$$).place);
-		} else if((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", ((mojood)$$).place, TYPE_STRING_REAL, tmp);
-			besaz("*", tmp, $3.place, ((mojood)$$).place);
-		} else if(((mojood)$$).type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("*", ((mojood)$$).place, tmp, ((mojood)$$).place);
+		if(((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)$$).type == EVal.TYPE_CODE_REAL && ((EVal)$$).type == EVal.TYPE_CODE_REAL)) {
+			emit("*", ((EVal)$$).place, $3.place, ((EVal)$$).place);
+		} else if((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)$$).place, TYPE_STRING_REAL, tmp);
+			emit("*", tmp, $3.place, ((EVal)$$).place);
+		} else if(((EVal)$$).type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("*", ((EVal)$$).place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"+\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir DEVIDE_EQUAL_KW ebarat {
 	
 		System.out.println("Rule 29.1: " +
 			"arithmatic_expressions: expressions ADD_KW expressions");
-		if(((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| (((mojood)$$).type == mojood.TYPE_CODE_REAL && ((mojood)$$).type == mojood.TYPE_CODE_REAL)) {
-			besaz("/", ((mojood)$$).place, $3.place, ((mojood)$$).place);
-		} else if((((mojood)$$).type == mojood.TYPE_CODE_INTEGER || ((mojood)$$).type == mojood.TYPE_CODE_CHAR || ((mojood)$$).type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", ((mojood)$$).place, TYPE_STRING_REAL, tmp);
-			besaz("/", tmp, $3.place, ((mojood)$$).place);
-		} else if(((mojood)$$).type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("/", ((mojood)$$).place, tmp, ((mojood)$$).place);
+		if(((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| (((EVal)$$).type == EVal.TYPE_CODE_REAL && ((EVal)$$).type == EVal.TYPE_CODE_REAL)) {
+			emit("/", ((EVal)$$).place, $3.place, ((EVal)$$).place);
+		} else if((((EVal)$$).type == EVal.TYPE_CODE_INTEGER || ((EVal)$$).type == EVal.TYPE_CODE_CHAR || ((EVal)$$).type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", ((EVal)$$).place, TYPE_STRING_REAL, tmp);
+			emit("/", tmp, $3.place, ((EVal)$$).place);
+		} else if(((EVal)$$).type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("/", ((EVal)$$).place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"+\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	taghirpazir PLUS_PLUS_KW {System.out.println("Rule 29.6");}
@@ -760,406 +895,418 @@ ebarat:
 	taghirpazir MINUS_MINUS_KW  {System.out.println("Rule 29.7");}
 	|
 	ebarateSade {System.out.println(" Rule 29.8 ebarateSade to ebarat");
-	$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;}
+	$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;}
 
 ebarateSade :
 	ebarateSade OR_KW  M ebarateSade {
 		System.out.println("Rule 30.1: " +
 			"bool_expressions: expressions OR_KW M expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
 		backpatch($1.falseList, $3.quad);
-		((mojood)$$).trueList = mojood.merge($1.trueList, $4.trueList);
-		((mojood)$$).falseList = $4.falseList;
+		((EVal)$$).trueList = EVal.merge($1.trueList, $4.trueList);
+		((EVal)$$).falseList = $4.falseList;
 	}
 	|
 	ebarateSade AND_KW M ebarateSade {
 		System.out.println("Rule 30.2: " +
 			"bool_expressions: expressions AND_KW M expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
 		backpatch($1.trueList, $3.quad);
-		((mojood)$$).trueList = $4.trueList;
-		((mojood)$$).falseList = mojood.merge($1.falseList, $4.falseList);
+		((EVal)$$).trueList = $4.trueList;
+		((EVal)$$).falseList = EVal.merge($1.falseList, $4.falseList);
 	}
 	|
 	ebarateSade OR_ELSE_KW M ebarateSade {
 		System.out.println("Rule 30.3: " +
 			"bool_expressions: expressions OR_ELSE_KW M expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
 		
 		backpatch($1.trueList, nextQuad());
-		besaz(":=", "1", null, ((mojood)$$).place);
-		besaz("goto", null, null, String.valueOf($3.quad));
+		emit(":=", "1", null, ((EVal)$$).place);
+		emit("goto", null, null, String.valueOf($3.quad));
 		backpatch($1.falseList, nextQuad());
-		besaz(":=", "0", null, ((mojood)$$).place);
-		besaz("goto", null, null, String.valueOf($3.quad));
+		emit(":=", "0", null, ((EVal)$$).place);
+		emit("goto", null, null, String.valueOf($3.quad));
 		backpatch($4.trueList, nextQuad());
 		backpatch($4.falseList, nextQuad());
-		besaz("+", ((mojood)$$).place, $4.place, ((mojood)$$).place);
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2));
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1));
+		emit("+", ((EVal)$$).place, $4.place, ((EVal)$$).place);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1));
 	}
 	|
 	ebarateSade AND_THEN_KW M ebarateSade {
 		System.out.println("Rule 30.4: " +
 			"bool_expressions: expressions AND_THEN_KW M expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
 		
 		backpatch($1.trueList, nextQuad());
-		besaz(":=", "1", null, ((mojood)$$).place);
-		besaz("goto", null, null, String.valueOf($3.quad));
+		emit(":=", "1", null, ((EVal)$$).place);
+		emit("goto", null, null, String.valueOf($3.quad));
 		backpatch($1.falseList, nextQuad());
-		besaz(":=", "0", null, ((mojood)$$).place);
-		besaz("goto", null, null, String.valueOf($3.quad));
+		emit(":=", "0", null, ((EVal)$$).place);
+		emit("goto", null, null, String.valueOf($3.quad));
 		backpatch($4.trueList, nextQuad());
 		backpatch($4.falseList, nextQuad());
-		besaz("*", ((mojood)$$).place, $4.place, ((mojood)$$).place);
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
+		emit("*", ((EVal)$$).place, $4.place, ((EVal)$$).place);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2));// result will be backpatched
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1));// result will be backpatched
 	}
 	|
 	NOT_KW ebarateSade {
 		System.out.println("Rule 30.5: " +
 			"bool_expressions: NOT_KW expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = $2.falseList;
-		((mojood)$$).falseList = $2.trueList;
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = $2.falseList;
+		((EVal)$$).falseList = $2.trueList;
 	}
 	|
 	ebarateRabetei {
 		System.out.println("Rule 30.6 ebarateRabetei to ebarateSade");
-		$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
+		$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
 	}
 
 ebarateRabetei:
 	ebarateRiaziManteghi {
 		System.out.println("Rule 31.1 ebarateRiaziManteghi to ebarateRabetei");
-		$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
+		$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
 	}
 	|
 	ebarateRiaziManteghi LESS_THAN_KW ebarateRiaziManteghi {
 		System.out.println("Rule 31.2: " +
 			"bool_expressions: expressions LT_KW expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
-		besaz("<", $1.place, $3.place, ((mojood)$$).place);
-		besaz("check", ((mojood)$$).place, null, "-"); // result will be backpatched.
-		besaz("goto", null, null, "-"); // result will be backpatched.
+		emit("<", $1.place, $3.place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi LESS_EQUAL_KW ebarateRiaziManteghi {
 		System.out.println("Rule 31.3: " +
 			"bool_expressions: expressions LE_KW expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
-		besaz("<=", $1.place, $3.place, ((mojood)$$).place);
-		besaz("check", ((mojood)$$).place, null, "-"); // result will be backpatched.
-		besaz("goto", null, null, "-"); // result will be backpatched.
+		emit("<=", $1.place, $3.place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MORE_THAN_KW ebarateRiaziManteghi {
 		System.out.println("Rule 31.4: " +
 			"bool_expressions: expressions GT_KW expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
-		besaz(">", $1.place, $3.place, ((mojood)$$).place);
-		besaz("check", ((mojood)$$).place, null, "-"); // result will be backpatched.
-		besaz("goto", null, null, "-"); // result will be backpatched.
+		emit(">", $1.place, $3.place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MORE_EQUAL_KW ebarateRiaziManteghi {
 		System.out.println("Rule 31.5: " +
 			"bool_expressions: expressions GE_KW expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
-		besaz(">=", $1.place, $3.place, ((mojood)$$).place);
-		besaz("check", ((mojood)$$).place, null, "-"); // result will be backpatched.
-		besaz("goto", null, null, "-"); // result will be backpatched.
+		emit(">=", $1.place, $3.place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
 	ebarateRiaziManteghi EQUAL_EQUAL_KW ebarateRiaziManteghi {
 		System.out.println("Rule 31.6: " +
 			"bool_expressions: expressions EQ_KW expressions");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
-		besaz("==", $1.place, $3.place, ((mojood)$$).place);
-		besaz("check", ((mojood)$$).place, null, "-"); // result will be backpatched.
-		besaz("goto", null, null, "-"); // result will be backpatched.
+		emit("==", $1.place, $3.place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 
 ebarateRiaziManteghi :
 	ebarateYegani {
-	
+		if($1.type == EVal.TYPE_CODE_BOOLEAN){
+			System.out.println("Rule 27.4: " +
+			"constant_expressions: saved_boolean");
+			$$ = new EVal();
+			((EVal)$$).place = $1.place;
+			((EVal)$$).type = $1.type;
+			((EVal)$$).trueList = $1.trueList;
+			((EVal)$$).falseList = $1.falseList;
+			((EVal)$$).nextList = $1.nextList;
+		}
+		else{
 		System.out.println("Rule 26.4: " +
 			"expressions: saved_identifier");
-		int index = jadvaleasli.lookUp($1.place);
-		if (index == jadvaleasli.NOT_IN_SYMBOL_TABLE) {
-			System.err.println("Error! \"" + lexIdentifier + "\" is not shenasayiShode.");
+		int index = symbolTable.lookUp($1.place);
+		if (index == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+			System.err.println("Error! \"" + lexIdentifier + "\" is not declared.");
 			return YYABORT;
 		}
-		if (jadvaleasli.arrays.get(index)) {
+		if (symbolTable.arrays.get(index)) {
 			System.err.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
 			return YYABORT;
 		}
-		$$ = new mojood();
-		((mojood)$$).place = jadvaleasli.names.get(index);
-		((mojood)$$).type = jadvaleasli.types.get(index);
+		$$ = new EVal();
+		((EVal)$$).place = symbolTable.names.get(index);
+		((EVal)$$).type = symbolTable.types.get(index);
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		}
 	}
 	|
 	ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi {
 	
 		System.out.println("Rule 29.1: " +
 			"arithmatic_expressions: expressions ADD_KW expressions");
-		if((($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| ($1.type == mojood.TYPE_CODE_REAL && $3.type == mojood.TYPE_CODE_REAL)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid($1.type, false);
-			((mojood)$$).type = $1.type;
-			besaz("+", $1.place, $3.place, ((mojood)$$).place);
-		} else if(($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $1.place, TYPE_STRING_REAL, tmp);
-			besaz("+", tmp, $3.place, ((mojood)$$).place);
-		} else if($1.type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("+", $1.place, tmp, ((mojood)$$).place);
+		if((($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| ($1.type == EVal.TYPE_CODE_REAL && $3.type == EVal.TYPE_CODE_REAL)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp($1.type, false);
+			((EVal)$$).type = $1.type;
+			emit("+", $1.place, $3.place, ((EVal)$$).place);
+		} else if(($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $1.place, TYPE_STRING_REAL, tmp);
+			emit("+", tmp, $3.place, ((EVal)$$).place);
+		} else if($1.type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("+", $1.place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"+\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MINUS_KW ebarateRiaziManteghi {
 		System.out.println("Rule 29.2: " +
 			"arithmatic_expressions: expressions SUB_KW expressions");
-		if((($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| ($1.type == mojood.TYPE_CODE_REAL && $3.type == mojood.TYPE_CODE_REAL)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid($1.type, false);
-			((mojood)$$).type = $1.type;
-			besaz("-", $1.place, $3.place, ((mojood)$$).place);
-		} else if(($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $1.place, TYPE_STRING_REAL, tmp);
-			besaz("-", tmp, $3.place, ((mojood)$$).place);
-		} else if($1.type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("-", $1.place, tmp, ((mojood)$$).place);
+		if((($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| ($1.type == EVal.TYPE_CODE_REAL && $3.type == EVal.TYPE_CODE_REAL)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp($1.type, false);
+			((EVal)$$).type = $1.type;
+			emit("-", $1.place, $3.place, ((EVal)$$).place);
+		} else if(($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $1.place, TYPE_STRING_REAL, tmp);
+			emit("-", tmp, $3.place, ((EVal)$$).place);
+		} else if($1.type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("-", $1.place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"-\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MULTIPLY_KW ebarateRiaziManteghi {
 		System.out.println("Rule 29.3: " +
 			"arithmatic_expressions: expressions MUL_KW expressions");
-		if((($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| ($1.type == mojood.TYPE_CODE_REAL && $3.type == mojood.TYPE_CODE_REAL)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid($1.type, false);
-			((mojood)$$).type = $1.type;
-			besaz("*", $1.place, $3.place, ((mojood)$$).place);
-		} else if(($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $1.place, TYPE_STRING_REAL, tmp);
-			besaz("*", tmp, $3.place, ((mojood)$$).place);
-		} else if($1.type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("*", $1.place, tmp, ((mojood)$$).place);
+		if((($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| ($1.type == EVal.TYPE_CODE_REAL && $3.type == EVal.TYPE_CODE_REAL)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp($1.type, false);
+			((EVal)$$).type = $1.type;
+			emit("*", $1.place, $3.place, ((EVal)$$).place);
+		} else if(($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $1.place, TYPE_STRING_REAL, tmp);
+			emit("*", tmp, $3.place, ((EVal)$$).place);
+		} else if($1.type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("*", $1.place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"*\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi DEVIDE_KW ebarateRiaziManteghi {
 	
 		System.out.println("Rule 29.4: " +
 			"arithmatic_expressions: expressions DIV_KW expressions");
-		if((($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-				&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN))
-			|| ($1.type == mojood.TYPE_CODE_REAL && $3.type == mojood.TYPE_CODE_REAL)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid($1.type, false);
-			((mojood)$$).type = $1.type;
-			besaz("/", $1.place, $3.place, ((mojood)$$).place);
-		} else if(($1.type == mojood.TYPE_CODE_INTEGER || $1.type == mojood.TYPE_CODE_CHAR || $1.type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $1.place, TYPE_STRING_REAL, tmp);
-			besaz("/", tmp, $3.place, ((mojood)$$).place);
-		} else if($1.type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER || $3.type == mojood.TYPE_CODE_CHAR || $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_REAL;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			besaz("cast", $3.place, TYPE_STRING_REAL, tmp);
-			besaz("/", $1.place, tmp, ((mojood)$$).place);
+		if((($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN))
+			|| ($1.type == EVal.TYPE_CODE_REAL && $3.type == EVal.TYPE_CODE_REAL)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp($1.type, false);
+			((EVal)$$).type = $1.type;
+			emit("/", $1.place, $3.place, ((EVal)$$).place);
+		} else if(($1.type == EVal.TYPE_CODE_INTEGER || $1.type == EVal.TYPE_CODE_CHAR || $1.type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $1.place, TYPE_STRING_REAL, tmp);
+			emit("/", tmp, $3.place, ((EVal)$$).place);
+		} else if($1.type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER || $3.type == EVal.TYPE_CODE_CHAR || $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_REAL;
+			String tmp = newTemp(EVal.TYPE_CODE_REAL, false);
+			emit("cast", $3.place, TYPE_STRING_REAL, tmp);
+			emit("/", $1.place, tmp, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"/\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
 	ebarateRiaziManteghi MOD_KW ebarateRiaziManteghi {
 		System.out.println("Rule 29.5: " +
 			"arithmatic_expressions: expressions MOD_KW expressions");
-		if(($1.type == mojood.TYPE_CODE_INTEGER
-				|| $1.type == mojood.TYPE_CODE_CHAR
-				|| $1.type == mojood.TYPE_CODE_BOOLEAN)
-			&& ($3.type == mojood.TYPE_CODE_INTEGER
-				|| $3.type == mojood.TYPE_CODE_CHAR
-				|| $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_INTEGER, false);
-			((mojood)$$).type = mojood.TYPE_CODE_INTEGER;
-			besaz("%", $1.place, $3.place, ((mojood)$$).place);
-		} else if(($1.type == mojood.TYPE_CODE_INTEGER
-				|| $1.type == mojood.TYPE_CODE_CHAR
-				|| $1.type == mojood.TYPE_CODE_BOOLEAN)
-			&& $3.type == mojood.TYPE_CODE_REAL) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_INTEGER;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_INTEGER, false);
-			besaz("cast", $3.place, TYPE_STRING_INTEGER, tmp);
-			besaz("%", $1.place, tmp, ((mojood)$$).place);
-		} else if($1.type == mojood.TYPE_CODE_REAL
-			&& ($3.type == mojood.TYPE_CODE_INTEGER
-				|| $3.type == mojood.TYPE_CODE_CHAR
-				|| $3.type == mojood.TYPE_CODE_BOOLEAN)) {
-			$$ = new mojood();
-			((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-			((mojood)$$).type = mojood.TYPE_CODE_INTEGER;
-			String tmp = moteqayerejadid(mojood.TYPE_CODE_INTEGER, false);
-			besaz("cast", $1.place, TYPE_STRING_INTEGER, tmp);
-			besaz("%", tmp, $3.place, ((mojood)$$).place);
+		if(($1.type == EVal.TYPE_CODE_INTEGER
+				|| $1.type == EVal.TYPE_CODE_CHAR
+				|| $1.type == EVal.TYPE_CODE_BOOLEAN)
+			&& ($3.type == EVal.TYPE_CODE_INTEGER
+				|| $3.type == EVal.TYPE_CODE_CHAR
+				|| $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
+			((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
+			emit("%", $1.place, $3.place, ((EVal)$$).place);
+		} else if(($1.type == EVal.TYPE_CODE_INTEGER
+				|| $1.type == EVal.TYPE_CODE_CHAR
+				|| $1.type == EVal.TYPE_CODE_BOOLEAN)
+			&& $3.type == EVal.TYPE_CODE_REAL) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
+			String tmp = newTemp(EVal.TYPE_CODE_INTEGER, false);
+			emit("cast", $3.place, TYPE_STRING_INTEGER, tmp);
+			emit("%", $1.place, tmp, ((EVal)$$).place);
+		} else if($1.type == EVal.TYPE_CODE_REAL
+			&& ($3.type == EVal.TYPE_CODE_INTEGER
+				|| $3.type == EVal.TYPE_CODE_CHAR
+				|| $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+			$$ = new EVal();
+			((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+			((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
+			String tmp = newTemp(EVal.TYPE_CODE_INTEGER, false);
+			emit("cast", $1.place, TYPE_STRING_INTEGER, tmp);
+			emit("%", tmp, $3.place, ((EVal)$$).place);
 		} else {
 			System.err.println("Error! Invalid type for \"%\" operation.");
 			return YYABORT;
 		}
 
-		((mojood)$$).trueList = mojood.makeList(nextQuad());
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 
 
@@ -1167,11 +1314,11 @@ ebarateYegani :
 	amalgareYegani ebarateYegani {System.out.println("Rule 35.1");}
 	|
 	amel {System.out.println("Rule 35.2 amel to ebarateYegani");
-	$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;}
+	$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;}
 
 amalgareYegani :
 	MINUS_KW {System.out.println("Rule 36.1");}
@@ -1183,28 +1330,28 @@ amalgareYegani :
 amel :
 	taghirpazir  {
 		System.out.println("Rule 37.1 taghirpazir to amel");
-		$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;}
+		$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;}
 	
 	|
 	taghirnapazir  {System.out.println("Rule 37.2 taghirnapazir to amel");
-					$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;}
+					$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;}
 
 taghirpazir :
 	saved_identifier  {
 		System.out.println("Rule 38.1 saved_identifier to taghirpazir");
-		$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;}
+		$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;}
 	
 	|
 	taghirpazir BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW  {System.out.println("Rule 38.2");}
@@ -1213,21 +1360,21 @@ taghirpazir :
 	
 taghirnapazir :
 	PARANTHESIS_BAZ_KW ebarat PARANTHESIS_BASTE_KW  {System.out.println("Rule 39.1");
-		$$ = new mojood();	
-		((mojood)$$).place = $2.place;
-		((mojood)$$).type = $2.type;
-		((mojood)$$).trueList = $2.trueList;
-		((mojood)$$).falseList = $2.falseList;}
+		$$ = new EVal();	
+		((EVal)$$).place = $2.place;
+		((EVal)$$).type = $2.type;
+		((EVal)$$).trueList = $2.trueList;
+		((EVal)$$).falseList = $2.falseList;}
 	|
 	sedaZadan  {System.out.println("Rule 39.2");}
 	|
 	meghdareSabet {
 		System.out.println("Rule 39.3: meghdareSabet to taghirnapazir");
-		$$ = new mojood();	
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
+		$$ = new EVal();	
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
 	}
 
 sedaZadan :
@@ -1244,134 +1391,138 @@ meghdareSabet:
 	saved_integer {
 		System.out.println("Rule 43.1: " +
 			"constant_expressions: saved_integer");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
-		((mojood)$$).nextList = $1.nextList;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
+		((EVal)$$).nextList = $1.nextList;
 	}
 	|
 	saved_real {
 		System.out.println("Rule 43.2: " +
 			"constant_expressions: saved_real");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
-		((mojood)$$).nextList = $1.nextList;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
+		((EVal)$$).nextList = $1.nextList;
 	}
 	|
 	saved_char {
 		System.out.println("Rule 43.3: " +
 			"constant_expressions: saved_char");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
-		((mojood)$$).nextList = $1.nextList;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
+		((EVal)$$).nextList = $1.nextList;
 	}
 	|
 	saved_boolean {
 		System.out.println("Rule 43.4: " +
 			"constant_expressions: saved_boolean");
-		$$ = new mojood();
-		((mojood)$$).place = $1.place;
-		((mojood)$$).type = $1.type;
-		((mojood)$$).trueList = $1.trueList;
-		((mojood)$$).falseList = $1.falseList;
-		((mojood)$$).nextList = $1.nextList;
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
+		((EVal)$$).nextList = $1.nextList;
 	} 
 
 saved_identifier:
 	SHENASE {
 		System.out.println("Rule 30: " +
 			"saved_identifier: IDENTIFIER");
-		$$ = new mojood();
-		((mojood)$$).place = lexIdentifier;
+		$$ = new EVal();
+		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+
 }
 	
 saved_integer:
 	ADAD {
 		System.out.println("Rule 31: " +
 			"saved_integer: INTEGER_CONSTANT");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_INTEGER, false);
-		((mojood)$$).type = mojood.TYPE_CODE_INTEGER;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
+		((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		besaz(":=", String.valueOf(lexInt), null, ((mojood)$$).place);
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit(":=", String.valueOf(lexInt), null, ((EVal)$$).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 
 }
 
 saved_real:
 	ADAD_ASHARI {
-		S                                                                                                                                                                                                          ut.println("Rule 32: " +
+		System.out.println("Rule 32: " +
 			"saved_real: REAL_CONSTANT");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_REAL, false);
-		((mojood)$$).type = mojood.TYPE_CODE_REAL;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_REAL, false);
+		((EVal)$$).type = EVal.TYPE_CODE_REAL;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		besaz(":=", String.valueOf(lexReal), null, ((mojood)$$).place);
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit(":=", String.valueOf(lexReal), null, ((EVal)$$).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 }
 
 saved_char:
 	HARFE_SABET {
 		System.out.println("saved_char: HARFE_SABET");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_CHAR, false);
-		((mojood)$$).type = mojood.TYPE_CODE_CHAR;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_CHAR, false);
+		((EVal)$$).type = EVal.TYPE_CODE_CHAR;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 
-		besaz(":=", "'" + String.valueOf(lexChar) + "'", null, ((mojood)$$).place);
-		//besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		//besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit(":=", "'" + String.valueOf(lexChar) + "'", null, ((EVal)$$).place);
+		//emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		//emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 }
 	
 saved_boolean:
 	TRUE_KW {
 		System.out.println("Rule 34.1: " +
 			"saved_boolean: TRUE_KW");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 		
-		besaz(":=", "1", null, ((mojood)$$).place);
+		emit(":=", "1", null, ((EVal)$$).place);
 		
-		besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit("check", ((EVal)$$).place, null, "-"); // result may be backpatched.
+		emit("goto", null, null, "-"); // result may be backpatched.
 	}|
 	FALSE_KW {
 		System.out.println("Rule 34.2: " +
 			"saved_boolean: FALSE_KW");
-		$$ = new mojood();
-		((mojood)$$).place = moteqayerejadid(mojood.TYPE_CODE_BOOLEAN, false);
-		((mojood)$$).type = mojood.TYPE_CODE_BOOLEAN;
-		((mojood)$$).trueList = mojood.makeList(nextQuad() + 1);
-		((mojood)$$).falseList = mojood.makeList(nextQuad() + 2);
-		((mojood)$$).nextList = mojood.merge(((mojood)$$).trueList, ((mojood)$$).falseList);
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_BOOLEAN, false);
+		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 		
-		besaz(":=", "0", null, ((mojood)$$).place);
+		emit(":=", "0", null, ((EVal)$$).place);
 
 		
-		besaz("check", ((mojood)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
-		besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+		emit("check", ((EVal)$$).place, null, "-"); // result may be backpatched.
+		emit("goto", null, null, "-"); // result may be backpatched.
 
 	}
 	
@@ -1379,21 +1530,21 @@ M:
 	{
 		System.out.println("Rule 35: " +
 			"M: ");
-		$$ = new mojood();
-		((mojood)$$).quad = nextQuad();
+		$$ = new EVal();
+		((EVal)$$).quad = nextQuad();
 	}
 
 N:
 	{
 		System.out.println("Rule 36: " +
 			"N: ");
-		$$ = new mojood();
-		((mojood)$$).nextList = mojood.makeList(nextQuad());
-		besaz("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+		$$ = new EVal();
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 }
 
 %%
-class mojood {
+class EVal {
 
 	public static final int TYPE_CODE_UNKNOWN = -1;
 	public static final int TYPE_CODE_INTEGER = 0;
@@ -1416,12 +1567,12 @@ class mojood {
 	public ArrayList<Integer> trueList;
 	public ArrayList<Integer> falseList;
 
-	public ArrayList<ArrayList<mojood>> initializersList;
-	public ArrayList<mojood> shenasayiShodes;
+	public ArrayList<ArrayList<EVal>> initializersList;
+	public ArrayList<EVal> declareds;
 
-	public ArrayList<mojood> initializers;
+	public ArrayList<EVal> initializers;
 
-	public mojood() {
+	public EVal() {
 	}
 
 	public static ArrayList<Integer> makeList(int number) {
@@ -1437,15 +1588,15 @@ class mojood {
 		return result;
 	}
 
-	public static ArrayList<ArrayList<mojood>> makeInitializersList(ArrayList<mojood> initializers) {
-		ArrayList<ArrayList<mojood>> result = new ArrayList<>();
+	public static ArrayList<ArrayList<EVal>> makeInitializersList(ArrayList<EVal> initializers) {
+		ArrayList<ArrayList<EVal>> result = new ArrayList<>();
 		result.add(initializers);
 		return result;
 	}
 
-	public static ArrayList<mojood> makeInitializersOrshenasayiShodes(mojood initializerOrdshenasayiShode) {
-		ArrayList<mojood> result = new ArrayList<>();
-		result.add(initializerOrdshenasayiShode);
+	public static ArrayList<EVal> makeInitializersOrDeclareds(EVal initializerOrdDeclared) {
+		ArrayList<EVal> result = new ArrayList<>();
+		result.add(initializerOrdDeclared);
 		return result;
 	}
 }
@@ -1524,7 +1675,7 @@ class Quadruple {
 	}
 }
 
-class jadvaleasli {
+class SymbolTable {
 
 	public static final int NOT_IN_SYMBOL_TABLE = -1;
 
@@ -1532,7 +1683,7 @@ class jadvaleasli {
 	public ArrayList<Integer> types;
 	public ArrayList<Boolean> arrays;
 
-	public jadvaleasli() {
+	public SymbolTable() {
 		names = new ArrayList<>();
 		types = new ArrayList<>();
 		arrays = new ArrayList<>();
@@ -1542,7 +1693,7 @@ class jadvaleasli {
 		return names.indexOf(name);
 	}
 
-	public boolean addTojadvaleasli(String name, int type, boolean array) {
+	public boolean addToSymbolTable(String name, int type, boolean array) {
 		if (lookUp(name) == -1) {
 			System.out.println(name+" added");
 			names.add(name);
@@ -1560,19 +1711,19 @@ class jadvaleasli {
         String res = "";
         for(int i = 0; i < names.size(); i++) {
             switch (types.get(i)) {
-                case mojood.TYPE_CODE_INTEGER:
+                case EVal.TYPE_CODE_INTEGER:
                     res += "\t" + YYParser.TYPE_STRING_INTEGER;
                     break;
-                case mojood.TYPE_CODE_REAL:
+                case EVal.TYPE_CODE_REAL:
                     res += "\t" + YYParser.TYPE_STRING_REAL;
                     break;
-                case mojood.TYPE_CODE_CHAR:
+                case EVal.TYPE_CODE_CHAR:
                     res += "\t" + YYParser.TYPE_STRING_CHAR;
                     break;
-                case mojood.TYPE_CODE_BOOLEAN:
+                case EVal.TYPE_CODE_BOOLEAN:
                     res += "\t" + YYParser.TYPE_STRING_BOOLEAN;
                     break;
-                case mojood.TYPE_CODE_RANGE:
+                case EVal.TYPE_CODE_RANGE:
                     continue;
             }
             res += (arrays.get(i) ? " *" : " ") + names.get(i) + ";\n";
