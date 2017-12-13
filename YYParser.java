@@ -1002,7 +1002,8 @@ class YYParser
 /* Line 577 of "YYParser.y"  */
     {System.out.println("Rule 19.1");
 	yyval = new EVal();
-	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;};
+	//((EVal)$$).nextList = $1.nextList;
+	};
   break;
     
 
@@ -1010,7 +1011,7 @@ class YYParser
   if (yyn == 38)
     
 /* Line 353 of lalr1.java  */
-/* Line 581 of "YYParser.y"  */
+/* Line 582 of "YYParser.y"  */
     {System.out.println("Rule 19.2");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;};
@@ -1021,7 +1022,7 @@ class YYParser
   if (yyn == 39)
     
 /* Line 353 of lalr1.java  */
-/* Line 585 of "YYParser.y"  */
+/* Line 586 of "YYParser.y"  */
     {System.out.println("Rule 19.3");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;};
@@ -1032,7 +1033,7 @@ class YYParser
   if (yyn == 40)
     
 /* Line 353 of lalr1.java  */
-/* Line 589 of "YYParser.y"  */
+/* Line 590 of "YYParser.y"  */
     {System.out.println("Rule 19.4");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;};
@@ -1043,7 +1044,7 @@ class YYParser
   if (yyn == 41)
     
 /* Line 353 of lalr1.java  */
-/* Line 593 of "YYParser.y"  */
+/* Line 594 of "YYParser.y"  */
     {System.out.println("Rule 19.5");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;};
@@ -1054,7 +1055,7 @@ class YYParser
   if (yyn == 42)
     
 /* Line 353 of lalr1.java  */
-/* Line 597 of "YYParser.y"  */
+/* Line 598 of "YYParser.y"  */
     {System.out.println("Rule 19.6");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (1-(1)))).nextList;};
@@ -1065,11 +1066,11 @@ class YYParser
   if (yyn == 43)
     
 /* Line 353 of lalr1.java  */
-/* Line 602 of "YYParser.y"  */
+/* Line 603 of "YYParser.y"  */
     {
 		System.out.println("Rule 20.1");
 		yyval = new EVal();
-		//((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
+		//((EVal)$$).nextList = ;
 	};
   break;
     
@@ -1078,7 +1079,7 @@ class YYParser
   if (yyn == 44)
     
 /* Line 353 of lalr1.java  */
-/* Line 608 of "YYParser.y"  */
+/* Line 609 of "YYParser.y"  */
     {
 		System.out.println("Rule 20.2");
 	};
@@ -1089,7 +1090,7 @@ class YYParser
   if (yyn == 45)
     
 /* Line 353 of lalr1.java  */
-/* Line 612 of "YYParser.y"  */
+/* Line 613 of "YYParser.y"  */
     {
 		System.out.println("Rule 20.3");
 	};
@@ -1100,7 +1101,7 @@ class YYParser
   if (yyn == 46)
     
 /* Line 353 of lalr1.java  */
-/* Line 616 of "YYParser.y"  */
+/* Line 617 of "YYParser.y"  */
     {
 		System.out.println("Rule 20.4");
 	};
@@ -1111,7 +1112,7 @@ class YYParser
   if (yyn == 47)
     
 /* Line 353 of lalr1.java  */
-/* Line 621 of "YYParser.y"  */
+/* Line 622 of "YYParser.y"  */
     {
 	System.out.println("Rule 21.1 jomleha : jomleha M jomle");
 	yyval = new EVal();
@@ -1125,7 +1126,7 @@ class YYParser
   if (yyn == 48)
     
 /* Line 353 of lalr1.java  */
-/* Line 628 of "YYParser.y"  */
+/* Line 629 of "YYParser.y"  */
     {
 	System.out.println("Rule 21.2 jomleha : jomle");
 	yyval = new EVal();
@@ -1138,7 +1139,7 @@ class YYParser
   if (yyn == 49)
     
 /* Line 353 of lalr1.java  */
-/* Line 636 of "YYParser.y"  */
+/* Line 637 of "YYParser.y"  */
     {
 		System.out.println("Rule 22.1 jomleyeEbarat : ebarat NOGHTE_VIRGUL M");
 		yyval = new EVal();
@@ -1151,7 +1152,7 @@ class YYParser
   if (yyn == 50)
     
 /* Line 353 of lalr1.java  */
-/* Line 642 of "YYParser.y"  */
+/* Line 643 of "YYParser.y"  */
     {
 	System.out.println("Rule 22.2 jomleyeEbarat : NOGHTE_VIRGUL M");
 	yyval = new EVal();
@@ -1163,7 +1164,7 @@ class YYParser
   if (yyn == 51)
     
 /* Line 353 of lalr1.java  */
-/* Line 647 of "YYParser.y"  */
+/* Line 648 of "YYParser.y"  */
     {
 		System.out.println("Rule 23.2 jomleyeEntekhab : IF_KW ebarateRiaziManteghi THEN_KW M jomle N ELSE_KW M jomle ");
 		yyval = new EVal();
@@ -1180,7 +1181,7 @@ class YYParser
   if (yyn == 52)
     
 /* Line 353 of lalr1.java  */
-/* Line 655 of "YYParser.y"  */
+/* Line 656 of "YYParser.y"  */
     {
 		System.out.println("Rule otherjomle " +
 			"statement: otherjomle");
@@ -1194,7 +1195,7 @@ class YYParser
   if (yyn == 53)
     
 /* Line 353 of lalr1.java  */
-/* Line 662 of "YYParser.y"  */
+/* Line 663 of "YYParser.y"  */
     {
 		System.out.println("Rule 21.1: " +
 			"unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M unmatched");
@@ -1211,7 +1212,7 @@ class YYParser
   if (yyn == 54)
     
 /* Line 353 of lalr1.java  */
-/* Line 671 of "YYParser.y"  */
+/* Line 672 of "YYParser.y"  */
     {
 		System.out.println("Rule 21.2: " +
 			"unmatched: IF_KW ebarateSade THEN_KW M statement");
@@ -1226,7 +1227,7 @@ class YYParser
   if (yyn == 55)
     
 /* Line 353 of lalr1.java  */
-/* Line 681 of "YYParser.y"  */
+/* Line 682 of "YYParser.y"  */
     {System.out.println("Rule 23.3 jomleyeEntekhab : KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE onsoreHalat onsorePishfarz END_KW ");
 		yyval = new EVal();
 		((EVal)yyval).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
@@ -1255,7 +1256,7 @@ class YYParser
   if (yyn == 56)
     
 /* Line 353 of lalr1.java  */
-/* Line 703 of "YYParser.y"  */
+/* Line 704 of "YYParser.y"  */
     {System.out.println("Rule 23.4");};
   break;
     
@@ -1264,7 +1265,7 @@ class YYParser
   if (yyn == 57)
     
 /* Line 353 of lalr1.java  */
-/* Line 707 of "YYParser.y"  */
+/* Line 708 of "YYParser.y"  */
     { System.out.println("Rule 24.1 onsoreHalat : SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL");
 	yyval = new EVal();
 		((EVal)yyval).initList = EVal.makeList(((EVal)(yystack.valueAt (8-(2)))).quad); // Starting point of saving saved_integer is stored in initList;
@@ -1281,7 +1282,7 @@ class YYParser
   if (yyn == 58)
     
 /* Line 353 of lalr1.java  */
-/* Line 717 of "YYParser.y"  */
+/* Line 718 of "YYParser.y"  */
     {System.out.println("Rule 24.2 onsoreHalat : onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL");
 	yyval = new EVal();
 		((EVal)yyval).initList = ((EVal)(yystack.valueAt (9-(1)))).initList;
@@ -1300,7 +1301,7 @@ class YYParser
   if (yyn == 59)
     
 /* Line 353 of lalr1.java  */
-/* Line 730 of "YYParser.y"  */
+/* Line 731 of "YYParser.y"  */
     {System.out.println("Rule 25 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL");
 	yyval = new EVal();
 		((EVal)yyval).quad = ((EVal)(yystack.valueAt (6-(3)))).quad;
@@ -1313,7 +1314,7 @@ class YYParser
   if (yyn == 60)
     
 /* Line 353 of lalr1.java  */
-/* Line 737 of "YYParser.y"  */
+/* Line 738 of "YYParser.y"  */
     {System.out.println("Rule 26 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle ");
 	yyval = new EVal();
 		((EVal)yyval).nextList = ((EVal)(yystack.valueAt (7-(4)))).falseList;
@@ -1328,7 +1329,7 @@ class YYParser
   if (yyn == 61)
     
 /* Line 353 of lalr1.java  */
-/* Line 747 of "YYParser.y"  */
+/* Line 748 of "YYParser.y"  */
     {System.out.println("Rule 27.1");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (3-(2)))).nextList;};
@@ -1339,7 +1340,7 @@ class YYParser
   if (yyn == 62)
     
 /* Line 353 of lalr1.java  */
-/* Line 751 of "YYParser.y"  */
+/* Line 752 of "YYParser.y"  */
     {System.out.println("Rule 27.2");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (3-(2)))).nextList;};
@@ -1350,7 +1351,7 @@ class YYParser
   if (yyn == 63)
     
 /* Line 353 of lalr1.java  */
-/* Line 756 of "YYParser.y"  */
+/* Line 757 of "YYParser.y"  */
     {System.out.println("Rule 28");
 	yyval = new EVal();
 	((EVal)yyval).nextList = ((EVal)(yystack.valueAt (3-(2)))).nextList;};
@@ -1361,7 +1362,7 @@ class YYParser
   if (yyn == 64)
     
 /* Line 353 of lalr1.java  */
-/* Line 761 of "YYParser.y"  */
+/* Line 762 of "YYParser.y"  */
     {
 	System.out.println("Rule 29.1");
 	if(((EVal)(yystack.valueAt (3-(3)))).type == EVal.TYPE_CODE_BOOLEAN){
@@ -1394,7 +1395,7 @@ class YYParser
   if (yyn == 65)
     
 /* Line 353 of lalr1.java  */
-/* Line 787 of "YYParser.y"  */
+/* Line 788 of "YYParser.y"  */
     {
 	
 		System.out.println("Rule 29.1: " +
@@ -1436,7 +1437,7 @@ class YYParser
   if (yyn == 66)
     
 /* Line 353 of lalr1.java  */
-/* Line 822 of "YYParser.y"  */
+/* Line 823 of "YYParser.y"  */
     {
 	
 		System.out.println("Rule 29.1: " +
@@ -1478,7 +1479,7 @@ class YYParser
   if (yyn == 67)
     
 /* Line 353 of lalr1.java  */
-/* Line 857 of "YYParser.y"  */
+/* Line 858 of "YYParser.y"  */
     {
 	
 		System.out.println("Rule 29.1: " +
@@ -1520,7 +1521,7 @@ class YYParser
   if (yyn == 68)
     
 /* Line 353 of lalr1.java  */
-/* Line 892 of "YYParser.y"  */
+/* Line 893 of "YYParser.y"  */
     {
 	
 		System.out.println("Rule 29.1: " +
@@ -1562,7 +1563,7 @@ class YYParser
   if (yyn == 69)
     
 /* Line 353 of lalr1.java  */
-/* Line 927 of "YYParser.y"  */
+/* Line 928 of "YYParser.y"  */
     {System.out.println("Rule 29.6");};
   break;
     
@@ -1571,7 +1572,7 @@ class YYParser
   if (yyn == 70)
     
 /* Line 353 of lalr1.java  */
-/* Line 929 of "YYParser.y"  */
+/* Line 930 of "YYParser.y"  */
     {System.out.println("Rule 29.7");};
   break;
     
@@ -1580,7 +1581,7 @@ class YYParser
   if (yyn == 71)
     
 /* Line 353 of lalr1.java  */
-/* Line 931 of "YYParser.y"  */
+/* Line 932 of "YYParser.y"  */
     {System.out.println(" Rule 29.8 ebarateSade to ebarat");
 	yyval = new EVal();	
 		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
@@ -1594,7 +1595,7 @@ class YYParser
   if (yyn == 72)
     
 /* Line 353 of lalr1.java  */
-/* Line 939 of "YYParser.y"  */
+/* Line 940 of "YYParser.y"  */
     {
 		System.out.println("Rule 30.1: " +
 			"bool_expressions: expressions OR_KW M expressions");
@@ -1612,7 +1613,7 @@ class YYParser
   if (yyn == 73)
     
 /* Line 353 of lalr1.java  */
-/* Line 950 of "YYParser.y"  */
+/* Line 951 of "YYParser.y"  */
     {
 		System.out.println("Rule 30.2: " +
 			"bool_expressions: expressions AND_KW M expressions");
@@ -1630,7 +1631,7 @@ class YYParser
   if (yyn == 74)
     
 /* Line 353 of lalr1.java  */
-/* Line 961 of "YYParser.y"  */
+/* Line 962 of "YYParser.y"  */
     {
 		System.out.println("Rule 30.3: " +
 			"bool_expressions: expressions OR_ELSE_KW M expressions");
@@ -1659,7 +1660,7 @@ class YYParser
   if (yyn == 75)
     
 /* Line 353 of lalr1.java  */
-/* Line 983 of "YYParser.y"  */
+/* Line 984 of "YYParser.y"  */
     {
 		System.out.println("Rule 30.4: " +
 			"bool_expressions: expressions AND_THEN_KW M expressions");
@@ -1688,7 +1689,7 @@ class YYParser
   if (yyn == 76)
     
 /* Line 353 of lalr1.java  */
-/* Line 1005 of "YYParser.y"  */
+/* Line 1006 of "YYParser.y"  */
     {
 		System.out.println("Rule 30.5: " +
 			"bool_expressions: NOT_KW expressions");
@@ -1705,7 +1706,7 @@ class YYParser
   if (yyn == 77)
     
 /* Line 353 of lalr1.java  */
-/* Line 1015 of "YYParser.y"  */
+/* Line 1016 of "YYParser.y"  */
     {
 		System.out.println("Rule 30.6 ebarateRabetei to ebarateSade");
 		yyval = new EVal();	
@@ -1721,7 +1722,7 @@ class YYParser
   if (yyn == 78)
     
 /* Line 353 of lalr1.java  */
-/* Line 1025 of "YYParser.y"  */
+/* Line 1026 of "YYParser.y"  */
     {
 		System.out.println("Rule 31.1 ebarateRiaziManteghi to ebarateRabetei");
 		yyval = new EVal();	
@@ -1737,7 +1738,7 @@ class YYParser
   if (yyn == 79)
     
 /* Line 353 of lalr1.java  */
-/* Line 1034 of "YYParser.y"  */
+/* Line 1035 of "YYParser.y"  */
     {
 		System.out.println("Rule 31.2: " +
 			"bool_expressions: expressions LT_KW expressions");
@@ -1758,7 +1759,7 @@ class YYParser
   if (yyn == 80)
     
 /* Line 353 of lalr1.java  */
-/* Line 1048 of "YYParser.y"  */
+/* Line 1049 of "YYParser.y"  */
     {
 		System.out.println("Rule 31.3: " +
 			"bool_expressions: expressions LE_KW expressions");
@@ -1779,7 +1780,7 @@ class YYParser
   if (yyn == 81)
     
 /* Line 353 of lalr1.java  */
-/* Line 1062 of "YYParser.y"  */
+/* Line 1063 of "YYParser.y"  */
     {
 		System.out.println("Rule 31.4: " +
 			"bool_expressions: expressions GT_KW expressions");
@@ -1800,7 +1801,7 @@ class YYParser
   if (yyn == 82)
     
 /* Line 353 of lalr1.java  */
-/* Line 1076 of "YYParser.y"  */
+/* Line 1077 of "YYParser.y"  */
     {
 		System.out.println("Rule 31.5: " +
 			"bool_expressions: expressions GE_KW expressions");
@@ -1821,7 +1822,7 @@ class YYParser
   if (yyn == 83)
     
 /* Line 353 of lalr1.java  */
-/* Line 1090 of "YYParser.y"  */
+/* Line 1091 of "YYParser.y"  */
     {
 		System.out.println("Rule 31.6: " +
 			"bool_expressions: expressions EQ_KW expressions");
@@ -1842,7 +1843,7 @@ class YYParser
   if (yyn == 84)
     
 /* Line 353 of lalr1.java  */
-/* Line 1105 of "YYParser.y"  */
+/* Line 1106 of "YYParser.y"  */
     {
 		if(((EVal)(yystack.valueAt (1-(1)))).type == EVal.TYPE_CODE_BOOLEAN){
 			System.out.println("Rule 27.4: " +
@@ -1866,6 +1867,7 @@ class YYParser
 			System.err.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
 			return YYABORT;
 		}
+		System.out.println("found: "+index);
 		yyval = new EVal();
 		((EVal)yyval).place = symbolTable.names.get(index);
 		((EVal)yyval).type = symbolTable.types.get(index);
@@ -1886,7 +1888,7 @@ class YYParser
   if (yyn == 85)
     
 /* Line 353 of lalr1.java  */
-/* Line 1142 of "YYParser.y"  */
+/* Line 1144 of "YYParser.y"  */
     {
 	
 		System.out.println("Rule 29.1: " +
@@ -1933,7 +1935,7 @@ class YYParser
   if (yyn == 86)
     
 /* Line 353 of lalr1.java  */
-/* Line 1182 of "YYParser.y"  */
+/* Line 1184 of "YYParser.y"  */
     {
 		System.out.println("Rule 29.2: " +
 			"arithmatic_expressions: expressions SUB_KW expressions");
@@ -1979,7 +1981,7 @@ class YYParser
   if (yyn == 87)
     
 /* Line 353 of lalr1.java  */
-/* Line 1221 of "YYParser.y"  */
+/* Line 1223 of "YYParser.y"  */
     {
 		System.out.println("Rule 29.3: " +
 			"arithmatic_expressions: expressions MUL_KW expressions");
@@ -2025,7 +2027,7 @@ class YYParser
   if (yyn == 88)
     
 /* Line 353 of lalr1.java  */
-/* Line 1260 of "YYParser.y"  */
+/* Line 1262 of "YYParser.y"  */
     {
 	
 		System.out.println("Rule 29.4: " +
@@ -2072,7 +2074,7 @@ class YYParser
   if (yyn == 89)
     
 /* Line 353 of lalr1.java  */
-/* Line 1300 of "YYParser.y"  */
+/* Line 1302 of "YYParser.y"  */
     {
 		System.out.println("Rule 29.5: " +
 			"arithmatic_expressions: expressions MOD_KW expressions");
@@ -2125,7 +2127,7 @@ class YYParser
   if (yyn == 90)
     
 /* Line 353 of lalr1.java  */
-/* Line 1348 of "YYParser.y"  */
+/* Line 1350 of "YYParser.y"  */
     {System.out.println("Rule 35.1");};
   break;
     
@@ -2134,7 +2136,7 @@ class YYParser
   if (yyn == 91)
     
 /* Line 353 of lalr1.java  */
-/* Line 1350 of "YYParser.y"  */
+/* Line 1352 of "YYParser.y"  */
     {System.out.println("Rule 35.2 amel to ebarateYegani");
 	yyval = new EVal();	
 		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
@@ -2148,7 +2150,7 @@ class YYParser
   if (yyn == 92)
     
 /* Line 353 of lalr1.java  */
-/* Line 1358 of "YYParser.y"  */
+/* Line 1360 of "YYParser.y"  */
     {System.out.println("Rule 36.1");};
   break;
     
@@ -2157,7 +2159,7 @@ class YYParser
   if (yyn == 93)
     
 /* Line 353 of lalr1.java  */
-/* Line 1360 of "YYParser.y"  */
+/* Line 1362 of "YYParser.y"  */
     {System.out.println("Rule 36.2");};
   break;
     
@@ -2166,7 +2168,7 @@ class YYParser
   if (yyn == 94)
     
 /* Line 353 of lalr1.java  */
-/* Line 1362 of "YYParser.y"  */
+/* Line 1364 of "YYParser.y"  */
     {System.out.println("Rule 36.3");};
   break;
     
@@ -2175,7 +2177,7 @@ class YYParser
   if (yyn == 95)
     
 /* Line 353 of lalr1.java  */
-/* Line 1365 of "YYParser.y"  */
+/* Line 1367 of "YYParser.y"  */
     {
 		System.out.println("Rule 37.1 taghirpazir to amel");
 		yyval = new EVal();	
@@ -2190,7 +2192,7 @@ class YYParser
   if (yyn == 96)
     
 /* Line 353 of lalr1.java  */
-/* Line 1374 of "YYParser.y"  */
+/* Line 1376 of "YYParser.y"  */
     {System.out.println("Rule 37.2 taghirnapazir to amel");
 					yyval = new EVal();	
 		((EVal)yyval).place = ((EVal)(yystack.valueAt (1-(1)))).place;
@@ -2204,7 +2206,7 @@ class YYParser
   if (yyn == 97)
     
 /* Line 353 of lalr1.java  */
-/* Line 1382 of "YYParser.y"  */
+/* Line 1384 of "YYParser.y"  */
     {
 		System.out.println("Rule 38.1 saved_identifier to taghirpazir");
 		yyval = new EVal();	
@@ -2219,7 +2221,7 @@ class YYParser
   if (yyn == 98)
     
 /* Line 353 of lalr1.java  */
-/* Line 1391 of "YYParser.y"  */
+/* Line 1393 of "YYParser.y"  */
     {System.out.println("Rule 38.2");};
   break;
     
@@ -2228,7 +2230,7 @@ class YYParser
   if (yyn == 99)
     
 /* Line 353 of lalr1.java  */
-/* Line 1393 of "YYParser.y"  */
+/* Line 1395 of "YYParser.y"  */
     {System.out.println("Rule 38.3");};
   break;
     
@@ -2237,7 +2239,7 @@ class YYParser
   if (yyn == 100)
     
 /* Line 353 of lalr1.java  */
-/* Line 1396 of "YYParser.y"  */
+/* Line 1398 of "YYParser.y"  */
     {System.out.println("Rule 39.1");
 		yyval = new EVal();	
 		((EVal)yyval).place = ((EVal)(yystack.valueAt (3-(2)))).place;
@@ -2251,7 +2253,7 @@ class YYParser
   if (yyn == 101)
     
 /* Line 353 of lalr1.java  */
-/* Line 1403 of "YYParser.y"  */
+/* Line 1405 of "YYParser.y"  */
     {System.out.println("Rule 39.2");};
   break;
     
@@ -2260,7 +2262,7 @@ class YYParser
   if (yyn == 102)
     
 /* Line 353 of lalr1.java  */
-/* Line 1405 of "YYParser.y"  */
+/* Line 1407 of "YYParser.y"  */
     {
 		System.out.println("Rule 39.3: meghdareSabet to taghirnapazir");
 		yyval = new EVal();	
@@ -2276,7 +2278,7 @@ class YYParser
   if (yyn == 103)
     
 /* Line 353 of lalr1.java  */
-/* Line 1415 of "YYParser.y"  */
+/* Line 1417 of "YYParser.y"  */
     {System.out.println("Rule 40.1");};
   break;
     
@@ -2285,7 +2287,7 @@ class YYParser
   if (yyn == 104)
     
 /* Line 353 of lalr1.java  */
-/* Line 1417 of "YYParser.y"  */
+/* Line 1419 of "YYParser.y"  */
     {System.out.println("Rule 40.2");};
   break;
     
@@ -2294,7 +2296,7 @@ class YYParser
   if (yyn == 105)
     
 /* Line 353 of lalr1.java  */
-/* Line 1420 of "YYParser.y"  */
+/* Line 1422 of "YYParser.y"  */
     {System.out.println("Rule 42.1");};
   break;
     
@@ -2303,7 +2305,7 @@ class YYParser
   if (yyn == 106)
     
 /* Line 353 of lalr1.java  */
-/* Line 1422 of "YYParser.y"  */
+/* Line 1424 of "YYParser.y"  */
     {System.out.println("Rule 42.2");};
   break;
     
@@ -2312,7 +2314,7 @@ class YYParser
   if (yyn == 107)
     
 /* Line 353 of lalr1.java  */
-/* Line 1425 of "YYParser.y"  */
+/* Line 1427 of "YYParser.y"  */
     {
 		System.out.println("Rule 43.1: " +
 			"constant_expressions: saved_integer");
@@ -2330,7 +2332,7 @@ class YYParser
   if (yyn == 108)
     
 /* Line 353 of lalr1.java  */
-/* Line 1436 of "YYParser.y"  */
+/* Line 1438 of "YYParser.y"  */
     {
 		System.out.println("Rule 43.2: " +
 			"constant_expressions: saved_real");
@@ -2348,7 +2350,7 @@ class YYParser
   if (yyn == 109)
     
 /* Line 353 of lalr1.java  */
-/* Line 1447 of "YYParser.y"  */
+/* Line 1449 of "YYParser.y"  */
     {
 		System.out.println("Rule 43.3: " +
 			"constant_expressions: saved_char");
@@ -2366,7 +2368,7 @@ class YYParser
   if (yyn == 110)
     
 /* Line 353 of lalr1.java  */
-/* Line 1458 of "YYParser.y"  */
+/* Line 1460 of "YYParser.y"  */
     {
 		System.out.println("Rule 43.4: " +
 			"constant_expressions: saved_boolean");
@@ -2384,7 +2386,7 @@ class YYParser
   if (yyn == 111)
     
 /* Line 353 of lalr1.java  */
-/* Line 1470 of "YYParser.y"  */
+/* Line 1472 of "YYParser.y"  */
     {
 		System.out.println("Rule 30: " +
 			"saved_identifier: IDENTIFIER");
@@ -2402,7 +2404,7 @@ class YYParser
   if (yyn == 112)
     
 /* Line 353 of lalr1.java  */
-/* Line 1482 of "YYParser.y"  */
+/* Line 1484 of "YYParser.y"  */
     {
 		System.out.println("Rule 31: " +
 			"saved_integer: INTEGER_CONSTANT");
@@ -2425,7 +2427,7 @@ class YYParser
   if (yyn == 113)
     
 /* Line 353 of lalr1.java  */
-/* Line 1499 of "YYParser.y"  */
+/* Line 1501 of "YYParser.y"  */
     {
 		System.out.println("Rule 32: " +
 			"saved_real: REAL_CONSTANT");
@@ -2447,7 +2449,7 @@ class YYParser
   if (yyn == 114)
     
 /* Line 353 of lalr1.java  */
-/* Line 1515 of "YYParser.y"  */
+/* Line 1517 of "YYParser.y"  */
     {
 		System.out.println("saved_char: HARFE_SABET");
 		yyval = new EVal();
@@ -2468,7 +2470,7 @@ class YYParser
   if (yyn == 115)
     
 /* Line 353 of lalr1.java  */
-/* Line 1530 of "YYParser.y"  */
+/* Line 1532 of "YYParser.y"  */
     {
 		System.out.println("Rule 34.1: " +
 			"saved_boolean: TRUE_KW");
@@ -2491,7 +2493,7 @@ class YYParser
   if (yyn == 116)
     
 /* Line 353 of lalr1.java  */
-/* Line 1545 of "YYParser.y"  */
+/* Line 1547 of "YYParser.y"  */
     {
 		System.out.println("Rule 34.2: " +
 			"saved_boolean: FALSE_KW");
@@ -2516,7 +2518,7 @@ class YYParser
   if (yyn == 117)
     
 /* Line 353 of lalr1.java  */
-/* Line 1564 of "YYParser.y"  */
+/* Line 1566 of "YYParser.y"  */
     {
 		System.out.println("Rule 35: " +
 			"M: ");
@@ -2530,7 +2532,7 @@ class YYParser
   if (yyn == 118)
     
 /* Line 353 of lalr1.java  */
-/* Line 1572 of "YYParser.y"  */
+/* Line 1574 of "YYParser.y"  */
     {
 		System.out.println("Rule 36: " +
 			"N: ");
@@ -2544,7 +2546,7 @@ class YYParser
 
 
 /* Line 353 of lalr1.java  */
-/* Line 2548 of "YYParser.java"  */
+/* Line 2550 of "YYParser.java"  */
 	default: break;
       }
 
@@ -3256,15 +3258,15 @@ class YYParser
          0,   212,   212,   218,   221,   226,   229,   232,   237,   241,
      246,   250,   255,   336,   342,   347,   352,   359,   436,   448,
      466,   472,   506,   513,   532,   536,   540,   542,   545,   547,
-     550,   553,   555,   558,   559,   562,   568,   577,   581,   585,
-     589,   593,   597,   602,   608,   612,   616,   621,   628,   636,
-     642,   647,   655,   662,   671,   681,   703,   707,   717,   730,
-     737,   747,   751,   756,   761,   787,   822,   857,   892,   927,
-     929,   931,   939,   950,   961,   983,  1005,  1015,  1025,  1034,
-    1048,  1062,  1076,  1090,  1105,  1142,  1182,  1221,  1260,  1300,
-    1348,  1350,  1358,  1360,  1362,  1365,  1374,  1382,  1391,  1393,
-    1396,  1403,  1405,  1415,  1417,  1420,  1422,  1425,  1436,  1447,
-    1458,  1470,  1482,  1499,  1515,  1530,  1545,  1564,  1572
+     550,   553,   555,   558,   559,   562,   568,   577,   582,   586,
+     590,   594,   598,   603,   609,   613,   617,   622,   629,   637,
+     643,   648,   656,   663,   672,   682,   704,   708,   718,   731,
+     738,   748,   752,   757,   762,   788,   823,   858,   893,   928,
+     930,   932,   940,   951,   962,   984,  1006,  1016,  1026,  1035,
+    1049,  1063,  1077,  1091,  1106,  1144,  1184,  1223,  1262,  1302,
+    1350,  1352,  1360,  1362,  1364,  1367,  1376,  1384,  1393,  1395,
+    1398,  1405,  1407,  1417,  1419,  1422,  1424,  1427,  1438,  1449,
+    1460,  1472,  1484,  1501,  1517,  1532,  1547,  1566,  1574
   };
 
   // Report on the debug stream that the rule yyrule is going to be reduced.
@@ -3525,13 +3527,13 @@ class YYParser
 
 
 /* Line 875 of lalr1.java  */
-/* Line 3529 of "YYParser.java"  */
+/* Line 3531 of "YYParser.java"  */
 
 }
 
 
 /* Line 879 of lalr1.java  */
-/* Line 1580 of "YYParser.y"  */
+/* Line 1582 of "YYParser.y"  */
 
 class EVal {
 

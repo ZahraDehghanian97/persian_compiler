@@ -576,7 +576,8 @@ jomle :
 otherjomle :
 	jomleyeMorakkab {System.out.println("Rule 19.1");
 	$$ = new EVal();
-	((EVal)$$).nextList = $1.nextList;}
+	//((EVal)$$).nextList = $1.nextList;
+	}
 	|
 	jomleyeEbarat {System.out.println("Rule 19.2");
 	$$ = new EVal();
@@ -602,7 +603,7 @@ jomleyeMorakkab :
 	AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW {
 		System.out.println("Rule 20.1");
 		$$ = new EVal();
-		//((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
+		//((EVal)$$).nextList = ;
 	}
 	|
 	AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW {
@@ -1125,6 +1126,7 @@ ebarateRiaziManteghi :
 			System.err.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
 			return YYABORT;
 		}
+		System.out.println("found: "+index);
 		$$ = new EVal();
 		((EVal)$$).place = symbolTable.names.get(index);
 		((EVal)$$).type = symbolTable.types.get(index);
