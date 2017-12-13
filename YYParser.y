@@ -13,7 +13,7 @@ MOD_KW LESS_THAN_KW MORE_EQUAL_KW
 PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW 
 ADAD_ASHARI
 
-%type <EVal> saved_boolean ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud
+%type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
 meghdareSabet taghirpazir
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
@@ -559,17 +559,44 @@ shenaseyeVorudi :
 	SHENASE BRACKET_BAZ_KW BRACKET_BASTE_KW {System.out.println("Rule 18.2");}
 	
 jomle :
-	jomleyeMorakkab {System.out.println("Rule 19.1");}
+	matched{
+		System.out.println("Rule mathched " +
+			"statement: matched");
+		$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;
+	}
+	| unmatched{
+		System.out.println("Ruleunmatched " +
+			"statement: unmatched");
+		$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;
+	}
+	
+
+otherjomle :
+	jomleyeMorakkab {System.out.println("Rule 19.1");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeEbarat {System.out.println("Rule 19.2");}
+	jomleyeEbarat {System.out.println("Rule 19.2");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeEntekhab {System.out.println("Rule 19.3");}
+	jomleyeEntekhab {System.out.println("Rule 19.3");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeTekrar{System.out.println("Rule 19.4");}
+	jomleyeTekrar{System.out.println("Rule 19.4");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeBazgasht{System.out.println("Rule 19.5");}
+	jomleyeBazgasht{System.out.println("Rule 19.5");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 	|
-	jomleyeShekast {System.out.println("Rule 19.6");}
+	jomleyeShekast {System.out.println("Rule 19.6");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;}
 
 jomleyeMorakkab :
 	AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW {
@@ -589,46 +616,144 @@ jomleyeMorakkab :
 	}
 	
 jomleha :
-	jomleha jomle {System.out.println("Rule 21.1");}
+	jomleha M jomle {
+	System.out.println("Rule 21.1 jomleha : jomleha M jomle");
+	$$ = new EVal();
+		((EVal)$$).nextList = $3.nextList;
+		backpatch($1.nextList, $2.quad);
+	}
 	|
-	jomle {System.out.println("Rule 21.2");}
+	jomle {
+	System.out.println("Rule 21.2 jomleha : jomle");
+	$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;
+	}
 
 	
 jomleyeEbarat :
-	ebarat NOGHTE_VIRGUL {
-		System.out.println("Rule 22.1");
+	ebarat NOGHTE_VIRGUL M{
+		System.out.println("Rule 22.1 jomleyeEbarat : ebarat NOGHTE_VIRGUL M");
+		$$ = new EVal();
+		((EVal)$$).nextList = $1.nextList;
 	}
 	|
-	NOGHTE_VIRGUL {System.out.println("Rule 22.2");}
+	NOGHTE_VIRGUL M {
+	System.out.println("Rule 22.2 jomleyeEbarat : NOGHTE_VIRGUL M");
+	$$ = new EVal();
+		((EVal)$$).nextList = EVal.makeList($2.quad);}
+matched :
+	IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M matched {
+		System.out.println("Rule 23.2 jomleyeEntekhab : IF_KW ebarateRiaziManteghi THEN_KW M jomle N ELSE_KW M jomle ");
+		$$ = new EVal();
+		backpatch($2.trueList, $4.quad);
+		backpatch($2.falseList, $8.quad);
+		((EVal)$$).nextList = EVal.merge($5.nextList, $6.nextList);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
+
+	}|otherjomle{
+		System.out.println("Rule otherjomle " +
+			"statement: otherjomle");
+		$$ = new EVal();
+	((EVal)$$).nextList = $1.nextList;
+	}
+unmatched:
+	IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M unmatched {
+		System.out.println("Rule 21.1: " +
+			"unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M unmatched");
+		$$ = new EVal();
+		backpatch($2.trueList, $4.quad);
+		backpatch($2.falseList, $8.quad);
+		((EVal)$$).nextList = EVal.merge($5.nextList, $6.nextList);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
+	}
+	| IF_KW ebarateRiaziManteghi THEN_KW M jomle {
+		System.out.println("Rule 21.2: " +
+			"unmatched: IF_KW ebarateSade THEN_KW M statement");
+		$$ = new EVal();
+		backpatch($2.trueList, $4.quad);
+		((EVal)$$).nextList = EVal.merge($2.falseList, $5.nextList);
+	}
 
 jomleyeEntekhab :
-	IF_KW ebarateSade THEN_KW jomle %prec LOWER_THAN_ELSE_KW {System.out.println("Rule 23.1");}
+	
+	KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW {System.out.println("Rule 23.3 jomleyeEntekhab : KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE onsoreHalat onsorePishfarz END_KW ");
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(EVal.TYPE_CODE_INTEGER, false);
+		((EVal)$$).nextList = EVal.merge($6.nextList, $7.nextList);
+
+		int last = $6.falseList.size() - 1;
+		backpatch($5.nextList, $6.initList.get(0));
+		backpatch($6.falseList.get(last), nextQuad());
+		for(int i = 0; i < $6.declareds.size() - 1; i++) {
+			backpatch($6.falseList.get(i), $6.initList.get(i + 1));
+
+			emit("=", $3.place, $6.declareds.get(i).place, ((EVal)$$).place);
+			emit("check", ((EVal)$$).place, null, String.valueOf($6.trueList.get(i))); // result will not be backpatched.
+		}
+		emit("=", $3.place, $6.declareds.get(last).place, ((EVal)$$).place);
+		emit("check", ((EVal)$$).place, null, String.valueOf($6.trueList.get(last))); // result will not be backpatched.
+
+		emit("goto", null, null, String.valueOf($7.quad)); // result will not be backpatched.
+
+
+	}
 	|
-	IF_KW ebarateSade THEN_KW jomle ELSE_KW jomle {System.out.println("Rule 23.2");}
-	|
-	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat onsorePishfarz END_KW {System.out.println("Rule 23.3");}
-	|
-	KEY_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW onsoreHalat END_KW {System.out.println("Rule 23.4");}
+	KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW {System.out.println("Rule 23.4");}
 
 		
 onsoreHalat :
-	SWITCH_KW ADAD DONOGHTE_KW jomle NOGHTE_VIRGUL { System.out.println("Rule 24.1"); }
+	SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL { System.out.println("Rule 24.1 onsoreHalat : SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL");
+	$$ = new EVal();
+		((EVal)$$).initList = EVal.makeList($2.quad); // Starting point of saving saved_integer is stored in initList;
+		((EVal)$$).declareds = EVal.makeInitializersOrDeclareds($3); // saved_integer value is stored in declareds.
+		((EVal)$$).falseList = $4.nextList; // If there is another init point this will be backpatched to next init point, else to test point.
+		((EVal)$$).trueList = EVal.makeList($6.quad); // Starting point of block is stored in trueList;
+		((EVal)$$).nextList = $7.nextList;
+
+	 }
 	|
-	onsoreHalat SWITCH_KW ADAD DONOGHTE_KW jomle NOGHTE_VIRGUL {System.out.println("Rule 24.2");}
+	onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL {System.out.println("Rule 24.2 onsoreHalat : onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL");
+	$$ = new EVal();
+		((EVal)$$).initList = $1.initList;
+		((EVal)$$).initList.add($3.quad);
+		((EVal)$$).declareds = $1.declareds;
+		((EVal)$$).declareds.add($4);
+		((EVal)$$).falseList = EVal.merge($1.falseList, $5.nextList);
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).trueList.add($7.quad);
+		((EVal)$$).nextList = EVal.merge($1.nextList, $8.nextList);
+}
 
 onsorePishfarz:
-	DEFAULT_KW DONOGHTE_KW jomle NOGHTE_VIRGUL {System.out.println("Rule 25");}
+	DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL {System.out.println("Rule 25 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL");
+	$$ = new EVal();
+		((EVal)$$).quad = $3.quad;
+		((EVal)$$).nextList = $5.nextList;
+		}
 
 jomleyeTekrar:
-	WHILE_KW PARANTHESIS_BAZ_KW ebarateSade PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 26");}
+	WHILE_KW PARANTHESIS_BAZ_KW M ebarateRiaziManteghi PARANTHESIS_BASTE_KW M jomle {System.out.println("Rule 26 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle ");
+	$$ = new EVal();
+		((EVal)$$).nextList = $4.falseList;
+
+		backpatch($7.nextList, $3.quad);
+		backpatch($4.trueList, $6.quad);
+	}
+
 
 jomleyeBazgasht:
-	RETURN_KW NOGHTE_VIRGUL {System.out.println("Rule 27.1");}
+	RETURN_KW M NOGHTE_VIRGUL {System.out.println("Rule 27.1");
+	$$ = new EVal();
+	((EVal)$$).nextList = $2.nextList;}
 	|
-	RETURN_KW ebarat NOGHTE_VIRGUL {System.out.println("Rule 27.2");}
+	RETURN_KW ebarat NOGHTE_VIRGUL {System.out.println("Rule 27.2");
+	$$ = new EVal();
+	((EVal)$$).nextList = $2.nextList;}
 
 jomleyeShekast:
-	BREAK_KW NOGHTE_VIRGUL {System.out.println("Rule 28");}
+	BREAK_KW M NOGHTE_VIRGUL {System.out.println("Rule 28");
+	$$ = new EVal();
+	((EVal)$$).nextList = $2.nextList;}
 
 ebarat:
 	taghirpazir EQUAL_KW ebarat {
