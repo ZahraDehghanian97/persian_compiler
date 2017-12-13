@@ -701,7 +701,9 @@ jomleyeEntekhab :
 
 	}
 	|
+
 	KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW {System.out.println("Rule 23.4");}
+
 
 		
 onsoreHalat :
