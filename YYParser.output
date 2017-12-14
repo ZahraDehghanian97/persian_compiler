@@ -82,11 +82,11 @@ Grammar
    48 jomleyeEbarat: ebarat NOGHTE_VIRGUL M
    49              | NOGHTE_VIRGUL M
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M matched
+   50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M matched
    51        | otherjomle
 
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M unmatched
-   53          | IF_KW ebarateRiaziManteghi THEN_KW M jomle
+   52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M unmatched
+   53          | IF_KW ebarateSade THEN_KW M jomle
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW
@@ -96,7 +96,7 @@ Grammar
 
    58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateRiaziManteghi PARANTHESIS_BASTE_KW M jomle
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle
 
    60 jomleyeBazgasht: RETURN_KW M NOGHTE_VIRGUL
    61                | RETURN_KW ebarat NOGHTE_VIRGUL
@@ -308,12 +308,13 @@ ebarat (91)
     on left: 63 64 65 66 67 68 69 70, on right: 48 61 63 64 65 66 67
     97 99 104 105
 ebarateSade (92)
-    on left: 71 72 73 74 75 76, on right: 20 70 71 72 73 74 75
+    on left: 71 72 73 74 75 76, on right: 20 50 52 53 59 70 71 72 73
+    74 75
 ebarateRabetei (93)
     on left: 77 78 79 80 81 82, on right: 76
 ebarateRiaziManteghi (94)
-    on left: 83 84 85 86 87 88, on right: 50 52 53 54 55 59 77 78 79
-    80 81 82 84 85 86 87 88
+    on left: 83 84 85 86 87 88, on right: 54 55 77 78 79 80 81 82 84
+    85 86 87 88
 ebarateYegani (95)
     on left: 89 90, on right: 83 89
 amalgareYegani (96)
@@ -903,10 +904,11 @@ state 41
 
 state 42
 
-   50 matched: IF_KW . ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M matched
-   52 unmatched: IF_KW . ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M unmatched
-   53          | IF_KW . ebarateRiaziManteghi THEN_KW M jomle
+   50 matched: IF_KW . ebarateSade THEN_KW M matched N ELSE_KW M matched
+   52 unmatched: IF_KW . ebarateSade THEN_KW M matched N ELSE_KW M unmatched
+   53          | IF_KW . ebarateSade THEN_KW M jomle
 
+    NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
     HARFE_SABET         shift, and go to state 48
@@ -918,7 +920,9 @@ state 42
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarateRiaziManteghi  go to state 104
+    ebarateSade           go to state 104
+    ebarateRabetei        go to state 69
+    ebarateRiaziManteghi  go to state 70
     ebarateYegani         go to state 71
     amalgareYegani        go to state 72
     amel                  go to state 73
@@ -968,7 +972,7 @@ state 43
 
 state 44
 
-   59 jomleyeTekrar: WHILE_KW . PARANTHESIS_BAZ_KW M ebarateRiaziManteghi PARANTHESIS_BASTE_KW M jomle
+   59 jomleyeTekrar: WHILE_KW . PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle
 
     PARANTHESIS_BAZ_KW  shift, and go to state 106
 
@@ -1670,21 +1674,19 @@ state 103
 
 state 104
 
-   50 matched: IF_KW ebarateRiaziManteghi . THEN_KW M matched N ELSE_KW M matched
-   52 unmatched: IF_KW ebarateRiaziManteghi . THEN_KW M matched N ELSE_KW M unmatched
-   53          | IF_KW ebarateRiaziManteghi . THEN_KW M jomle
-   84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
-   85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
-   86                     | ebarateRiaziManteghi . MULTIPLY_KW ebarateRiaziManteghi
-   87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
-   88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
+   50 matched: IF_KW ebarateSade . THEN_KW M matched N ELSE_KW M matched
+   52 unmatched: IF_KW ebarateSade . THEN_KW M matched N ELSE_KW M unmatched
+   53          | IF_KW ebarateSade . THEN_KW M jomle
+   71 ebarateSade: ebarateSade . OR_KW M ebarateSade
+   72            | ebarateSade . AND_KW M ebarateSade
+   73            | ebarateSade . OR_ELSE_KW M ebarateSade
+   74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    ADD_KW       shift, and go to state 115
     THEN_KW      shift, and go to state 151
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MINUS_KW     shift, and go to state 120
-    MOD_KW       shift, and go to state 122
+    AND_KW       shift, and go to state 111
+    OR_KW        shift, and go to state 112
+    OR_ELSE_KW   shift, and go to state 113
+    AND_THEN_KW  shift, and go to state 114
 
 
 state 105
@@ -1700,7 +1702,7 @@ state 105
 
 state 106
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW . M ebarateRiaziManteghi PARANTHESIS_BASTE_KW M jomle
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW . M ebarateSade PARANTHESIS_BASTE_KW M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -2570,9 +2572,9 @@ state 150
 
 state 151
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW . M matched N ELSE_KW M matched
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW . M matched N ELSE_KW M unmatched
-   53          | IF_KW ebarateRiaziManteghi THEN_KW . M jomle
+   50 matched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M matched
+   52 unmatched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M unmatched
+   53          | IF_KW ebarateSade THEN_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -2581,8 +2583,9 @@ state 151
 
 state 152
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M . ebarateRiaziManteghi PARANTHESIS_BASTE_KW M jomle
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M . ebarateSade PARANTHESIS_BASTE_KW M jomle
 
+    NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
     HARFE_SABET         shift, and go to state 48
@@ -2594,7 +2597,9 @@ state 152
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarateRiaziManteghi  go to state 186
+    ebarateSade           go to state 186
+    ebarateRabetei        go to state 69
+    ebarateRiaziManteghi  go to state 70
     ebarateYegani         go to state 71
     amalgareYegani        go to state 72
     amel                  go to state 73
@@ -3040,9 +3045,9 @@ state 184
 
 state 185
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M . matched N ELSE_KW M matched
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M . matched N ELSE_KW M unmatched
-   53          | IF_KW ebarateRiaziManteghi THEN_KW M . jomle
+   50 matched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M matched
+   52 unmatched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M unmatched
+   53          | IF_KW ebarateSade THEN_KW M . jomle
 
     AKULAD_BAZ_KW       shift, and go to state 39
     BREAK_KW            shift, and go to state 40
@@ -3093,19 +3098,17 @@ state 185
 
 state 186
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateRiaziManteghi . PARANTHESIS_BASTE_KW M jomle
-   84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
-   85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
-   86                     | ebarateRiaziManteghi . MULTIPLY_KW ebarateRiaziManteghi
-   87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
-   88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade . PARANTHESIS_BASTE_KW M jomle
+   71 ebarateSade: ebarateSade . OR_KW M ebarateSade
+   72            | ebarateSade . AND_KW M ebarateSade
+   73            | ebarateSade . OR_ELSE_KW M ebarateSade
+   74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    ADD_KW                shift, and go to state 115
-    MULTIPLY_KW           shift, and go to state 117
+    AND_KW                shift, and go to state 111
+    OR_KW                 shift, and go to state 112
     PARANTHESIS_BASTE_KW  shift, and go to state 197
-    DEVIDE_KW             shift, and go to state 119
-    MINUS_KW              shift, and go to state 120
-    MOD_KW                shift, and go to state 122
+    OR_ELSE_KW            shift, and go to state 113
+    AND_THEN_KW           shift, and go to state 114
 
 
 state 187
@@ -3218,7 +3221,7 @@ state 194
 
 state 195
 
-   53 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M jomle .
+   53 unmatched: IF_KW ebarateSade THEN_KW M jomle .
 
     $default  reduce using rule 53 (unmatched)
 
@@ -3226,8 +3229,8 @@ state 195
 state 196
 
    34 jomle: matched .
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M matched . N ELSE_KW M matched
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M matched . N ELSE_KW M unmatched
+   50 matched: IF_KW ebarateSade THEN_KW M matched . N ELSE_KW M matched
+   52 unmatched: IF_KW ebarateSade THEN_KW M matched . N ELSE_KW M unmatched
 
     ELSE_KW   reduce using rule 34 (jomle)
     ELSE_KW   [reduce using rule 117 (N)]
@@ -3238,7 +3241,7 @@ state 196
 
 state 197
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateRiaziManteghi PARANTHESIS_BASTE_KW . M jomle
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -3264,15 +3267,15 @@ state 199
 
 state 200
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M matched N . ELSE_KW M matched
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M matched N . ELSE_KW M unmatched
+   50 matched: IF_KW ebarateSade THEN_KW M matched N . ELSE_KW M matched
+   52 unmatched: IF_KW ebarateSade THEN_KW M matched N . ELSE_KW M unmatched
 
     ELSE_KW  shift, and go to state 204
 
 
 state 201
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateRiaziManteghi PARANTHESIS_BASTE_KW M . jomle
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M . jomle
 
     AKULAD_BAZ_KW       shift, and go to state 39
     BREAK_KW            shift, and go to state 40
@@ -3345,8 +3348,8 @@ state 203
 
 state 204
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW . M matched
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW . M unmatched
+   50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW . M matched
+   52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW . M unmatched
 
     $default  reduce using rule 116 (M)
 
@@ -3355,7 +3358,7 @@ state 204
 
 state 205
 
-   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateRiaziManteghi PARANTHESIS_BASTE_KW M jomle .
+   59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle .
 
     $default  reduce using rule 59 (jomleyeTekrar)
 
@@ -3401,8 +3404,8 @@ state 210
 
 state 211
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M . matched
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M . unmatched
+   50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M . matched
+   52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M . unmatched
 
     AKULAD_BAZ_KW       shift, and go to state 39
     BREAK_KW            shift, and go to state 40
@@ -3486,14 +3489,14 @@ state 215
 
 state 216
 
-   50 matched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M matched .
+   50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M matched .
 
     $default  reduce using rule 50 (matched)
 
 
 state 217
 
-   52 unmatched: IF_KW ebarateRiaziManteghi THEN_KW M matched N ELSE_KW M unmatched .
+   52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M unmatched .
 
     $default  reduce using rule 52 (unmatched)
 
