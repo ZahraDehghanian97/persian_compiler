@@ -5,7 +5,7 @@ Terminals unused in grammar
    LOWER_THAN_ELSE_KW
 
 
-State 196 conflicts: 1 reduce/reduce
+State 201 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -61,7 +61,7 @@ Grammar
    32 shenaseyeVorudi: SHENASE
    33                | SHENASE BRACKET_BAZ_KW BRACKET_BASTE_KW
 
-   34 jomle: matched
+   34 jomle: matched N
    35      | unmatched
 
    36 otherjomle: jomleyeMorakkab
@@ -94,7 +94,7 @@ Grammar
    56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle
    57            | onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle
 
-   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL
+   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N
 
    59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle
 
@@ -206,7 +206,7 @@ AND_KW (278) 72
 OR_KW (279) 71
 NOT_KW (280) 75
 WHILE_KW (281) 59
-NOGHTE_VIRGUL (282) 11 16 27 48 49 58 60 61 62
+NOGHTE_VIRGUL (282) 11 16 27 48 49 60 61 62
 ADAD (283) 111
 SHENASE (284) 1 7 8 23 24 25 26 32 33 110
 HARFE_SABET (285) 113
@@ -345,7 +345,7 @@ M (108)
     on left: 116, on right: 46 48 49 50 52 53 56 57 58 59 60 62 71
     72 73 74
 N (109)
-    on left: 117, on right: 50 52 54 55 56 57 58
+    on left: 117, on right: 34 50 52 54 55 56 57 58
 
 
 state 0
@@ -1121,9 +1121,11 @@ state 60
 
 state 61
 
-   34 jomle: matched .
+   34 jomle: matched . N
 
-    $default  reduce using rule 34 (jomle)
+    $default  reduce using rule 117 (N)
+
+    N  go to state 110
 
 
 state 62
@@ -1165,7 +1167,7 @@ state 67
 
    48 jomleyeEbarat: ebarat . NOGHTE_VIRGUL M
 
-    NOGHTE_VIRGUL  shift, and go to state 110
+    NOGHTE_VIRGUL  shift, and go to state 111
 
 
 state 68
@@ -1176,10 +1178,10 @@ state 68
    73            | ebarateSade . OR_ELSE_KW M ebarateSade
    74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 111
-    OR_KW        shift, and go to state 112
-    OR_ELSE_KW   shift, and go to state 113
-    AND_THEN_KW  shift, and go to state 114
+    AND_KW       shift, and go to state 112
+    OR_KW        shift, and go to state 113
+    OR_ELSE_KW   shift, and go to state 114
+    AND_THEN_KW  shift, and go to state 115
 
     $default  reduce using rule 70 (ebarat)
 
@@ -1205,16 +1207,16 @@ state 70
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW          shift, and go to state 115
-    MORE_THAN_KW    shift, and go to state 116
-    MULTIPLY_KW     shift, and go to state 117
-    EQUAL_EQUAL_KW  shift, and go to state 118
-    DEVIDE_KW       shift, and go to state 119
-    MINUS_KW        shift, and go to state 120
-    LESS_EQUAL_KW   shift, and go to state 121
-    MOD_KW          shift, and go to state 122
-    LESS_THAN_KW    shift, and go to state 123
-    MORE_EQUAL_KW   shift, and go to state 124
+    ADD_KW          shift, and go to state 116
+    MORE_THAN_KW    shift, and go to state 117
+    MULTIPLY_KW     shift, and go to state 118
+    EQUAL_EQUAL_KW  shift, and go to state 119
+    DEVIDE_KW       shift, and go to state 120
+    MINUS_KW        shift, and go to state 121
+    LESS_EQUAL_KW   shift, and go to state 122
+    MOD_KW          shift, and go to state 123
+    LESS_THAN_KW    shift, and go to state 124
+    MORE_EQUAL_KW   shift, and go to state 125
 
     $default  reduce using rule 77 (ebarateRabetei)
 
@@ -1241,7 +1243,7 @@ state 72
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarateYegani     go to state 125
+    ebarateYegani     go to state 126
     amalgareYegani    go to state 72
     amel              go to state 73
     taghirpazir       go to state 92
@@ -1275,15 +1277,15 @@ state 74
    97 taghirpazir: taghirpazir . BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW
    98            | taghirpazir . NOGHTE_KW saved_identifier
 
-    NOGHTE_KW          shift, and go to state 126
-    BRACKET_BAZ_KW     shift, and go to state 127
-    EQUAL_KW           shift, and go to state 128
-    DEVIDE_EQUAL_KW    shift, and go to state 129
-    PLUS_EQUAL_KW      shift, and go to state 130
-    PLUS_PLUS_KW       shift, and go to state 131
-    MINUS_MINUS_KW     shift, and go to state 132
-    MINUS_EQUAL_KW     shift, and go to state 133
-    MULTIPLY_EQUAL_KW  shift, and go to state 134
+    NOGHTE_KW          shift, and go to state 127
+    BRACKET_BAZ_KW     shift, and go to state 128
+    EQUAL_KW           shift, and go to state 129
+    DEVIDE_EQUAL_KW    shift, and go to state 130
+    PLUS_EQUAL_KW      shift, and go to state 131
+    PLUS_PLUS_KW       shift, and go to state 132
+    MINUS_MINUS_KW     shift, and go to state 133
+    MINUS_EQUAL_KW     shift, and go to state 134
+    MULTIPLY_EQUAL_KW  shift, and go to state 135
 
     $default  reduce using rule 94 (amel)
 
@@ -1315,7 +1317,7 @@ state 78
   102 sedaZadan: saved_identifier . PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW
   103          | saved_identifier . PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW
 
-    PARANTHESIS_BAZ_KW  shift, and go to state 135
+    PARANTHESIS_BAZ_KW  shift, and go to state 136
 
     $default  reduce using rule 96 (taghirpazir)
 
@@ -1353,7 +1355,7 @@ state 83
    32 shenaseyeVorudi: SHENASE .
    33                | SHENASE . BRACKET_BAZ_KW BRACKET_BASTE_KW
 
-    BRACKET_BAZ_KW  shift, and go to state 136
+    BRACKET_BAZ_KW  shift, and go to state 137
 
     $default  reduce using rule 32 (shenaseyeVorudi)
 
@@ -1363,7 +1365,7 @@ state 84
    29 jensVorudiha: jens shenaseyeVorudiha .
    30 shenaseyeVorudiha: shenaseyeVorudiha . COMMA shenaseyeVorudi
 
-    COMMA  shift, and go to state 137
+    COMMA  shift, and go to state 138
 
     $default  reduce using rule 29 (jensVorudiha)
 
@@ -1385,7 +1387,7 @@ state 86
     CHAR_KW     shift, and go to state 8
 
     jens          go to state 27
-    jensVorudiha  go to state 138
+    jensVorudiha  go to state 139
 
 
 state 87
@@ -1411,7 +1413,7 @@ state 87
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 139
+    jomle                 go to state 140
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -1462,7 +1464,7 @@ state 88
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 140
+    jomle                 go to state 141
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -1496,7 +1498,7 @@ state 89
    27 vorudiha: vorudiha . NOGHTE_VIRGUL jensVorudiha
 
     NOGHTE_VIRGUL         shift, and go to state 86
-    PARANTHESIS_BASTE_KW  shift, and go to state 141
+    PARANTHESIS_BASTE_KW  shift, and go to state 142
 
 
 state 90
@@ -1514,10 +1516,10 @@ state 91
    73            | ebarateSade . OR_ELSE_KW M ebarateSade
    74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 111
-    OR_KW        shift, and go to state 112
-    OR_ELSE_KW   shift, and go to state 113
-    AND_THEN_KW  shift, and go to state 114
+    AND_KW       shift, and go to state 112
+    OR_KW        shift, and go to state 113
+    OR_ELSE_KW   shift, and go to state 114
+    AND_THEN_KW  shift, and go to state 115
 
     $default  reduce using rule 20 (tarifeMeghdareAvalie)
 
@@ -1528,8 +1530,8 @@ state 92
    97 taghirpazir: taghirpazir . BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW
    98            | taghirpazir . NOGHTE_KW saved_identifier
 
-    NOGHTE_KW       shift, and go to state 126
-    BRACKET_BAZ_KW  shift, and go to state 127
+    NOGHTE_KW       shift, and go to state 127
+    BRACKET_BAZ_KW  shift, and go to state 128
 
     $default  reduce using rule 94 (amel)
 
@@ -1538,7 +1540,7 @@ state 93
 
    22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW saved_integer . BRACKET_BASTE_KW
 
-    BRACKET_BASTE_KW  shift, and go to state 142
+    BRACKET_BASTE_KW  shift, and go to state 143
 
 
 state 94
@@ -1561,7 +1563,7 @@ state 96
    18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha . COMMA tarifeMeghdareAvalie
 
     COMMA          shift, and go to state 31
-    NOGHTE_VIRGUL  shift, and go to state 143
+    NOGHTE_VIRGUL  shift, and go to state 144
 
 
 state 97
@@ -1582,7 +1584,7 @@ state 98
     BOOLEAN_KW          shift, and go to state 7
     CHAR_KW             shift, and go to state 8
     AKULAD_BAZ_KW       shift, and go to state 39
-    AKULAD_BASTE_KW     shift, and go to state 144
+    AKULAD_BASTE_KW     shift, and go to state 145
     BREAK_KW            shift, and go to state 40
     RETURN_KW           shift, and go to state 41
     IF_KW               shift, and go to state 42
@@ -1606,7 +1608,7 @@ state 98
     jomle                    go to state 99
     otherjomle               go to state 58
     jomleyeMorakkab          go to state 59
-    jomleha                  go to state 145
+    jomleha                  go to state 146
     jomleyeEbarat            go to state 60
     matched                  go to state 61
     unmatched                go to state 62
@@ -1644,32 +1646,32 @@ state 100
    44 jomleyeMorakkab: AKULAD_BAZ_KW jomleha . AKULAD_BASTE_KW
    46 jomleha: jomleha . M jomle
 
-    AKULAD_BASTE_KW  shift, and go to state 146
+    AKULAD_BASTE_KW  shift, and go to state 147
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 147
+    M  go to state 148
 
 
 state 101
 
    62 jomleyeShekast: BREAK_KW M . NOGHTE_VIRGUL
 
-    NOGHTE_VIRGUL  shift, and go to state 148
+    NOGHTE_VIRGUL  shift, and go to state 149
 
 
 state 102
 
    61 jomleyeBazgasht: RETURN_KW ebarat . NOGHTE_VIRGUL
 
-    NOGHTE_VIRGUL  shift, and go to state 149
+    NOGHTE_VIRGUL  shift, and go to state 150
 
 
 state 103
 
    60 jomleyeBazgasht: RETURN_KW M . NOGHTE_VIRGUL
 
-    NOGHTE_VIRGUL  shift, and go to state 150
+    NOGHTE_VIRGUL  shift, and go to state 151
 
 
 state 104
@@ -1682,11 +1684,11 @@ state 104
    73            | ebarateSade . OR_ELSE_KW M ebarateSade
    74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    THEN_KW      shift, and go to state 151
-    AND_KW       shift, and go to state 111
-    OR_KW        shift, and go to state 112
-    OR_ELSE_KW   shift, and go to state 113
-    AND_THEN_KW  shift, and go to state 114
+    THEN_KW      shift, and go to state 152
+    AND_KW       shift, and go to state 112
+    OR_KW        shift, and go to state 113
+    OR_ELSE_KW   shift, and go to state 114
+    AND_THEN_KW  shift, and go to state 115
 
 
 state 105
@@ -1706,7 +1708,7 @@ state 106
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 152
+    M  go to state 153
 
 
 state 107
@@ -1732,7 +1734,7 @@ state 108
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarateRiaziManteghi  go to state 153
+    ebarateRiaziManteghi  go to state 154
     ebarateYegani         go to state 71
     amalgareYegani        go to state 72
     amel                  go to state 73
@@ -1751,21 +1753,19 @@ state 109
 
    99 taghirnapazir: PARANTHESIS_BAZ_KW ebarat . PARANTHESIS_BASTE_KW
 
-    PARANTHESIS_BASTE_KW  shift, and go to state 154
+    PARANTHESIS_BASTE_KW  shift, and go to state 155
 
 
 state 110
 
-   48 jomleyeEbarat: ebarat NOGHTE_VIRGUL . M
+   34 jomle: matched N .
 
-    $default  reduce using rule 116 (M)
-
-    M  go to state 155
+    $default  reduce using rule 34 (jomle)
 
 
 state 111
 
-   72 ebarateSade: ebarateSade AND_KW . M ebarateSade
+   48 jomleyeEbarat: ebarat NOGHTE_VIRGUL . M
 
     $default  reduce using rule 116 (M)
 
@@ -1774,7 +1774,7 @@ state 111
 
 state 112
 
-   71 ebarateSade: ebarateSade OR_KW . M ebarateSade
+   72 ebarateSade: ebarateSade AND_KW . M ebarateSade
 
     $default  reduce using rule 116 (M)
 
@@ -1783,7 +1783,7 @@ state 112
 
 state 113
 
-   73 ebarateSade: ebarateSade OR_ELSE_KW . M ebarateSade
+   71 ebarateSade: ebarateSade OR_KW . M ebarateSade
 
     $default  reduce using rule 116 (M)
 
@@ -1792,7 +1792,7 @@ state 113
 
 state 114
 
-   74 ebarateSade: ebarateSade AND_THEN_KW . M ebarateSade
+   73 ebarateSade: ebarateSade OR_ELSE_KW . M ebarateSade
 
     $default  reduce using rule 116 (M)
 
@@ -1801,37 +1801,16 @@ state 114
 
 state 115
 
-   84 ebarateRiaziManteghi: ebarateRiaziManteghi ADD_KW . ebarateRiaziManteghi
+   74 ebarateSade: ebarateSade AND_THEN_KW . M ebarateSade
 
-    ADAD                shift, and go to state 46
-    SHENASE             shift, and go to state 47
-    HARFE_SABET         shift, and go to state 48
-    MULTIPLY_KW         shift, and go to state 50
-    PARANTHESIS_BAZ_KW  shift, and go to state 51
-    TRUE_KW             shift, and go to state 52
-    QUESTION_KW         shift, and go to state 53
-    FALSE_KW            shift, and go to state 54
-    MINUS_KW            shift, and go to state 55
-    ADAD_ASHARI         shift, and go to state 56
+    $default  reduce using rule 116 (M)
 
-    ebarateRiaziManteghi  go to state 160
-    ebarateYegani         go to state 71
-    amalgareYegani        go to state 72
-    amel                  go to state 73
-    taghirpazir           go to state 92
-    taghirnapazir         go to state 75
-    sedaZadan             go to state 76
-    meghdareSabet         go to state 77
-    saved_identifier      go to state 78
-    saved_integer         go to state 79
-    saved_real            go to state 80
-    saved_char            go to state 81
-    saved_boolean         go to state 82
+    M  go to state 160
 
 
 state 116
 
-   80 ebarateRabetei: ebarateRiaziManteghi MORE_THAN_KW . ebarateRiaziManteghi
+   84 ebarateRiaziManteghi: ebarateRiaziManteghi ADD_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -1861,7 +1840,7 @@ state 116
 
 state 117
 
-   86 ebarateRiaziManteghi: ebarateRiaziManteghi MULTIPLY_KW . ebarateRiaziManteghi
+   80 ebarateRabetei: ebarateRiaziManteghi MORE_THAN_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -1891,7 +1870,7 @@ state 117
 
 state 118
 
-   82 ebarateRabetei: ebarateRiaziManteghi EQUAL_EQUAL_KW . ebarateRiaziManteghi
+   86 ebarateRiaziManteghi: ebarateRiaziManteghi MULTIPLY_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -1921,7 +1900,7 @@ state 118
 
 state 119
 
-   87 ebarateRiaziManteghi: ebarateRiaziManteghi DEVIDE_KW . ebarateRiaziManteghi
+   82 ebarateRabetei: ebarateRiaziManteghi EQUAL_EQUAL_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -1951,7 +1930,7 @@ state 119
 
 state 120
 
-   85 ebarateRiaziManteghi: ebarateRiaziManteghi MINUS_KW . ebarateRiaziManteghi
+   87 ebarateRiaziManteghi: ebarateRiaziManteghi DEVIDE_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -1981,7 +1960,7 @@ state 120
 
 state 121
 
-   79 ebarateRabetei: ebarateRiaziManteghi LESS_EQUAL_KW . ebarateRiaziManteghi
+   85 ebarateRiaziManteghi: ebarateRiaziManteghi MINUS_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -2011,7 +1990,7 @@ state 121
 
 state 122
 
-   88 ebarateRiaziManteghi: ebarateRiaziManteghi MOD_KW . ebarateRiaziManteghi
+   79 ebarateRabetei: ebarateRiaziManteghi LESS_EQUAL_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -2041,7 +2020,7 @@ state 122
 
 state 123
 
-   78 ebarateRabetei: ebarateRiaziManteghi LESS_THAN_KW . ebarateRiaziManteghi
+   88 ebarateRiaziManteghi: ebarateRiaziManteghi MOD_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -2071,7 +2050,7 @@ state 123
 
 state 124
 
-   81 ebarateRabetei: ebarateRiaziManteghi MORE_EQUAL_KW . ebarateRiaziManteghi
+   78 ebarateRabetei: ebarateRiaziManteghi LESS_THAN_KW . ebarateRiaziManteghi
 
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
@@ -2101,25 +2080,8 @@ state 124
 
 state 125
 
-   89 ebarateYegani: amalgareYegani ebarateYegani .
+   81 ebarateRabetei: ebarateRiaziManteghi MORE_EQUAL_KW . ebarateRiaziManteghi
 
-    $default  reduce using rule 89 (ebarateYegani)
-
-
-state 126
-
-   98 taghirpazir: taghirpazir NOGHTE_KW . saved_identifier
-
-    SHENASE  shift, and go to state 47
-
-    saved_identifier  go to state 170
-
-
-state 127
-
-   97 taghirpazir: taghirpazir BRACKET_BAZ_KW . ebarat BRACKET_BASTE_KW
-
-    NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
     SHENASE             shift, and go to state 47
     HARFE_SABET         shift, and go to state 48
@@ -2131,14 +2093,11 @@ state 127
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarat                go to state 171
-    ebarateSade           go to state 68
-    ebarateRabetei        go to state 69
-    ebarateRiaziManteghi  go to state 70
+    ebarateRiaziManteghi  go to state 170
     ebarateYegani         go to state 71
     amalgareYegani        go to state 72
     amel                  go to state 73
-    taghirpazir           go to state 74
+    taghirpazir           go to state 92
     taghirnapazir         go to state 75
     sedaZadan             go to state 76
     meghdareSabet         go to state 77
@@ -2149,9 +2108,25 @@ state 127
     saved_boolean         go to state 82
 
 
+state 126
+
+   89 ebarateYegani: amalgareYegani ebarateYegani .
+
+    $default  reduce using rule 89 (ebarateYegani)
+
+
+state 127
+
+   98 taghirpazir: taghirpazir NOGHTE_KW . saved_identifier
+
+    SHENASE  shift, and go to state 47
+
+    saved_identifier  go to state 171
+
+
 state 128
 
-   63 ebarat: taghirpazir EQUAL_KW . ebarat
+   97 taghirpazir: taghirpazir BRACKET_BAZ_KW . ebarat BRACKET_BASTE_KW
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2185,7 +2160,7 @@ state 128
 
 state 129
 
-   67 ebarat: taghirpazir DEVIDE_EQUAL_KW . ebarat
+   63 ebarat: taghirpazir EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2219,7 +2194,7 @@ state 129
 
 state 130
 
-   64 ebarat: taghirpazir PLUS_EQUAL_KW . ebarat
+   67 ebarat: taghirpazir DEVIDE_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2253,21 +2228,7 @@ state 130
 
 state 131
 
-   68 ebarat: taghirpazir PLUS_PLUS_KW .
-
-    $default  reduce using rule 68 (ebarat)
-
-
-state 132
-
-   69 ebarat: taghirpazir MINUS_MINUS_KW .
-
-    $default  reduce using rule 69 (ebarat)
-
-
-state 133
-
-   65 ebarat: taghirpazir MINUS_EQUAL_KW . ebarat
+   64 ebarat: taghirpazir PLUS_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2299,9 +2260,23 @@ state 133
     saved_boolean         go to state 82
 
 
+state 132
+
+   68 ebarat: taghirpazir PLUS_PLUS_KW .
+
+    $default  reduce using rule 68 (ebarat)
+
+
+state 133
+
+   69 ebarat: taghirpazir MINUS_MINUS_KW .
+
+    $default  reduce using rule 69 (ebarat)
+
+
 state 134
 
-   66 ebarat: taghirpazir MULTIPLY_EQUAL_KW . ebarat
+   65 ebarat: taghirpazir MINUS_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2335,23 +2310,21 @@ state 134
 
 state 135
 
-  102 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW . bordareVorudiha PARANTHESIS_BASTE_KW
-  103          | saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW
+   66 ebarat: taghirpazir MULTIPLY_EQUAL_KW . ebarat
 
-    NOT_KW                shift, and go to state 43
-    ADAD                  shift, and go to state 46
-    SHENASE               shift, and go to state 47
-    HARFE_SABET           shift, and go to state 48
-    MULTIPLY_KW           shift, and go to state 50
-    PARANTHESIS_BASTE_KW  shift, and go to state 177
-    PARANTHESIS_BAZ_KW    shift, and go to state 51
-    TRUE_KW               shift, and go to state 52
-    QUESTION_KW           shift, and go to state 53
-    FALSE_KW              shift, and go to state 54
-    MINUS_KW              shift, and go to state 55
-    ADAD_ASHARI           shift, and go to state 56
+    NOT_KW              shift, and go to state 43
+    ADAD                shift, and go to state 46
+    SHENASE             shift, and go to state 47
+    HARFE_SABET         shift, and go to state 48
+    MULTIPLY_KW         shift, and go to state 50
+    PARANTHESIS_BAZ_KW  shift, and go to state 51
+    TRUE_KW             shift, and go to state 52
+    QUESTION_KW         shift, and go to state 53
+    FALSE_KW            shift, and go to state 54
+    MINUS_KW            shift, and go to state 55
+    ADAD_ASHARI         shift, and go to state 56
 
-    ebarat                go to state 178
+    ebarat                go to state 177
     ebarateSade           go to state 68
     ebarateRabetei        go to state 69
     ebarateRiaziManteghi  go to state 70
@@ -2361,7 +2334,6 @@ state 135
     taghirpazir           go to state 74
     taghirnapazir         go to state 75
     sedaZadan             go to state 76
-    bordareVorudiha       go to state 179
     meghdareSabet         go to state 77
     saved_identifier      go to state 78
     saved_integer         go to state 79
@@ -2372,42 +2344,79 @@ state 135
 
 state 136
 
-   33 shenaseyeVorudi: SHENASE BRACKET_BAZ_KW . BRACKET_BASTE_KW
+  102 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW . bordareVorudiha PARANTHESIS_BASTE_KW
+  103          | saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW
 
-    BRACKET_BASTE_KW  shift, and go to state 180
+    NOT_KW                shift, and go to state 43
+    ADAD                  shift, and go to state 46
+    SHENASE               shift, and go to state 47
+    HARFE_SABET           shift, and go to state 48
+    MULTIPLY_KW           shift, and go to state 50
+    PARANTHESIS_BASTE_KW  shift, and go to state 178
+    PARANTHESIS_BAZ_KW    shift, and go to state 51
+    TRUE_KW               shift, and go to state 52
+    QUESTION_KW           shift, and go to state 53
+    FALSE_KW              shift, and go to state 54
+    MINUS_KW              shift, and go to state 55
+    ADAD_ASHARI           shift, and go to state 56
+
+    ebarat                go to state 179
+    ebarateSade           go to state 68
+    ebarateRabetei        go to state 69
+    ebarateRiaziManteghi  go to state 70
+    ebarateYegani         go to state 71
+    amalgareYegani        go to state 72
+    amel                  go to state 73
+    taghirpazir           go to state 74
+    taghirnapazir         go to state 75
+    sedaZadan             go to state 76
+    bordareVorudiha       go to state 180
+    meghdareSabet         go to state 77
+    saved_identifier      go to state 78
+    saved_integer         go to state 79
+    saved_real            go to state 80
+    saved_char            go to state 81
+    saved_boolean         go to state 82
 
 
 state 137
+
+   33 shenaseyeVorudi: SHENASE BRACKET_BAZ_KW . BRACKET_BASTE_KW
+
+    BRACKET_BASTE_KW  shift, and go to state 181
+
+
+state 138
 
    30 shenaseyeVorudiha: shenaseyeVorudiha COMMA . shenaseyeVorudi
 
     SHENASE  shift, and go to state 83
 
-    shenaseyeVorudi  go to state 181
+    shenaseyeVorudi  go to state 182
 
 
-state 138
+state 139
 
    27 vorudiha: vorudiha NOGHTE_VIRGUL jensVorudiha .
 
     $default  reduce using rule 27 (vorudiha)
 
 
-state 139
+state 140
 
    25 tarifeTabe: SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle .
 
     $default  reduce using rule 25 (tarifeTabe)
 
 
-state 140
+state 141
 
    24 tarifeTabe: jens SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle .
 
     $default  reduce using rule 24 (tarifeTabe)
 
 
-state 141
+state 142
 
    23 tarifeTabe: jens SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW . jomle
 
@@ -2430,7 +2439,7 @@ state 141
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 182
+    jomle                 go to state 183
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -2458,47 +2467,47 @@ state 141
     saved_boolean         go to state 82
 
 
-state 142
+state 143
 
    22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW .
 
     $default  reduce using rule 22 (tarifeShenaseMoteghayer)
 
 
-state 143
+state 144
 
    11 tarifeMoteghayyerMahdud: jens tarifhayeMoteghayyerha NOGHTE_VIRGUL .
 
     $default  reduce using rule 11 (tarifeMoteghayyerMahdud)
 
 
-state 144
+state 145
 
    43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW .
 
     $default  reduce using rule 43 (jomleyeMorakkab)
 
 
-state 145
+state 146
 
    42 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli jomleha . AKULAD_BASTE_KW
    46 jomleha: jomleha . M jomle
 
-    AKULAD_BASTE_KW  shift, and go to state 183
+    AKULAD_BASTE_KW  shift, and go to state 184
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 147
+    M  go to state 148
 
 
-state 146
+state 147
 
    44 jomleyeMorakkab: AKULAD_BAZ_KW jomleha AKULAD_BASTE_KW .
 
     $default  reduce using rule 44 (jomleyeMorakkab)
 
 
-state 147
+state 148
 
    46 jomleha: jomleha M . jomle
 
@@ -2521,7 +2530,7 @@ state 147
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 184
+    jomle                 go to state 185
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -2549,28 +2558,28 @@ state 147
     saved_boolean         go to state 82
 
 
-state 148
+state 149
 
    62 jomleyeShekast: BREAK_KW M NOGHTE_VIRGUL .
 
     $default  reduce using rule 62 (jomleyeShekast)
 
 
-state 149
+state 150
 
    61 jomleyeBazgasht: RETURN_KW ebarat NOGHTE_VIRGUL .
 
     $default  reduce using rule 61 (jomleyeBazgasht)
 
 
-state 150
+state 151
 
    60 jomleyeBazgasht: RETURN_KW M NOGHTE_VIRGUL .
 
     $default  reduce using rule 60 (jomleyeBazgasht)
 
 
-state 151
+state 152
 
    50 matched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M matched
    52 unmatched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M unmatched
@@ -2578,10 +2587,10 @@ state 151
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 185
+    M  go to state 186
 
 
-state 152
+state 153
 
    59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M . ebarateSade PARANTHESIS_BASTE_KW M jomle
 
@@ -2597,7 +2606,7 @@ state 152
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarateSade           go to state 186
+    ebarateSade           go to state 187
     ebarateRabetei        go to state 69
     ebarateRiaziManteghi  go to state 70
     ebarateYegani         go to state 71
@@ -2614,7 +2623,7 @@ state 152
     saved_boolean         go to state 82
 
 
-state 153
+state 154
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi . PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi . PARANTHESIS_BASTE_KW N onsoreHalat END_KW
@@ -2624,64 +2633,31 @@ state 153
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW                shift, and go to state 115
-    MULTIPLY_KW           shift, and go to state 117
-    PARANTHESIS_BASTE_KW  shift, and go to state 187
-    DEVIDE_KW             shift, and go to state 119
-    MINUS_KW              shift, and go to state 120
-    MOD_KW                shift, and go to state 122
+    ADD_KW                shift, and go to state 116
+    MULTIPLY_KW           shift, and go to state 118
+    PARANTHESIS_BASTE_KW  shift, and go to state 188
+    DEVIDE_KW             shift, and go to state 120
+    MINUS_KW              shift, and go to state 121
+    MOD_KW                shift, and go to state 123
 
 
-state 154
+state 155
 
    99 taghirnapazir: PARANTHESIS_BAZ_KW ebarat PARANTHESIS_BASTE_KW .
 
     $default  reduce using rule 99 (taghirnapazir)
 
 
-state 155
+state 156
 
    48 jomleyeEbarat: ebarat NOGHTE_VIRGUL M .
 
     $default  reduce using rule 48 (jomleyeEbarat)
 
 
-state 156
-
-   72 ebarateSade: ebarateSade AND_KW M . ebarateSade
-
-    NOT_KW              shift, and go to state 43
-    ADAD                shift, and go to state 46
-    SHENASE             shift, and go to state 47
-    HARFE_SABET         shift, and go to state 48
-    MULTIPLY_KW         shift, and go to state 50
-    PARANTHESIS_BAZ_KW  shift, and go to state 51
-    TRUE_KW             shift, and go to state 52
-    QUESTION_KW         shift, and go to state 53
-    FALSE_KW            shift, and go to state 54
-    MINUS_KW            shift, and go to state 55
-    ADAD_ASHARI         shift, and go to state 56
-
-    ebarateSade           go to state 188
-    ebarateRabetei        go to state 69
-    ebarateRiaziManteghi  go to state 70
-    ebarateYegani         go to state 71
-    amalgareYegani        go to state 72
-    amel                  go to state 73
-    taghirpazir           go to state 92
-    taghirnapazir         go to state 75
-    sedaZadan             go to state 76
-    meghdareSabet         go to state 77
-    saved_identifier      go to state 78
-    saved_integer         go to state 79
-    saved_real            go to state 80
-    saved_char            go to state 81
-    saved_boolean         go to state 82
-
-
 state 157
 
-   71 ebarateSade: ebarateSade OR_KW M . ebarateSade
+   72 ebarateSade: ebarateSade AND_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2714,7 +2690,7 @@ state 157
 
 state 158
 
-   73 ebarateSade: ebarateSade OR_ELSE_KW M . ebarateSade
+   71 ebarateSade: ebarateSade OR_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2747,7 +2723,7 @@ state 158
 
 state 159
 
-   74 ebarateSade: ebarateSade AND_THEN_KW M . ebarateSade
+   73 ebarateSade: ebarateSade OR_ELSE_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 43
     ADAD                shift, and go to state 46
@@ -2780,6 +2756,39 @@ state 159
 
 state 160
 
+   74 ebarateSade: ebarateSade AND_THEN_KW M . ebarateSade
+
+    NOT_KW              shift, and go to state 43
+    ADAD                shift, and go to state 46
+    SHENASE             shift, and go to state 47
+    HARFE_SABET         shift, and go to state 48
+    MULTIPLY_KW         shift, and go to state 50
+    PARANTHESIS_BAZ_KW  shift, and go to state 51
+    TRUE_KW             shift, and go to state 52
+    QUESTION_KW         shift, and go to state 53
+    FALSE_KW            shift, and go to state 54
+    MINUS_KW            shift, and go to state 55
+    ADAD_ASHARI         shift, and go to state 56
+
+    ebarateSade           go to state 192
+    ebarateRabetei        go to state 69
+    ebarateRiaziManteghi  go to state 70
+    ebarateYegani         go to state 71
+    amalgareYegani        go to state 72
+    amel                  go to state 73
+    taghirpazir           go to state 92
+    taghirnapazir         go to state 75
+    sedaZadan             go to state 76
+    meghdareSabet         go to state 77
+    saved_identifier      go to state 78
+    saved_integer         go to state 79
+    saved_real            go to state 80
+    saved_char            go to state 81
+    saved_boolean         go to state 82
+
+
+state 161
+
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    84                     | ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi .
    85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2787,14 +2796,14 @@ state 160
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MOD_KW       shift, and go to state 122
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 84 (ebarateRiaziManteghi)
 
 
-state 161
+state 162
 
    80 ebarateRabetei: ebarateRiaziManteghi MORE_THAN_KW ebarateRiaziManteghi .
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2803,16 +2812,16 @@ state 161
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 115
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MINUS_KW     shift, and go to state 120
-    MOD_KW       shift, and go to state 122
+    ADD_KW       shift, and go to state 116
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MINUS_KW     shift, and go to state 121
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 80 (ebarateRabetei)
 
 
-state 162
+state 163
 
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2824,7 +2833,7 @@ state 162
     $default  reduce using rule 86 (ebarateRiaziManteghi)
 
 
-state 163
+state 164
 
    82 ebarateRabetei: ebarateRiaziManteghi EQUAL_EQUAL_KW ebarateRiaziManteghi .
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2833,16 +2842,16 @@ state 163
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 115
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MINUS_KW     shift, and go to state 120
-    MOD_KW       shift, and go to state 122
+    ADD_KW       shift, and go to state 116
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MINUS_KW     shift, and go to state 121
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 82 (ebarateRabetei)
 
 
-state 164
+state 165
 
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2854,7 +2863,7 @@ state 164
     $default  reduce using rule 87 (ebarateRiaziManteghi)
 
 
-state 165
+state 166
 
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2863,14 +2872,14 @@ state 165
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MOD_KW       shift, and go to state 122
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 85 (ebarateRiaziManteghi)
 
 
-state 166
+state 167
 
    79 ebarateRabetei: ebarateRiaziManteghi LESS_EQUAL_KW ebarateRiaziManteghi .
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2879,16 +2888,16 @@ state 166
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 115
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MINUS_KW     shift, and go to state 120
-    MOD_KW       shift, and go to state 122
+    ADD_KW       shift, and go to state 116
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MINUS_KW     shift, and go to state 121
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 79 (ebarateRabetei)
 
 
-state 167
+state 168
 
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    85                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2900,7 +2909,7 @@ state 167
     $default  reduce using rule 88 (ebarateRiaziManteghi)
 
 
-state 168
+state 169
 
    78 ebarateRabetei: ebarateRiaziManteghi LESS_THAN_KW ebarateRiaziManteghi .
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2909,16 +2918,16 @@ state 168
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 115
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MINUS_KW     shift, and go to state 120
-    MOD_KW       shift, and go to state 122
+    ADD_KW       shift, and go to state 116
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MINUS_KW     shift, and go to state 121
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 78 (ebarateRabetei)
 
 
-state 169
+state 170
 
    81 ebarateRabetei: ebarateRiaziManteghi MORE_EQUAL_KW ebarateRiaziManteghi .
    84 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2927,123 +2936,123 @@ state 169
    87                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    88                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 115
-    MULTIPLY_KW  shift, and go to state 117
-    DEVIDE_KW    shift, and go to state 119
-    MINUS_KW     shift, and go to state 120
-    MOD_KW       shift, and go to state 122
+    ADD_KW       shift, and go to state 116
+    MULTIPLY_KW  shift, and go to state 118
+    DEVIDE_KW    shift, and go to state 120
+    MINUS_KW     shift, and go to state 121
+    MOD_KW       shift, and go to state 123
 
     $default  reduce using rule 81 (ebarateRabetei)
 
 
-state 170
+state 171
 
    98 taghirpazir: taghirpazir NOGHTE_KW saved_identifier .
 
     $default  reduce using rule 98 (taghirpazir)
 
 
-state 171
+state 172
 
    97 taghirpazir: taghirpazir BRACKET_BAZ_KW ebarat . BRACKET_BASTE_KW
 
-    BRACKET_BASTE_KW  shift, and go to state 192
+    BRACKET_BASTE_KW  shift, and go to state 193
 
 
-state 172
+state 173
 
    63 ebarat: taghirpazir EQUAL_KW ebarat .
 
     $default  reduce using rule 63 (ebarat)
 
 
-state 173
+state 174
 
    67 ebarat: taghirpazir DEVIDE_EQUAL_KW ebarat .
 
     $default  reduce using rule 67 (ebarat)
 
 
-state 174
+state 175
 
    64 ebarat: taghirpazir PLUS_EQUAL_KW ebarat .
 
     $default  reduce using rule 64 (ebarat)
 
 
-state 175
+state 176
 
    65 ebarat: taghirpazir MINUS_EQUAL_KW ebarat .
 
     $default  reduce using rule 65 (ebarat)
 
 
-state 176
+state 177
 
    66 ebarat: taghirpazir MULTIPLY_EQUAL_KW ebarat .
 
     $default  reduce using rule 66 (ebarat)
 
 
-state 177
+state 178
 
   103 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW .
 
     $default  reduce using rule 103 (sedaZadan)
 
 
-state 178
+state 179
 
   105 bordareVorudiha: ebarat .
 
     $default  reduce using rule 105 (bordareVorudiha)
 
 
-state 179
+state 180
 
   102 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha . PARANTHESIS_BASTE_KW
   104 bordareVorudiha: bordareVorudiha . COMMA ebarat
 
-    COMMA                 shift, and go to state 193
-    PARANTHESIS_BASTE_KW  shift, and go to state 194
+    COMMA                 shift, and go to state 194
+    PARANTHESIS_BASTE_KW  shift, and go to state 195
 
 
-state 180
+state 181
 
    33 shenaseyeVorudi: SHENASE BRACKET_BAZ_KW BRACKET_BASTE_KW .
 
     $default  reduce using rule 33 (shenaseyeVorudi)
 
 
-state 181
+state 182
 
    30 shenaseyeVorudiha: shenaseyeVorudiha COMMA shenaseyeVorudi .
 
     $default  reduce using rule 30 (shenaseyeVorudiha)
 
 
-state 182
+state 183
 
    23 tarifeTabe: jens SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle .
 
     $default  reduce using rule 23 (tarifeTabe)
 
 
-state 183
+state 184
 
    42 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW .
 
     $default  reduce using rule 42 (jomleyeMorakkab)
 
 
-state 184
+state 185
 
    46 jomleha: jomleha M jomle .
 
     $default  reduce using rule 46 (jomleha)
 
 
-state 185
+state 186
 
    50 matched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M matched
    52 unmatched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M unmatched
@@ -3068,11 +3077,11 @@ state 185
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 195
+    jomle                 go to state 196
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
-    matched               go to state 196
+    matched               go to state 197
     unmatched             go to state 62
     jomleyeEntekhab       go to state 63
     jomleyeTekrar         go to state 64
@@ -3096,7 +3105,7 @@ state 185
     saved_boolean         go to state 82
 
 
-state 186
+state 187
 
    59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade . PARANTHESIS_BASTE_KW M jomle
    71 ebarateSade: ebarateSade . OR_KW M ebarateSade
@@ -3104,24 +3113,24 @@ state 186
    73            | ebarateSade . OR_ELSE_KW M ebarateSade
    74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW                shift, and go to state 111
-    OR_KW                 shift, and go to state 112
-    PARANTHESIS_BASTE_KW  shift, and go to state 197
-    OR_ELSE_KW            shift, and go to state 113
-    AND_THEN_KW           shift, and go to state 114
+    AND_KW                shift, and go to state 112
+    OR_KW                 shift, and go to state 113
+    PARANTHESIS_BASTE_KW  shift, and go to state 198
+    OR_ELSE_KW            shift, and go to state 114
+    AND_THEN_KW           shift, and go to state 115
 
 
-state 187
+state 188
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW . N onsoreHalat onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW . N onsoreHalat END_KW
 
     $default  reduce using rule 117 (N)
 
-    N  go to state 198
+    N  go to state 199
 
 
-state 188
+state 189
 
    71 ebarateSade: ebarateSade . OR_KW M ebarateSade
    72            | ebarateSade . AND_KW M ebarateSade
@@ -3132,7 +3141,7 @@ state 188
     $default  reduce using rule 72 (ebarateSade)
 
 
-state 189
+state 190
 
    71 ebarateSade: ebarateSade . OR_KW M ebarateSade
    71            | ebarateSade OR_KW M ebarateSade .
@@ -3140,13 +3149,13 @@ state 189
    73            | ebarateSade . OR_ELSE_KW M ebarateSade
    74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 111
-    AND_THEN_KW  shift, and go to state 114
+    AND_KW       shift, and go to state 112
+    AND_THEN_KW  shift, and go to state 115
 
     $default  reduce using rule 71 (ebarateSade)
 
 
-state 190
+state 191
 
    71 ebarateSade: ebarateSade . OR_KW M ebarateSade
    72            | ebarateSade . AND_KW M ebarateSade
@@ -3154,13 +3163,13 @@ state 190
    73            | ebarateSade OR_ELSE_KW M ebarateSade .
    74            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 111
-    AND_THEN_KW  shift, and go to state 114
+    AND_KW       shift, and go to state 112
+    AND_THEN_KW  shift, and go to state 115
 
     $default  reduce using rule 73 (ebarateSade)
 
 
-state 191
+state 192
 
    71 ebarateSade: ebarateSade . OR_KW M ebarateSade
    72            | ebarateSade . AND_KW M ebarateSade
@@ -3171,14 +3180,14 @@ state 191
     $default  reduce using rule 74 (ebarateSade)
 
 
-state 192
+state 193
 
    97 taghirpazir: taghirpazir BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW .
 
     $default  reduce using rule 97 (taghirpazir)
 
 
-state 193
+state 194
 
   104 bordareVorudiha: bordareVorudiha COMMA . ebarat
 
@@ -3194,7 +3203,7 @@ state 193
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    ebarat                go to state 199
+    ebarat                go to state 200
     ebarateSade           go to state 68
     ebarateRabetei        go to state 69
     ebarateRiaziManteghi  go to state 70
@@ -3212,68 +3221,70 @@ state 193
     saved_boolean         go to state 82
 
 
-state 194
+state 195
 
   102 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW .
 
     $default  reduce using rule 102 (sedaZadan)
 
 
-state 195
+state 196
 
    53 unmatched: IF_KW ebarateSade THEN_KW M jomle .
 
     $default  reduce using rule 53 (unmatched)
 
 
-state 196
+state 197
 
-   34 jomle: matched .
+   34 jomle: matched . N
    50 matched: IF_KW ebarateSade THEN_KW M matched . N ELSE_KW M matched
    52 unmatched: IF_KW ebarateSade THEN_KW M matched . N ELSE_KW M unmatched
 
-    ELSE_KW   reduce using rule 34 (jomle)
-    ELSE_KW   [reduce using rule 117 (N)]
-    $default  reduce using rule 34 (jomle)
+    $default  reduce using rule 117 (N)
 
-    N  go to state 200
+    N  go to state 201
 
 
-state 197
+state 198
 
    59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 201
+    M  go to state 202
 
 
-state 198
+state 199
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N . onsoreHalat onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N . onsoreHalat END_KW
 
-    SWITCH_KW  shift, and go to state 202
+    SWITCH_KW  shift, and go to state 203
 
-    onsoreHalat  go to state 203
+    onsoreHalat  go to state 204
 
 
-state 199
+state 200
 
   104 bordareVorudiha: bordareVorudiha COMMA ebarat .
 
     $default  reduce using rule 104 (bordareVorudiha)
 
 
-state 200
+state 201
 
+   34 jomle: matched N .
    50 matched: IF_KW ebarateSade THEN_KW M matched N . ELSE_KW M matched
    52 unmatched: IF_KW ebarateSade THEN_KW M matched N . ELSE_KW M unmatched
 
-    ELSE_KW  shift, and go to state 204
+    ELSE_KW  shift, and go to state 205
+
+    ELSE_KW   [reduce using rule 34 (jomle)]
+    $default  reduce using rule 34 (jomle)
 
 
-state 201
+state 202
 
    59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M . jomle
 
@@ -3296,7 +3307,7 @@ state 201
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 205
+    jomle                 go to state 206
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -3324,85 +3335,85 @@ state 201
     saved_boolean         go to state 82
 
 
-state 202
+state 203
 
    56 onsoreHalat: SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 206
+    M  go to state 207
 
 
-state 203
+state 204
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat . onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat . END_KW
    57 onsoreHalat: onsoreHalat . SWITCH_KW M saved_integer N DONOGHTE_KW M jomle
 
-    SWITCH_KW   shift, and go to state 207
-    END_KW      shift, and go to state 208
-    DEFAULT_KW  shift, and go to state 209
+    SWITCH_KW   shift, and go to state 208
+    END_KW      shift, and go to state 209
+    DEFAULT_KW  shift, and go to state 210
 
-    onsorePishfarz  go to state 210
+    onsorePishfarz  go to state 211
 
 
-state 204
+state 205
 
    50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW . M matched
    52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW . M unmatched
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 211
+    M  go to state 212
 
 
-state 205
+state 206
 
    59 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle .
 
     $default  reduce using rule 59 (jomleyeTekrar)
 
 
-state 206
+state 207
 
    56 onsoreHalat: SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle
 
     ADAD  shift, and go to state 46
 
-    saved_integer  go to state 212
+    saved_integer  go to state 213
 
 
-state 207
+state 208
 
    57 onsoreHalat: onsoreHalat SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 213
+    M  go to state 214
 
 
-state 208
+state 209
 
    55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW .
 
     $default  reduce using rule 55 (jomleyeEntekhab)
 
 
-state 209
-
-   58 onsorePishfarz: DEFAULT_KW . DONOGHTE_KW M jomle N NOGHTE_VIRGUL
-
-    DONOGHTE_KW  shift, and go to state 214
-
-
 state 210
 
-   54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz . END_KW
+   58 onsorePishfarz: DEFAULT_KW . DONOGHTE_KW M jomle N
 
-    END_KW  shift, and go to state 215
+    DONOGHTE_KW  shift, and go to state 215
 
 
 state 211
+
+   54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz . END_KW
+
+    END_KW  shift, and go to state 216
+
+
+state 212
 
    50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M . matched
    52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M . unmatched
@@ -3429,8 +3440,8 @@ state 211
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
-    matched               go to state 216
-    unmatched             go to state 217
+    matched               go to state 217
+    unmatched             go to state 218
     jomleyeEntekhab       go to state 63
     jomleyeTekrar         go to state 64
     jomleyeBazgasht       go to state 65
@@ -3453,73 +3464,73 @@ state 211
     saved_boolean         go to state 82
 
 
-state 212
+state 213
 
    56 onsoreHalat: SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle
 
     $default  reduce using rule 117 (N)
 
-    N  go to state 218
+    N  go to state 219
 
 
-state 213
+state 214
 
    57 onsoreHalat: onsoreHalat SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle
 
     ADAD  shift, and go to state 46
 
-    saved_integer  go to state 219
-
-
-state 214
-
-   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW . M jomle N NOGHTE_VIRGUL
-
-    $default  reduce using rule 116 (M)
-
-    M  go to state 220
+    saved_integer  go to state 220
 
 
 state 215
+
+   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW . M jomle N
+
+    $default  reduce using rule 116 (M)
+
+    M  go to state 221
+
+
+state 216
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW .
 
     $default  reduce using rule 54 (jomleyeEntekhab)
 
 
-state 216
+state 217
 
    50 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M matched .
 
     $default  reduce using rule 50 (matched)
 
 
-state 217
+state 218
 
    52 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M unmatched .
 
     $default  reduce using rule 52 (unmatched)
 
 
-state 218
+state 219
 
    56 onsoreHalat: SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle
 
-    DONOGHTE_KW  shift, and go to state 221
+    DONOGHTE_KW  shift, and go to state 222
 
 
-state 219
+state 220
 
    57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle
 
     $default  reduce using rule 117 (N)
 
-    N  go to state 222
+    N  go to state 223
 
 
-state 220
+state 221
 
-   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M . jomle N NOGHTE_VIRGUL
+   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M . jomle N
 
     AKULAD_BAZ_KW       shift, and go to state 39
     BREAK_KW            shift, and go to state 40
@@ -3540,7 +3551,7 @@ state 220
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 223
+    jomle                 go to state 224
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -3568,32 +3579,32 @@ state 220
     saved_boolean         go to state 82
 
 
-state 221
+state 222
 
    56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 224
-
-
-state 222
-
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle
-
-    DONOGHTE_KW  shift, and go to state 225
+    M  go to state 225
 
 
 state 223
 
-   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle . N NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle
 
-    $default  reduce using rule 117 (N)
-
-    N  go to state 226
+    DONOGHTE_KW  shift, and go to state 226
 
 
 state 224
+
+   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle . N
+
+    $default  reduce using rule 117 (N)
+
+    N  go to state 227
+
+
+state 225
 
    56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle
 
@@ -3616,7 +3627,7 @@ state 224
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 227
+    jomle                 go to state 228
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -3644,30 +3655,30 @@ state 224
     saved_boolean         go to state 82
 
 
-state 225
+state 226
 
    57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
-    M  go to state 228
-
-
-state 226
-
-   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N . NOGHTE_VIRGUL
-
-    NOGHTE_VIRGUL  shift, and go to state 229
+    M  go to state 229
 
 
 state 227
+
+   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N .
+
+    $default  reduce using rule 58 (onsorePishfarz)
+
+
+state 228
 
    56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle .
 
     $default  reduce using rule 56 (onsoreHalat)
 
 
-state 228
+state 229
 
    57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle
 
@@ -3716,13 +3727,6 @@ state 228
     saved_real            go to state 80
     saved_char            go to state 81
     saved_boolean         go to state 82
-
-
-state 229
-
-   58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL .
-
-    $default  reduce using rule 58 (onsorePishfarz)
 
 
 state 230
