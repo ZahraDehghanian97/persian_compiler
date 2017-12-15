@@ -655,7 +655,9 @@ matched :
 		((EVal)$$).nextList = EVal.merge($5.nextList, $6.nextList);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).nextList, $9.nextList);
 
-	}|otherjomle{
+	}
+	|
+	otherjomle{
 		System.out.println("Rule otherjomle " +
 			"statement: otherjomle");
 		$$ = new EVal();
@@ -709,7 +711,7 @@ jomleyeEntekhab :
 
 		
 onsoreHalat :
-	SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL { System.out.println("Rule 24.1 onsoreHalat : SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL");
+	SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle { System.out.println("Rule 24.1 onsoreHalat : SWITCH_KW M saved_integer N  DONOGHTE_KW M jomle NOGHTE_VIRGUL");
 	$$ = new EVal();
 		((EVal)$$).initList = EVal.makeList($2.quad); // Starting point of saving saved_integer is stored in initList;
 		((EVal)$$).declareds = EVal.makeInitializersOrDeclareds($3); // saved_integer value is stored in declareds.
@@ -719,7 +721,7 @@ onsoreHalat :
 
 	 }
 	|
-	onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL {System.out.println("Rule 24.2 onsoreHalat : onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL");
+	onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle {System.out.println("Rule 24.2 onsoreHalat : onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL");
 	$$ = new EVal();
 		((EVal)$$).initList = $1.initList;
 		((EVal)$$).initList.add($3.quad);

@@ -91,8 +91,8 @@ Grammar
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW
 
-   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
-   57            | onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle
+   57            | onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle
 
    58 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle N NOGHTE_VIRGUL
 
@@ -206,7 +206,7 @@ AND_KW (278) 72
 OR_KW (279) 71
 NOT_KW (280) 75
 WHILE_KW (281) 59
-NOGHTE_VIRGUL (282) 11 16 27 48 49 56 57 58 60 61 62
+NOGHTE_VIRGUL (282) 11 16 27 48 49 58 60 61 62
 ADAD (283) 111
 SHENASE (284) 1 7 8 23 24 25 26 32 33 110
 HARFE_SABET (285) 113
@@ -3326,7 +3326,7 @@ state 201
 
 state 202
 
-   56 onsoreHalat: SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -3337,7 +3337,7 @@ state 203
 
    54 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat . onsorePishfarz END_KW
    55                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat . END_KW
-   57 onsoreHalat: onsoreHalat . SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat . SWITCH_KW M saved_integer N DONOGHTE_KW M jomle
 
     SWITCH_KW   shift, and go to state 207
     END_KW      shift, and go to state 208
@@ -3365,7 +3365,7 @@ state 205
 
 state 206
 
-   56 onsoreHalat: SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle
 
     ADAD  shift, and go to state 46
 
@@ -3374,7 +3374,7 @@ state 206
 
 state 207
 
-   57 onsoreHalat: onsoreHalat SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -3455,7 +3455,7 @@ state 211
 
 state 212
 
-   56 onsoreHalat: SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle
 
     $default  reduce using rule 117 (N)
 
@@ -3464,7 +3464,7 @@ state 212
 
 state 213
 
-   57 onsoreHalat: onsoreHalat SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle
 
     ADAD  shift, and go to state 46
 
@@ -3503,14 +3503,14 @@ state 217
 
 state 218
 
-   56 onsoreHalat: SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle
 
     DONOGHTE_KW  shift, and go to state 221
 
 
 state 219
 
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle
 
     $default  reduce using rule 117 (N)
 
@@ -3570,7 +3570,7 @@ state 220
 
 state 221
 
-   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -3579,7 +3579,7 @@ state 221
 
 state 222
 
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N . DONOGHTE_KW M jomle
 
     DONOGHTE_KW  shift, and go to state 225
 
@@ -3595,7 +3595,7 @@ state 223
 
 state 224
 
-   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle
 
     AKULAD_BAZ_KW       shift, and go to state 39
     BREAK_KW            shift, and go to state 40
@@ -3646,7 +3646,7 @@ state 224
 
 state 225
 
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle
 
     $default  reduce using rule 116 (M)
 
@@ -3662,14 +3662,14 @@ state 226
 
 state 227
 
-   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle . NOGHTE_VIRGUL
+   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle .
 
-    NOGHTE_VIRGUL  shift, and go to state 230
+    $default  reduce using rule 56 (onsoreHalat)
 
 
 state 228
 
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle NOGHTE_VIRGUL
+   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle
 
     AKULAD_BAZ_KW       shift, and go to state 39
     BREAK_KW            shift, and go to state 40
@@ -3690,7 +3690,7 @@ state 228
     MINUS_KW            shift, and go to state 55
     ADAD_ASHARI         shift, and go to state 56
 
-    jomle                 go to state 231
+    jomle                 go to state 230
     otherjomle            go to state 58
     jomleyeMorakkab       go to state 59
     jomleyeEbarat         go to state 60
@@ -3727,20 +3727,6 @@ state 229
 
 state 230
 
-   56 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL .
-
-    $default  reduce using rule 56 (onsoreHalat)
-
-
-state 231
-
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle . NOGHTE_VIRGUL
-
-    NOGHTE_VIRGUL  shift, and go to state 232
-
-
-state 232
-
-   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle NOGHTE_VIRGUL .
+   57 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M jomle .
 
     $default  reduce using rule 57 (onsoreHalat)

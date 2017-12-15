@@ -31,7 +31,7 @@ INT_KW = (\u0635\u062d\u062d)
 
 SWITCH_KW = ( \u062d\u0627\u0644\u062a)
 end_kw = (\u062a\u0645\u0627\u0645)
-default_kw = (\u067e\u06cc\u0634\u0641\u0631\u0636)
+default_kw = (\u067e\u06cc\u0634\u0641\u0631\u0636) | (\u067e\u0634\u0641\u0631\u0636)
 break_kw = (\u0628\u0634\u06a9\u0646)
 return_kw = (\u0628\u0631\u06af\u0631\u062f\u0627\u0646)
 AKULAD_BAZ_KW = [{]
@@ -69,7 +69,7 @@ FLOAT_KW = (\u0627\u0639\u0634\u0627\u0631\u06cc) | (\u0627\u0639\u0634\u0627\u0
 BOOLEAN_KW =(\u0645\u0646\u0637\u0642\u06cc) | (\u0645\u0646\u0637\u0642)
 CHAR_KW = (\u062d\u0631\u0641)
 
-KEY_KW = (\u06a9\u0644\u06cc\u062f)
+KEY_KW = (\u06a9\u0644\u06cc\u062f) | (\u06a9\u0644\u062f)
 MORE_THAN_KW = "<"
 NOGHTE_KW = "."
 MULTIPLY_KW = "*"
