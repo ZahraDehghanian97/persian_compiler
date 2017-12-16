@@ -82,8 +82,8 @@ meghdareSabet taghirpazir
                 int yyl_return = -1;
                 try {
                     yyl_return = lexer.yylex();
-                } catch (IOException e) {
-                    System.err.println("IO error: " + e);
+                } catch (IOException EVal) {
+                    System.err.println("IO error: " + EVal);
                 }
                 return yyl_return;
             }
@@ -148,8 +148,8 @@ meghdareSabet taghirpazir
 		DataOutputStream dos = null;
 		try {
 			dos = new DataOutputStream(new FileOutputStream(fileAddress));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException EVal) {
+			EVal.printStackTrace();
 		}
 
 		try {
@@ -190,8 +190,8 @@ meghdareSabet taghirpazir
 					"\t\t\t\tgetchar();\n\t\t\treturn -2;\n");
 
 			dos.writeBytes("}\n");
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException EVal) {
+			EVal.printStackTrace();
 		}
 
 	}
@@ -606,6 +606,8 @@ jomleyeMorakkab :
 	|
 	AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW {
 		System.out.println("Rule 20.2");
+		$$ = new EVal();
+		((EVal)$$).nextList = EVal.makeList(0);		
 	}
 	|
 	AKULAD_BAZ_KW jomleha AKULAD_BASTE_KW {
@@ -797,31 +799,73 @@ jomleyeShekast:
 ebarat:
 	taghirpazir EQUAL_KW ebarat {
 	System.out.println("Rule 29.1");
-	$$ = new EVal();
-	((EVal)$$).nextList = $3.nextList;
-	((EVal)$$).place = $1.place;
-	((EVal)$$).type = $3.type;
-	((EVal)$$).array = $1.array;
-	((EVal)$$).trueList = $3.trueList;
-	((EVal)$$).falseList = $3.falseList;
-	((EVal)$$).initializers = $3.initializers;
-	if($3.type == EVal.TYPE_CODE_BOOLEAN){
+		int index = symbolTable.lookUp($1.place);
+		if (index == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+			System.err.println("Error! \"" + $1.place + "\" is not declared.");
+			return YYABORT;
+		}
+		String srcPlace = $3.place;
+		if((symbolTable.types.get(index) != $3.type)
+			&& !((symbolTable.types.get(index) == EVal.TYPE_CODE_INTEGER
+					|| symbolTable.types.get(index) == EVal.TYPE_CODE_CHAR
+					|| symbolTable.types.get(index) == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER
+					|| $3.type == EVal.TYPE_CODE_CHAR
+					|| $3.type == EVal.TYPE_CODE_BOOLEAN))) {
+			if((symbolTable.types.get(index) == EVal.TYPE_CODE_REAL)
+				&& ($3.type == EVal.TYPE_CODE_INTEGER
+					|| $3.type == EVal.TYPE_CODE_CHAR
+					|| $3.type == EVal.TYPE_CODE_BOOLEAN)) {
+				srcPlace = newTemp(EVal.TYPE_CODE_REAL, false);
+				emit("cast", $3.place, TYPE_STRING_REAL, srcPlace);
+			} else if((symbolTable.types.get(index) == EVal.TYPE_CODE_INTEGER
+					|| symbolTable.types.get(index) == EVal.TYPE_CODE_CHAR
+					|| symbolTable.types.get(index) == EVal.TYPE_CODE_BOOLEAN)
+				&& ($3.type == EVal.TYPE_CODE_REAL)) {
+				srcPlace = newTemp(symbolTable.types.get(index), false);
+				emit("cast", $3.place, getTypeString(symbolTable.types.get(index)), srcPlace);
+			} else {
+				System.err.println("Error! Type mismatch: " + $1.place + ", " + $3.place);
+				return YYABORT;
+			}
+		}
+		if (symbolTable.arrays.get(index)) {
+			System.err.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
+			return YYABORT;
+		}
+		$$ = new EVal();
+		((EVal)$$).place = symbolTable.names.get(index);
+		((EVal)$$).type = symbolTable.types.get(index);
+		if(symbolTable.types.get(index) != EVal.TYPE_CODE_BOOLEAN) {
+			((EVal)$$).nextList = $1.nextList;
+			emit(":=", srcPlace, null, $1.place);
+			switch (symbolTable.types.get(index)) {
+				case EVal.TYPE_CODE_INTEGER:
+					emit("iprint", null, null, $1.place);
+					break;
+				case EVal.TYPE_CODE_REAL:
+					emit("rprint", null, null, $1.place);
+					break;
+				case EVal.TYPE_CODE_CHAR:
+					emit("cprint", null, null, $1.place);
+					break;
+			}
+		} else {
+			backpatch($3.falseList, nextQuad());
+			backpatch($3.trueList, nextQuad() + 2);
+			emit(":=", "0", null, ((EVal)$$).place);
+			emit("goto", null, null, String.valueOf(nextQuad() + 2));
+			emit(":=", "1", null, ((EVal)$$).place);
+			emit("bprint", null, null, $1.place);
+		}
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+	
 		
-		backpatch($3.trueList, nextQuad() );
-		backpatch($3.falseList, nextQuad() + 2);
-		
-		emit(":=", "1", null, $1.place);
-		emit("goto", null, null, String.valueOf(nextQuad() + 2));
-		emit(":=", "0", null, $1.place);
-		
-		
-		
-	}
-	else{
-	emit(":=", $3.place, null, $1.place);
 	}
 	
-	}
+	
+	
 	|
 	taghirpazir PLUS_EQUAL_KW ebarat {
 	
@@ -1445,7 +1489,36 @@ taghirpazir :
 	}
 	
 	|
-	taghirpazir BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW  {System.out.println("Rule 38.2");}
+	taghirpazir BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW  {System.out.println("Rule 38.2");
+	int index = symbolTable.lookUp($1.place);
+		if (index == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+			System.err.println("Error! \"" + lexIdentifier + "\" is not declared.");
+			return YYABORT;
+		}
+		if (!symbolTable.arrays.get(index)) {
+			System.err.println("Error! \"" + lexIdentifier + "\" is not an array, it can not be used with index.");
+			return YYABORT;
+		}
+		$$ = new EVal();
+		((EVal)$$).place = newTemp(symbolTable.types.get(index), false);
+		((EVal)$$).type = symbolTable.types.get(index);
+		EVal.arrayIndexOutOfBoundList.add(nextQuad() + 2);
+		EVal.arrayIndexOutOfBoundList.add(nextQuad() + 4);
+		emit("-", $3.place, startStr + $1.place, indexStr + $1.place);
+		emit(">=", indexStr + $1.place, sizeStr + $1.place, condStr + $1.place);
+		emit("check", condStr + $1.place, null, String.valueOf(nextQuad() + 3)); // Result will be backpatched.
+		emit("<", indexStr + $1.place, "0", condStr + $1.place);
+		emit("check", condStr + $1.place, null, String.valueOf(nextQuad() + 1)); // Result will be backpatched.
+
+		emit("=[]", $1.place, indexStr + $1.place, ((EVal)$$).place);
+
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result will be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); //result will be backpatche
+		}
 	|
 	taghirpazir NOGHTE_KW saved_identifier {System.out.println("Rule 38.3");}
 	
