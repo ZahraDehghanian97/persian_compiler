@@ -234,12 +234,14 @@ tarif:
 	}
 
 tarifeSakhtar:
-	STRUCT_KW SHENASE AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
+	STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.1 ");
+		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
 	}
 	|
-	STRUCT_KW SHENASE AKULAD_BAZ_KW AKULAD_BASTE_KW  {
+	STRUCT_KW saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.2 ");
+		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
 	}
 	
 tarifhayeMahalli:
@@ -612,6 +614,9 @@ jomleyeMorakkab :
 	|
 	AKULAD_BAZ_KW jomleha AKULAD_BASTE_KW {
 		System.out.println("Rule 20.3");
+		$$ = new EVal();
+		((EVal)$$).nextList = $2.nextList;
+		
 	}
 	|
 	AKULAD_BAZ_KW AKULAD_BASTE_KW {
@@ -1520,7 +1525,21 @@ taghirpazir :
 		emit("goto", null, null, String.valueOf(nextQuad() + 1)); //result will be backpatche
 		}
 	|
-	taghirpazir NOGHTE_KW saved_identifier {System.out.println("Rule 38.3");}
+	taghirpazir NOGHTE_KW saved_identifier {
+		System.out.println("Rule 38.3");
+		
+		if(symbolTable.lookUp($1.place)==-1){
+			System.err.println("struct not defined.");
+
+		}
+		$$ = new EVal();	
+		((EVal)$$).place = $3.place;
+		((EVal)$$).type = $3.type;
+		((EVal)$$).trueList = $3.trueList;
+		((EVal)$$).falseList = $3.falseList;
+		((EVal)$$).nextList = $3.nextList;
+		}
+	
 	
 taghirnapazir :
 	PARANTHESIS_BAZ_KW ebarat PARANTHESIS_BASTE_KW  {System.out.println("Rule 39.1");
@@ -1717,7 +1736,7 @@ class EVal {
 	public static final int TYPE_CODE_CHAR = 2;
 	public static final int TYPE_CODE_BOOLEAN = 3;
 	public static final int TYPE_CODE_RANGE = 4;
-	
+	public static final int TYPE_CODE_STRUCT = 5;	
 
 	public String place;
 	public int type;

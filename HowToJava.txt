@@ -4,4 +4,4 @@
 
 
 for debugging:
-> bison -L JAVA --verbose parser.y
+> bison -L JAVA --verbose YYParser.y
