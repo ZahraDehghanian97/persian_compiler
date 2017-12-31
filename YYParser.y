@@ -340,21 +340,29 @@ jens:
 	
 		$$ = new EVal();
 		((EVal)$$).type = EVal.TYPE_CODE_INTEGER;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	}
 	| FLOAT_KW {
 	System.out.println("Rule 8.2");
 		$$ = new EVal();
 		((EVal)$$).type = EVal.TYPE_CODE_REAL;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	}
 	|CHAR_KW {
 		System.out.println("Rule 8.3");
 		$$ = new EVal();
 		((EVal)$$).type = EVal.TYPE_CODE_CHAR;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	}
 	|BOOLEAN_KW{
 		System.out.println("Rule 8.4");
 		$$ = new EVal();
 		((EVal)$$).type = EVal.TYPE_CODE_BOOLEAN;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
 	}
 	
 tarifeMoteghayyer:
@@ -531,17 +539,26 @@ tarifeShenaseMoteghayer:
 	}
 	
 tarifeTabe:
-	jens SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {
+	 jens saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {
 		System.out.println("Rule 13.1");
+		backpatch($1.nextList, (quadruples.size()));
+		
+		System.out.println($1.nextList.get(0)+1);
+		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
+		
 	}
 	|
-	jens SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
+	jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
 		System.out.println("Rule 13.2");
+		backpatch($1.nextList, (quadruples.size()));
+		System.out.println($1.nextList.get(0)+1);
+		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
 	}
+	
 	|
-	SHENASE PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.3");}
+	saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.3");}
 	|
-	SHENASE PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.4");}
+	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.4");}
 	
 vorudiha :
 	vorudiha NOGHTE_VIRGUL jensVorudiha {System.out.println("Rule 15.1");}
@@ -557,8 +574,13 @@ shenaseyeVorudiha :
 	shenaseyeVorudi {System.out.println("Rule 17.2");}
 	
 shenaseyeVorudi :
-	SHENASE {System.out.println("Rule 18.1");}|
-	SHENASE BRACKET_BAZ_KW BRACKET_BASTE_KW {System.out.println("Rule 18.2");}
+	saved_identifier {
+		System.out.println("Rule 18.1");
+		symbolTable.addToSymbolTable($1.place, $1.type, false);
+		emit(":=","stack[top]" , null, $1.place);
+		emit("+", "top", "1", "top");
+		}|
+	saved_identifier BRACKET_BAZ_KW BRACKET_BASTE_KW {System.out.println("Rule 18.2");}
 	
 jomle :
 	matched N{
@@ -1023,6 +1045,7 @@ ebarat:
 		((EVal)$$).trueList = $1.trueList;
 		((EVal)$$).falseList = $1.falseList;
 		((EVal)$$).nextList = $1.nextList;
+		
 	}
 
 ebarateSade :
@@ -1562,14 +1585,20 @@ taghirnapazir :
 	}
 
 sedaZadan :
-	saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");} 
+	saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");
+	emit ("goto",null,null,addFunction($1.place,0));
+	} 
 	|
 	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW {System.out.println("Rule 40.2");} 
 
 bordareVorudiha: 
 	bordareVorudiha COMMA ebarat {System.out.println("Rule 42.1");}
 	|
-	ebarat {System.out.println("Rule 42.2");}
+	ebarat {
+	System.out.println("Rule 42.2");
+	emit("-", "top", "1", "top");
+	emit(":=",$1.place , null, "stack[top]");
+	}
 
 meghdareSabet:	
 	saved_integer {
@@ -1877,15 +1906,31 @@ class SymbolTable {
 	public ArrayList<String> names;
 	public ArrayList<Integer> types;
 	public ArrayList<Boolean> arrays;
+	public ArrayList<String[]>functions;
 
 	public SymbolTable() {
 		names = new ArrayList<>();
 		types = new ArrayList<>();
 		arrays = new ArrayList<>();
+		functions = new ArrayList<>();
 	}
 
 	public int lookUp(String name) {
 		return names.indexOf(name);
+	}
+
+	public String addFunction(String name, int address) {
+		
+		for(String[] str: functions){
+			if(str[0].equals(name)){
+				return str[1];
+			}
+		}
+		String str[] = new String[2];
+		str[0] = name;
+		str[1] = Integer.toString(address);
+		functions.add(str);
+		return "hey";
 	}
 
 	public boolean addToSymbolTable(String name, int type, boolean array) {
