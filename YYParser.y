@@ -13,7 +13,7 @@ MOD_KW LESS_THAN_KW MORE_EQUAL_KW
 PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW 
 ADAD_ASHARI
 
-%type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
+%type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle tarifeSakhtar tarifhayeMahalli
 meghdareSabet taghirpazir
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
@@ -237,6 +237,14 @@ tarifeSakhtar:
 	STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.1 ");
 		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
+		
+		for(int i = 0; i < $4.mstruct.size(); i++) {
+			
+			System.out.println($2.place+"."+$4.mstruct.get(i).place);
+			symbolTable.changeName($4.mstruct.get(i).place,"."+$4.mstruct.get(i).place);
+			
+		}
+		
 	}
 	|
 	STRUCT_KW saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW  {
@@ -246,11 +254,22 @@ tarifeSakhtar:
 	
 tarifhayeMahalli:
 	tarifhayeMahalli tarifeMoteghayyerMahdud  {
-		System.out.println("Rule 5 ");
+		System.out.println("Rule 5.1 ");
+		$$ = new EVal();
+		((EVal)$$).mstruct = $1.mstruct;
+		((EVal)$$).mstruct.add($2);
+		
 	}
 	|
 	tarifeMoteghayyerMahdud  {
-		System.out.println("Rule 5 ");
+		System.out.println("Rule 5.2 ");
+		$$ = new EVal();
+		((EVal)$$).type = $1.type;
+		((EVal)$$).trueList = $1.trueList;
+		((EVal)$$).falseList = $1.falseList;
+		((EVal)$$).place = $1.place;
+		((EVal)$$).mstruct = new ArrayList<>();
+		((EVal)$$).mstruct.add(((EVal)$$));
 	}
 		
 tarifeMoteghayyerMahdud:
@@ -1755,6 +1774,8 @@ class EVal {
 	public ArrayList<EVal> declareds;
 
 	public ArrayList<EVal> initializers;
+	
+	public ArrayList<EVal> mstruct;
 
 	public EVal() {
 	}
@@ -1886,6 +1907,11 @@ class SymbolTable {
 
 	public int lookUp(String name) {
 		return names.indexOf(name);
+	}
+	
+	public void changeName(String old, String newStr){
+		
+		names.get(names.indexOf(old)).concat(newStr);
 	}
 
 	public boolean addToSymbolTable(String name, int type, boolean array) {
