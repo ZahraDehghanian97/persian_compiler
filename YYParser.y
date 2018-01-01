@@ -14,7 +14,7 @@ PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW
 ADAD_ASHARI
 
 %type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
-meghdareSabet taghirpazir
+meghdareSabet taghirpazir bordareVorudiha
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
 %type <EVal> saved_real
@@ -39,6 +39,7 @@ meghdareSabet taghirpazir
 	public static double lexReal;
 	public static boolean lexBoolean;
 	public static char lexChar;
+	int n;
 
 	private ArrayList<Quadruple> quadruples = new ArrayList<>();
 	private SymbolTable symbolTable = new SymbolTable();
@@ -538,12 +539,18 @@ tarifeShenaseMoteghayer:
 		symbolTable.addToSymbolTable(condStr + ((EVal)$$).place, EVal.TYPE_CODE_INTEGER, false);
 	}
 	
+function_input:
+	PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW{
+	
+		emit(":=", "sp", null, "top");
+	}
+	
+	
 tarifeTabe:
-	 jens saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {
+	 jens saved_identifier function_input jomle {
 		System.out.println("Rule 13.1");
 		backpatch($1.nextList, (quadruples.size()));
 		
-		System.out.println($1.nextList.get(0)+1);
 		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
 		
 	}
@@ -578,7 +585,7 @@ shenaseyeVorudi :
 		System.out.println("Rule 18.1");
 		symbolTable.addToSymbolTable($1.place, $1.type, false);
 		emit(":=","stack[top]" , null, $1.place);
-		emit("+", "top", "1", "top");
+		emit("-", "top", "1", "top");
 		}|
 	saved_identifier BRACKET_BAZ_KW BRACKET_BASTE_KW {System.out.println("Rule 18.2");}
 	
@@ -814,9 +821,19 @@ jomleyeBazgasht:
 	$$ = new EVal();
 	((EVal)$$).nextList = $2.nextList;}
 	|
-	RETURN_KW ebarat NOGHTE_VIRGUL {System.out.println("Rule 27.2");
+	RETURN_KW ebarat NOGHTE_VIRGUL {
+	System.out.println("Rule 27.2");
 	$$ = new EVal();
-	((EVal)$$).nextList = $2.nextList;}
+	((EVal)$$).nextList = $2.nextList;
+	emit(":=",$2.place , null, "stack[sp + 1]");
+	emit("+","sp" , "2", "top");
+	emit(":=","*sp", null, "sp");
+	emit(":=","*top", null, "L");
+	emit("+","top" , "1", "top");
+	emit("+","*top" , "top", "top");
+	emit("+","1" , "top", "top");
+	emit ("goto",null,null,"L");
+	}
 
 jomleyeShekast:
 	BREAK_KW M NOGHTE_VIRGUL {System.out.println("Rule 28");
@@ -1586,15 +1603,32 @@ taghirnapazir :
 
 sedaZadan :
 	saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");
-	emit ("goto",null,null,addFunction($1.place,0));
+	
+	emit("-", "top", "1", "top");
+	emit(":=",String.valueOf(n) , null, "stack[top]");
+	emit("-", "top", "1", "top");
+	emit(":=",String.valueOf(nextQuad() - 1) , null, "stack[top]");
+	emit("-", "top", "1", "top");
+	emit("-", "top", "1", "top");
+	emit(":=","sp" , null, "stack[top]");
+	emit(":=","top" , null, "sp");
+	emit("+", "top", "3", "top");
+	emit("+", "top", "*top", "top");
+	emit ("goto",null,null,symbolTable.addFunction($1.place,0));
 	} 
 	|
 	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW {System.out.println("Rule 40.2");} 
 
 bordareVorudiha: 
-	bordareVorudiha COMMA ebarat {System.out.println("Rule 42.1");}
+	 bordareVorudiha COMMA ebarat  {
+	  System.out.println("Rule 42.1");
+	  emit("-", "top", "1", "top");
+	  emit(":=",$1.place , null, "stack[top]");
+	  n++;
+	  }
 	|
 	ebarat {
+	n = 1;
 	System.out.println("Rule 42.2");
 	emit("-", "top", "1", "top");
 	emit(":=",$1.place , null, "stack[top]");
