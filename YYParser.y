@@ -1607,7 +1607,7 @@ sedaZadan :
 	emit("-", "top", "1", "top");
 	emit(":=",String.valueOf(n) , null, "stack[top]");
 	emit("-", "top", "1", "top");
-	emit(":=",String.valueOf(nextQuad() - 1) , null, "stack[top]");
+	emit(":=",String.valueOf(nextQuad() + 8) , null, "stack[top]");
 	emit("-", "top", "1", "top");
 	emit("-", "top", "1", "top");
 	emit(":=","sp" , null, "stack[top]");
@@ -1623,7 +1623,7 @@ bordareVorudiha:
 	 bordareVorudiha COMMA ebarat  {
 	  System.out.println("Rule 42.1");
 	  emit("-", "top", "1", "top");
-	  emit(":=",$1.place , null, "stack[top]");
+	  emit(":=",$3.place , null, "stack[top]");
 	  n++;
 	  }
 	|
