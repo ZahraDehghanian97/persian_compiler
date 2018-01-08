@@ -14,7 +14,7 @@ PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW
 ADAD_ASHARI MAIN_KW
 
 %type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
-meghdareSabet taghirpazir bordareVorudiha
+meghdareSabet taghirpazir bordareVorudiha function_name
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
 %type <EVal> saved_real
@@ -41,6 +41,9 @@ meghdareSabet taghirpazir bordareVorudiha
 	public static char lexChar;
 	int n;
 	int main_address;
+	
+	String[] function_names = new String[1000];
+	int top = -1;
 
 	private ArrayList<Quadruple> quadruples = new ArrayList<>();
 	private SymbolTable symbolTable = new SymbolTable();
@@ -544,22 +547,36 @@ tarifeShenaseMoteghayer:
 	}
 	
 function_input:
-	PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW{
+	 vorudiha PARANTHESIS_BASTE_KW{
 	
 		emit(":=", "sp", null, "top");
 	}
 	
+function_name:
+	saved_identifier PARANTHESIS_BAZ_KW {
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).nextList = $1.nextList;
+		
+		top++;
+		function_names[top] = $1.place;
+		System.out.println(function_names[top]);
+		
+	}
+	
 	
 tarifeTabe:
-	 jens saved_identifier function_input jomle {
+	 jens function_name function_input jomle {
 		System.out.println("Rule 13.1");
 		backpatch($1.nextList, (quadruples.size()));
 		
 		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
 		
+		top--;
+		
 	}
 	|
-	jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
+	jens function_name PARANTHESIS_BASTE_KW jomle {
 		System.out.println("Rule 13.2");
 		backpatch($1.nextList, (quadruples.size()));
 		System.out.println($1.nextList.get(0)+1);
@@ -567,14 +584,14 @@ tarifeTabe:
 	}
 	
 	|
-	saved_identifier function_input jomle {
+	function_name function_input jomle {
 		System.out.println("Rule 13.3");
 		backpatch($1.nextList, (quadruples.size()));
 		
 		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
 	}
 	|
-	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
+	function_name PARANTHESIS_BASTE_KW jomle {
 	System.out.println("Rule 13.4");
 	
 		backpatch($1.nextList, (quadruples.size()));
@@ -1707,7 +1724,15 @@ saved_identifier:
 		System.out.println("Rule 30: " +
 			"saved_identifier: IDENTIFIER");
 		$$ = new EVal();
-		((EVal)$$).place = lexIdentifier;
+		
+		if(top>-1){
+		
+			((EVal)$$).place = function_names[top] + lexIdentifier;
+		}
+		
+		else{
+			((EVal)$$).place = lexIdentifier;
+		}
 		//((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
 		//((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = //EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
@@ -1719,7 +1744,14 @@ saved_identifier:
 		System.out.println("Rule 31: " +
 			"saved_identifier: MAIN_KW");
 		$$ = new EVal();
-		((EVal)$$).place = lexIdentifier;
+		if(top>-1){
+		
+			((EVal)$$).place = function_names[top] + lexIdentifier;
+		}
+		
+		else{
+			((EVal)$$).place = lexIdentifier;
+		}
 		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
