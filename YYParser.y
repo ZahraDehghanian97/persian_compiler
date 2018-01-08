@@ -14,7 +14,7 @@ PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW
 ADAD_ASHARI MAIN_KW
 
 %type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
-meghdareSabet taghirpazir bordareVorudiha function_name
+meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_shenase struct_name struct_name2
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
 %type <EVal> saved_real
@@ -159,6 +159,7 @@ meghdareSabet taghirpazir bordareVorudiha function_name
 
 		try {
 			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\n");
+			dos.writeBytes("\t int stack[1001];\n \t int top = 1000 ;\n \t int sp = 1000 ;\n ");
 			dos.writeBytes(symbolTable.toString());
 			dos.writeBytes("\n\t\n");
 			// Backpatch of error controllers.
@@ -240,16 +241,26 @@ tarif:
 	| tarifeTabe{
 		System.out.println("Rule 3.3: " );
 	}
-
+struct_name :
+	STRUCT_KW saved_identifier{
+		$$ = new EVal();
+		((EVal)$$).place = $2.place;
+		((EVal)$$).nextList = $2.nextList;
+		top++;
+		function_names[top] = $2.place ;
+		
+	}
 tarifeSakhtar:
-	STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
+	struct_name AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.1 ");
-		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
+		symbolTable.addToSymbolTable($1.place, EVal.TYPE_CODE_INTEGER, false);
+		top--;
 	}
 	|
-	STRUCT_KW saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW  {
+	struct_name AKULAD_BAZ_KW AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.2 ");
-		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
+		symbolTable.addToSymbolTable($1.place, EVal.TYPE_CODE_INTEGER, false);
+		top--;
 	}
 	
 tarifhayeMahalli:
@@ -558,9 +569,14 @@ function_name:
 		((EVal)$$).place = $1.place;
 		((EVal)$$).nextList = $1.nextList;
 		
+		System.out.println($1.place);
 		top++;
 		function_names[top] = $1.place;
-		System.out.println(function_names[top]);
+		
+		//for(int i=0; i<=top; i++){
+		System.out.println(top);
+		
+		
 		
 	}
 	
@@ -1605,20 +1621,35 @@ taghirpazir :
 		emit("goto", null, null, String.valueOf(nextQuad() + 1)); //result will be backpatche
 		}
 	|
-	taghirpazir NOGHTE_KW saved_identifier {
+	struct_name2 noghte_shenase {
 		System.out.println("Rule 38.3");
 		
-		if(symbolTable.lookUp($1.place)==-1){
-			System.err.println("struct not defined.");
+		//if(symbolTable.lookUp($1.place)==-1){
+			//System.err.println("struct not defined.");
 
-		}
+		//}
 		$$ = new EVal();	
-		((EVal)$$).place = $3.place;
-		((EVal)$$).type = $3.type;
-		((EVal)$$).trueList = $3.trueList;
-		((EVal)$$).falseList = $3.falseList;
-		((EVal)$$).nextList = $3.nextList;
+		((EVal)$$).place = $1.place + $2.place;
+		((EVal)$$).type = $2.type;
+		((EVal)$$).trueList = $2.trueList;
+		((EVal)$$).falseList = $2.falseList;
+		((EVal)$$).nextList = $2.nextList;
 		}
+
+struct_name2:
+	SHENASE{
+		$$ = new EVal();
+		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will 
+	}
+noghte_shenase:
+	NOGHTE_KW SHENASE{
+		$$ = new EVal();
+		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); 
+	}
 	
 	
 taghirnapazir :
@@ -1640,9 +1671,18 @@ taghirnapazir :
 		((EVal)$$).falseList = $1.falseList;
 		((EVal)$$).nextList = $1.nextList;
 	}
+	
+function_name2:
+	SHENASE PARANTHESIS_BAZ_KW
+	{
+		$$ = new EVal();
+		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+	}
 
 sedaZadan :
-	saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");
+	function_name2 bordareVorudiha PARANTHESIS_BASTE_KW {System.out.println("Rule 40.1");
 	
 	emit("-", "top", "1", "top");
 	emit(":=",String.valueOf(n) , null, "stack[top]");
@@ -1657,7 +1697,7 @@ sedaZadan :
 	emit ("goto",null,null,symbolTable.addFunction($1.place,0));
 	} 
 	|
-	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW {System.out.println("Rule 40.2");} 
+	function_name2 PARANTHESIS_BASTE_KW {System.out.println("Rule 40.2");} 
 
 bordareVorudiha: 
 	 bordareVorudiha COMMA ebarat  {
@@ -1744,14 +1784,11 @@ saved_identifier:
 		System.out.println("Rule 31: " +
 			"saved_identifier: MAIN_KW");
 		$$ = new EVal();
-		if(top>-1){
 		
-			((EVal)$$).place = function_names[top] + lexIdentifier;
-		}
 		
-		else{
-			((EVal)$$).place = lexIdentifier;
-		}
+		
+		((EVal)$$).place = "main";
+		//System.out.println(lexIdentifier);
 		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
