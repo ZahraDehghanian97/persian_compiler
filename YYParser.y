@@ -11,7 +11,7 @@ KEY_KW MORE_THAN_KW NOGHTE_KW MULTIPLY_KW BRACKET_BASTE_KW BRACKET_BAZ_KW PARANT
 TRUE_KW QUESTION_KW EQUAL_EQUAL_KW EQUAL_KW DEVIDE_KW DEVIDE_EQUAL_KW OR_ELSE_KW FALSE_KW AND_THEN_KW MINUS_KW DONOGHTE_KW LESS_EQUAL_KW
 MOD_KW LESS_THAN_KW MORE_EQUAL_KW 
 PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW 
-ADAD_ASHARI
+ADAD_ASHARI MAIN_KW
 
 %type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
 meghdareSabet taghirpazir bordareVorudiha
@@ -40,6 +40,7 @@ meghdareSabet taghirpazir bordareVorudiha
 	public static boolean lexBoolean;
 	public static char lexChar;
 	int n;
+	int main_address;
 
 	private ArrayList<Quadruple> quadruples = new ArrayList<>();
 	private SymbolTable symbolTable = new SymbolTable();
@@ -167,9 +168,12 @@ meghdareSabet taghirpazir bordareVorudiha
 				dos.writeBytes(Quadruple.LINE_STR + i + ":" + "\t\t" + quadruples.get(i) + "\n");
 			}
 			// Normal Finish
-			if(quadruples.size() < 100)
+			if(quadruples.size() < 100){
+			
+				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tgoto "+main_address+";\n");
+				
 				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
-					"\t\t\t\tgetchar();\n\t\t\t\treturn 0;\n");
+					"\t\t\t\tgetchar();\n\t\t\t\treturn 0;\n");}
 			else
 				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
 					"\t\t\t\tgetchar();\n\t\t\t\treturn 0;\n");
@@ -261,8 +265,8 @@ tarifeMoteghayyerMahdud:
 		
 		System.out.println("Rule 3: " +
 			"declarations: type_specifiers declarator_list");
-		System.out.println($1.type+" "+$2.type);
-		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type == $2.type) {
+		//System.out.println($1.type+" "+$2.type);
+		if($2.type == EVal.TYPE_CODE_UNKNOWN || $1.type >= $2.type) {
 			for(int i = 0; i < $2.initializersList.size(); i++) {
 				if(symbolTable.lookUp(sizeStr + $2.declareds.get(i).place) == SymbolTable.NOT_IN_SYMBOL_TABLE) {
 					symbolTable.addToSymbolTable($2.declareds.get(i).place, $1.type, false);
@@ -563,9 +567,20 @@ tarifeTabe:
 	}
 	
 	|
-	saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.3");}
+	saved_identifier function_input jomle {
+		System.out.println("Rule 13.3");
+		backpatch($1.nextList, (quadruples.size()));
+		
+		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
+	}
 	|
-	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {System.out.println("Rule 13.4");}
+	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
+	System.out.println("Rule 13.4");
+	
+		backpatch($1.nextList, (quadruples.size()));
+		System.out.println($1.nextList.get(0)+1);
+		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
+	}
 	
 vorudiha :
 	vorudiha NOGHTE_VIRGUL jensVorudiha {System.out.println("Rule 15.1");}
@@ -834,6 +849,7 @@ jomleyeBazgasht:
 	emit("+","1" , "top", "top");
 	emit ("goto",null,null,"L");
 	}
+	
 
 jomleyeShekast:
 	BREAK_KW M NOGHTE_VIRGUL {System.out.println("Rule 28");
@@ -1252,17 +1268,24 @@ ebarateRiaziManteghi :
 		System.out.println("Rule 26.4: " +
 			"expressions: saved_identifier");
 		int index = symbolTable.lookUp($1.place);
-		if (index == SymbolTable.NOT_IN_SYMBOL_TABLE) {
+		
+		boolean isFunction =  false;
+		if(!symbolTable.findFunction($1.place).equals("not_found")){
+			isFunction = true;
+		}
+		if (index == SymbolTable.NOT_IN_SYMBOL_TABLE
+			&& !isFunction) {
 			System.out.println("Error! \"" + $1.place + "\" is not declared.");
 			return YYABORT;
 		}
-		if (symbolTable.arrays.get(index)) {
+		if (!isFunction && symbolTable.arrays.get(index)) {
 			System.out.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
 			return YYABORT;
 		}
-		System.out.println("found: "+index);
+		//System.out.println("found: "+index);
 		$$ = new EVal();
-		((EVal)$$).place = $1.place;//symbolTable.names.get(index);
+		((EVal)$$).place = $1.place;
+		//symbolTable.names.get(index);
 		((EVal)$$).type = $1.type;//symbolTable.types.get(index);
 
 		
@@ -1685,11 +1708,23 @@ saved_identifier:
 			"saved_identifier: IDENTIFIER");
 		$$ = new EVal();
 		((EVal)$$).place = lexIdentifier;
+		//((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
+		//((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
+		((EVal)$$).nextList = //EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+		((EVal)$$).nextList = EVal.makeList(nextQuad());
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result will be backpatched.
+	}
+	|
+	MAIN_KW {
+		System.out.println("Rule 31: " +
+			"saved_identifier: MAIN_KW");
+		$$ = new EVal();
+		((EVal)$$).place = lexIdentifier;
 		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
-
-}
+		main_address = quadruples.size();
+	}
 	
 saved_integer:
 	ADAD {
@@ -1964,7 +1999,17 @@ class SymbolTable {
 		str[0] = name;
 		str[1] = Integer.toString(address);
 		functions.add(str);
-		return "hey";
+		return "not_found";
+	}
+	
+	public String findFunction(String name){
+	
+		for(String[] str: functions){
+			if(str[0].equals(name)){
+				return str[1];
+			}
+		}
+		return "not_found";
 	}
 
 	public boolean addToSymbolTable(String name, int type, boolean array) {

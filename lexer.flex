@@ -28,6 +28,7 @@ PROGRAM_KW = (\u0628\u0631\u0646\u0627\u0645\u0647)
 struct_kw = (\u0633\u0627\u062e\u062a\u0627\u0631)
 constant_kw = (\u062b\u0627\u0628\u062a)
 INT_KW = (\u0635\u062d\u062d)
+MAIN_KW = (\u0627\u0635\u0644)
 
 SWITCH_KW = ( \u062d\u0627\u0644\u062a)
 end_kw = (\u062a\u0645\u0627\u0645)
@@ -106,6 +107,11 @@ ADD_KW = [+]
 {comments} {
 	if(p){System.out.println(yytext() + "\t" + "comments\t" + '-');}
 	return YYParser.COMMENT;
+}
+
+{MAIN_KW} {
+	if(p){System.out.println(yytext() + "\t" + "MAIN_KW\t" + '-');}
+	return YYParser.MAIN_KW ;
 }
 
 {KEY_KW} {

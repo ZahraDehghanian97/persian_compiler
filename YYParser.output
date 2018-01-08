@@ -49,7 +49,7 @@ Grammar
 
    24 tarifeTabe: jens saved_identifier function_input jomle
    25           | jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle
-   26           | saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle
+   26           | saved_identifier function_input jomle
    27           | saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle
 
    28 vorudiha: vorudiha NOGHTE_VIRGUL jensVorudiha
@@ -165,19 +165,20 @@ Grammar
   110              | saved_boolean
 
   111 saved_identifier: SHENASE
+  112                 | MAIN_KW
 
-  112 saved_integer: ADAD
+  113 saved_integer: ADAD
 
-  113 saved_real: ADAD_ASHARI
+  114 saved_real: ADAD_ASHARI
 
-  114 saved_char: HARFE_SABET
+  115 saved_char: HARFE_SABET
 
-  115 saved_boolean: TRUE_KW
-  116              | FALSE_KW
+  116 saved_boolean: TRUE_KW
+  117              | FALSE_KW
 
-  117 M: /* empty */
+  118 M: /* empty */
 
-  118 N: /* empty */
+  119 N: /* empty */
 
 
 Terminals, with rules where they appear
@@ -209,25 +210,25 @@ OR_KW (279) 72
 NOT_KW (280) 76
 WHILE_KW (281) 60
 NOGHTE_VIRGUL (282) 11 16 28 49 50 61 62 63
-ADAD (283) 112
+ADAD (283) 113
 SHENASE (284) 1 111
-HARFE_SABET (285) 114
+HARFE_SABET (285) 115
 KEY_KW (286) 55 56
 MORE_THAN_KW (287) 81
 NOGHTE_KW (288) 99
 MULTIPLY_KW (289) 87 93
 BRACKET_BASTE_KW (290) 22 34 98
 BRACKET_BAZ_KW (291) 22 34 98
-PARANTHESIS_BASTE_KW (292) 23 25 26 27 55 56 60 100 103 104
-PARANTHESIS_BAZ_KW (293) 23 25 26 27 55 56 60 100 103 104
-TRUE_KW (294) 115
+PARANTHESIS_BASTE_KW (292) 23 25 27 55 56 60 100 103 104
+PARANTHESIS_BAZ_KW (293) 23 25 27 55 56 60 100 103 104
+TRUE_KW (294) 116
 QUESTION_KW (295) 94
 EQUAL_EQUAL_KW (296) 83
 EQUAL_KW (297) 20 64
 DEVIDE_KW (298) 88
 DEVIDE_EQUAL_KW (299) 68
 OR_ELSE_KW (300) 74
-FALSE_KW (301) 116
+FALSE_KW (301) 117
 AND_THEN_KW (302) 75
 MINUS_KW (303) 86 92
 DONOGHTE_KW (304) 57 58 59
@@ -240,116 +241,118 @@ PLUS_PLUS_KW (310) 69
 MINUS_MINUS_KW (311) 70
 MINUS_EQUAL_KW (312) 66
 MULTIPLY_EQUAL_KW (313) 67
-ADAD_ASHARI (314) 113
-LOWER_THAN_ELSE_KW (315)
+ADAD_ASHARI (314) 114
+MAIN_KW (315) 112
+LOWER_THAN_ELSE_KW (316)
 
 
 Nonterminals, with rules where they appear
 
-$accept (61)
+$accept (62)
     on left: 0
-barnameh (62)
+barnameh (63)
     on left: 1, on right: 0
-tarifha (63)
+tarifha (64)
     on left: 2 3, on right: 1 2
-tarif (64)
+tarif (65)
     on left: 4 5 6, on right: 2 3
-tarifeSakhtar (65)
+tarifeSakhtar (66)
     on left: 7 8, on right: 4
-tarifhayeMahalli (66)
+tarifhayeMahalli (67)
     on left: 9 10, on right: 7 9 43 44
-tarifeMoteghayyerMahdud (67)
+tarifeMoteghayyerMahdud (68)
     on left: 11, on right: 9 10
-jens (68)
+jens (69)
     on left: 12 13 14 15, on right: 11 16 24 25 30
-tarifeMoteghayyer (69)
+tarifeMoteghayyer (70)
     on left: 16, on right: 5
-tarifhayeMoteghayyerha (70)
+tarifhayeMoteghayyerha (71)
     on left: 17 18, on right: 11 16 18
-tarifeMeghdareAvalie (71)
+tarifeMeghdareAvalie (72)
     on left: 19 20, on right: 17 18
-tarifeShenaseMoteghayer (72)
+tarifeShenaseMoteghayer (73)
     on left: 21 22, on right: 19 20
-function_input (73)
-    on left: 23, on right: 24
-tarifeTabe (74)
+function_input (74)
+    on left: 23, on right: 24 26
+tarifeTabe (75)
     on left: 24 25 26 27, on right: 6
-vorudiha (75)
-    on left: 28 29, on right: 23 26 28
-jensVorudiha (76)
+vorudiha (76)
+    on left: 28 29, on right: 23 28
+jensVorudiha (77)
     on left: 30, on right: 28 29
-shenaseyeVorudiha (77)
+shenaseyeVorudiha (78)
     on left: 31 32, on right: 30 31
-shenaseyeVorudi (78)
+shenaseyeVorudi (79)
     on left: 33 34, on right: 31 32
-jomle (79)
+jomle (80)
     on left: 35 36, on right: 24 25 26 27 47 48 54 57 58 59 60
-otherjomle (80)
+otherjomle (81)
     on left: 37 38 39 40 41 42, on right: 52
-jomleyeMorakkab (81)
+jomleyeMorakkab (82)
     on left: 43 44 45 46, on right: 37
-jomleha (82)
+jomleha (83)
     on left: 47 48, on right: 43 45 47
-jomleyeEbarat (83)
+jomleyeEbarat (84)
     on left: 49 50, on right: 38
-matched (84)
+matched (85)
     on left: 51 52, on right: 35 51 53
-unmatched (85)
+unmatched (86)
     on left: 53 54, on right: 36 53
-jomleyeEntekhab (86)
+jomleyeEntekhab (87)
     on left: 55 56, on right: 39
-onsoreHalat (87)
+onsoreHalat (88)
     on left: 57 58, on right: 55 56 58
-onsorePishfarz (88)
+onsorePishfarz (89)
     on left: 59, on right: 55
-jomleyeTekrar (89)
+jomleyeTekrar (90)
     on left: 60, on right: 40
-jomleyeBazgasht (90)
+jomleyeBazgasht (91)
     on left: 61 62, on right: 41
-jomleyeShekast (91)
+jomleyeShekast (92)
     on left: 63, on right: 42
-ebarat (92)
+ebarat (93)
     on left: 64 65 66 67 68 69 70 71, on right: 49 62 64 65 66 67 68
     98 100 105 106
-ebarateSade (93)
+ebarateSade (94)
     on left: 72 73 74 75 76 77, on right: 20 51 53 54 60 71 72 73 74
     75 76
-ebarateRabetei (94)
+ebarateRabetei (95)
     on left: 78 79 80 81 82 83, on right: 77
-ebarateRiaziManteghi (95)
+ebarateRiaziManteghi (96)
     on left: 84 85 86 87 88 89, on right: 55 56 78 79 80 81 82 83 85
     86 87 88 89
-ebarateYegani (96)
+ebarateYegani (97)
     on left: 90 91, on right: 84 90
-amalgareYegani (97)
+amalgareYegani (98)
     on left: 92 93 94, on right: 90
-amel (98)
+amel (99)
     on left: 95 96, on right: 91
-taghirpazir (99)
+taghirpazir (100)
     on left: 97 98 99, on right: 64 65 66 67 68 69 70 95 98 99
-taghirnapazir (100)
+taghirnapazir (101)
     on left: 100 101 102, on right: 96
-sedaZadan (101)
+sedaZadan (102)
     on left: 103 104, on right: 101
-bordareVorudiha (102)
+bordareVorudiha (103)
     on left: 105 106, on right: 103 105
-meghdareSabet (103)
+meghdareSabet (104)
     on left: 107 108 109 110, on right: 102
-saved_identifier (104)
-    on left: 111, on right: 7 8 21 22 24 25 26 27 33 34 97 99 103 104
-saved_integer (105)
-    on left: 112, on right: 22 57 58 107
-saved_real (106)
-    on left: 113, on right: 108
-saved_char (107)
-    on left: 114, on right: 109
-saved_boolean (108)
-    on left: 115 116, on right: 110
-M (109)
-    on left: 117, on right: 47 49 50 51 53 54 57 58 59 60 61 63 72
+saved_identifier (105)
+    on left: 111 112, on right: 7 8 21 22 24 25 26 27 33 34 97 99 103
+    104
+saved_integer (106)
+    on left: 113, on right: 22 57 58 107
+saved_real (107)
+    on left: 114, on right: 108
+saved_char (108)
+    on left: 115, on right: 109
+saved_boolean (109)
+    on left: 116 117, on right: 110
+M (110)
+    on left: 118, on right: 47 49 50 51 53 54 57 58 59 60 61 63 72
     73 74 75
-N (110)
-    on left: 118, on right: 35 51 53 55 56 57 58 59
+N (111)
+    on left: 119, on right: 35 51 53 55 56 57 58 59
 
 
 state 0
@@ -385,14 +388,15 @@ state 3
     CHAR_KW     shift, and go to state 8
     STRUCT_KW   shift, and go to state 9
     SHENASE     shift, and go to state 10
+    MAIN_KW     shift, and go to state 11
 
-    tarifha            go to state 11
-    tarif              go to state 12
-    tarifeSakhtar      go to state 13
-    jens               go to state 14
-    tarifeMoteghayyer  go to state 15
-    tarifeTabe         go to state 16
-    saved_identifier   go to state 17
+    tarifha            go to state 12
+    tarif              go to state 13
+    tarifeSakhtar      go to state 14
+    jens               go to state 15
+    tarifeMoteghayyer  go to state 16
+    tarifeTabe         go to state 17
+    saved_identifier   go to state 18
 
 
 state 4
@@ -436,8 +440,9 @@ state 9
     8              | STRUCT_KW . saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW
 
     SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
 
-    saved_identifier  go to state 18
+    saved_identifier  go to state 19
 
 
 state 10
@@ -449,6 +454,13 @@ state 10
 
 state 11
 
+  112 saved_identifier: MAIN_KW .
+
+    $default  reduce using rule 112 (saved_identifier)
+
+
+state 12
+
     1 barnameh: PROGRAM_KW SHENASE tarifha .
     2 tarifha: tarifha . tarif
 
@@ -458,140 +470,196 @@ state 11
     CHAR_KW     shift, and go to state 8
     STRUCT_KW   shift, and go to state 9
     SHENASE     shift, and go to state 10
+    MAIN_KW     shift, and go to state 11
 
     $default  reduce using rule 1 (barnameh)
 
-    tarif              go to state 19
-    tarifeSakhtar      go to state 13
-    jens               go to state 14
-    tarifeMoteghayyer  go to state 15
-    tarifeTabe         go to state 16
-    saved_identifier   go to state 17
+    tarif              go to state 20
+    tarifeSakhtar      go to state 14
+    jens               go to state 15
+    tarifeMoteghayyer  go to state 16
+    tarifeTabe         go to state 17
+    saved_identifier   go to state 18
 
 
-state 12
+state 13
 
     3 tarifha: tarif .
 
     $default  reduce using rule 3 (tarifha)
 
 
-state 13
+state 14
 
     4 tarif: tarifeSakhtar .
 
     $default  reduce using rule 4 (tarif)
 
 
-state 14
+state 15
 
    16 tarifeMoteghayyer: jens . tarifhayeMoteghayyerha NOGHTE_VIRGUL
    24 tarifeTabe: jens . saved_identifier function_input jomle
    25           | jens . saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle
 
     SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
 
-    tarifhayeMoteghayyerha   go to state 20
-    tarifeMeghdareAvalie     go to state 21
-    tarifeShenaseMoteghayer  go to state 22
-    saved_identifier         go to state 23
+    tarifhayeMoteghayyerha   go to state 21
+    tarifeMeghdareAvalie     go to state 22
+    tarifeShenaseMoteghayer  go to state 23
+    saved_identifier         go to state 24
 
 
-state 15
+state 16
 
     5 tarif: tarifeMoteghayyer .
 
     $default  reduce using rule 5 (tarif)
 
 
-state 16
+state 17
 
     6 tarif: tarifeTabe .
 
     $default  reduce using rule 6 (tarif)
 
 
-state 17
+state 18
 
-   26 tarifeTabe: saved_identifier . PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle
+   26 tarifeTabe: saved_identifier . function_input jomle
    27           | saved_identifier . PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle
 
-    PARANTHESIS_BAZ_KW  shift, and go to state 24
+    PARANTHESIS_BAZ_KW  shift, and go to state 25
+
+    function_input  go to state 26
 
 
-state 18
+state 19
 
     7 tarifeSakhtar: STRUCT_KW saved_identifier . AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW
     8              | STRUCT_KW saved_identifier . AKULAD_BAZ_KW AKULAD_BASTE_KW
 
-    AKULAD_BAZ_KW  shift, and go to state 25
+    AKULAD_BAZ_KW  shift, and go to state 27
 
 
-state 19
+state 20
 
     2 tarifha: tarifha tarif .
 
     $default  reduce using rule 2 (tarifha)
 
 
-state 20
+state 21
 
    16 tarifeMoteghayyer: jens tarifhayeMoteghayyerha . NOGHTE_VIRGUL
    18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha . COMMA tarifeMeghdareAvalie
 
-    COMMA          shift, and go to state 26
-    NOGHTE_VIRGUL  shift, and go to state 27
+    COMMA          shift, and go to state 28
+    NOGHTE_VIRGUL  shift, and go to state 29
 
 
-state 21
+state 22
 
    17 tarifhayeMoteghayyerha: tarifeMeghdareAvalie .
 
     $default  reduce using rule 17 (tarifhayeMoteghayyerha)
 
 
-state 22
+state 23
 
    19 tarifeMeghdareAvalie: tarifeShenaseMoteghayer .
    20                     | tarifeShenaseMoteghayer . EQUAL_KW ebarateSade
 
-    EQUAL_KW  shift, and go to state 28
+    EQUAL_KW  shift, and go to state 30
 
     $default  reduce using rule 19 (tarifeMeghdareAvalie)
 
 
-state 23
+state 24
 
    21 tarifeShenaseMoteghayer: saved_identifier .
    22                        | saved_identifier . BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW
    24 tarifeTabe: jens saved_identifier . function_input jomle
    25           | jens saved_identifier . PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle
 
-    BRACKET_BAZ_KW      shift, and go to state 29
-    PARANTHESIS_BAZ_KW  shift, and go to state 30
+    BRACKET_BAZ_KW      shift, and go to state 31
+    PARANTHESIS_BAZ_KW  shift, and go to state 32
 
     $default  reduce using rule 21 (tarifeShenaseMoteghayer)
 
-    function_input  go to state 31
+    function_input  go to state 33
 
 
-state 24
+state 25
 
-   26 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW . vorudiha PARANTHESIS_BASTE_KW jomle
-   27           | saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW jomle
+   23 function_input: PARANTHESIS_BAZ_KW . vorudiha PARANTHESIS_BASTE_KW
+   27 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW jomle
 
     FLOAT_KW              shift, and go to state 5
     INT_KW                shift, and go to state 6
     BOOLEAN_KW            shift, and go to state 7
     CHAR_KW               shift, and go to state 8
-    PARANTHESIS_BASTE_KW  shift, and go to state 32
+    PARANTHESIS_BASTE_KW  shift, and go to state 34
 
-    jens          go to state 33
-    vorudiha      go to state 34
-    jensVorudiha  go to state 35
+    jens          go to state 35
+    vorudiha      go to state 36
+    jensVorudiha  go to state 37
 
 
-state 25
+state 26
+
+   26 tarifeTabe: saved_identifier function_input . jomle
+
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    jomle                 go to state 55
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 27
 
     7 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW . tarifhayeMahalli AKULAD_BASTE_KW
     8              | STRUCT_KW saved_identifier AKULAD_BAZ_KW . AKULAD_BASTE_KW
@@ -600,74 +668,76 @@ state 25
     INT_KW           shift, and go to state 6
     BOOLEAN_KW       shift, and go to state 7
     CHAR_KW          shift, and go to state 8
-    AKULAD_BASTE_KW  shift, and go to state 36
+    AKULAD_BASTE_KW  shift, and go to state 81
 
-    tarifhayeMahalli         go to state 37
-    tarifeMoteghayyerMahdud  go to state 38
-    jens                     go to state 39
+    tarifhayeMahalli         go to state 82
+    tarifeMoteghayyerMahdud  go to state 83
+    jens                     go to state 84
 
 
-state 26
+state 28
 
    18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha COMMA . tarifeMeghdareAvalie
 
     SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
 
-    tarifeMeghdareAvalie     go to state 40
-    tarifeShenaseMoteghayer  go to state 22
-    saved_identifier         go to state 41
+    tarifeMeghdareAvalie     go to state 85
+    tarifeShenaseMoteghayer  go to state 23
+    saved_identifier         go to state 86
 
 
-state 27
+state 29
 
    16 tarifeMoteghayyer: jens tarifhayeMoteghayyerha NOGHTE_VIRGUL .
 
     $default  reduce using rule 16 (tarifeMoteghayyer)
 
 
-state 28
+state 30
 
    20 tarifeMeghdareAvalie: tarifeShenaseMoteghayer EQUAL_KW . ebarateSade
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateSade           go to state 52
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateSade           go to state 87
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 29
+state 31
 
    22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW . saved_integer BRACKET_BASTE_KW
 
-    ADAD  shift, and go to state 43
+    ADAD  shift, and go to state 45
 
-    saved_integer  go to state 67
+    saved_integer  go to state 89
 
 
-state 30
+state 32
 
    23 function_input: PARANTHESIS_BAZ_KW . vorudiha PARANTHESIS_BASTE_KW
    25 tarifeTabe: jens saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW jomle
@@ -676,198 +746,291 @@ state 30
     INT_KW                shift, and go to state 6
     BOOLEAN_KW            shift, and go to state 7
     CHAR_KW               shift, and go to state 8
-    PARANTHESIS_BASTE_KW  shift, and go to state 68
+    PARANTHESIS_BASTE_KW  shift, and go to state 90
 
-    jens          go to state 33
-    vorudiha      go to state 69
-    jensVorudiha  go to state 35
-
-
-state 31
-
-   24 tarifeTabe: jens saved_identifier function_input . jomle
-
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    jomle                 go to state 77
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 32
-
-   27 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW . jomle
-
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    jomle                 go to state 90
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    jens          go to state 35
+    vorudiha      go to state 36
+    jensVorudiha  go to state 37
 
 
 state 33
 
-   30 jensVorudiha: jens . shenaseyeVorudiha
+   24 tarifeTabe: jens saved_identifier function_input . jomle
 
-    SHENASE  shift, and go to state 10
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    shenaseyeVorudiha  go to state 91
-    shenaseyeVorudi    go to state 92
-    saved_identifier   go to state 93
+    jomle                 go to state 91
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 34
 
-   26 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW vorudiha . PARANTHESIS_BASTE_KW jomle
-   28 vorudiha: vorudiha . NOGHTE_VIRGUL jensVorudiha
+   27 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW . jomle
 
-    NOGHTE_VIRGUL         shift, and go to state 94
-    PARANTHESIS_BASTE_KW  shift, and go to state 95
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    jomle                 go to state 92
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 35
+
+   30 jensVorudiha: jens . shenaseyeVorudiha
+
+    SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
+
+    shenaseyeVorudiha  go to state 93
+    shenaseyeVorudi    go to state 94
+    saved_identifier   go to state 95
+
+
+state 36
+
+   23 function_input: PARANTHESIS_BAZ_KW vorudiha . PARANTHESIS_BASTE_KW
+   28 vorudiha: vorudiha . NOGHTE_VIRGUL jensVorudiha
+
+    NOGHTE_VIRGUL         shift, and go to state 96
+    PARANTHESIS_BASTE_KW  shift, and go to state 97
+
+
+state 37
 
    29 vorudiha: jensVorudiha .
 
     $default  reduce using rule 29 (vorudiha)
 
 
-state 36
-
-    8 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW .
-
-    $default  reduce using rule 8 (tarifeSakhtar)
-
-
-state 37
-
-    7 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli . AKULAD_BASTE_KW
-    9 tarifhayeMahalli: tarifhayeMahalli . tarifeMoteghayyerMahdud
-
-    FLOAT_KW         shift, and go to state 5
-    INT_KW           shift, and go to state 6
-    BOOLEAN_KW       shift, and go to state 7
-    CHAR_KW          shift, and go to state 8
-    AKULAD_BASTE_KW  shift, and go to state 96
-
-    tarifeMoteghayyerMahdud  go to state 97
-    jens                     go to state 39
-
-
 state 38
 
-   10 tarifhayeMahalli: tarifeMoteghayyerMahdud .
+   43 jomleyeMorakkab: AKULAD_BAZ_KW . tarifhayeMahalli jomleha AKULAD_BASTE_KW
+   44                | AKULAD_BAZ_KW . tarifhayeMahalli AKULAD_BASTE_KW
+   45                | AKULAD_BAZ_KW . jomleha AKULAD_BASTE_KW
+   46                | AKULAD_BAZ_KW . AKULAD_BASTE_KW
 
-    $default  reduce using rule 10 (tarifhayeMahalli)
+    FLOAT_KW            shift, and go to state 5
+    INT_KW              shift, and go to state 6
+    BOOLEAN_KW          shift, and go to state 7
+    CHAR_KW             shift, and go to state 8
+    AKULAD_BAZ_KW       shift, and go to state 38
+    AKULAD_BASTE_KW     shift, and go to state 98
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    tarifhayeMahalli         go to state 99
+    tarifeMoteghayyerMahdud  go to state 83
+    jens                     go to state 84
+    jomle                    go to state 100
+    otherjomle               go to state 56
+    jomleyeMorakkab          go to state 57
+    jomleha                  go to state 101
+    jomleyeEbarat            go to state 58
+    matched                  go to state 59
+    unmatched                go to state 60
+    jomleyeEntekhab          go to state 61
+    jomleyeTekrar            go to state 62
+    jomleyeBazgasht          go to state 63
+    jomleyeShekast           go to state 64
+    ebarat                   go to state 65
+    ebarateSade              go to state 66
+    ebarateRabetei           go to state 67
+    ebarateRiaziManteghi     go to state 68
+    ebarateYegani            go to state 69
+    amalgareYegani           go to state 70
+    amel                     go to state 71
+    taghirpazir              go to state 72
+    taghirnapazir            go to state 73
+    sedaZadan                go to state 74
+    meghdareSabet            go to state 75
+    saved_identifier         go to state 76
+    saved_integer            go to state 77
+    saved_real               go to state 78
+    saved_char               go to state 79
+    saved_boolean            go to state 80
 
 
 state 39
 
-   11 tarifeMoteghayyerMahdud: jens . tarifhayeMoteghayyerha NOGHTE_VIRGUL
+   63 jomleyeShekast: BREAK_KW . M NOGHTE_VIRGUL
 
-    SHENASE  shift, and go to state 10
+    $default  reduce using rule 118 (M)
 
-    tarifhayeMoteghayyerha   go to state 98
-    tarifeMeghdareAvalie     go to state 21
-    tarifeShenaseMoteghayer  go to state 22
-    saved_identifier         go to state 41
+    M  go to state 102
 
 
 state 40
 
-   18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha COMMA tarifeMeghdareAvalie .
+   61 jomleyeBazgasht: RETURN_KW . M NOGHTE_VIRGUL
+   62                | RETURN_KW . ebarat NOGHTE_VIRGUL
 
-    $default  reduce using rule 18 (tarifhayeMoteghayyerha)
+    NOT_KW              shift, and go to state 42
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    $default  reduce using rule 118 (M)
+
+    ebarat                go to state 103
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+    M                     go to state 104
 
 
 state 41
 
-   21 tarifeShenaseMoteghayer: saved_identifier .
-   22                        | saved_identifier . BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW
+   51 matched: IF_KW . ebarateSade THEN_KW M matched N ELSE_KW M matched
+   53 unmatched: IF_KW . ebarateSade THEN_KW M matched N ELSE_KW M unmatched
+   54          | IF_KW . ebarateSade THEN_KW M jomle
 
-    BRACKET_BAZ_KW  shift, and go to state 29
+    NOT_KW              shift, and go to state 42
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    $default  reduce using rule 21 (tarifeShenaseMoteghayer)
+    ebarateSade           go to state 105
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 42
@@ -875,148 +1038,253 @@ state 42
    76 ebarateSade: NOT_KW . ebarateSade
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateSade           go to state 99
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateSade           go to state 106
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 43
 
-  112 saved_integer: ADAD .
+   60 jomleyeTekrar: WHILE_KW . PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle
 
-    $default  reduce using rule 112 (saved_integer)
+    PARANTHESIS_BAZ_KW  shift, and go to state 107
 
 
 state 44
 
-  114 saved_char: HARFE_SABET .
+   50 jomleyeEbarat: NOGHTE_VIRGUL . M
 
-    $default  reduce using rule 114 (saved_char)
+    $default  reduce using rule 118 (M)
+
+    M  go to state 108
 
 
 state 45
+
+  113 saved_integer: ADAD .
+
+    $default  reduce using rule 113 (saved_integer)
+
+
+state 46
+
+  115 saved_char: HARFE_SABET .
+
+    $default  reduce using rule 115 (saved_char)
+
+
+state 47
+
+   55 jomleyeEntekhab: KEY_KW . PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
+   56                | KEY_KW . PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW
+
+    PARANTHESIS_BAZ_KW  shift, and go to state 109
+
+
+state 48
 
    93 amalgareYegani: MULTIPLY_KW .
 
     $default  reduce using rule 93 (amalgareYegani)
 
 
-state 46
+state 49
 
   100 taghirnapazir: PARANTHESIS_BAZ_KW . ebarat PARANTHESIS_BASTE_KW
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 100
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 47
-
-  115 saved_boolean: TRUE_KW .
-
-    $default  reduce using rule 115 (saved_boolean)
+    ebarat                go to state 110
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 48
+state 50
+
+  116 saved_boolean: TRUE_KW .
+
+    $default  reduce using rule 116 (saved_boolean)
+
+
+state 51
 
    94 amalgareYegani: QUESTION_KW .
 
     $default  reduce using rule 94 (amalgareYegani)
 
 
-state 49
+state 52
 
-  116 saved_boolean: FALSE_KW .
+  117 saved_boolean: FALSE_KW .
 
-    $default  reduce using rule 116 (saved_boolean)
+    $default  reduce using rule 117 (saved_boolean)
 
 
-state 50
+state 53
 
    92 amalgareYegani: MINUS_KW .
 
     $default  reduce using rule 92 (amalgareYegani)
 
 
-state 51
+state 54
 
-  113 saved_real: ADAD_ASHARI .
+  114 saved_real: ADAD_ASHARI .
 
-    $default  reduce using rule 113 (saved_real)
+    $default  reduce using rule 114 (saved_real)
 
 
-state 52
+state 55
 
-   20 tarifeMeghdareAvalie: tarifeShenaseMoteghayer EQUAL_KW ebarateSade .
+   26 tarifeTabe: saved_identifier function_input jomle .
+
+    $default  reduce using rule 26 (tarifeTabe)
+
+
+state 56
+
+   52 matched: otherjomle .
+
+    $default  reduce using rule 52 (matched)
+
+
+state 57
+
+   37 otherjomle: jomleyeMorakkab .
+
+    $default  reduce using rule 37 (otherjomle)
+
+
+state 58
+
+   38 otherjomle: jomleyeEbarat .
+
+    $default  reduce using rule 38 (otherjomle)
+
+
+state 59
+
+   35 jomle: matched . N
+
+    $default  reduce using rule 119 (N)
+
+    N  go to state 111
+
+
+state 60
+
+   36 jomle: unmatched .
+
+    $default  reduce using rule 36 (jomle)
+
+
+state 61
+
+   39 otherjomle: jomleyeEntekhab .
+
+    $default  reduce using rule 39 (otherjomle)
+
+
+state 62
+
+   40 otherjomle: jomleyeTekrar .
+
+    $default  reduce using rule 40 (otherjomle)
+
+
+state 63
+
+   41 otherjomle: jomleyeBazgasht .
+
+    $default  reduce using rule 41 (otherjomle)
+
+
+state 64
+
+   42 otherjomle: jomleyeShekast .
+
+    $default  reduce using rule 42 (otherjomle)
+
+
+state 65
+
+   49 jomleyeEbarat: ebarat . NOGHTE_VIRGUL M
+
+    NOGHTE_VIRGUL  shift, and go to state 112
+
+
+state 66
+
+   71 ebarat: ebarateSade .
    72 ebarateSade: ebarateSade . OR_KW M ebarateSade
    73            | ebarateSade . AND_KW M ebarateSade
    74            | ebarateSade . OR_ELSE_KW M ebarateSade
    75            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 101
-    OR_KW        shift, and go to state 102
-    OR_ELSE_KW   shift, and go to state 103
-    AND_THEN_KW  shift, and go to state 104
+    AND_KW       shift, and go to state 113
+    OR_KW        shift, and go to state 114
+    OR_ELSE_KW   shift, and go to state 115
+    AND_THEN_KW  shift, and go to state 116
 
-    $default  reduce using rule 20 (tarifeMeghdareAvalie)
+    $default  reduce using rule 71 (ebarat)
 
 
-state 53
+state 67
 
    77 ebarateSade: ebarateRabetei .
 
     $default  reduce using rule 77 (ebarateSade)
 
 
-state 54
+state 68
 
    78 ebarateRabetei: ebarateRiaziManteghi .
    79               | ebarateRiaziManteghi . LESS_THAN_KW ebarateRiaziManteghi
@@ -1030,467 +1298,65 @@ state 54
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW          shift, and go to state 105
-    MORE_THAN_KW    shift, and go to state 106
-    MULTIPLY_KW     shift, and go to state 107
-    EQUAL_EQUAL_KW  shift, and go to state 108
-    DEVIDE_KW       shift, and go to state 109
-    MINUS_KW        shift, and go to state 110
-    LESS_EQUAL_KW   shift, and go to state 111
-    MOD_KW          shift, and go to state 112
-    LESS_THAN_KW    shift, and go to state 113
-    MORE_EQUAL_KW   shift, and go to state 114
+    ADD_KW          shift, and go to state 117
+    MORE_THAN_KW    shift, and go to state 118
+    MULTIPLY_KW     shift, and go to state 119
+    EQUAL_EQUAL_KW  shift, and go to state 120
+    DEVIDE_KW       shift, and go to state 121
+    MINUS_KW        shift, and go to state 122
+    LESS_EQUAL_KW   shift, and go to state 123
+    MOD_KW          shift, and go to state 124
+    LESS_THAN_KW    shift, and go to state 125
+    MORE_EQUAL_KW   shift, and go to state 126
 
     $default  reduce using rule 78 (ebarateRabetei)
 
 
-state 55
+state 69
 
    84 ebarateRiaziManteghi: ebarateYegani .
 
     $default  reduce using rule 84 (ebarateRiaziManteghi)
 
 
-state 56
+state 70
 
    90 ebarateYegani: amalgareYegani . ebarateYegani
 
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateYegani     go to state 115
-    amalgareYegani    go to state 56
-    amel              go to state 57
-    taghirpazir       go to state 58
-    taghirnapazir     go to state 59
-    sedaZadan         go to state 60
-    meghdareSabet     go to state 61
-    saved_identifier  go to state 62
-    saved_integer     go to state 63
-    saved_real        go to state 64
-    saved_char        go to state 65
-    saved_boolean     go to state 66
+    ebarateYegani     go to state 127
+    amalgareYegani    go to state 70
+    amel              go to state 71
+    taghirpazir       go to state 88
+    taghirnapazir     go to state 73
+    sedaZadan         go to state 74
+    meghdareSabet     go to state 75
+    saved_identifier  go to state 76
+    saved_integer     go to state 77
+    saved_real        go to state 78
+    saved_char        go to state 79
+    saved_boolean     go to state 80
 
 
-state 57
+state 71
 
    91 ebarateYegani: amel .
 
     $default  reduce using rule 91 (ebarateYegani)
 
 
-state 58
-
-   95 amel: taghirpazir .
-   98 taghirpazir: taghirpazir . BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW
-   99            | taghirpazir . NOGHTE_KW saved_identifier
-
-    NOGHTE_KW       shift, and go to state 116
-    BRACKET_BAZ_KW  shift, and go to state 117
-
-    $default  reduce using rule 95 (amel)
-
-
-state 59
-
-   96 amel: taghirnapazir .
-
-    $default  reduce using rule 96 (amel)
-
-
-state 60
-
-  101 taghirnapazir: sedaZadan .
-
-    $default  reduce using rule 101 (taghirnapazir)
-
-
-state 61
-
-  102 taghirnapazir: meghdareSabet .
-
-    $default  reduce using rule 102 (taghirnapazir)
-
-
-state 62
-
-   97 taghirpazir: saved_identifier .
-  103 sedaZadan: saved_identifier . PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW
-  104          | saved_identifier . PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW
-
-    PARANTHESIS_BAZ_KW  shift, and go to state 118
-
-    $default  reduce using rule 97 (taghirpazir)
-
-
-state 63
-
-  107 meghdareSabet: saved_integer .
-
-    $default  reduce using rule 107 (meghdareSabet)
-
-
-state 64
-
-  108 meghdareSabet: saved_real .
-
-    $default  reduce using rule 108 (meghdareSabet)
-
-
-state 65
-
-  109 meghdareSabet: saved_char .
-
-    $default  reduce using rule 109 (meghdareSabet)
-
-
-state 66
-
-  110 meghdareSabet: saved_boolean .
-
-    $default  reduce using rule 110 (meghdareSabet)
-
-
-state 67
-
-   22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW saved_integer . BRACKET_BASTE_KW
-
-    BRACKET_BASTE_KW  shift, and go to state 119
-
-
-state 68
-
-   25 tarifeTabe: jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW . jomle
-
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    jomle                 go to state 120
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 69
-
-   23 function_input: PARANTHESIS_BAZ_KW vorudiha . PARANTHESIS_BASTE_KW
-   28 vorudiha: vorudiha . NOGHTE_VIRGUL jensVorudiha
-
-    NOGHTE_VIRGUL         shift, and go to state 94
-    PARANTHESIS_BASTE_KW  shift, and go to state 121
-
-
-state 70
-
-   43 jomleyeMorakkab: AKULAD_BAZ_KW . tarifhayeMahalli jomleha AKULAD_BASTE_KW
-   44                | AKULAD_BAZ_KW . tarifhayeMahalli AKULAD_BASTE_KW
-   45                | AKULAD_BAZ_KW . jomleha AKULAD_BASTE_KW
-   46                | AKULAD_BAZ_KW . AKULAD_BASTE_KW
-
-    FLOAT_KW            shift, and go to state 5
-    INT_KW              shift, and go to state 6
-    BOOLEAN_KW          shift, and go to state 7
-    CHAR_KW             shift, and go to state 8
-    AKULAD_BAZ_KW       shift, and go to state 70
-    AKULAD_BASTE_KW     shift, and go to state 122
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    tarifhayeMahalli         go to state 123
-    tarifeMoteghayyerMahdud  go to state 38
-    jens                     go to state 39
-    jomle                    go to state 124
-    otherjomle               go to state 78
-    jomleyeMorakkab          go to state 79
-    jomleha                  go to state 125
-    jomleyeEbarat            go to state 80
-    matched                  go to state 81
-    unmatched                go to state 82
-    jomleyeEntekhab          go to state 83
-    jomleyeTekrar            go to state 84
-    jomleyeBazgasht          go to state 85
-    jomleyeShekast           go to state 86
-    ebarat                   go to state 87
-    ebarateSade              go to state 88
-    ebarateRabetei           go to state 53
-    ebarateRiaziManteghi     go to state 54
-    ebarateYegani            go to state 55
-    amalgareYegani           go to state 56
-    amel                     go to state 57
-    taghirpazir              go to state 89
-    taghirnapazir            go to state 59
-    sedaZadan                go to state 60
-    meghdareSabet            go to state 61
-    saved_identifier         go to state 62
-    saved_integer            go to state 63
-    saved_real               go to state 64
-    saved_char               go to state 65
-    saved_boolean            go to state 66
-
-
-state 71
-
-   63 jomleyeShekast: BREAK_KW . M NOGHTE_VIRGUL
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 126
-
-
 state 72
-
-   61 jomleyeBazgasht: RETURN_KW . M NOGHTE_VIRGUL
-   62                | RETURN_KW . ebarat NOGHTE_VIRGUL
-
-    NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    $default  reduce using rule 117 (M)
-
-    ebarat                go to state 127
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-    M                     go to state 128
-
-
-state 73
-
-   51 matched: IF_KW . ebarateSade THEN_KW M matched N ELSE_KW M matched
-   53 unmatched: IF_KW . ebarateSade THEN_KW M matched N ELSE_KW M unmatched
-   54          | IF_KW . ebarateSade THEN_KW M jomle
-
-    NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateSade           go to state 129
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 74
-
-   60 jomleyeTekrar: WHILE_KW . PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M jomle
-
-    PARANTHESIS_BAZ_KW  shift, and go to state 130
-
-
-state 75
-
-   50 jomleyeEbarat: NOGHTE_VIRGUL . M
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 131
-
-
-state 76
-
-   55 jomleyeEntekhab: KEY_KW . PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
-   56                | KEY_KW . PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW
-
-    PARANTHESIS_BAZ_KW  shift, and go to state 132
-
-
-state 77
-
-   24 tarifeTabe: jens saved_identifier function_input jomle .
-
-    $default  reduce using rule 24 (tarifeTabe)
-
-
-state 78
-
-   52 matched: otherjomle .
-
-    $default  reduce using rule 52 (matched)
-
-
-state 79
-
-   37 otherjomle: jomleyeMorakkab .
-
-    $default  reduce using rule 37 (otherjomle)
-
-
-state 80
-
-   38 otherjomle: jomleyeEbarat .
-
-    $default  reduce using rule 38 (otherjomle)
-
-
-state 81
-
-   35 jomle: matched . N
-
-    $default  reduce using rule 118 (N)
-
-    N  go to state 133
-
-
-state 82
-
-   36 jomle: unmatched .
-
-    $default  reduce using rule 36 (jomle)
-
-
-state 83
-
-   39 otherjomle: jomleyeEntekhab .
-
-    $default  reduce using rule 39 (otherjomle)
-
-
-state 84
-
-   40 otherjomle: jomleyeTekrar .
-
-    $default  reduce using rule 40 (otherjomle)
-
-
-state 85
-
-   41 otherjomle: jomleyeBazgasht .
-
-    $default  reduce using rule 41 (otherjomle)
-
-
-state 86
-
-   42 otherjomle: jomleyeShekast .
-
-    $default  reduce using rule 42 (otherjomle)
-
-
-state 87
-
-   49 jomleyeEbarat: ebarat . NOGHTE_VIRGUL M
-
-    NOGHTE_VIRGUL  shift, and go to state 134
-
-
-state 88
-
-   71 ebarat: ebarateSade .
-   72 ebarateSade: ebarateSade . OR_KW M ebarateSade
-   73            | ebarateSade . AND_KW M ebarateSade
-   74            | ebarateSade . OR_ELSE_KW M ebarateSade
-   75            | ebarateSade . AND_THEN_KW M ebarateSade
-
-    AND_KW       shift, and go to state 101
-    OR_KW        shift, and go to state 102
-    OR_ELSE_KW   shift, and go to state 103
-    AND_THEN_KW  shift, and go to state 104
-
-    $default  reduce using rule 71 (ebarat)
-
-
-state 89
 
    64 ebarat: taghirpazir . EQUAL_KW ebarat
    65       | taghirpazir . PLUS_EQUAL_KW ebarat
@@ -1503,54 +1369,267 @@ state 89
    98 taghirpazir: taghirpazir . BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW
    99            | taghirpazir . NOGHTE_KW saved_identifier
 
-    NOGHTE_KW          shift, and go to state 116
-    BRACKET_BAZ_KW     shift, and go to state 117
-    EQUAL_KW           shift, and go to state 135
-    DEVIDE_EQUAL_KW    shift, and go to state 136
-    PLUS_EQUAL_KW      shift, and go to state 137
-    PLUS_PLUS_KW       shift, and go to state 138
-    MINUS_MINUS_KW     shift, and go to state 139
-    MINUS_EQUAL_KW     shift, and go to state 140
-    MULTIPLY_EQUAL_KW  shift, and go to state 141
+    NOGHTE_KW          shift, and go to state 128
+    BRACKET_BAZ_KW     shift, and go to state 129
+    EQUAL_KW           shift, and go to state 130
+    DEVIDE_EQUAL_KW    shift, and go to state 131
+    PLUS_EQUAL_KW      shift, and go to state 132
+    PLUS_PLUS_KW       shift, and go to state 133
+    MINUS_MINUS_KW     shift, and go to state 134
+    MINUS_EQUAL_KW     shift, and go to state 135
+    MULTIPLY_EQUAL_KW  shift, and go to state 136
 
     $default  reduce using rule 95 (amel)
 
 
+state 73
+
+   96 amel: taghirnapazir .
+
+    $default  reduce using rule 96 (amel)
+
+
+state 74
+
+  101 taghirnapazir: sedaZadan .
+
+    $default  reduce using rule 101 (taghirnapazir)
+
+
+state 75
+
+  102 taghirnapazir: meghdareSabet .
+
+    $default  reduce using rule 102 (taghirnapazir)
+
+
+state 76
+
+   97 taghirpazir: saved_identifier .
+  103 sedaZadan: saved_identifier . PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW
+  104          | saved_identifier . PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW
+
+    PARANTHESIS_BAZ_KW  shift, and go to state 137
+
+    $default  reduce using rule 97 (taghirpazir)
+
+
+state 77
+
+  107 meghdareSabet: saved_integer .
+
+    $default  reduce using rule 107 (meghdareSabet)
+
+
+state 78
+
+  108 meghdareSabet: saved_real .
+
+    $default  reduce using rule 108 (meghdareSabet)
+
+
+state 79
+
+  109 meghdareSabet: saved_char .
+
+    $default  reduce using rule 109 (meghdareSabet)
+
+
+state 80
+
+  110 meghdareSabet: saved_boolean .
+
+    $default  reduce using rule 110 (meghdareSabet)
+
+
+state 81
+
+    8 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW .
+
+    $default  reduce using rule 8 (tarifeSakhtar)
+
+
+state 82
+
+    7 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli . AKULAD_BASTE_KW
+    9 tarifhayeMahalli: tarifhayeMahalli . tarifeMoteghayyerMahdud
+
+    FLOAT_KW         shift, and go to state 5
+    INT_KW           shift, and go to state 6
+    BOOLEAN_KW       shift, and go to state 7
+    CHAR_KW          shift, and go to state 8
+    AKULAD_BASTE_KW  shift, and go to state 138
+
+    tarifeMoteghayyerMahdud  go to state 139
+    jens                     go to state 84
+
+
+state 83
+
+   10 tarifhayeMahalli: tarifeMoteghayyerMahdud .
+
+    $default  reduce using rule 10 (tarifhayeMahalli)
+
+
+state 84
+
+   11 tarifeMoteghayyerMahdud: jens . tarifhayeMoteghayyerha NOGHTE_VIRGUL
+
+    SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
+
+    tarifhayeMoteghayyerha   go to state 140
+    tarifeMeghdareAvalie     go to state 22
+    tarifeShenaseMoteghayer  go to state 23
+    saved_identifier         go to state 86
+
+
+state 85
+
+   18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha COMMA tarifeMeghdareAvalie .
+
+    $default  reduce using rule 18 (tarifhayeMoteghayyerha)
+
+
+state 86
+
+   21 tarifeShenaseMoteghayer: saved_identifier .
+   22                        | saved_identifier . BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW
+
+    BRACKET_BAZ_KW  shift, and go to state 31
+
+    $default  reduce using rule 21 (tarifeShenaseMoteghayer)
+
+
+state 87
+
+   20 tarifeMeghdareAvalie: tarifeShenaseMoteghayer EQUAL_KW ebarateSade .
+   72 ebarateSade: ebarateSade . OR_KW M ebarateSade
+   73            | ebarateSade . AND_KW M ebarateSade
+   74            | ebarateSade . OR_ELSE_KW M ebarateSade
+   75            | ebarateSade . AND_THEN_KW M ebarateSade
+
+    AND_KW       shift, and go to state 113
+    OR_KW        shift, and go to state 114
+    OR_ELSE_KW   shift, and go to state 115
+    AND_THEN_KW  shift, and go to state 116
+
+    $default  reduce using rule 20 (tarifeMeghdareAvalie)
+
+
+state 88
+
+   95 amel: taghirpazir .
+   98 taghirpazir: taghirpazir . BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW
+   99            | taghirpazir . NOGHTE_KW saved_identifier
+
+    NOGHTE_KW       shift, and go to state 128
+    BRACKET_BAZ_KW  shift, and go to state 129
+
+    $default  reduce using rule 95 (amel)
+
+
+state 89
+
+   22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW saved_integer . BRACKET_BASTE_KW
+
+    BRACKET_BASTE_KW  shift, and go to state 141
+
+
 state 90
+
+   25 tarifeTabe: jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW . jomle
+
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    jomle                 go to state 142
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 91
+
+   24 tarifeTabe: jens saved_identifier function_input jomle .
+
+    $default  reduce using rule 24 (tarifeTabe)
+
+
+state 92
 
    27 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle .
 
     $default  reduce using rule 27 (tarifeTabe)
 
 
-state 91
+state 93
 
    30 jensVorudiha: jens shenaseyeVorudiha .
    31 shenaseyeVorudiha: shenaseyeVorudiha . COMMA shenaseyeVorudi
 
-    COMMA  shift, and go to state 142
+    COMMA  shift, and go to state 143
 
     $default  reduce using rule 30 (jensVorudiha)
 
 
-state 92
+state 94
 
    32 shenaseyeVorudiha: shenaseyeVorudi .
 
     $default  reduce using rule 32 (shenaseyeVorudiha)
 
 
-state 93
+state 95
 
    33 shenaseyeVorudi: saved_identifier .
    34                | saved_identifier . BRACKET_BAZ_KW BRACKET_BASTE_KW
 
-    BRACKET_BAZ_KW  shift, and go to state 143
+    BRACKET_BAZ_KW  shift, and go to state 144
 
     $default  reduce using rule 33 (shenaseyeVorudi)
 
 
-state 94
+state 96
 
    28 vorudiha: vorudiha NOGHTE_VIRGUL . jensVorudiha
 
@@ -1559,85 +1638,144 @@ state 94
     BOOLEAN_KW  shift, and go to state 7
     CHAR_KW     shift, and go to state 8
 
-    jens          go to state 33
-    jensVorudiha  go to state 144
-
-
-state 95
-
-   26 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW . jomle
-
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    jomle                 go to state 145
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 96
-
-    7 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW .
-
-    $default  reduce using rule 7 (tarifeSakhtar)
+    jens          go to state 35
+    jensVorudiha  go to state 145
 
 
 state 97
 
-    9 tarifhayeMahalli: tarifhayeMahalli tarifeMoteghayyerMahdud .
+   23 function_input: PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW .
 
-    $default  reduce using rule 9 (tarifhayeMahalli)
+    $default  reduce using rule 23 (function_input)
 
 
 state 98
 
-   11 tarifeMoteghayyerMahdud: jens tarifhayeMoteghayyerha . NOGHTE_VIRGUL
-   18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha . COMMA tarifeMeghdareAvalie
+   46 jomleyeMorakkab: AKULAD_BAZ_KW AKULAD_BASTE_KW .
 
-    COMMA          shift, and go to state 26
-    NOGHTE_VIRGUL  shift, and go to state 146
+    $default  reduce using rule 46 (jomleyeMorakkab)
 
 
 state 99
+
+    9 tarifhayeMahalli: tarifhayeMahalli . tarifeMoteghayyerMahdud
+   43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli . jomleha AKULAD_BASTE_KW
+   44                | AKULAD_BAZ_KW tarifhayeMahalli . AKULAD_BASTE_KW
+
+    FLOAT_KW            shift, and go to state 5
+    INT_KW              shift, and go to state 6
+    BOOLEAN_KW          shift, and go to state 7
+    CHAR_KW             shift, and go to state 8
+    AKULAD_BAZ_KW       shift, and go to state 38
+    AKULAD_BASTE_KW     shift, and go to state 146
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    tarifeMoteghayyerMahdud  go to state 139
+    jens                     go to state 84
+    jomle                    go to state 100
+    otherjomle               go to state 56
+    jomleyeMorakkab          go to state 57
+    jomleha                  go to state 147
+    jomleyeEbarat            go to state 58
+    matched                  go to state 59
+    unmatched                go to state 60
+    jomleyeEntekhab          go to state 61
+    jomleyeTekrar            go to state 62
+    jomleyeBazgasht          go to state 63
+    jomleyeShekast           go to state 64
+    ebarat                   go to state 65
+    ebarateSade              go to state 66
+    ebarateRabetei           go to state 67
+    ebarateRiaziManteghi     go to state 68
+    ebarateYegani            go to state 69
+    amalgareYegani           go to state 70
+    amel                     go to state 71
+    taghirpazir              go to state 72
+    taghirnapazir            go to state 73
+    sedaZadan                go to state 74
+    meghdareSabet            go to state 75
+    saved_identifier         go to state 76
+    saved_integer            go to state 77
+    saved_real               go to state 78
+    saved_char               go to state 79
+    saved_boolean            go to state 80
+
+
+state 100
+
+   48 jomleha: jomle .
+
+    $default  reduce using rule 48 (jomleha)
+
+
+state 101
+
+   45 jomleyeMorakkab: AKULAD_BAZ_KW jomleha . AKULAD_BASTE_KW
+   47 jomleha: jomleha . M jomle
+
+    AKULAD_BASTE_KW  shift, and go to state 148
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 149
+
+
+state 102
+
+   63 jomleyeShekast: BREAK_KW M . NOGHTE_VIRGUL
+
+    NOGHTE_VIRGUL  shift, and go to state 150
+
+
+state 103
+
+   62 jomleyeBazgasht: RETURN_KW ebarat . NOGHTE_VIRGUL
+
+    NOGHTE_VIRGUL  shift, and go to state 151
+
+
+state 104
+
+   61 jomleyeBazgasht: RETURN_KW M . NOGHTE_VIRGUL
+
+    NOGHTE_VIRGUL  shift, and go to state 152
+
+
+state 105
+
+   51 matched: IF_KW ebarateSade . THEN_KW M matched N ELSE_KW M matched
+   53 unmatched: IF_KW ebarateSade . THEN_KW M matched N ELSE_KW M unmatched
+   54          | IF_KW ebarateSade . THEN_KW M jomle
+   72 ebarateSade: ebarateSade . OR_KW M ebarateSade
+   73            | ebarateSade . AND_KW M ebarateSade
+   74            | ebarateSade . OR_ELSE_KW M ebarateSade
+   75            | ebarateSade . AND_THEN_KW M ebarateSade
+
+    THEN_KW      shift, and go to state 153
+    AND_KW       shift, and go to state 113
+    OR_KW        shift, and go to state 114
+    OR_ELSE_KW   shift, and go to state 115
+    AND_THEN_KW  shift, and go to state 116
+
+
+state 106
 
    72 ebarateSade: ebarateSade . OR_KW M ebarateSade
    73            | ebarateSade . AND_KW M ebarateSade
@@ -1648,1007 +1786,1077 @@ state 99
     $default  reduce using rule 76 (ebarateSade)
 
 
-state 100
-
-  100 taghirnapazir: PARANTHESIS_BAZ_KW ebarat . PARANTHESIS_BASTE_KW
-
-    PARANTHESIS_BASTE_KW  shift, and go to state 147
-
-
-state 101
-
-   73 ebarateSade: ebarateSade AND_KW . M ebarateSade
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 148
-
-
-state 102
-
-   72 ebarateSade: ebarateSade OR_KW . M ebarateSade
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 149
-
-
-state 103
-
-   74 ebarateSade: ebarateSade OR_ELSE_KW . M ebarateSade
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 150
-
-
-state 104
-
-   75 ebarateSade: ebarateSade AND_THEN_KW . M ebarateSade
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 151
-
-
-state 105
-
-   85 ebarateRiaziManteghi: ebarateRiaziManteghi ADD_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 152
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 106
-
-   81 ebarateRabetei: ebarateRiaziManteghi MORE_THAN_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 153
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
 state 107
-
-   87 ebarateRiaziManteghi: ebarateRiaziManteghi MULTIPLY_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 154
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 108
-
-   83 ebarateRabetei: ebarateRiaziManteghi EQUAL_EQUAL_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 155
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 109
-
-   88 ebarateRiaziManteghi: ebarateRiaziManteghi DEVIDE_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 156
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 110
-
-   86 ebarateRiaziManteghi: ebarateRiaziManteghi MINUS_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 157
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 111
-
-   80 ebarateRabetei: ebarateRiaziManteghi LESS_EQUAL_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 158
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 112
-
-   89 ebarateRiaziManteghi: ebarateRiaziManteghi MOD_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 159
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 113
-
-   79 ebarateRabetei: ebarateRiaziManteghi LESS_THAN_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 160
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 114
-
-   82 ebarateRabetei: ebarateRiaziManteghi MORE_EQUAL_KW . ebarateRiaziManteghi
-
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateRiaziManteghi  go to state 161
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 115
-
-   90 ebarateYegani: amalgareYegani ebarateYegani .
-
-    $default  reduce using rule 90 (ebarateYegani)
-
-
-state 116
-
-   99 taghirpazir: taghirpazir NOGHTE_KW . saved_identifier
-
-    SHENASE  shift, and go to state 10
-
-    saved_identifier  go to state 162
-
-
-state 117
-
-   98 taghirpazir: taghirpazir BRACKET_BAZ_KW . ebarat BRACKET_BASTE_KW
-
-    NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarat                go to state 163
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 118
-
-  103 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW . bordareVorudiha PARANTHESIS_BASTE_KW
-  104          | saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW
-
-    NOT_KW                shift, and go to state 42
-    ADAD                  shift, and go to state 43
-    SHENASE               shift, and go to state 10
-    HARFE_SABET           shift, and go to state 44
-    MULTIPLY_KW           shift, and go to state 45
-    PARANTHESIS_BASTE_KW  shift, and go to state 164
-    PARANTHESIS_BAZ_KW    shift, and go to state 46
-    TRUE_KW               shift, and go to state 47
-    QUESTION_KW           shift, and go to state 48
-    FALSE_KW              shift, and go to state 49
-    MINUS_KW              shift, and go to state 50
-    ADAD_ASHARI           shift, and go to state 51
-
-    ebarat                go to state 165
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    bordareVorudiha       go to state 166
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 119
-
-   22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW .
-
-    $default  reduce using rule 22 (tarifeShenaseMoteghayer)
-
-
-state 120
-
-   25 tarifeTabe: jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle .
-
-    $default  reduce using rule 25 (tarifeTabe)
-
-
-state 121
-
-   23 function_input: PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW .
-
-    $default  reduce using rule 23 (function_input)
-
-
-state 122
-
-   46 jomleyeMorakkab: AKULAD_BAZ_KW AKULAD_BASTE_KW .
-
-    $default  reduce using rule 46 (jomleyeMorakkab)
-
-
-state 123
-
-    9 tarifhayeMahalli: tarifhayeMahalli . tarifeMoteghayyerMahdud
-   43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli . jomleha AKULAD_BASTE_KW
-   44                | AKULAD_BAZ_KW tarifhayeMahalli . AKULAD_BASTE_KW
-
-    FLOAT_KW            shift, and go to state 5
-    INT_KW              shift, and go to state 6
-    BOOLEAN_KW          shift, and go to state 7
-    CHAR_KW             shift, and go to state 8
-    AKULAD_BAZ_KW       shift, and go to state 70
-    AKULAD_BASTE_KW     shift, and go to state 167
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    tarifeMoteghayyerMahdud  go to state 97
-    jens                     go to state 39
-    jomle                    go to state 124
-    otherjomle               go to state 78
-    jomleyeMorakkab          go to state 79
-    jomleha                  go to state 168
-    jomleyeEbarat            go to state 80
-    matched                  go to state 81
-    unmatched                go to state 82
-    jomleyeEntekhab          go to state 83
-    jomleyeTekrar            go to state 84
-    jomleyeBazgasht          go to state 85
-    jomleyeShekast           go to state 86
-    ebarat                   go to state 87
-    ebarateSade              go to state 88
-    ebarateRabetei           go to state 53
-    ebarateRiaziManteghi     go to state 54
-    ebarateYegani            go to state 55
-    amalgareYegani           go to state 56
-    amel                     go to state 57
-    taghirpazir              go to state 89
-    taghirnapazir            go to state 59
-    sedaZadan                go to state 60
-    meghdareSabet            go to state 61
-    saved_identifier         go to state 62
-    saved_integer            go to state 63
-    saved_real               go to state 64
-    saved_char               go to state 65
-    saved_boolean            go to state 66
-
-
-state 124
-
-   48 jomleha: jomle .
-
-    $default  reduce using rule 48 (jomleha)
-
-
-state 125
-
-   45 jomleyeMorakkab: AKULAD_BAZ_KW jomleha . AKULAD_BASTE_KW
-   47 jomleha: jomleha . M jomle
-
-    AKULAD_BASTE_KW  shift, and go to state 169
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 170
-
-
-state 126
-
-   63 jomleyeShekast: BREAK_KW M . NOGHTE_VIRGUL
-
-    NOGHTE_VIRGUL  shift, and go to state 171
-
-
-state 127
-
-   62 jomleyeBazgasht: RETURN_KW ebarat . NOGHTE_VIRGUL
-
-    NOGHTE_VIRGUL  shift, and go to state 172
-
-
-state 128
-
-   61 jomleyeBazgasht: RETURN_KW M . NOGHTE_VIRGUL
-
-    NOGHTE_VIRGUL  shift, and go to state 173
-
-
-state 129
-
-   51 matched: IF_KW ebarateSade . THEN_KW M matched N ELSE_KW M matched
-   53 unmatched: IF_KW ebarateSade . THEN_KW M matched N ELSE_KW M unmatched
-   54          | IF_KW ebarateSade . THEN_KW M jomle
-   72 ebarateSade: ebarateSade . OR_KW M ebarateSade
-   73            | ebarateSade . AND_KW M ebarateSade
-   74            | ebarateSade . OR_ELSE_KW M ebarateSade
-   75            | ebarateSade . AND_THEN_KW M ebarateSade
-
-    THEN_KW      shift, and go to state 174
-    AND_KW       shift, and go to state 101
-    OR_KW        shift, and go to state 102
-    OR_ELSE_KW   shift, and go to state 103
-    AND_THEN_KW  shift, and go to state 104
-
-
-state 130
 
    60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW . M ebarateSade PARANTHESIS_BASTE_KW M jomle
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
-    M  go to state 175
+    M  go to state 154
 
 
-state 131
+state 108
 
    50 jomleyeEbarat: NOGHTE_VIRGUL M .
 
     $default  reduce using rule 50 (jomleyeEbarat)
 
 
-state 132
+state 109
 
    55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW . ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
    56                | KEY_KW PARANTHESIS_BAZ_KW . ebarateRiaziManteghi PARANTHESIS_BASTE_KW N onsoreHalat END_KW
 
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateRiaziManteghi  go to state 176
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateRiaziManteghi  go to state 155
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 133
+state 110
+
+  100 taghirnapazir: PARANTHESIS_BAZ_KW ebarat . PARANTHESIS_BASTE_KW
+
+    PARANTHESIS_BASTE_KW  shift, and go to state 156
+
+
+state 111
 
    35 jomle: matched N .
 
     $default  reduce using rule 35 (jomle)
 
 
-state 134
+state 112
 
    49 jomleyeEbarat: ebarat NOGHTE_VIRGUL . M
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
-    M  go to state 177
+    M  go to state 157
 
 
-state 135
+state 113
+
+   73 ebarateSade: ebarateSade AND_KW . M ebarateSade
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 158
+
+
+state 114
+
+   72 ebarateSade: ebarateSade OR_KW . M ebarateSade
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 159
+
+
+state 115
+
+   74 ebarateSade: ebarateSade OR_ELSE_KW . M ebarateSade
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 160
+
+
+state 116
+
+   75 ebarateSade: ebarateSade AND_THEN_KW . M ebarateSade
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 161
+
+
+state 117
+
+   85 ebarateRiaziManteghi: ebarateRiaziManteghi ADD_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 162
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 118
+
+   81 ebarateRabetei: ebarateRiaziManteghi MORE_THAN_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 163
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 119
+
+   87 ebarateRiaziManteghi: ebarateRiaziManteghi MULTIPLY_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 164
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 120
+
+   83 ebarateRabetei: ebarateRiaziManteghi EQUAL_EQUAL_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 165
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 121
+
+   88 ebarateRiaziManteghi: ebarateRiaziManteghi DEVIDE_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 166
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 122
+
+   86 ebarateRiaziManteghi: ebarateRiaziManteghi MINUS_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 167
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 123
+
+   80 ebarateRabetei: ebarateRiaziManteghi LESS_EQUAL_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 168
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 124
+
+   89 ebarateRiaziManteghi: ebarateRiaziManteghi MOD_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 169
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 125
+
+   79 ebarateRabetei: ebarateRiaziManteghi LESS_THAN_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 170
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 126
+
+   82 ebarateRabetei: ebarateRiaziManteghi MORE_EQUAL_KW . ebarateRiaziManteghi
+
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateRiaziManteghi  go to state 171
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 127
+
+   90 ebarateYegani: amalgareYegani ebarateYegani .
+
+    $default  reduce using rule 90 (ebarateYegani)
+
+
+state 128
+
+   99 taghirpazir: taghirpazir NOGHTE_KW . saved_identifier
+
+    SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
+
+    saved_identifier  go to state 172
+
+
+state 129
+
+   98 taghirpazir: taghirpazir BRACKET_BAZ_KW . ebarat BRACKET_BASTE_KW
+
+    NOT_KW              shift, and go to state 42
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarat                go to state 173
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 130
 
    64 ebarat: taghirpazir EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 178
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarat                go to state 174
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 136
+state 131
 
    68 ebarat: taghirpazir DEVIDE_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 179
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarat                go to state 175
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 137
+state 132
 
    65 ebarat: taghirpazir PLUS_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 180
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarat                go to state 176
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 138
+state 133
 
    69 ebarat: taghirpazir PLUS_PLUS_KW .
 
     $default  reduce using rule 69 (ebarat)
 
 
-state 139
+state 134
 
    70 ebarat: taghirpazir MINUS_MINUS_KW .
 
     $default  reduce using rule 70 (ebarat)
 
 
-state 140
+state 135
 
    66 ebarat: taghirpazir MINUS_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 181
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarat                go to state 177
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 141
+state 136
 
    67 ebarat: taghirpazir MULTIPLY_EQUAL_KW . ebarat
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 182
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarat                go to state 178
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 137
+
+  103 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW . bordareVorudiha PARANTHESIS_BASTE_KW
+  104          | saved_identifier PARANTHESIS_BAZ_KW . PARANTHESIS_BASTE_KW
+
+    NOT_KW                shift, and go to state 42
+    ADAD                  shift, and go to state 45
+    SHENASE               shift, and go to state 10
+    HARFE_SABET           shift, and go to state 46
+    MULTIPLY_KW           shift, and go to state 48
+    PARANTHESIS_BASTE_KW  shift, and go to state 179
+    PARANTHESIS_BAZ_KW    shift, and go to state 49
+    TRUE_KW               shift, and go to state 50
+    QUESTION_KW           shift, and go to state 51
+    FALSE_KW              shift, and go to state 52
+    MINUS_KW              shift, and go to state 53
+    ADAD_ASHARI           shift, and go to state 54
+    MAIN_KW               shift, and go to state 11
+
+    ebarat                go to state 180
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    bordareVorudiha       go to state 181
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 138
+
+    7 tarifeSakhtar: STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW .
+
+    $default  reduce using rule 7 (tarifeSakhtar)
+
+
+state 139
+
+    9 tarifhayeMahalli: tarifhayeMahalli tarifeMoteghayyerMahdud .
+
+    $default  reduce using rule 9 (tarifhayeMahalli)
+
+
+state 140
+
+   11 tarifeMoteghayyerMahdud: jens tarifhayeMoteghayyerha . NOGHTE_VIRGUL
+   18 tarifhayeMoteghayyerha: tarifhayeMoteghayyerha . COMMA tarifeMeghdareAvalie
+
+    COMMA          shift, and go to state 28
+    NOGHTE_VIRGUL  shift, and go to state 182
+
+
+state 141
+
+   22 tarifeShenaseMoteghayer: saved_identifier BRACKET_BAZ_KW saved_integer BRACKET_BASTE_KW .
+
+    $default  reduce using rule 22 (tarifeShenaseMoteghayer)
 
 
 state 142
 
-   31 shenaseyeVorudiha: shenaseyeVorudiha COMMA . shenaseyeVorudi
+   25 tarifeTabe: jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle .
 
-    SHENASE  shift, and go to state 10
-
-    shenaseyeVorudi   go to state 183
-    saved_identifier  go to state 93
+    $default  reduce using rule 25 (tarifeTabe)
 
 
 state 143
+
+   31 shenaseyeVorudiha: shenaseyeVorudiha COMMA . shenaseyeVorudi
+
+    SHENASE  shift, and go to state 10
+    MAIN_KW  shift, and go to state 11
+
+    shenaseyeVorudi   go to state 183
+    saved_identifier  go to state 95
+
+
+state 144
 
    34 shenaseyeVorudi: saved_identifier BRACKET_BAZ_KW . BRACKET_BASTE_KW
 
     BRACKET_BASTE_KW  shift, and go to state 184
 
 
-state 144
+state 145
 
    28 vorudiha: vorudiha NOGHTE_VIRGUL jensVorudiha .
 
     $default  reduce using rule 28 (vorudiha)
 
 
-state 145
-
-   26 tarifeTabe: saved_identifier PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW jomle .
-
-    $default  reduce using rule 26 (tarifeTabe)
-
-
 state 146
 
-   11 tarifeMoteghayyerMahdud: jens tarifhayeMoteghayyerha NOGHTE_VIRGUL .
+   44 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW .
 
-    $default  reduce using rule 11 (tarifeMoteghayyerMahdud)
+    $default  reduce using rule 44 (jomleyeMorakkab)
 
 
 state 147
+
+   43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli jomleha . AKULAD_BASTE_KW
+   47 jomleha: jomleha . M jomle
+
+    AKULAD_BASTE_KW  shift, and go to state 185
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 149
+
+
+state 148
+
+   45 jomleyeMorakkab: AKULAD_BAZ_KW jomleha AKULAD_BASTE_KW .
+
+    $default  reduce using rule 45 (jomleyeMorakkab)
+
+
+state 149
+
+   47 jomleha: jomleha M . jomle
+
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    jomle                 go to state 186
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 150
+
+   63 jomleyeShekast: BREAK_KW M NOGHTE_VIRGUL .
+
+    $default  reduce using rule 63 (jomleyeShekast)
+
+
+state 151
+
+   62 jomleyeBazgasht: RETURN_KW ebarat NOGHTE_VIRGUL .
+
+    $default  reduce using rule 62 (jomleyeBazgasht)
+
+
+state 152
+
+   61 jomleyeBazgasht: RETURN_KW M NOGHTE_VIRGUL .
+
+    $default  reduce using rule 61 (jomleyeBazgasht)
+
+
+state 153
+
+   51 matched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M matched
+   53 unmatched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M unmatched
+   54          | IF_KW ebarateSade THEN_KW . M jomle
+
+    $default  reduce using rule 118 (M)
+
+    M  go to state 187
+
+
+state 154
+
+   60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M . ebarateSade PARANTHESIS_BASTE_KW M jomle
+
+    NOT_KW              shift, and go to state 42
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    ebarateSade           go to state 188
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 155
+
+   55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi . PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
+   56                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi . PARANTHESIS_BASTE_KW N onsoreHalat END_KW
+   85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
+   86                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
+   87                     | ebarateRiaziManteghi . MULTIPLY_KW ebarateRiaziManteghi
+   88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
+   89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
+
+    ADD_KW                shift, and go to state 117
+    MULTIPLY_KW           shift, and go to state 119
+    PARANTHESIS_BASTE_KW  shift, and go to state 189
+    DEVIDE_KW             shift, and go to state 121
+    MINUS_KW              shift, and go to state 122
+    MOD_KW                shift, and go to state 124
+
+
+state 156
 
   100 taghirnapazir: PARANTHESIS_BAZ_KW ebarat PARANTHESIS_BASTE_KW .
 
     $default  reduce using rule 100 (taghirnapazir)
 
 
-state 148
+state 157
+
+   49 jomleyeEbarat: ebarat NOGHTE_VIRGUL M .
+
+    $default  reduce using rule 49 (jomleyeEbarat)
+
+
+state 158
 
    73 ebarateSade: ebarateSade AND_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateSade           go to state 185
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateSade           go to state 190
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 149
+state 159
 
    72 ebarateSade: ebarateSade OR_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateSade           go to state 186
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateSade           go to state 191
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 150
+state 160
 
    74 ebarateSade: ebarateSade OR_ELSE_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateSade           go to state 187
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateSade           go to state 192
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 151
+state 161
 
    75 ebarateSade: ebarateSade AND_THEN_KW M . ebarateSade
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarateSade           go to state 188
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarateSade           go to state 193
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 88
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 152
+state 162
 
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    85                     | ebarateRiaziManteghi ADD_KW ebarateRiaziManteghi .
@@ -2657,14 +2865,14 @@ state 152
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MOD_KW       shift, and go to state 112
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 85 (ebarateRiaziManteghi)
 
 
-state 153
+state 163
 
    81 ebarateRabetei: ebarateRiaziManteghi MORE_THAN_KW ebarateRiaziManteghi .
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2673,16 +2881,16 @@ state 153
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 105
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MINUS_KW     shift, and go to state 110
-    MOD_KW       shift, and go to state 112
+    ADD_KW       shift, and go to state 117
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MINUS_KW     shift, and go to state 122
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 81 (ebarateRabetei)
 
 
-state 154
+state 164
 
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    86                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2694,7 +2902,7 @@ state 154
     $default  reduce using rule 87 (ebarateRiaziManteghi)
 
 
-state 155
+state 165
 
    83 ebarateRabetei: ebarateRiaziManteghi EQUAL_EQUAL_KW ebarateRiaziManteghi .
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2703,16 +2911,16 @@ state 155
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 105
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MINUS_KW     shift, and go to state 110
-    MOD_KW       shift, and go to state 112
+    ADD_KW       shift, and go to state 117
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MINUS_KW     shift, and go to state 122
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 83 (ebarateRabetei)
 
 
-state 156
+state 166
 
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    86                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2724,7 +2932,7 @@ state 156
     $default  reduce using rule 88 (ebarateRiaziManteghi)
 
 
-state 157
+state 167
 
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    86                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2733,14 +2941,14 @@ state 157
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MOD_KW       shift, and go to state 112
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 86 (ebarateRiaziManteghi)
 
 
-state 158
+state 168
 
    80 ebarateRabetei: ebarateRiaziManteghi LESS_EQUAL_KW ebarateRiaziManteghi .
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2749,16 +2957,16 @@ state 158
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 105
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MINUS_KW     shift, and go to state 110
-    MOD_KW       shift, and go to state 112
+    ADD_KW       shift, and go to state 117
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MINUS_KW     shift, and go to state 122
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 80 (ebarateRabetei)
 
 
-state 159
+state 169
 
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
    86                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
@@ -2770,7 +2978,7 @@ state 159
     $default  reduce using rule 89 (ebarateRiaziManteghi)
 
 
-state 160
+state 170
 
    79 ebarateRabetei: ebarateRiaziManteghi LESS_THAN_KW ebarateRiaziManteghi .
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2779,16 +2987,16 @@ state 160
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 105
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MINUS_KW     shift, and go to state 110
-    MOD_KW       shift, and go to state 112
+    ADD_KW       shift, and go to state 117
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MINUS_KW     shift, and go to state 122
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 79 (ebarateRabetei)
 
 
-state 161
+state 171
 
    82 ebarateRabetei: ebarateRiaziManteghi MORE_EQUAL_KW ebarateRiaziManteghi .
    85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
@@ -2797,252 +3005,92 @@ state 161
    88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
    89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
 
-    ADD_KW       shift, and go to state 105
-    MULTIPLY_KW  shift, and go to state 107
-    DEVIDE_KW    shift, and go to state 109
-    MINUS_KW     shift, and go to state 110
-    MOD_KW       shift, and go to state 112
+    ADD_KW       shift, and go to state 117
+    MULTIPLY_KW  shift, and go to state 119
+    DEVIDE_KW    shift, and go to state 121
+    MINUS_KW     shift, and go to state 122
+    MOD_KW       shift, and go to state 124
 
     $default  reduce using rule 82 (ebarateRabetei)
 
 
-state 162
+state 172
 
    99 taghirpazir: taghirpazir NOGHTE_KW saved_identifier .
 
     $default  reduce using rule 99 (taghirpazir)
 
 
-state 163
+state 173
 
    98 taghirpazir: taghirpazir BRACKET_BAZ_KW ebarat . BRACKET_BASTE_KW
 
-    BRACKET_BASTE_KW  shift, and go to state 189
-
-
-state 164
-
-  104 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW .
-
-    $default  reduce using rule 104 (sedaZadan)
-
-
-state 165
-
-  106 bordareVorudiha: ebarat .
-
-    $default  reduce using rule 106 (bordareVorudiha)
-
-
-state 166
-
-  103 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha . PARANTHESIS_BASTE_KW
-  105 bordareVorudiha: bordareVorudiha . COMMA ebarat
-
-    COMMA                 shift, and go to state 190
-    PARANTHESIS_BASTE_KW  shift, and go to state 191
-
-
-state 167
-
-   44 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW .
-
-    $default  reduce using rule 44 (jomleyeMorakkab)
-
-
-state 168
-
-   43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli jomleha . AKULAD_BASTE_KW
-   47 jomleha: jomleha . M jomle
-
-    AKULAD_BASTE_KW  shift, and go to state 192
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 170
-
-
-state 169
-
-   45 jomleyeMorakkab: AKULAD_BAZ_KW jomleha AKULAD_BASTE_KW .
-
-    $default  reduce using rule 45 (jomleyeMorakkab)
-
-
-state 170
-
-   47 jomleha: jomleha M . jomle
-
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    jomle                 go to state 193
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 171
-
-   63 jomleyeShekast: BREAK_KW M NOGHTE_VIRGUL .
-
-    $default  reduce using rule 63 (jomleyeShekast)
-
-
-state 172
-
-   62 jomleyeBazgasht: RETURN_KW ebarat NOGHTE_VIRGUL .
-
-    $default  reduce using rule 62 (jomleyeBazgasht)
-
-
-state 173
-
-   61 jomleyeBazgasht: RETURN_KW M NOGHTE_VIRGUL .
-
-    $default  reduce using rule 61 (jomleyeBazgasht)
+    BRACKET_BASTE_KW  shift, and go to state 194
 
 
 state 174
-
-   51 matched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M matched
-   53 unmatched: IF_KW ebarateSade THEN_KW . M matched N ELSE_KW M unmatched
-   54          | IF_KW ebarateSade THEN_KW . M jomle
-
-    $default  reduce using rule 117 (M)
-
-    M  go to state 194
-
-
-state 175
-
-   60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M . ebarateSade PARANTHESIS_BASTE_KW M jomle
-
-    NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    ebarateSade           go to state 195
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 58
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 176
-
-   55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi . PARANTHESIS_BASTE_KW N onsoreHalat onsorePishfarz END_KW
-   56                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi . PARANTHESIS_BASTE_KW N onsoreHalat END_KW
-   85 ebarateRiaziManteghi: ebarateRiaziManteghi . ADD_KW ebarateRiaziManteghi
-   86                     | ebarateRiaziManteghi . MINUS_KW ebarateRiaziManteghi
-   87                     | ebarateRiaziManteghi . MULTIPLY_KW ebarateRiaziManteghi
-   88                     | ebarateRiaziManteghi . DEVIDE_KW ebarateRiaziManteghi
-   89                     | ebarateRiaziManteghi . MOD_KW ebarateRiaziManteghi
-
-    ADD_KW                shift, and go to state 105
-    MULTIPLY_KW           shift, and go to state 107
-    PARANTHESIS_BASTE_KW  shift, and go to state 196
-    DEVIDE_KW             shift, and go to state 109
-    MINUS_KW              shift, and go to state 110
-    MOD_KW                shift, and go to state 112
-
-
-state 177
-
-   49 jomleyeEbarat: ebarat NOGHTE_VIRGUL M .
-
-    $default  reduce using rule 49 (jomleyeEbarat)
-
-
-state 178
 
    64 ebarat: taghirpazir EQUAL_KW ebarat .
 
     $default  reduce using rule 64 (ebarat)
 
 
-state 179
+state 175
 
    68 ebarat: taghirpazir DEVIDE_EQUAL_KW ebarat .
 
     $default  reduce using rule 68 (ebarat)
 
 
-state 180
+state 176
 
    65 ebarat: taghirpazir PLUS_EQUAL_KW ebarat .
 
     $default  reduce using rule 65 (ebarat)
 
 
-state 181
+state 177
 
    66 ebarat: taghirpazir MINUS_EQUAL_KW ebarat .
 
     $default  reduce using rule 66 (ebarat)
 
 
-state 182
+state 178
 
    67 ebarat: taghirpazir MULTIPLY_EQUAL_KW ebarat .
 
     $default  reduce using rule 67 (ebarat)
+
+
+state 179
+
+  104 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW .
+
+    $default  reduce using rule 104 (sedaZadan)
+
+
+state 180
+
+  106 bordareVorudiha: ebarat .
+
+    $default  reduce using rule 106 (bordareVorudiha)
+
+
+state 181
+
+  103 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha . PARANTHESIS_BASTE_KW
+  105 bordareVorudiha: bordareVorudiha . COMMA ebarat
+
+    COMMA                 shift, and go to state 195
+    PARANTHESIS_BASTE_KW  shift, and go to state 196
+
+
+state 182
+
+   11 tarifeMoteghayyerMahdud: jens tarifhayeMoteghayyerha NOGHTE_VIRGUL .
+
+    $default  reduce using rule 11 (tarifeMoteghayyerMahdud)
 
 
 state 183
@@ -3061,6 +3109,99 @@ state 184
 
 state 185
 
+   43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW .
+
+    $default  reduce using rule 43 (jomleyeMorakkab)
+
+
+state 186
+
+   47 jomleha: jomleha M jomle .
+
+    $default  reduce using rule 47 (jomleha)
+
+
+state 187
+
+   51 matched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M matched
+   53 unmatched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M unmatched
+   54          | IF_KW ebarateSade THEN_KW M . jomle
+
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
+    NOT_KW              shift, and go to state 42
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
+    SHENASE             shift, and go to state 10
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
+
+    jomle                 go to state 197
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 198
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
+
+
+state 188
+
+   60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade . PARANTHESIS_BASTE_KW M jomle
+   72 ebarateSade: ebarateSade . OR_KW M ebarateSade
+   73            | ebarateSade . AND_KW M ebarateSade
+   74            | ebarateSade . OR_ELSE_KW M ebarateSade
+   75            | ebarateSade . AND_THEN_KW M ebarateSade
+
+    AND_KW                shift, and go to state 113
+    OR_KW                 shift, and go to state 114
+    PARANTHESIS_BASTE_KW  shift, and go to state 199
+    OR_ELSE_KW            shift, and go to state 115
+    AND_THEN_KW           shift, and go to state 116
+
+
+state 189
+
+   55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW . N onsoreHalat onsorePishfarz END_KW
+   56                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW . N onsoreHalat END_KW
+
+    $default  reduce using rule 119 (N)
+
+    N  go to state 200
+
+
+state 190
+
    72 ebarateSade: ebarateSade . OR_KW M ebarateSade
    73            | ebarateSade . AND_KW M ebarateSade
    73            | ebarateSade AND_KW M ebarateSade .
@@ -3070,7 +3211,7 @@ state 185
     $default  reduce using rule 73 (ebarateSade)
 
 
-state 186
+state 191
 
    72 ebarateSade: ebarateSade . OR_KW M ebarateSade
    72            | ebarateSade OR_KW M ebarateSade .
@@ -3078,13 +3219,13 @@ state 186
    74            | ebarateSade . OR_ELSE_KW M ebarateSade
    75            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 101
-    AND_THEN_KW  shift, and go to state 104
+    AND_KW       shift, and go to state 113
+    AND_THEN_KW  shift, and go to state 116
 
     $default  reduce using rule 72 (ebarateSade)
 
 
-state 187
+state 192
 
    72 ebarateSade: ebarateSade . OR_KW M ebarateSade
    73            | ebarateSade . AND_KW M ebarateSade
@@ -3092,13 +3233,13 @@ state 187
    74            | ebarateSade OR_ELSE_KW M ebarateSade .
    75            | ebarateSade . AND_THEN_KW M ebarateSade
 
-    AND_KW       shift, and go to state 101
-    AND_THEN_KW  shift, and go to state 104
+    AND_KW       shift, and go to state 113
+    AND_THEN_KW  shift, and go to state 116
 
     $default  reduce using rule 74 (ebarateSade)
 
 
-state 188
+state 193
 
    72 ebarateSade: ebarateSade . OR_KW M ebarateSade
    73            | ebarateSade . AND_KW M ebarateSade
@@ -3109,181 +3250,83 @@ state 188
     $default  reduce using rule 75 (ebarateSade)
 
 
-state 189
+state 194
 
    98 taghirpazir: taghirpazir BRACKET_BAZ_KW ebarat BRACKET_BASTE_KW .
 
     $default  reduce using rule 98 (taghirpazir)
 
 
-state 190
+state 195
 
   105 bordareVorudiha: bordareVorudiha COMMA . ebarat
 
     NOT_KW              shift, and go to state 42
-    ADAD                shift, and go to state 43
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    ebarat                go to state 197
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    ebarat                go to state 201
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
-state 191
+state 196
 
   103 sedaZadan: saved_identifier PARANTHESIS_BAZ_KW bordareVorudiha PARANTHESIS_BASTE_KW .
 
     $default  reduce using rule 103 (sedaZadan)
 
 
-state 192
-
-   43 jomleyeMorakkab: AKULAD_BAZ_KW tarifhayeMahalli jomleha AKULAD_BASTE_KW .
-
-    $default  reduce using rule 43 (jomleyeMorakkab)
-
-
-state 193
-
-   47 jomleha: jomleha M jomle .
-
-    $default  reduce using rule 47 (jomleha)
-
-
-state 194
-
-   51 matched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M matched
-   53 unmatched: IF_KW ebarateSade THEN_KW M . matched N ELSE_KW M unmatched
-   54          | IF_KW ebarateSade THEN_KW M . jomle
-
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
-    NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
-    SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
-
-    jomle                 go to state 198
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 199
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
-
-
-state 195
-
-   60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade . PARANTHESIS_BASTE_KW M jomle
-   72 ebarateSade: ebarateSade . OR_KW M ebarateSade
-   73            | ebarateSade . AND_KW M ebarateSade
-   74            | ebarateSade . OR_ELSE_KW M ebarateSade
-   75            | ebarateSade . AND_THEN_KW M ebarateSade
-
-    AND_KW                shift, and go to state 101
-    OR_KW                 shift, and go to state 102
-    PARANTHESIS_BASTE_KW  shift, and go to state 200
-    OR_ELSE_KW            shift, and go to state 103
-    AND_THEN_KW           shift, and go to state 104
-
-
-state 196
-
-   55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW . N onsoreHalat onsorePishfarz END_KW
-   56                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW . N onsoreHalat END_KW
-
-    $default  reduce using rule 118 (N)
-
-    N  go to state 201
-
-
 state 197
-
-  105 bordareVorudiha: bordareVorudiha COMMA ebarat .
-
-    $default  reduce using rule 105 (bordareVorudiha)
-
-
-state 198
 
    54 unmatched: IF_KW ebarateSade THEN_KW M jomle .
 
     $default  reduce using rule 54 (unmatched)
 
 
-state 199
+state 198
 
    35 jomle: matched . N
    51 matched: IF_KW ebarateSade THEN_KW M matched . N ELSE_KW M matched
    53 unmatched: IF_KW ebarateSade THEN_KW M matched . N ELSE_KW M unmatched
 
-    $default  reduce using rule 118 (N)
+    $default  reduce using rule 119 (N)
 
     N  go to state 202
 
 
-state 200
+state 199
 
    60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW . M jomle
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 203
 
 
-state 201
+state 200
 
    55 jomleyeEntekhab: KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N . onsoreHalat onsorePishfarz END_KW
    56                | KEY_KW PARANTHESIS_BAZ_KW ebarateRiaziManteghi PARANTHESIS_BASTE_KW N . onsoreHalat END_KW
@@ -3291,6 +3334,13 @@ state 201
     SWITCH_KW  shift, and go to state 204
 
     onsoreHalat  go to state 205
+
+
+state 201
+
+  105 bordareVorudiha: bordareVorudiha COMMA ebarat .
+
+    $default  reduce using rule 105 (bordareVorudiha)
 
 
 state 202
@@ -3309,58 +3359,59 @@ state 203
 
    60 jomleyeTekrar: WHILE_KW PARANTHESIS_BAZ_KW M ebarateSade PARANTHESIS_BASTE_KW M . jomle
 
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
     NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
     jomle                 go to state 207
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 204
 
    57 onsoreHalat: SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 208
 
@@ -3383,7 +3434,7 @@ state 206
    51 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW . M matched
    53 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW . M unmatched
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 213
 
@@ -3399,7 +3450,7 @@ state 208
 
    57 onsoreHalat: SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle
 
-    ADAD  shift, and go to state 43
+    ADAD  shift, and go to state 45
 
     saved_integer  go to state 214
 
@@ -3408,7 +3459,7 @@ state 209
 
    58 onsoreHalat: onsoreHalat SWITCH_KW . M saved_integer N DONOGHTE_KW M jomle
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 215
 
@@ -3439,57 +3490,58 @@ state 213
    51 matched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M . matched
    53 unmatched: IF_KW ebarateSade THEN_KW M matched N ELSE_KW M . unmatched
 
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
     NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
     matched               go to state 218
     unmatched             go to state 219
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 214
 
    57 onsoreHalat: SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle
 
-    $default  reduce using rule 118 (N)
+    $default  reduce using rule 119 (N)
 
     N  go to state 220
 
@@ -3498,7 +3550,7 @@ state 215
 
    58 onsoreHalat: onsoreHalat SWITCH_KW M . saved_integer N DONOGHTE_KW M jomle
 
-    ADAD  shift, and go to state 43
+    ADAD  shift, and go to state 45
 
     saved_integer  go to state 221
 
@@ -3507,7 +3559,7 @@ state 216
 
    59 onsorePishfarz: DEFAULT_KW DONOGHTE_KW . M jomle N
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 222
 
@@ -3544,7 +3596,7 @@ state 221
 
    58 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer . N DONOGHTE_KW M jomle
 
-    $default  reduce using rule 118 (N)
+    $default  reduce using rule 119 (N)
 
     N  go to state 224
 
@@ -3553,58 +3605,59 @@ state 222
 
    59 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M . jomle N
 
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
     NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
     jomle                 go to state 225
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 223
 
    57 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 226
 
@@ -3620,7 +3673,7 @@ state 225
 
    59 onsorePishfarz: DEFAULT_KW DONOGHTE_KW M jomle . N
 
-    $default  reduce using rule 118 (N)
+    $default  reduce using rule 119 (N)
 
     N  go to state 228
 
@@ -3629,58 +3682,59 @@ state 226
 
    57 onsoreHalat: SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle
 
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
     NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
     jomle                 go to state 229
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 227
 
    58 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW . M jomle
 
-    $default  reduce using rule 117 (M)
+    $default  reduce using rule 118 (M)
 
     M  go to state 230
 
@@ -3703,51 +3757,52 @@ state 230
 
    58 onsoreHalat: onsoreHalat SWITCH_KW M saved_integer N DONOGHTE_KW M . jomle
 
-    AKULAD_BAZ_KW       shift, and go to state 70
-    BREAK_KW            shift, and go to state 71
-    RETURN_KW           shift, and go to state 72
-    IF_KW               shift, and go to state 73
+    AKULAD_BAZ_KW       shift, and go to state 38
+    BREAK_KW            shift, and go to state 39
+    RETURN_KW           shift, and go to state 40
+    IF_KW               shift, and go to state 41
     NOT_KW              shift, and go to state 42
-    WHILE_KW            shift, and go to state 74
-    NOGHTE_VIRGUL       shift, and go to state 75
-    ADAD                shift, and go to state 43
+    WHILE_KW            shift, and go to state 43
+    NOGHTE_VIRGUL       shift, and go to state 44
+    ADAD                shift, and go to state 45
     SHENASE             shift, and go to state 10
-    HARFE_SABET         shift, and go to state 44
-    KEY_KW              shift, and go to state 76
-    MULTIPLY_KW         shift, and go to state 45
-    PARANTHESIS_BAZ_KW  shift, and go to state 46
-    TRUE_KW             shift, and go to state 47
-    QUESTION_KW         shift, and go to state 48
-    FALSE_KW            shift, and go to state 49
-    MINUS_KW            shift, and go to state 50
-    ADAD_ASHARI         shift, and go to state 51
+    HARFE_SABET         shift, and go to state 46
+    KEY_KW              shift, and go to state 47
+    MULTIPLY_KW         shift, and go to state 48
+    PARANTHESIS_BAZ_KW  shift, and go to state 49
+    TRUE_KW             shift, and go to state 50
+    QUESTION_KW         shift, and go to state 51
+    FALSE_KW            shift, and go to state 52
+    MINUS_KW            shift, and go to state 53
+    ADAD_ASHARI         shift, and go to state 54
+    MAIN_KW             shift, and go to state 11
 
     jomle                 go to state 231
-    otherjomle            go to state 78
-    jomleyeMorakkab       go to state 79
-    jomleyeEbarat         go to state 80
-    matched               go to state 81
-    unmatched             go to state 82
-    jomleyeEntekhab       go to state 83
-    jomleyeTekrar         go to state 84
-    jomleyeBazgasht       go to state 85
-    jomleyeShekast        go to state 86
-    ebarat                go to state 87
-    ebarateSade           go to state 88
-    ebarateRabetei        go to state 53
-    ebarateRiaziManteghi  go to state 54
-    ebarateYegani         go to state 55
-    amalgareYegani        go to state 56
-    amel                  go to state 57
-    taghirpazir           go to state 89
-    taghirnapazir         go to state 59
-    sedaZadan             go to state 60
-    meghdareSabet         go to state 61
-    saved_identifier      go to state 62
-    saved_integer         go to state 63
-    saved_real            go to state 64
-    saved_char            go to state 65
-    saved_boolean         go to state 66
+    otherjomle            go to state 56
+    jomleyeMorakkab       go to state 57
+    jomleyeEbarat         go to state 58
+    matched               go to state 59
+    unmatched             go to state 60
+    jomleyeEntekhab       go to state 61
+    jomleyeTekrar         go to state 62
+    jomleyeBazgasht       go to state 63
+    jomleyeShekast        go to state 64
+    ebarat                go to state 65
+    ebarateSade           go to state 66
+    ebarateRabetei        go to state 67
+    ebarateRiaziManteghi  go to state 68
+    ebarateYegani         go to state 69
+    amalgareYegani        go to state 70
+    amel                  go to state 71
+    taghirpazir           go to state 72
+    taghirnapazir         go to state 73
+    sedaZadan             go to state 74
+    meghdareSabet         go to state 75
+    saved_identifier      go to state 76
+    saved_integer         go to state 77
+    saved_real            go to state 78
+    saved_char            go to state 79
+    saved_boolean         go to state 80
 
 
 state 231
