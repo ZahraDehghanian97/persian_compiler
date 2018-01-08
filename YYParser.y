@@ -14,7 +14,7 @@ PLUS_EQUAL_KW PLUS_PLUS_KW MINUS_MINUS_KW MINUS_EQUAL_KW MULTIPLY_EQUAL_KW
 ADAD_ASHARI MAIN_KW
 
 %type <EVal> saved_boolean matched unmatched ebarat ebarateSade ebarateRabetei ebarateRiaziManteghi amel ebarateYegani taghirnapazir tarifha tarif jens tarifeMoteghayyer tarifhayeMoteghayyerha tarifeMeghdareAvalie tarifeShenaseMoteghayer tarifeMoteghayyerMahdud jomle jomleha jomleyeEbarat jomleyeEntekhab onsoreHalat onsorePishfarz jomleyeTekrar jomleyeBazgasht jomleyeShekast jomleyeMorakkab otherjomle  
-meghdareSabet taghirpazir bordareVorudiha
+meghdareSabet taghirpazir bordareVorudiha esmetabe
 %type <EVal> saved_identifier
 %type <EVal> saved_integer
 %type <EVal> saved_real
@@ -41,6 +41,10 @@ meghdareSabet taghirpazir bordareVorudiha
 	public static char lexChar;
 	int n;
 	int main_address;
+	
+	String[] function_names = new String[1000];
+	
+	int top = 0;
 
 	private ArrayList<Quadruple> quadruples = new ArrayList<>();
 	private SymbolTable symbolTable = new SymbolTable();
@@ -120,7 +124,7 @@ meghdareSabet taghirpazir bordareVorudiha
 	}
 
 	private String newTemp(int type, boolean array) {
-		String name = tempStr + tempCounter++;
+		String name =function_names[top]+ tempStr + tempCounter++;
 		symbolTable.addToSymbolTable(name, type, array);
 		return name;
 	}
@@ -242,11 +246,13 @@ tarifeSakhtar:
 	STRUCT_KW saved_identifier AKULAD_BAZ_KW tarifhayeMahalli AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.1 ");
 		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
+		symbolTable.addTmp($2.place);
 	}
 	|
 	STRUCT_KW saved_identifier AKULAD_BAZ_KW AKULAD_BASTE_KW  {
 		System.out.println("Rule 4.2 ");
 		symbolTable.addToSymbolTable($2.place, EVal.TYPE_CODE_INTEGER, false);
+		symbolTable.addTmp($2.place);
 	}
 	
 tarifhayeMahalli:
@@ -544,26 +550,41 @@ tarifeShenaseMoteghayer:
 	}
 	
 function_input:
-	PARANTHESIS_BAZ_KW vorudiha PARANTHESIS_BASTE_KW{
+	 vorudiha PARANTHESIS_BASTE_KW{
 	
 		emit(":=", "sp", null, "top");
 	}
 	
+esmetabe:
+	saved_identifier PARANTHESIS_BAZ_KW{
+	
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).nextList = $1.nextList;
+		
+		function_names[top] = $1.place;
+		top++;
+	}
+	
 	
 tarifeTabe:
-	 jens saved_identifier function_input jomle {
+	 jens esmetabe function_input jomle {
 		System.out.println("Rule 13.1");
 		backpatch($1.nextList, (quadruples.size()));
 		
 		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
+		symbolTable.addTmp($2.place);
+		top--;
 		
 	}
 	|
-	jens saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
+	jens esmetabe PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
 		System.out.println("Rule 13.2");
 		backpatch($1.nextList, (quadruples.size()));
 		System.out.println($1.nextList.get(0)+1);
 		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
+		symbolTable.addTmp($2.place);
+		top--;
 	}
 	
 	|
@@ -572,6 +593,7 @@ tarifeTabe:
 		backpatch($1.nextList, (quadruples.size()));
 		
 		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
+		symbolTable.addTmp($1.place);
 	}
 	|
 	saved_identifier PARANTHESIS_BAZ_KW PARANTHESIS_BASTE_KW jomle {
@@ -580,6 +602,7 @@ tarifeTabe:
 		backpatch($1.nextList, (quadruples.size()));
 		System.out.println($1.nextList.get(0)+1);
 		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
+		symbolTable.addTmp($1.place);
 	}
 	
 vorudiha :
@@ -865,41 +888,41 @@ ebarat:
 			return YYABORT;
 		}
 		String srcPlace = $3.place;
-		if((symbolTable.types.get(index) != $3.type)
-			&& !((symbolTable.types.get(index) == EVal.TYPE_CODE_INTEGER
-					|| symbolTable.types.get(index) == EVal.TYPE_CODE_CHAR
-					|| symbolTable.types.get(index) == EVal.TYPE_CODE_BOOLEAN)
+		if((symbolTable.tmp.types.get(index) != $3.type)
+			&& !((symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_INTEGER
+					|| symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_CHAR
+					|| symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_BOOLEAN)
 				&& ($3.type == EVal.TYPE_CODE_INTEGER
 					|| $3.type == EVal.TYPE_CODE_CHAR
 					|| $3.type == EVal.TYPE_CODE_BOOLEAN))) {
-			if((symbolTable.types.get(index) == EVal.TYPE_CODE_REAL)
+			if((symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_REAL)
 				&& ($3.type == EVal.TYPE_CODE_INTEGER
 					|| $3.type == EVal.TYPE_CODE_CHAR
 					|| $3.type == EVal.TYPE_CODE_BOOLEAN)) {
 				srcPlace = newTemp(EVal.TYPE_CODE_REAL, false);
 				emit("cast", $3.place, TYPE_STRING_REAL, srcPlace);
-			} else if((symbolTable.types.get(index) == EVal.TYPE_CODE_INTEGER
-					|| symbolTable.types.get(index) == EVal.TYPE_CODE_CHAR
-					|| symbolTable.types.get(index) == EVal.TYPE_CODE_BOOLEAN)
+			} else if((symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_INTEGER
+					|| symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_CHAR
+					|| symbolTable.tmp.types.get(index) == EVal.TYPE_CODE_BOOLEAN)
 				&& ($3.type == EVal.TYPE_CODE_REAL)) {
-				srcPlace = newTemp(symbolTable.types.get(index), false);
-				emit("cast", $3.place, getTypeString(symbolTable.types.get(index)), srcPlace);
+				srcPlace = newTemp(symbolTable.tmp.types.get(index), false);
+				emit("cast", $3.place, getTypeString(symbolTable.tmp.types.get(index)), srcPlace);
 			} else {
 				System.err.println("Error! Type mismatch: " + $1.place + ", " + $3.place);
 				return YYABORT;
 			}
 		}
-		if (symbolTable.arrays.get(index)) {
+		if (symbolTable.tmp.arrays.get(index)) {
 			System.err.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
 			return YYABORT;
 		}
 		$$ = new EVal();
-		((EVal)$$).place = symbolTable.names.get(index);
-		((EVal)$$).type = symbolTable.types.get(index);
-		if(symbolTable.types.get(index) != EVal.TYPE_CODE_BOOLEAN) {
+		((EVal)$$).place = symbolTable.tmp.names.get(index);
+		((EVal)$$).type = symbolTable.tmp.types.get(index);
+		if(symbolTable.tmp.types.get(index) != EVal.TYPE_CODE_BOOLEAN) {
 			((EVal)$$).nextList = $1.nextList;
 			emit(":=", srcPlace, null, $1.place);
-			switch (symbolTable.types.get(index)) {
+			switch (symbolTable.tmp.types.get(index)) {
 				case EVal.TYPE_CODE_INTEGER:
 					emit("iprint", null, null, $1.place);
 					break;
@@ -1278,15 +1301,15 @@ ebarateRiaziManteghi :
 			System.out.println("Error! \"" + $1.place + "\" is not declared.");
 			return YYABORT;
 		}
-		if (!isFunction && symbolTable.arrays.get(index)) {
+		if (!isFunction && symbolTable.tmp.arrays.get(index)) {
 			System.out.println("Error! \"" + lexIdentifier + "\" is an array, it can not be used without index.");
 			return YYABORT;
 		}
 		//System.out.println("found: "+index);
 		$$ = new EVal();
 		((EVal)$$).place = $1.place;
-		//symbolTable.names.get(index);
-		((EVal)$$).type = $1.type;//symbolTable.types.get(index);
+		//symbolTable.tmp.names.get(index);
+		((EVal)$$).type = $1.type;//symbolTable.tmp.types.get(index);
 
 		
 		((EVal)$$).trueList = EVal.makeList(nextQuad());
@@ -1563,13 +1586,13 @@ taghirpazir :
 			System.err.println("Error! \"" + lexIdentifier + "\" is not declared.");
 			return YYABORT;
 		}
-		if (!symbolTable.arrays.get(index)) {
+		if (!symbolTable.tmp.arrays.get(index)) {
 			System.err.println("Error! \"" + lexIdentifier + "\" is not an array, it can not be used with index.");
 			return YYABORT;
 		}
 		$$ = new EVal();
-		((EVal)$$).place = newTemp(symbolTable.types.get(index), false);
-		((EVal)$$).type = symbolTable.types.get(index);
+		((EVal)$$).place = newTemp(symbolTable.tmp.types.get(index), false);
+		((EVal)$$).type = symbolTable.tmp.types.get(index);
 		EVal.arrayIndexOutOfBoundList.add(nextQuad() + 2);
 		EVal.arrayIndexOutOfBoundList.add(nextQuad() + 4);
 		emit("-", $3.place, startStr + $1.place, indexStr + $1.place);
@@ -1707,7 +1730,7 @@ saved_identifier:
 		System.out.println("Rule 30: " +
 			"saved_identifier: IDENTIFIER");
 		$$ = new EVal();
-		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).place = function_names[top] + lexIdentifier;
 		//((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
 		//((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = //EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
@@ -1719,7 +1742,7 @@ saved_identifier:
 		System.out.println("Rule 31: " +
 			"saved_identifier: MAIN_KW");
 		$$ = new EVal();
-		((EVal)$$).place = lexIdentifier;
+		((EVal)$$).place = function_names[top] + lexIdentifier;
 		((EVal)$$).trueList = EVal.makeList(nextQuad() + 1);
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
@@ -1976,6 +1999,8 @@ class SymbolTable {
 	public ArrayList<Integer> types;
 	public ArrayList<Boolean> arrays;
 	public ArrayList<String[]>functions;
+	
+	SymbolTable tmp;
 
 	public SymbolTable() {
 		names = new ArrayList<>();
@@ -1985,6 +2010,11 @@ class SymbolTable {
 	}
 
 	public int lookUp(String name) {
+		return tmp.names.indexOf(name);
+	}
+	
+	public int globalLookUp(String name){
+	
 		return names.indexOf(name);
 	}
 
@@ -2013,14 +2043,38 @@ class SymbolTable {
 	}
 
 	public boolean addToSymbolTable(String name, int type, boolean array) {
-		if (lookUp(name) == -1) {
+	
+		if(tmp == null){
+			tmp = new SymbolTable();
+		}
+		if (tmp.globalLookUp(name) == -1) {
 			System.out.println(name+" added");
-			names.add(name);
-			types.add(type);
-			arrays.add(array);
+			tmp.names.add(name);
+			tmp.types.add(type);
+			tmp.arrays.add(array);
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean addTmp(String prefix){
+		
+	
+		for(int i=0; i<tmp.names.size(); i++){
+		
+			String str = tmp.names.get(i);
+			if (globalLookUp(prefix+str) == -1) {
+				names.add(prefix+str);
+				types.add(tmp.types.get(i));
+				arrays.add(tmp.arrays.get(i));
+				
+			}
+			else{
+				return false;
+			}
+		}
+		tmp = new SymbolTable();
+		return true;
 	}
 
 	@Override
