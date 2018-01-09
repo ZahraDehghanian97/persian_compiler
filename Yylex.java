@@ -55,16 +55,16 @@ class Yylex {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\43\1\42\1\45\1\45\1\42\27\0\1\73\1\0\1\44"+
-    "\1\62\1\61\1\53\1\74\1\50\1\65\1\36\1\40\1\35\11\34"+
-    "\1\71\1\46\1\56\1\70\1\72\1\66\1\0\32\52\1\57\1\37"+
-    "\1\60\25\52\1\41\7\52\1\26\1\0\1\27\7\0\1\45\u057a\0"+
-    "\14\33\1\51\16\33\1\47\3\33\1\67\2\33\1\30\4\33\1\4"+
-    "\1\1\1\33\1\11\1\12\1\33\1\14\1\10\1\25\1\33\1\2"+
-    "\1\33\1\7\1\20\1\13\1\22\1\55\1\33\1\54\1\63\6\33"+
-    "\1\21\1\32\1\33\1\15\1\5\1\3\1\6\1\31\65\33\1\16"+
-    "\7\33\1\64\42\33\1\23\5\33\1\24\34\33\1\17\63\33\u1928\0"+
-    "\1\45\1\45\udb26\0\u02b0\33\160\0\220\33\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\u0110\0";
+    "\11\0\1\41\1\42\1\44\1\44\1\42\27\0\1\71\1\0\1\43"+
+    "\1\60\1\57\1\51\1\72\1\47\1\63\1\36\1\40\1\35\11\34"+
+    "\1\67\1\45\1\54\1\66\1\70\1\64\33\0\1\56\1\37\1\55"+
+    "\25\0\1\41\7\0\1\26\1\0\1\27\7\0\1\44\u057a\0\14\33"+
+    "\1\50\16\33\1\46\3\33\1\65\2\33\1\30\4\33\1\4\1\1"+
+    "\1\33\1\11\1\12\1\33\1\14\1\10\1\25\1\33\1\2\1\33"+
+    "\1\7\1\20\1\13\1\22\1\53\1\33\1\52\1\61\6\33\1\21"+
+    "\1\32\1\33\1\15\1\5\1\3\1\6\1\31\65\33\1\16\7\33"+
+    "\1\62\42\33\1\23\5\33\1\24\34\33\1\17\63\33\u1928\0\1\44"+
+    "\1\44\udb26\0\u02b0\33\160\0\220\33\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\u0110\0";
 
   /** 
    * Translates characters to character classes
@@ -88,7 +88,7 @@ class Yylex {
     "\1\2\1\57\1\2\1\60\1\61\1\62\1\63\2\2"+
     "\1\64\3\2\1\51\1\53\2\54\2\2\1\65\1\57"+
     "\1\2\1\66\1\2\1\67\1\2\1\70\1\71\1\2"+
-    "\1\65\1\72\2\2\1\73\1\74\1\75";
+    "\1\65\1\72\1\2\1\73\1\2\1\74\1\75";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[156];
@@ -116,26 +116,26 @@ class Yylex {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\75\0\172\0\267\0\364\0\u0131\0\u016e\0\u01ab"+
-    "\0\u01e8\0\u0225\0\u0262\0\u029f\0\u02dc\0\u0319\0\u0356\0\u0393"+
-    "\0\75\0\75\0\u03d0\0\u040d\0\u044a\0\75\0\u0487\0\u04c4"+
-    "\0\75\0\u0501\0\75\0\267\0\75\0\267\0\u053e\0\u057b"+
-    "\0\75\0\75\0\75\0\75\0\u05b8\0\u05f5\0\75\0\267"+
-    "\0\u0632\0\75\0\u066f\0\75\0\u06ac\0\u06e9\0\u0726\0\u0763"+
-    "\0\u07a0\0\u07dd\0\u081a\0\u0857\0\u0894\0\u08d1\0\u090e\0\u094b"+
-    "\0\u0988\0\u09c5\0\u0a02\0\u0a3f\0\u0a7c\0\u0ab9\0\u0af6\0\u0b33"+
-    "\0\u0b70\0\u0bad\0\u0bea\0\u0c27\0\u0c64\0\75\0\u0501\0\u0ca1"+
-    "\0\u0cde\0\75\0\u0d1b\0\u0d58\0\75\0\75\0\u0d95\0\75"+
-    "\0\75\0\75\0\75\0\75\0\75\0\u0dd2\0\u0e0f\0\u0e4c"+
-    "\0\267\0\267\0\267\0\u0e89\0\u0ec6\0\u0f03\0\u0f40\0\u0f7d"+
-    "\0\u0fba\0\267\0\267\0\u0ff7\0\u1034\0\u1071\0\u10ae\0\267"+
-    "\0\u10eb\0\u1128\0\u1165\0\u11a2\0\u11df\0\u0c64\0\u0ca1\0\75"+
-    "\0\u121c\0\u1259\0\u1296\0\u12d3\0\267\0\u1310\0\u134d\0\267"+
-    "\0\u138a\0\u13c7\0\u1404\0\267\0\267\0\267\0\267\0\u1441"+
-    "\0\u147e\0\267\0\u14bb\0\u14f8\0\u1535\0\267\0\u0cde\0\75"+
-    "\0\u1259\0\u1572\0\u15af\0\u15ec\0\267\0\u1629\0\267\0\u1666"+
-    "\0\267\0\u16a3\0\267\0\267\0\u16e0\0\267\0\267\0\u171d"+
-    "\0\u175a\0\267\0\267\0\267";
+    "\0\0\0\73\0\166\0\261\0\354\0\u0127\0\u0162\0\u019d"+
+    "\0\u01d8\0\u0213\0\u024e\0\u0289\0\u02c4\0\u02ff\0\u033a\0\u0375"+
+    "\0\73\0\73\0\u03b0\0\u03eb\0\u0426\0\73\0\u0461\0\u049c"+
+    "\0\73\0\u04d7\0\73\0\261\0\73\0\261\0\u0512\0\u054d"+
+    "\0\73\0\73\0\73\0\73\0\u0588\0\u05c3\0\73\0\261"+
+    "\0\u05fe\0\73\0\u0639\0\73\0\u0674\0\u06af\0\u06ea\0\u0725"+
+    "\0\u0760\0\u079b\0\u07d6\0\u0811\0\u084c\0\u0887\0\u08c2\0\u08fd"+
+    "\0\u0938\0\u0973\0\u09ae\0\u09e9\0\u0a24\0\u0a5f\0\u0a9a\0\u0ad5"+
+    "\0\u0b10\0\u0b4b\0\u0b86\0\u0bc1\0\u0bfc\0\73\0\u04d7\0\u0c37"+
+    "\0\u0c72\0\73\0\u0cad\0\u0ce8\0\73\0\73\0\u0d23\0\73"+
+    "\0\73\0\73\0\73\0\73\0\73\0\u0d5e\0\u0d99\0\u0dd4"+
+    "\0\261\0\261\0\261\0\u0e0f\0\u0e4a\0\u0e85\0\u0ec0\0\u0efb"+
+    "\0\u0f36\0\261\0\261\0\u0f71\0\u0fac\0\u0fe7\0\u1022\0\261"+
+    "\0\u105d\0\u1098\0\u10d3\0\u110e\0\u1149\0\u0bfc\0\u0c37\0\73"+
+    "\0\u1184\0\u11bf\0\u11fa\0\u1235\0\261\0\u1270\0\u12ab\0\261"+
+    "\0\u12e6\0\u1321\0\u135c\0\261\0\261\0\261\0\261\0\u1397"+
+    "\0\u13d2\0\261\0\u140d\0\u1448\0\u1483\0\261\0\u0c72\0\73"+
+    "\0\u11bf\0\u14be\0\u14f9\0\u1534\0\261\0\u156f\0\261\0\u15aa"+
+    "\0\261\0\u15e5\0\261\0\261\0\u1620\0\261\0\261\0\u165b"+
+    "\0\261\0\u1696\0\261\0\261";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[156];
@@ -164,182 +164,181 @@ class Yylex {
     "\1\2\1\3\2\4\1\5\1\6\1\4\1\7\1\10"+
     "\1\11\1\12\1\13\1\14\1\4\1\15\1\16\3\4"+
     "\1\17\1\4\1\20\1\21\1\22\1\23\1\24\2\4"+
-    "\2\25\1\26\1\27\1\30\3\31\1\32\1\0\1\33"+
-    "\1\34\1\35\1\36\1\2\1\37\2\4\1\40\1\41"+
-    "\1\42\1\43\1\44\1\45\1\4\1\46\1\47\1\50"+
-    "\1\51\1\52\1\53\1\54\1\55\76\0\1\4\1\56"+
-    "\15\4\1\57\5\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\25\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\2\4\2\0\1\4\6\0\12\4\1\60"+
-    "\10\4\1\61\1\4\2\0\1\4\1\62\4\4\11\0"+
-    "\1\4\1\0\1\4\2\0\1\63\1\4\5\0\2\4"+
-    "\2\0\1\4\6\0\2\4\1\64\22\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\6\0\3\4\1\65\21\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\6\0\14\4\1\66\10\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\6\0\4\4\1\67\20\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\6\0\3\4\1\70\21\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\6\0\13\4\1\71\11\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\6\0\1\4\1\72\1\4\1\73\21\4"+
-    "\2\0\6\4\11\0\1\4\1\0\1\4\2\0\2\4"+
-    "\5\0\2\4\2\0\1\4\6\0\16\4\1\74\1\75"+
-    "\5\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\2\4\2\0\1\4\6\0\3\4\1\76"+
-    "\21\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\2\4\2\0\1\4\6\0\14\4\1\77"+
-    "\10\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\2\4\2\0\1\4\6\0\1\4\1\100"+
-    "\23\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\2\4\2\0\1\4\6\0\2\4\1\101"+
-    "\22\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\2\4\2\0\1\4\6\0\5\4\1\102"+
-    "\15\4\1\103\1\4\2\0\2\4\1\104\3\4\11\0"+
-    "\1\4\1\0\1\4\2\0\2\4\5\0\2\4\2\0"+
-    "\1\4\41\0\2\25\1\105\73\0\1\106\6\0\1\107"+
-    "\70\0\1\110\12\0\1\111\14\0\1\112\4\0\37\113"+
-    "\1\114\2\113\1\0\2\113\1\0\27\113\70\0\1\115"+
-    "\74\0\1\116\5\0\14\4\1\117\10\4\2\0\6\4"+
-    "\11\0\1\4\1\0\1\4\2\0\2\4\5\0\2\4"+
-    "\2\0\1\4\72\0\1\120\2\0\1\121\74\0\1\122"+
-    "\74\0\1\123\74\0\1\124\3\0\1\125\1\0\2\4"+
-    "\1\126\20\4\1\127\1\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\22\4\1\130\2\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\14\4\1\131\10\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\1\4\1\132\23\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\1\4\1\133\23\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\17\4\1\134\5\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\25\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\1\4\1\135\5\0\2\4\2\0\1\4\6\0"+
-    "\7\4\1\136\15\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\3\4\1\137\21\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\3\4\1\140\21\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\1\141\24\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\13\4"+
-    "\1\142\11\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\20\4"+
-    "\1\143\4\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\14\4"+
-    "\1\144\10\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\17\4"+
-    "\1\75\5\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\20\4"+
-    "\1\145\4\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\25\4"+
-    "\2\0\1\4\1\146\4\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\16\4"+
-    "\1\147\5\4\1\150\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\6\4\1\151\16\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\23\4\1\152\1\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\4\4\1\153\20\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\1\4\1\154\23\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\10\4\1\155\14\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\41\0"+
-    "\2\156\40\0\25\110\2\0\6\110\1\0\1\110\1\0"+
-    "\1\157\2\160\3\0\1\110\1\0\2\110\1\0\2\110"+
-    "\1\0\2\110\2\0\2\110\2\0\1\110\5\0\42\111"+
-    "\1\0\2\111\1\0\5\111\1\161\21\111\37\0\1\162"+
-    "\4\0\1\163\30\0\42\113\1\0\1\113\1\164\1\0"+
-    "\27\113\1\0\25\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\1\4\1\165\5\0\2\4\2\0\1\4"+
-    "\6\0\3\4\1\166\21\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\1\4\1\167\23\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\2\4\1\170\22\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\3\4\1\171\21\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\25\4\2\0\2\4\1\172\3\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\10\4\1\173\14\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\20\4\1\174\4\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\4\4\1\175\20\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\10\4\1\176\14\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\10\4\1\177\14\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\1\4\1\200\23\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\23\4\1\201\1\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\24\4\1\150\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\10\4\1\202\14\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\3\4\1\203\21\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\25\4\2\0\6\4\11\0\1\4\1\0\1\4\2\0"+
-    "\2\4\5\0\1\4\1\204\2\0\1\4\6\0\2\4"+
-    "\1\205\22\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\6\0\16\4"+
-    "\1\206\6\4\2\0\6\4\11\0\1\4\1\0\1\4"+
-    "\2\0\2\4\5\0\2\4\2\0\1\4\5\0\40\111"+
-    "\1\207\1\111\1\0\2\111\1\0\5\111\1\161\21\111"+
-    "\44\0\1\163\67\0\1\210\74\0\1\211\4\0\1\163"+
-    "\31\0\4\4\1\212\20\4\2\0\6\4\11\0\1\4"+
-    "\1\0\1\4\2\0\2\4\5\0\2\4\2\0\1\4"+
-    "\6\0\24\4\1\213\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\1\4\1\214\23\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\16\4\1\215\6\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\3\4\1\216\21\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\21\4\1\217\3\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\1\4\1\220\23\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\5\4\1\221\17\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\2\4\1\222\22\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\5\4\1\223\17\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\5\4\1\224\17\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\3\4\1\225\21\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\16\4\1\226\6\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\1\4\1\227\23\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\2\4\1\230\22\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\16\4\1\231\6\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\2\4\1\232\22\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\5\4\1\233\17\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\6\0"+
-    "\2\4\1\234\22\4\2\0\6\4\11\0\1\4\1\0"+
-    "\1\4\2\0\2\4\5\0\2\4\2\0\1\4\5\0";
+    "\2\25\1\26\1\27\1\30\2\31\1\32\1\0\1\33"+
+    "\1\34\1\35\1\36\1\37\2\4\1\40\1\41\1\42"+
+    "\1\43\1\44\1\45\1\4\1\46\1\47\1\50\1\51"+
+    "\1\52\1\53\1\54\1\55\74\0\1\4\1\56\15\4"+
+    "\1\57\5\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\25\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\2\4\2\0\1\4\6\0\12\4\1\60\10\4"+
+    "\1\61\1\4\2\0\1\4\1\62\4\4\10\0\1\4"+
+    "\1\0\1\4\1\0\1\63\1\4\5\0\2\4\2\0"+
+    "\1\4\6\0\2\4\1\64\22\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\6\0\3\4\1\65\21\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\6\0\14\4\1\66\10\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\6\0\4\4\1\67\20\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\6\0\3\4\1\70\21\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\6\0\13\4\1\71\11\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\6\0\1\4\1\72\1\4\1\73\21\4\2\0"+
+    "\6\4\10\0\1\4\1\0\1\4\1\0\2\4\5\0"+
+    "\2\4\2\0\1\4\6\0\16\4\1\74\1\75\5\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\2\4\2\0\1\4\6\0\3\4\1\76\21\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\2\4\2\0\1\4\6\0\14\4\1\77\10\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\2\4\2\0\1\4\6\0\1\4\1\100\23\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\2\4\2\0\1\4\6\0\2\4\1\101\22\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\2\4\2\0\1\4\6\0\5\4\1\102\15\4"+
+    "\1\103\1\4\2\0\2\4\1\104\3\4\10\0\1\4"+
+    "\1\0\1\4\1\0\2\4\5\0\2\4\2\0\1\4"+
+    "\41\0\2\25\1\105\71\0\1\106\5\0\1\107\67\0"+
+    "\1\110\10\0\1\111\14\0\1\112\4\0\37\113\1\114"+
+    "\2\113\1\0\1\113\1\0\26\113\66\0\1\115\72\0"+
+    "\1\116\5\0\14\4\1\117\10\4\2\0\6\4\10\0"+
+    "\1\4\1\0\1\4\1\0\2\4\5\0\2\4\2\0"+
+    "\1\4\70\0\1\120\2\0\1\121\72\0\1\122\72\0"+
+    "\1\123\72\0\1\124\3\0\1\125\1\0\2\4\1\126"+
+    "\20\4\1\127\1\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\22\4\1\130\2\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\14\4\1\131\10\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\1\4\1\132\23\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\1\4\1\133\23\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\17\4\1\134\5\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\25\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\1\4\1\135\5\0\2\4\2\0\1\4\6\0\7\4"+
+    "\1\136\15\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\3\4"+
+    "\1\137\21\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\3\4"+
+    "\1\140\21\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\1\141"+
+    "\24\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\13\4\1\142"+
+    "\11\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\20\4\1\143"+
+    "\4\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\14\4\1\144"+
+    "\10\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\17\4\1\75"+
+    "\5\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\20\4\1\145"+
+    "\4\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\25\4\2\0"+
+    "\1\4\1\146\4\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\16\4\1\147"+
+    "\5\4\1\150\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\6\4"+
+    "\1\151\16\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\23\4"+
+    "\1\152\1\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\4\4"+
+    "\1\153\20\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\1\4"+
+    "\1\154\23\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\10\4"+
+    "\1\155\14\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\41\0\2\156"+
+    "\35\0\41\110\1\157\1\160\1\110\1\0\26\110\42\111"+
+    "\1\0\1\111\1\0\4\111\1\161\21\111\37\0\1\162"+
+    "\3\0\1\163\27\0\42\113\1\0\1\164\1\0\26\113"+
+    "\1\0\25\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\1\4\1\165\5\0\2\4\2\0\1\4\6\0"+
+    "\3\4\1\166\21\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\1\4\1\167\23\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\2\4\1\170\22\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\3\4\1\171\21\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\25\4\2\0\2\4\1\172\3\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\10\4\1\173\14\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\20\4\1\174\4\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\4\4\1\175\20\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\10\4\1\176\14\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\10\4\1\177\14\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\1\4\1\200\23\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\23\4\1\201\1\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\24\4\1\150\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\10\4"+
+    "\1\202\14\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\3\4"+
+    "\1\203\21\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\25\4"+
+    "\2\0\6\4\10\0\1\4\1\0\1\4\1\0\2\4"+
+    "\5\0\1\4\1\204\2\0\1\4\6\0\2\4\1\205"+
+    "\22\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\6\0\16\4\1\206"+
+    "\6\4\2\0\6\4\10\0\1\4\1\0\1\4\1\0"+
+    "\2\4\5\0\2\4\2\0\1\4\5\0\40\111\1\207"+
+    "\1\111\1\0\1\111\1\0\4\111\1\161\21\111\43\0"+
+    "\1\163\66\0\1\210\72\0\1\211\3\0\1\163\30\0"+
+    "\4\4\1\212\20\4\2\0\6\4\10\0\1\4\1\0"+
+    "\1\4\1\0\2\4\5\0\2\4\2\0\1\4\6\0"+
+    "\24\4\1\213\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\1\4"+
+    "\1\214\23\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\16\4"+
+    "\1\215\6\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\3\4"+
+    "\1\216\21\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\21\4"+
+    "\1\217\3\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\1\4"+
+    "\1\220\23\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\5\4"+
+    "\1\221\17\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\2\4"+
+    "\1\222\22\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\5\4"+
+    "\1\223\17\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\5\4"+
+    "\1\224\17\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\3\4"+
+    "\1\225\21\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\16\4"+
+    "\1\226\6\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\1\4"+
+    "\1\227\23\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\2\4"+
+    "\1\230\22\4\2\0\6\4\10\0\1\4\1\0\1\4"+
+    "\1\0\2\4\5\0\2\4\2\0\1\4\6\0\2\4"+
+    "\1\231\13\4\1\232\6\4\2\0\6\4\10\0\1\4"+
+    "\1\0\1\4\1\0\2\4\5\0\2\4\2\0\1\4"+
+    "\6\0\2\4\1\233\22\4\2\0\6\4\10\0\1\4"+
+    "\1\0\1\4\1\0\2\4\5\0\2\4\2\0\1\4"+
+    "\6\0\5\4\1\234\17\4\2\0\6\4\10\0\1\4"+
+    "\1\0\1\4\1\0\2\4\5\0\2\4\2\0\1\4"+
+    "\6\0\2\4\1\231\22\4\2\0\6\4\10\0\1\4"+
+    "\1\0\1\4\1\0\2\4\5\0\2\4\2\0\1\4"+
+    "\5\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[6039];
+    int [] result = new int[5841];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -480,7 +479,7 @@ class Yylex {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 226) {
+    while (i < 224) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -775,369 +774,368 @@ class Yylex {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { //if(p){System.out.println(yytext() + "\t" + "NOTHING\t" + '-');}
+            { //System.out.println(yytext() + "\t" + "NOTHING\t" + '-');
 	//System.out.println(yytext() + "\t" + "nothing\t" + '-');
             }
           case 62: break;
           case 2: 
-            { if(p){System.out.println(yytext() + "\t" + "SHENASE\t" + '-');}
+            { System.out.println(yytext() + "\t" + "SHENASE\t" + '-');
 	//System.out.println(yytext() + "\t" + "shenase\t" + '-');
 	YYParser.lexIdentifier = yytext();
 	return YYParser.SHENASE;
             }
           case 63: break;
           case 3: 
-            { if(p){System.out.println(yytext() + "\t" + "AKULAD_BAZ_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "AKULAD_BAZ_KW\t" + '-');
 	return YYParser.AKULAD_BAZ_KW;
             }
           case 64: break;
           case 4: 
-            { if(p){System.out.println(yytext() + "\t" + "AKULAD_BASTE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "AKULAD_BASTE_KW\t" + '-');
 	return YYParser.AKULAD_BASTE_KW;
             }
           case 65: break;
           case 5: 
-            { if(p){System.out.println(yytext() + "\t" + "AND_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "AND_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "AND_KW\t" + '-');
 	return YYParser.AND_KW;
             }
           case 66: break;
           case 6: 
-            { if(p){System.out.println(yytext() + "\t" + "ADAD\t" + '-');}
+            { System.out.println(yytext() + "\t" + "ADAD\t" + '-');
 	//System.out.println(yytext() + "\t" + "adad\t" + '-');
 	YYParser.lexInt = Integer.parseInt(yytext());
 	return YYParser.ADAD;
             }
           case 67: break;
           case 7: 
-            { if(p){System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');
 	return YYParser.NOGHTE_KW ;
 	//System.out.println(yytext() + "\t" + "NOGHTE_KW\t" + '-');
             }
           case 68: break;
           case 8: 
-            { if(p){System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');
 	return YYParser.DEVIDE_KW ;
 	//System.out.println(yytext() + "\t" + "DEVIDE_KW\t" + '-');
             }
           case 69: break;
           case 9: 
             { //System.out.println(yytext() + "\t" + "new line\t" + '-');
-	//if(p){System.out.println(yytext() + "\t" + "NEW_LINE\t" + '-');}
+	//System.out.println(yytext() + "\t" + "NEW_LINE\t" + '-');
             }
           case 70: break;
           case 10: 
-            { if(p){System.out.println(yytext() + "\t" + "NOGHTE_VIRGUL\t" + '-');}
+            { System.out.println(yytext() + "\t" + "NOGHTE_VIRGUL\t" + '-');
 	//System.out.println(yytext() + "\t" + "noghte_virgul\t" + '-');
 	return YYParser.NOGHTE_VIRGUL;
             }
           case 71: break;
           case 11: 
-            { if(p){System.out.println(yytext() + "\t" + "COMMA\t" + '-');}
+            { System.out.println(yytext() + "\t" + "COMMA\t" + '-');
 	//System.out.println(yytext() + "\t" + "comma\t" + '-');
 	return YYParser.COMMA;
             }
           case 72: break;
           case 12: 
-            { if(p){System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');
 	return YYParser.MULTIPLY_KW ;
 	//System.out.println(yytext() + "\t" + "MULTIPLY_KW\t" + '-');
             }
           case 73: break;
           case 13: 
-            { if(p){System.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
 	return YYParser.MORE_THAN_KW ;
 	//ystem.out.println(yytext() + "\t" + "MORE_THAN_KW\t" + '-');
             }
           case 74: break;
           case 14: 
-            { if(p){System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');
 
 	return YYParser.BRACKET_BASTE_KW ;
 	//System.out.println(yytext() + "\t" + "BRACKET_BASTE_KW\t" + '-');
             }
           case 75: break;
           case 15: 
-            { if(p){System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');
 
 	return YYParser.BRACKET_BAZ_KW ;
 	//System.out.println(yytext() + "\t" + "BRACKET_BAZ_KW\t" + '-');
             }
           case 76: break;
           case 16: 
-            { if(p){System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');
 
 	return YYParser.PARANTHESIS_BASTE_KW ;
 	//System.out.println(yytext() + "\t" + "PARANTHESIS_BASTE_KW\t" + '-');
             }
           case 77: break;
           case 17: 
-            { if(p){System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');
 	return YYParser.PARANTHESIS_BAZ_KW ;
 	//System.out.println(yytext() + "\t" + "PARANTHESIS_BAZ_KW\t" + '-');
             }
           case 78: break;
           case 18: 
-            { if(p){System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MINUS_KW\t" + '-');
 	return YYParser.MINUS_KW ;
             }
           case 79: break;
           case 19: 
-            { if(p){System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');
 	return YYParser.QUESTION_KW ;
 	//System.out.println(yytext() + "\t" + "QUESTION_KW\t" + '-');
             }
           case 80: break;
           case 20: 
-            { if(p){System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');
 	return YYParser.EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "EQUAL_KW\t" + '-');
             }
           case 81: break;
           case 21: 
-            { if(p){System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');
 	return YYParser.DONOGHTE_KW ;
 	//System.out.println(yytext() + "\t" + "DONOGHTE_KW\t" + '-');
             }
           case 82: break;
           case 22: 
-            { if(p){System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');
 	return YYParser.LESS_THAN_KW ;
 	//System.out.println(yytext() + "\t" + "LESS_THAN_KW\t" + '-');
             }
           case 83: break;
           case 23: 
-            { if(p){System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');
 	return YYParser.MOD_KW ;
 	//System.out.println(yytext() + "\t" + "MOD_KW\t" + '-');
             }
           case 84: break;
           case 24: 
-            { if(p){System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "ADD_KW\t" + '-');
 	return YYParser.ADD_KW;
             }
           case 85: break;
           case 25: 
-            { if(p){System.out.println(yytext() + "\t" + "OR_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "OR_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "OR_KW\t" + '-');
 	return YYParser.OR_KW;
             }
           case 86: break;
           case 26: 
-            { //if(p){System.out.println(yytext() + "\t" + "\t" + '-');}
+            { //System.out.println(yytext() + "\t" + "\t" + '-');
 	System.out.println(yytext() + "\t" + "null_char\t" + '-');
             }
           case 87: break;
           case 27: 
-            { if(p){System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');
 	return YYParser.DEVIDE_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "DEVIDE_EQUAL_KW\t" + '-');
             }
           case 88: break;
           case 28: 
-            { if(p){System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');
 	return YYParser.MULTIPLY_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MULTIPLY_EQUAL_KW\t" + '-');
             }
           case 89: break;
           case 29: 
-            { if(p){System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');
 	return YYParser.MORE_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MORE_EQUAL_KW\t" + '-');
             }
           case 90: break;
           case 30: 
-            { if(p){System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');
 	return YYParser.MINUS_MINUS_KW ;
 	//System.out.println(yytext() + "\t" + "MINUS_MINUS_KW\t" + '-');
             }
           case 91: break;
           case 31: 
-            { if(p){System.out.println(yytext() + "\t" + "MINUS_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MINUS_EQUAL_KW\t" + '-');
 	return YYParser.MINUS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "MINU_EQUAL_KW\t" + '-');
             }
           case 92: break;
           case 32: 
-            { if(p){System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');
 	return YYParser.EQUAL_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "EQUAL_EQUAL_KW\t" + '-');
             }
           case 93: break;
           case 33: 
-            { if(p){System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');
 	return YYParser.LESS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "LESS_EQUAL_KW\t" + '-');
             }
           case 94: break;
           case 34: 
-            { if(p){System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');
 	return YYParser.PLUS_EQUAL_KW ;
 	//System.out.println(yytext() + "\t" + "PLUS_EQUAL_KW\t" + '-');
             }
           case 95: break;
           case 35: 
-            { if(p){System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');
 	return YYParser.PLUS_PLUS_KW ;
 	//System.out.println(yytext() + "\t" + "PLUS_PLUS_KW\t" + '-');
             }
           case 96: break;
           case 36: 
-            { if(p){System.out.println(yytext() + "\t" + "MAIN_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "MAIN_KW\t" + '-');
 	return YYParser.MAIN_KW ;
             }
           case 97: break;
           case 37: 
-            { if(p){System.out.println(yytext() + "\t" + "IF_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "IF_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "IF_KW\t" + '-');
 	return YYParser.IF_KW;
             }
           case 98: break;
           case 38: 
             { //System.out.println(yytext() + "\t" + "INT_KW\t" + '-');
-	if(p){System.out.println(yytext() + "\t" + "INT_KW\t" + '-');}
+	System.out.println(yytext() + "\t" + "INT_KW\t" + '-');
 	return YYParser.INT_KW;
             }
           case 99: break;
           case 39: 
-            { if(p){System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "CHAR_KW\t" + '-');
 	return YYParser.CHAR_KW;
             }
           case 100: break;
           case 40: 
-            { if(p){System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "KEY_KW\t" + '-');
 	return YYParser.KEY_KW ;
             }
           case 101: break;
           case 41: 
-            { if(p){System.out.println(yytext() + "\t" + "WHILE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "WHILE_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "while_kw\t" + '-');
 	return YYParser.WHILE_KW;
             }
           case 102: break;
           case 42: 
-            { if(p){System.out.println(yytext() + "\t" + "ADAD\t" + '-');}
+            { System.out.println(yytext() + "\t" + "ADAD\t" + '-');
 	//System.out.println(yytext() + "\t" + "adad\t" + '-');
 	YYParser.lexReal = Double.parseDouble(yytext());
 	return YYParser.ADAD_ASHARI;
             }
           case 103: break;
           case 43: 
-            { if(p){System.out.println(yytext() + "\t" + "comments\t" + '-');}
-	return YYParser.COMMENT;
+            { System.out.println(yytext() + "\t" + "comments\t" + '-');
             }
           case 104: break;
           case 44: 
-            { if(p){System.out.println(yytext() + "\t" + "HARFE_SABET\t" + '-');}
+            { System.out.println(yytext() + "\t" + "HARFE_SABET\t" + '-');
 	//System.out.println(yytext() + "\t" + "harfe_sabet\t" + '-');
 	YYParser.lexChar = yytext().charAt(1);
 	return YYParser.HARFE_SABET;
             }
           case 105: break;
           case 45: 
-            { if(p){System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');
 	YYParser.lexBoolean = Boolean.parseBoolean("false");
 	return YYParser.FALSE_KW ;
 	//System.out.println(yytext() + "\t" + "FALSE_KW\t" + '-');
             }
           case 106: break;
           case 46: 
-            { if(p){System.out.println(yytext() + "\t" + "BREAK_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "BREAK_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "break_kw\t" + '-');
 	return YYParser.BREAK_KW;
             }
           case 107: break;
           case 47: 
-            { if(p){System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "BOOLEAN_KW\t" + '-');
 	return YYParser.BOOLEAN_KW;
             }
           case 108: break;
           case 48: 
-            { if(p){System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "NOT_KW\t" + '-');
 	return YYParser.NOT_KW;
             }
           case 109: break;
           case 49: 
-            { if(p){System.out.println(yytext() + "\t" + "END_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "END_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "end_kw\t" + '-');
 	return YYParser.END_KW;
             }
           case 110: break;
           case 50: 
-            { if(p){System.out.println(yytext() + "\t" + "CONSTANT_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "CONSTANT_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "constant_kw\t" + '-');
 	return YYParser.CONSTANT_KW;
             }
           case 111: break;
           case 51: 
-            { if(p){System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "SWITCH_KW\t" + '-');
 	return YYParser.SWITCH_KW;
             }
           case 112: break;
           case 52: 
-            { if(p){System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');
 	YYParser.lexBoolean = Boolean.parseBoolean("true");
 	return YYParser.TRUE_KW ;
 	//System.out.println(yytext() + "\t" + "TRUE_KW\t" + '-');
             }
           case 113: break;
           case 53: 
-            { if(p){System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "FLOAT_KW\t" + '-');
 	return YYParser.FLOAT_KW;
             }
           case 114: break;
           case 54: 
-            { if(p){System.out.println(yytext() + "\t" + "DEFAULT_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "DEFAULT_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "default_kw\t" + '-');
 	return YYParser.DEFAULT_KW;
             }
           case 115: break;
           case 55: 
-            { if(p){System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "THEN_KW\t" + '-');
 	return YYParser.THEN_KW;
             }
           case 116: break;
           case 56: 
-            { if(p){System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "ELSE_KW\t" + '-');
 	return YYParser.ELSE_KW;
             }
           case 117: break;
           case 57: 
-            { if(p){System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "PROGRAM_KW\t" + '-');
 	return YYParser.PROGRAM_KW;
             }
           case 118: break;
           case 58: 
-            { if(p){System.out.println(yytext() + "\t" + "STRUCT_KW\t" + '-');}
+            { System.out.println(yytext() + "\t" + "STRUCT_KW\t" + '-');
 	//System.out.println(yytext() + "\t" + "type_kw\t" + '-');
 	return YYParser.STRUCT_KW;
             }
           case 119: break;
           case 59: 
-            { if(p){System.out.println(yytext() + "\t" + "RETURN_KW\t" + '-');}
-	//System.out.println(yytext() + "\t" + "return_kw\t" + '-');
-	return YYParser.RETURN_KW;
+            { System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');
+	return YYParser.AND_THEN_KW ;
+	//System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');
             }
           case 120: break;
           case 60: 
-            { if(p){System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');}
-	return YYParser.OR_ELSE_KW ;
-	//System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
+            { System.out.println(yytext() + "\t" + "RETURN_KW\t" + '-');
+	//System.out.println(yytext() + "\t" + "return_kw\t" + '-');
+	return YYParser.RETURN_KW;
             }
           case 121: break;
           case 61: 
-            { if(p){System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');}
-	return YYParser.AND_THEN_KW ;
-	//System.out.println(yytext() + "\t" + "AND_THEN_KW\t" + '-');
+            { System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
+	return YYParser.OR_ELSE_KW ;
+	//System.out.println(yytext() + "\t" + "OR_ELSE_KW\t" + '-');
             }
           case 122: break;
           default:
