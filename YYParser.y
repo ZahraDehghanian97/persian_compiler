@@ -41,6 +41,9 @@ meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_sh
 	public static char lexChar;
 	int n;
 	int main_address;
+	int andaze ; 
+	boolean is_main;
+	int main_last_line;
 	
 	String[] function_names = new String[1000];
 	int top = -1;
@@ -159,7 +162,7 @@ meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_sh
 
 		try {
 			dos.writeBytes("#include <stdio.h>\n\nint main() {\n\n");
-			dos.writeBytes("\t int stack[1001];\n \t int top = 1000 ;\n \t int sp = 1000 ;\n ");
+			dos.writeBytes("\t int stack[2000];\n \t int top = 1000 ;\n \t int sp = 1000 ;\n\tstack[1002] = "+andaze+";\n");
 			dos.writeBytes(symbolTable.toString());
 			dos.writeBytes("\n\t\n");
 			// Backpatch of error controllers.
@@ -174,9 +177,10 @@ meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_sh
 			// Normal Finish
 			if(quadruples.size() < 100){
 			
-				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tgoto "+main_address+";\n");
+				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tgoto Line"+main_address+";\n");
 				
-				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
+				int lineNumber = quadruples.size() + 1;
+				dos.writeBytes(Quadruple.LINE_STR + lineNumber + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
 					"\t\t\t\tgetchar();\n\t\t\t\treturn 0;\n");}
 			else
 				dos.writeBytes(Quadruple.LINE_STR + quadruples.size() + ":" + "\t\tprintf(\"Process is terminated with no error.\\n\");\n" +
@@ -184,7 +188,7 @@ meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_sh
 
 			// Array index out of bound error.
 			if(quadruples.size() < 100)
-				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 1) + ":" + "\t\tprintf(\"Array Error: Index out of bound!\\n\");\n" +
+				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 2) + ":" + "\t\tprintf(\"Array Error: Index out of bound!\\n\");\n" +
 					"\t\t\t\tgetchar();\n\t\t\treturn -1;\n");
 			else
 				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 1) + ":" + "\t\tprintf(\"Array Error: Index out of bound!\\n\");\n" +
@@ -192,7 +196,7 @@ meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_sh
 
 			// Invalid array size error.
 			if(quadruples.size() < 100)
-				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 2) + ":" + "\t\tprintf(\"Array Error: Invalid array size!\\n\");\n" +
+				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 3) + ":" + "\t\tprintf(\"Array Error: Invalid array size!\\n\");\n" +
 					"\t\t\t\tgetchar();\n\t\t\treturn -2;\n");
 			else
 				dos.writeBytes(Quadruple.LINE_STR + (quadruples.size() + 2) + ":" + "\t\tprintf(\"Array Error: Invalid array size!\\n\");\n" +
@@ -220,6 +224,8 @@ meghdareSabet taghirpazir bordareVorudiha function_name function_name2 noghte_sh
 barnameh:
 	PROGRAM_KW SHENASE tarifha {
 		System.out.println("Rule 1.1 ");
+		andaze = quadruples.size()+1;
+		
 		exportIntermediateCode();
 	}
 
@@ -589,6 +595,11 @@ tarifeTabe:
 		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
 		
 		top--;
+		if(is_main){
+			
+			main_last_line = quadruples.size();
+			is_main = false;
+		}
 		
 	}
 	|
@@ -597,6 +608,12 @@ tarifeTabe:
 		backpatch($1.nextList, (quadruples.size()));
 		System.out.println($1.nextList.get(0)+1);
 		symbolTable.addFunction($2.place, $1.nextList.get(0)+1);
+		
+		if(is_main){
+			
+			main_last_line = quadruples.size();
+			is_main = false;
+		}
 	}
 	
 	|
@@ -605,6 +622,12 @@ tarifeTabe:
 		backpatch($1.nextList, (quadruples.size()));
 		
 		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
+		
+		if(is_main){
+			
+			main_last_line = quadruples.size();
+			is_main = false;
+		}
 	}
 	|
 	function_name PARANTHESIS_BASTE_KW jomle {
@@ -613,6 +636,12 @@ tarifeTabe:
 		backpatch($1.nextList, (quadruples.size()));
 		System.out.println($1.nextList.get(0)+1);
 		symbolTable.addFunction($1.place, $1.nextList.get(0)+1);
+		
+		if(is_main){
+			
+			main_last_line = quadruples.size();
+			is_main = false;
+		}
 	}
 	
 vorudiha :
@@ -662,11 +691,15 @@ otherjomle :
 	|
 	jomleyeEntekhab {System.out.println("Rule 19.3");
 	$$ = new EVal();
-	((EVal)$$).nextList = $1.nextList;}
+	((EVal)$$).nextList = $1.nextList;
+	backpatch($1.nextList, nextQuad());
+	}
 	|
 	jomleyeTekrar{System.out.println("Rule 19.4");
 	$$ = new EVal();
-	((EVal)$$).nextList = $1.nextList;}
+	((EVal)$$).nextList = $1.nextList;
+	backpatch($1.nextList, nextQuad());
+	}
 	|
 	jomleyeBazgasht{System.out.println("Rule 19.5");
 	$$ = new EVal();
@@ -861,7 +894,7 @@ jomleyeTekrar:
 		$$ = new EVal();
 		
 		((EVal)$$).nextList = $4.falseList;
-		emit("goto", null, null, String.valueOf(nextQuad() + 1));
+		//emit("goto", null, null, String.valueOf($3.quad));
 
 	}
 
@@ -869,7 +902,17 @@ jomleyeTekrar:
 jomleyeBazgasht:
 	RETURN_KW M NOGHTE_VIRGUL {System.out.println("Rule 27.1");
 	$$ = new EVal();
-	((EVal)$$).nextList = $2.nextList;}
+	((EVal)$$).nextList = $2.nextList;
+	
+	emit("+","sp" , "2", "top");
+	emit(":=","stack[sp]", null, "sp");
+	emit(":=","stack[top]", null, "L");
+	emit("+","top" , "1", "top");
+	emit("+","stack[top]" , "top", "top");
+	emit("+","1" , "top", "top");
+	emit ("goto",null,null,"L");
+	
+	}
 	|
 	RETURN_KW ebarat NOGHTE_VIRGUL {
 	System.out.println("Rule 27.2");
@@ -877,10 +920,10 @@ jomleyeBazgasht:
 	((EVal)$$).nextList = $2.nextList;
 	emit(":=",$2.place , null, "stack[sp + 1]");
 	emit("+","sp" , "2", "top");
-	emit(":=","*sp", null, "sp");
-	emit(":=","*top", null, "L");
+	emit(":=","stack[sp]", null, "sp");
+	emit(":=","stack[top]", null, "L");
 	emit("+","top" , "1", "top");
-	emit("+","*top" , "top", "top");
+	emit("+","stack[top]" , "top", "top");
 	emit("+","1" , "top", "top");
 	emit ("goto",null,null,"L");
 	}
@@ -1102,9 +1145,38 @@ ebarat:
 		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
 	}
 	|
-	taghirpazir PLUS_PLUS_KW {System.out.println("Rule 29.6");}
+	taghirpazir PLUS_PLUS_KW {
+		System.out.println("Rule 29.6");
+		
+		
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		emit("+", ((EVal)$$).place, "1", ((EVal)$$).place);
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	}
 	|
-	taghirpazir MINUS_MINUS_KW  {System.out.println("Rule 29.7");}
+	taghirpazir MINUS_MINUS_KW  {
+	System.out.println("Rule 29.7");
+		
+		
+		$$ = new EVal();
+		((EVal)$$).place = $1.place;
+		((EVal)$$).type = $1.type;
+		emit("-", ((EVal)$$).place, "1", ((EVal)$$).place);
+		
+		((EVal)$$).trueList = EVal.makeList(nextQuad());
+		((EVal)$$).falseList = EVal.makeList(nextQuad() + 1);
+		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
+
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
+		emit("goto", null, null, String.valueOf(nextQuad() + 1)); // result may be backpatched.
+	}
 	|
 	ebarateSade {System.out.println(" Rule 29.8 ebarateSade to ebarat");
 	$$ = new EVal();	
@@ -1227,7 +1299,7 @@ ebarateRabetei:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
 		emit("<", $1.place, $3.place, ((EVal)$$).place);
-		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
 		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
@@ -1241,7 +1313,7 @@ ebarateRabetei:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
 		emit("<=", $1.place, $3.place, ((EVal)$$).place);
-		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
 		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
@@ -1255,7 +1327,7 @@ ebarateRabetei:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
 		emit(">", $1.place, $3.place, ((EVal)$$).place);
-		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
 		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
@@ -1269,7 +1341,7 @@ ebarateRabetei:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
 		emit(">=", $1.place, $3.place, ((EVal)$$).place);
-		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
 		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 	|
@@ -1283,7 +1355,7 @@ ebarateRabetei:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 
 		emit("==", $1.place, $3.place, ((EVal)$$).place);
-		emit("check", ((EVal)$$).place, null, "-"); // result will be backpatched.
+		emit("check", ((EVal)$$).place, null, String.valueOf(nextQuad() + 2)); // result may be backpatched.
 		emit("goto", null, null, "-"); // result will be backpatched.
 	}
 
@@ -1706,7 +1778,7 @@ sedaZadan :
 	emit(":=","sp" , null, "stack[top]");
 	emit(":=","top" , null, "sp");
 	emit("+", "top", "3", "top");
-	emit("+", "top", "*top", "top");
+	emit("+", "top", "stack[top]", "top");
 	emit ("goto",null,null,symbolTable.addFunction($1.place,0));
 	} 
 	|
@@ -1806,6 +1878,7 @@ saved_identifier:
 		((EVal)$$).falseList = EVal.makeList(nextQuad() + 2);
 		((EVal)$$).nextList = EVal.merge(((EVal)$$).trueList, ((EVal)$$).falseList);
 		main_address = quadruples.size();
+		is_main = true;
 	}
 	
 saved_integer:
@@ -1947,15 +2020,17 @@ class EVal {
 
 	public static ArrayList<Integer> merge(ArrayList<Integer> al1, ArrayList<Integer> al2) {
 		ArrayList<Integer> result = new ArrayList<>();
-		
+		boolean flag = true;
 		if(al1 == null){
 			result = al2;
+			flag = false;
 		}
 		
 		if(al2 == null){
 			result = al1;
+			flag= false;
 		}
-		else{
+		if(flag){
 		result.addAll(al1);
 		result.addAll(al2);
 		
